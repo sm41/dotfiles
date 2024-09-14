@@ -1,0 +1,11 @@
+[Unit]
+Description = Get Radiko Weekly Program
+
+
+[Timer]
+OnCalendar = Sat *-*-* 18:30:00
+Persistent = true
+RandomizedDelaySec = 60s
+
+[Install]
+WantedBy = timers.target

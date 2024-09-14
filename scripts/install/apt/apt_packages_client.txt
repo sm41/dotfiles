@@ -1,0 +1,9 @@
+audacious
+ffmpeg
+fonts-ipafont
+git
+jq
+keepassxc
+mpv
+solaar
+vlc

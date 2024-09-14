@@ -1,0 +1,40 @@
+
+
+name: shellscript test
+on: push
+jobs:
+    install:
+        runs-on: ubuntu-latest
+
+        strategy:
+          fail-fast: false
+          matrix:
+            script:
+            # - __apt_install.sh
+            # - __install_docker.sh
+            # - __pip_install.sh
+            # - __install_vscode.sh
+            - test.sh
+
+        steps:
+          - name: chekout
+            uses: actions/checkout@v4
+
+          - name: loop
+            run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
+
+    # link:
+    #     runs-on: ubuntu-latest
+
+    #     strategy:
+    #       fail-fast: false
+    #       matrix:
+    #         script:
+    #         - __link_netplan.sh
+
+    #     steps:
+    #       - name: chekout
+    #         uses: actions/checkout@v4
+
+    #       - name: loop
+    #         run:  ${GITHUB_WORKSPACE}/script/link/${{ matrix.script }}

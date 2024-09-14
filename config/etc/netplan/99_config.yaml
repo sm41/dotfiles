@@ -1,0 +1,30 @@
+# https://netplan.readthedocs.io/en/latest/
+
+# ip link |grep "state UP"
+# ip addr
+
+# /etc/netplan/xxx_config.yaml
+# sudo netplan apply
+
+
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enp0s25:
+      dhcp4: false
+      dhcp6: false
+      ipv6-privacy: true
+      addresses:
+        - 192.168.1.38/24
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses:
+        - 2620:119:35::35 # OpenDNS ipv6 prio
+        - 2620:119:53::53 # OpenDNS ipv6 alt
+        - 208.67.222.222  # OpenDNS ipv4 prio
+        - 208.67.220.220  # OpenDNS ipv4 alt
+
+

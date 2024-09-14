@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eux
+
+input_file=requirements.txt
+work_path=$(cd $(dirname $0) && pwd)
+
+mkdir --parents ${HOME}/.local/bin
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py --user
+
+python3 -m pip install \
+  --user \
+  --requirement \
+  ${work_path}/${input_file}
