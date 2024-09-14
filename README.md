@@ -1,4 +1,4 @@
-# ci
+# dotfiles
 
 ## hogefuga
 
