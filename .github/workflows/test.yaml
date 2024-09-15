@@ -27,24 +27,24 @@ jobs:
             run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
-    deploy:
-        if: false
-        runs-on: ubuntu-latest
+    # deploy:
+    #     if: false
+    #     runs-on: ubuntu-latest
 
-        strategy:
-          fail-fast: false
-          matrix:
-            script:
-            # - scripts/deploy/cp/__cp_etc_netplan.sh
-            # - scripts/deploy/cp/__cp_etc_sysctl.d.sh
-            # - scripts/deploy/cp/__cp_etc_systemd_system.sh
+    #     strategy:
+    #       fail-fast: false
+    #       matrix:
+    #         script:
+    #         # - scripts/deploy/cp/__cp_etc_netplan.sh
+    #         # - scripts/deploy/cp/__cp_etc_sysctl.d.sh
+    #         # - scripts/deploy/cp/__cp_etc_systemd_system.sh
 
-        steps:
-          - name: chekout
-            uses: actions/checkout@v4
+    #     steps:
+    #       - name: chekout
+    #         uses: actions/checkout@v4
 
-          - name: loop
-            run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
+    #       - name: loop
+    #         run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
     makefile:
