@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-input_file=apt_packages_server.txt
+input_file=apt_packages_${1}.txt
 work_path=$(cd $(dirname $0) && pwd)
 
 # sudo apt update

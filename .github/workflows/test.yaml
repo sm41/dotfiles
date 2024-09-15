@@ -36,4 +36,4 @@ jobs:
             uses: actions/checkout@v4
 
           - name: loop
-            run:  make install
+            run:  make server
