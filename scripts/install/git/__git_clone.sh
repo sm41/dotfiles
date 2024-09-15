@@ -11,7 +11,7 @@ while read repository_url
 do
 
   [ -z ${repository_url} ] && continue
-  [ ${repository_url::1} = "#" ] && continue
+  [ ${repository_url:0:1} = "#" ] && continue
 
   echo "git clone ${repository_url}.git"
 
