@@ -15,14 +15,14 @@ jobs:
             # - __pip_install.sh
             # - __install_vscode.sh
             # - .test/test.sh
+            - makefile
 
         steps:
           - name: chekout
             uses: actions/checkout@v4
 
           - name: loop
-            # run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
-            run:  ${GITHUB_WORKSPACE}/makefile make deploy
+            run:  make deploy
 
     # link:
     #     runs-on: ubuntu-latest
