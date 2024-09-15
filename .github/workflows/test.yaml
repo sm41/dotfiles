@@ -5,18 +5,18 @@ on: push
 # branches-ignore: '**'
 jobs:
     scripts:
-        if: false
+        if: true
         runs-on: ubuntu-latest
 
         strategy:
           fail-fast: false
           matrix:
             script:
-            - scripts/install/apt/__apt_install.sh
-            - scripts/install/git/__git_clone.sh
-            - scripts/install/misc/__install_docker.sh
-            - scripts/install/misc/__install_vscode.sh
-            - scripts/install/pip/__pip_install.sh
+            # - scripts/install/apt/__apt_install.sh
+            # - scripts/install/git/__git_clone.sh
+            # - scripts/install/misc/__install_docker.sh
+            # - scripts/install/misc/__install_vscode.sh
+            # - scripts/install/pip/__pip_install.sh
             - .test/test.sh
 
         steps:
@@ -28,16 +28,16 @@ jobs:
 
 
     deploy:
-        if: true
+        if: false
         runs-on: ubuntu-latest
 
         strategy:
           fail-fast: false
           matrix:
             script:
-            - scripts/deploy/cp/__cp_etc_netplan.sh
-            - scripts/deploy/cp/__cp_etc_sysctl.d.sh
-            - scripts/deploy/cp/__cp_etc_systemd_system.sh
+            # - scripts/deploy/cp/__cp_etc_netplan.sh
+            # - scripts/deploy/cp/__cp_etc_sysctl.d.sh
+            # - scripts/deploy/cp/__cp_etc_systemd_system.sh
 
         steps:
           - name: chekout
