@@ -9,6 +9,7 @@ work_path=$(cd $(dirname $0) && pwd)
 
 while read repository_url
 do
+
   [ -z ${repository_url} ] && continue
   [ ${repository_url::1} = "#" ] && continue
 
