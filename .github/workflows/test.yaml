@@ -2,6 +2,7 @@
 
 name: shellscript test
 on: push
+# branches-ignore: '**'
 jobs:
     scripts:
         if: false
@@ -11,10 +12,11 @@ jobs:
           fail-fast: false
           matrix:
             script:
-            # - __apt_install.sh
-            # - __install_docker.sh
-            # - __pip_install.sh
-            # - __install_vscode.sh
+            - scripts/install/apt/__apt_install.sh
+            - scripts/install/git/__git_clone.sh
+            - scripts/install/misc/__install_docker.sh
+            - scripts/install/misc/__install_vscode.sh
+            - scripts/install/pip/__pip_install.sh
             - .test/test.sh
 
         steps:
@@ -25,21 +27,24 @@ jobs:
             run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
-    # deploy:
-    #     runs-on: ubuntu-latest
+    deploy:
+        if: true
+        runs-on: ubuntu-latest
 
-    #     strategy:
-    #       fail-fast: false
-    #       matrix:
-    #         script:
-    #         - __link_netplan.sh
+        strategy:
+          fail-fast: false
+          matrix:
+            script:
+            - scripts/deploy/cp/__cp_etc_netplan.sh
+            - scripts/deploy/cp/__cp_etc_sysctl.d.sh
+            - scripts/deploy/cp/__cp_etc_systemd_system.sh
 
-    #     steps:
-    #       - name: chekout
-    #         uses: actions/checkout@v4
+        steps:
+          - name: chekout
+            uses: actions/checkout@v4
 
-    #       - name: loop
-    #         run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
+          - name: loop
+            run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
     makefile:
