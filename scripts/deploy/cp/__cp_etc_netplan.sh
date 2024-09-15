@@ -7,5 +7,5 @@ TARGET_FILE=99_config.yaml
 
 # hard link config.yaml to netplan
 sudo cp --interactive \
-  ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/${TARGET_FILE} \
+  ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/sample.${TARGET_FILE} \
   ${ORIGIN_DIR}/${TARGET_FILE}

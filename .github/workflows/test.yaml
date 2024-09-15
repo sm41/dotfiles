@@ -14,7 +14,8 @@ jobs:
             # - __install_docker.sh
             # - __pip_install.sh
             # - __install_vscode.sh
-            - .test/test.sh
+            # - .test/test.sh
+            makefile deploy
 
         steps:
           - name: chekout
