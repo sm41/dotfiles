@@ -12,6 +12,6 @@ do
   [ -z ${package_name} ] && continue
   [ ${package_name::1} = "#" ] && continue
 
-  echo "sudo apt install --no-install-recommends ^${package_name}$"
+  sudo apt install --no-install-recommends ^${package_name}$
 
 done < ${work_path}/${input_file}
