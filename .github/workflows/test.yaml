@@ -15,7 +15,7 @@ jobs:
             # - __pip_install.sh
             # - __install_vscode.sh
             # - .test/test.sh
-            "make deploy"
+            - makefile make deploy
 
         steps:
           - name: chekout
