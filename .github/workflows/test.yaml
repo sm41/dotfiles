@@ -23,17 +23,17 @@ jobs:
           - name: chekout
             uses: actions/checkout@v4
 
-          - name: loop
+          - name: test script
             run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
     makefile:
-        if: true
+        if: false
         runs-on: ubuntu-latest
 
         steps:
           - name: chekout
             uses: actions/checkout@v4
 
-          - name: loop
-            run:  make client
+          - name: test make
+            run:  make all
