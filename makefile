@@ -1,9 +1,9 @@
-#-install---------------------------------------------------------------------------------------
-.PHONY: install
-install:
+
+
+.PHONY: server
+server:
 	echo "hogefuga"
 
-#----------------------------------------------------------------------------------------------
-.PHONY: deploy
-deploy:
+.PHONY: client
+client:
 	echo "piyopiyo"
