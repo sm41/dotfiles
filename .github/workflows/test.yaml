@@ -36,4 +36,4 @@ jobs:
             uses: actions/checkout@v4
 
           - name: test make
-            run:  make all
+            run:  make server

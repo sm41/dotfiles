@@ -1,5 +1,10 @@
 # !/bin/bash
-set -eu
+set -eux
+
+
+
+
+
 
 input_file=git_repo.txt
 work_path=$(cd $(dirname $0) && pwd)
@@ -8,15 +13,11 @@ work_path=$(cd $(dirname $0) && pwd)
 
 
 
-
-
-
-
 while read repository_url
 do
 
   [ -z ${repository_url} ] && continue
-  # [ ${repository_url::1} = "#" ] && continue
+  [ ${repository_url::1} = "#" ] && continue
 
   echo "git clone ${repository_url}.git"
 
