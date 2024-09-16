@@ -3,5 +3,6 @@
 ## hogefuga
 
 ```bash
-echo ${hogefuga}
+sudo apt install git
+git clone ${hogefuga}
 ```

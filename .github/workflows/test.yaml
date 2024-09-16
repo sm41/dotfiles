@@ -5,7 +5,7 @@ on: push
 # branches-ignore: '**'
 jobs:
     scripts:
-        if: false
+        if: true
         runs-on: ubuntu-latest
 
         strategy:
@@ -28,12 +28,12 @@ jobs:
 
 
     makefile:
-        if: true
+        if: false
         runs-on: ubuntu-latest
 
         steps:
           - name: chekout
             uses: actions/checkout@v4
 
-          - name: test make
+          - name: test
             run:  make server
