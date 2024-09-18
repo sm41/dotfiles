@@ -1,7 +1,6 @@
 audacious
 ffmpeg
 fonts-ipafont
-git
 jq
 keepassxc
 mpv
