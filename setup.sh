@@ -2,28 +2,36 @@
 set -eu
 
 work_path=$(cd $(dirname $0) && pwd)
+array_file=( $(find  ${work_path}/zzz  -type f -printf "%f\n" | sort) )
 
-read -p " 🗨️  select  [ client | server | network | link ]  ==>  "  category_of_func
+# question
+read -p "🗨️  select  [ `echo ${array_file[@]}` ]  ==>  "  category_of_func
+
+# check input word
+  if printf '%s\n' "${array_file[@]}"  |  grep -qx ${category_of_func} ; then
+    echo "┗━ ✅ [ Match file name ]"
+  else
+    echo "┗━ ❌ [ Not match file name ]"
+    exit 1
+  fi
+
 echo "+----------------------------------------------------------------+"
+# shell script file
+while read jjj || [[ -n ${jjj} ]] ;  do  echo "📜  ${jjj##*/}"  ;  done < ${work_path}/zzz/${category_of_func}
 
-
-
-
-# eval $(cat ${work_path}/zzz/${category_of_func})
-
-
-
-
+echo "+----------------------------------------------------------------+"
 
 while read list_of_func <&3 || [[ -n ${list_of_func} ]]
 do
 
-  read -p "┏━ 💲 ${list_of_func##*/}  [ y/n ]  ==>  "  selected_func
+  [[ ${list_of_func::1} = "#" ]] && continue
+
+  read -p "┏━ 💲 ${list_of_func##*/}  [ y | n ]  ==>  "  selected_func
 
   case ${selected_func} in
     [Yy])
       echo "┗━ ✅ execute"
-      eval $(cat ${list_of_func}) <&3
+      eval $(echo ${list_of_func}) <&3
     ;;
     [Nn])
       echo "┗━ ❌ cancel"
