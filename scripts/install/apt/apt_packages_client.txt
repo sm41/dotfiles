@@ -1,7 +1,7 @@
 audacious
-ffmpeg
+#ffmpeg
 fonts-ipafont
-jq
+#jq
 keepassxc
 mpv
 solaar

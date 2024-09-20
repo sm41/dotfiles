@@ -1,0 +1,4 @@
+${work_path}/scripts/deploy/cp/__cp_etc_netplan.sh
+${work_path}/scripts/deploy/cp/__cp_etc_samba.sh
+${work_path}/scripts/deploy/cp/__cp_etc_sysctl.d.sh
+${work_path}/scripts/deploy/cp/__cp_etc_systemd_system.sh

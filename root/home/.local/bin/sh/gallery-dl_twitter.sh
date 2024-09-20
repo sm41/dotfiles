@@ -2,7 +2,7 @@
 # set -eux
 
 STORAGE_DIR=/mnt/640G
-VAR_DIR=/.local/state
+VAR_DIR=/.config
 BASE_DIR=/gallery-dl
 DOMAIN_DIR=/twitter
 ORIGIN_FILE=twitter_list

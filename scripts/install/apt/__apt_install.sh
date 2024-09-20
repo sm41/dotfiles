@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 set -eu
 
 if [[ ! $1 =~ ^(server|client)$  ]] ; then

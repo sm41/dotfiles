@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 set -eux
 
 input_file=requirements.txt
@@ -8,6 +8,7 @@ mkdir --parents ${HOME}/.local/bin
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py --user
+rm ./get-pip.py
 
 python3 -m pip install \
   --user \

@@ -1,0 +1,3 @@
+${work_path}/scripts/install/apt/__apt_install.sh client
+#${work_path}/scripts/install/misc/__install_vscode.sh
+#${work_path}/scripts/install/pip/__pip_install.sh

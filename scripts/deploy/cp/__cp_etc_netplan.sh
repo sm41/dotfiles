@@ -7,7 +7,7 @@ ORIGIN_DIR=/etc/netplan
 
 while read hogefuga
 do
-  sudo cp --interactive \
+  sudo cp --interactive --backup=numbered \
     ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/${hogefuga} \
     ${ORIGIN_DIR}/${hogefuga#sample.*}
 

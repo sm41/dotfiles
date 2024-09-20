@@ -7,7 +7,7 @@ ORIGIN_DIR=/etc/systemd/system
 
 while read unit_file
 do
-  sudo cp --interactive \
+  sudo cp --interactive --backup=numbered \
     ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/${unit_file} \
     ${ORIGIN_DIR}/${unit_file#sample.*}
 
