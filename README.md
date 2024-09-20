@@ -4,7 +4,12 @@
 
 ```bash
 sudo apt install git
-git clone ${hogefuga}
-cd dotfiles
-setup.sh
+```
+
+```bash
+git clone https://github.com/sm41/dotfiles.git && cd dotfiles
+```
+
+```bash
+./setup.sh
 ```
