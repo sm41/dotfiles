@@ -3,6 +3,9 @@ set -eu
 
 DOTFILES_DIR=/dotfiles/root/home
 
+
+
+
 # ${HOME}/.config symbolic link
 while read DOT_CONFIG
 do

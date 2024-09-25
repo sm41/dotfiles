@@ -3,6 +3,9 @@ set -eu
 
 DOTFILES_DIR=/dotfiles/root/home
 
+
+
+
 # ${HOME}/.local symbolic link
 while read DOT_LOCAL
 do

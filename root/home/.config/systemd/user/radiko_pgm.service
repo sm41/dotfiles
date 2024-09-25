@@ -1,8 +1,0 @@
-[Unit]
-Description = Get Radiko's Program
-
-
-
-[Service]
-Type = oneshot
-ExecStart = /usr/bin/bash %h/.local/bin/sh/radiko_pgm.sh

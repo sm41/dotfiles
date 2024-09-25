@@ -17,7 +17,11 @@ read -p "🗨️  select  [ `echo ${array_file[@]}` ]  ==>  "  category_of_func
 
 echo "+----------------------------------------------------------------+"
 # shell script file
-while read jjj || [[ -n ${jjj} ]] ;  do  echo "📜  ${jjj##*/}"  ;  done < ${work_path}/zzz/${category_of_func}
+while read jjj || [[ -n ${jjj} ]]
+do
+  [[ ${jjj::1} = "#" ]] && continue
+  echo "📜  ${jjj##*/}"
+done < ${work_path}/zzz/${category_of_func}
 
 echo "+----------------------------------------------------------------+"
 

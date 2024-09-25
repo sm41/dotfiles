@@ -14,4 +14,4 @@ do
   # echo "${FENNEC}  ===>  ${processed_path}"
   ln --symbolic --force ${FENNEC}  ${processed_path}
 
-done < <(find ${HOME}${DOTFILES_DIR}${ORIGIN_DIR} -type f | sort)
+done < <( find ${HOME}${DOTFILES_DIR}${ORIGIN_DIR} -type f | sort)
