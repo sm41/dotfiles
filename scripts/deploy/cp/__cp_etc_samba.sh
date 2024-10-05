@@ -7,7 +7,9 @@ ORIGIN_DIR=/etc/samba
 
 while read piyopiyo
 do
-  sudo cp --interactive --backup=numbered \
+  sudo cp \
+    --interactive \
+    --backup=numbered \
     ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/${piyopiyo} \
     ${ORIGIN_DIR}/${piyopiyo#sample.*}
 

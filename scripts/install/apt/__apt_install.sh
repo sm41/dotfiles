@@ -9,8 +9,8 @@ fi
 input_file=apt_packages_${1}.txt
 work_path=$(cd $(dirname $0) && pwd)
 
-# sudo apt-get update
-# sudo apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
 
 while read package_name
 do
@@ -18,6 +18,6 @@ do
   [ -z ${package_name} ] && continue
   [ ${package_name::1} = "#" ] && continue
 
-  echo "sudo apt-get install --no-install-recommends ^${package_name}$"
+  sudo apt-get install --no-install-recommends ^${package_name}$
 
 done < ${work_path}/${input_file}

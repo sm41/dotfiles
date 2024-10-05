@@ -18,7 +18,7 @@ do
   [ -z ${repository_url} ] && continue
   [ ${repository_url::1} = "#" ] && continue
 
-  echo "git clone ${repository_url}.git"
+  git clone ${repository_url}.git
 
 done < ${work_path}/${input_file}
 

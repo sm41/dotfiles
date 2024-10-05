@@ -1,3 +1,5 @@
 qbittorrent-nox
 curl
 mpv
+jq
+samba

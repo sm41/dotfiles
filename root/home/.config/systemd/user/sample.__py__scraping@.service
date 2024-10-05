@@ -6,5 +6,5 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/dotfiles/root/home/.local/bin/py/download/__main__.py $%I
+ExecStart = /usr/bin/python3   %h/dotfiles/root/home/bin/py/download/__main__.py $%I
 EnvironmentFile = %h/dotfiles/root/home/.config/systemd/env/env_scraping

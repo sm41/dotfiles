@@ -6,4 +6,4 @@ Description = Get Radiko's Program
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/bash      %h/dotfiles/root/home/.local/bin/sh/radiko_pgm.sh
+ExecStart = /usr/bin/bash      %h/dotfiles/root/home/bin/sh/radiko_pgm.sh
