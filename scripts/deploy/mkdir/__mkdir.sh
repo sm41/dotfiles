@@ -18,8 +18,9 @@ mkdir -p ${HOME}/XDG_USER_DIRS/Pictures
 mkdir -p ${HOME}/XDG_USER_DIRS/Videos
 
 # /home
-mkdir -p ${HOME}/app
+mkdir -p ${HOME}/appimage
 mkdir -p ${HOME}/bin/{bash,python}
+mkdir -p ${HOME}/repository
 
 # /mnt
 sudo mkdir -p ${LOCAL_STORAGE_}
