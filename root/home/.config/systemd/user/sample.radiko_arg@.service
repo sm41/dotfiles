@@ -6,5 +6,5 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/bash      %h/dotfiles/root/home/bin/sh/radiko_arg.sh $%I
+ExecStart = /usr/bin/bash      %h/dotfiles/root/home/bin/bash/radiko_arg.sh $%I
 EnvironmentFile = %h/dotfiles/root/home/.config/systemd/env/env_radiko

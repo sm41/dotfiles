@@ -14,4 +14,4 @@ do
   # echo "${DOT_LOCAL}  ===>   ${LOCAL_DIR}"
   ln --symbolic --force ${DOT_LOCAL}   ${LOCAL_DIR}
 
-done < <( find ${HOME}${DOTFILES_DIR}/.local -not \( -path "*/__pycache__/*" \) -type f | sort )
+done < <( find ${HOME}${DOTFILES_DIR}/.local -type f | sort )

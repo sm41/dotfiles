@@ -1,5 +1,5 @@
 # gallery-dl
 yt-dlp
-# selenium
-# plyer
+selenium
+plyer
 bs4

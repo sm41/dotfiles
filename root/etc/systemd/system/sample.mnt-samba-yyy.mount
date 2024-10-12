@@ -1,0 +1,19 @@
+
+# https://wiki.archlinux.jp/index.php/Samba
+
+
+[Unit]
+Description = Mount Share at boot
+Requires = systemd-networkd.service
+After = network-online.target
+Wants = network-online.target
+
+[Mount]
+What  = //192.168.1.9/%j
+Where = /mnt/samba/%j
+Options = credentials=/etc/samba/credentials,iocharset=utf8,rw,x-systemd.automount,uid=1000,gid=1000
+Type  = cifs
+TimeoutSec = 30
+
+[Install]
+WantedBy = default.target

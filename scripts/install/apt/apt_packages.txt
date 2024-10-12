@@ -1,9 +1,11 @@
+# client
+
 audacious
 #ffmpeg
 fonts-ipafont
 #jq
-keepassxc
+#keepassxc
 mpv
 solaar
-vlc
+#vlc
 curl

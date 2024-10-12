@@ -14,4 +14,4 @@ do
   # echo "${bin_file}  ===>   ${homebin}"
   ln --symbolic --force ${bin_file}  ${homebin}
 
-done < <( find ${HOME}${DOTFILES_DIR}/bin -type f | sort )
+done < <( find ${HOME}${DOTFILES_DIR}/bin -not \( -path "*/__pycache__/*" \) -type f | sort )

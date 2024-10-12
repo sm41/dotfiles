@@ -24,38 +24,30 @@ fi
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 
 # XDG
-export XDG_CONFIG_HOME=${HOME}/.config
-export  XDG_CACHE_HOME=${HOME}/.cache
-export   XDG_DATA_HOME=${HOME}/.local/share
-export  XDG_STATE_HOME=${HOME}/.local/state
+export XDG_CONFIG_HOME="${HOME}/.config"
+export  XDG_CACHE_HOME="${HOME}/.cache"
+export   XDG_DATA_HOME="${HOME}/.local/share"
+export  XDG_STATE_HOME="${HOME}/.local/state"
 
+# PATH
+export PATH=${PATH}:"${HOME}/bin/bash"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/bin" ] ; then
-    PATH=$PATH:${HOME}/bin
-fi
-
-if [ -d "${HOME}/bin/sh" ] ; then
-    PATH=$PATH:${HOME}/bin/sh
-fi
+# 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
+# https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
 # python
-export      PYTHON_HISTORY=${XDG_STATE_HOME}/python/history
-export PYTHONPYCACHEPREFIX=${XDG_CACHE_HOME}/python
-export      PYTHONUSERBASE=${XDG_DATA_HOME}/python
+# export          PYTHONPATH=
+export      PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
+export      PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 
-
-
-export PATH=$PATH:${HOME}/bin
-
-
-
+# /mnt
+export   LOCAL_STORAGE_="/mnt/local/"
+export NETWORK_STORAGE_="/mnt/samba/"
+export NETWORK_STORAGE_="/mnt/samba/"
 
 
 # hogefuga=/etc/profile.d
-
-
-
 
 
 # if [ -d ${hogefuga} ]; then

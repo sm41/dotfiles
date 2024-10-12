@@ -1,13 +1,8 @@
 # !/bin/bash
 set -eu
 
-if [[ ! $1 =~ ^(server|client)$  ]] ; then
-  echo "wrong argument"
-  exit 1
-fi
-
-input_file=apt_packages_${1}.txt
-work_path=$(cd $(dirname $0) && pwd)
+input_file=apt_packages.txt
+work_path=$(realpath $(dirname "$0"))
 
 sudo apt-get update
 sudo apt-get upgrade

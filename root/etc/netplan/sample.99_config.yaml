@@ -22,9 +22,9 @@ network:
           via: 192.168.1.1
       nameservers:
         addresses:
-        - 2620:119:35::35 # OpenDNS ipv6 prio
-        - 2620:119:53::53 # OpenDNS ipv6 alt
-        - 208.67.222.222  # OpenDNS ipv4 prio
-        - 208.67.220.220  # OpenDNS ipv4 alt
+        - 2620:119:35::35 # OpenDNS ipv6 primary
+        - 2620:119:53::53 # OpenDNS ipv6 secondary
+        - 208.67.222.222  # OpenDNS ipv4 primary
+        - 208.67.220.220  # OpenDNS ipv4 secondary
 
 

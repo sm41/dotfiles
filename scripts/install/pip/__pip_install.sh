@@ -2,7 +2,7 @@
 set -eux
 
 input_file=requirements.txt
-work_path=$(cd $(dirname $0) && pwd)
+work_path=$(realpath $(dirname "$0"))
 
 mkdir --parents ${HOME}/.local/bin
 

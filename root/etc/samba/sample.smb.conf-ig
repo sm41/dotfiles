@@ -1,7 +1,7 @@
 
 [3t_a]
   comment = aaa
-  path = /mnt/3t_a
+  path = /mnt/%$(hogefuga)
   security = user
   read only = no
   guest ok = no
@@ -9,7 +9,7 @@
 
 [3t_b]
   comment = bbb
-  path = /mnt/3t_b
+  path = /mnt/%$(piyopiyo)
   security = user
   read only = no
   guest ok = no
