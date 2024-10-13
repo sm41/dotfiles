@@ -1,8 +1,11 @@
 #!/bin/bash
 set -eu
 
-DOTFILES_DIR=/dotfiles/root
-ORIGIN_DIR=/etc/systemd/system
+REPOSITORY_DIR=/repository
+DOTFILES_DIR=/dotfiles
+ROOT_DIR=/root
+FHS_DIR=/etc
+ORIGIN_DIR=/systemd/system
 
 
 while read unit_file
@@ -10,7 +13,7 @@ do
   sudo cp \
     --interactive \
     --backup=numbered \
-    ${HOME}${DOTFILES_DIR}${ORIGIN_DIR}/${unit_file} \
-    ${ORIGIN_DIR}/${unit_file#sample.*}
+    ${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${unit_file} \
+    ${FHS_DIR}${ORIGIN_DIR}/${unit_file#sample.*}
 
-done < <(find ${HOME}${DOTFILES_DIR}${ORIGIN_DIR} -type f -printf '%f\n' | sort )
+done < <(find ${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR} -type f -printf '%f\n' | sort )
