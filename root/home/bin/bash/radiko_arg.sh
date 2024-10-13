@@ -5,7 +5,7 @@
 REC_DIR=/mnt/640G/@radiko
 VAR_DIR=/.local/state/radiko
 
-DOTFILES=/dotfiles/root/home
+DOTFILES=/repository/dotfiles/root/home
 LOCAL_LIB=/.local/lib/bash
 
 mkdir -pv ${REC_DIR}
@@ -14,18 +14,6 @@ mkdir -pv ${HOME}${VAR_DIR}
 source ${HOME}${DOTFILES}${LOCAL_LIB}/_func_ffmpeg.bash
 source  ${HOME}${DOTFILES}${LOCAL_LIB}/_func_check.bash
 
-# check argment
-check_number_of_argment 4 $#
-
-# set option
-while getopts ":s:t:" opt ;
-do
-  case $opt in
-    s ) STATION_ID=${OPTARG} ;;
-    t ) TITLE_REGEX=${OPTARG} ;;
-    \? ) show_usage ; exit 1 ;;
-  esac
-done
 
 # usage
 function show_usage(){
@@ -53,6 +41,22 @@ function show_usage(){
       └ "JOAK-FM"  # NHK-FM（東京）
 _EOT_
 }
+
+
+# check argment
+check_number_of_argment 4 $#
+
+# set option
+while getopts ":s:t:" opt ;
+do
+  case $opt in
+    s ) STATION_ID=${OPTARG} ;;
+    t ) TITLE_REGEX=${OPTARG} ;;
+    \? ) show_usage ; exit 1 ;;
+  esac
+done
+
+
 
 function authorization(){
   # get authorize key

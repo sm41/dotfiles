@@ -8,7 +8,7 @@ function show_usage(){
 _EOT_
 }
 
-DOTFILES=/dotfiles/root/home
+DOTFILES=/repository/dotfiles/root/home
 LOCAL_LIB=/.local/lib/bash
 
 source  ${HOME}${DOTFILES}${LOCAL_LIB}/_func_ytdl.bash
