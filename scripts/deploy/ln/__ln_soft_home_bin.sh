@@ -1,17 +1,18 @@
 #!/bin/bash
 set -eu
 
-DOTFILES_DIR=/dotfiles/root/home
-
-
-
+REPOSITORY_DIR=/repository
+DOTFILES_DIR=/dotfiles
+ROOT_DIR=/root
+FHS_DIR=/home
+XDG_DIR=/bin
 
 # ${HOME}/.config symbolic link
-while read bin_file
+while read BIN_FILE
 do
-  homebin=${bin_file/${DOTFILES_DIR}}
-  mkdir --parents ${homebin%/*}
-  # echo "${bin_file}  ===>   ${homebin}"
-  ln --symbolic --force ${bin_file}  ${homebin}
+  HOME_BIN=${BIN_FILE/${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}}
+  mkdir --parents ${HOME_BIN%/*}
+  # echo "${BIN_FILE}  ===>   ${HOME_BIN}"
+  ln --symbolic --force ${BIN_FILE}  ${HOME_BIN}
 
-done < <( find ${HOME}${DOTFILES_DIR}/bin -not \( -path "*/__pycache__/*" \) -type f | sort )
+done < <( find ${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${XDG_DIR} -not \( -path "*/__pycache__/*" \) -type f | sort )
