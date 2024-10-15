@@ -1,32 +1,6 @@
 #!/bin/bash
 # set -eux
 
-STORAGE_DIR=/mnt/640G
-VAR_DIR=/.config
-BASE_DIR=/gallery-dl
-DOMAIN_DIR=/twitter
-ORIGIN_FILE=twitter_list
-
-# get the URL of each user in the list
-while read -a TW_LIST
-do
-  LIST_URL=${TW_LIST[0]}
-  LIST_TITLE=${TW_LIST[2]}
-
-  if [[ ! ${LIST_URL} =~ ^https://x.com/i/lists/[0-9]{19}/members$ ]] ; then continue ; fi
-
-  # make directory of member's in the list at the base directory
-  mkdir -pv ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}
-  mkdir -pv    ${STORAGE_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}
-
-  gallery-dl --dump-json ${LIST_URL} \
-    | jq --raw-output --compact-output '.[][2] | ["https://x.com/i/user/" + .rest_id, "# " + .legacy.screen_name] | @tsv' \
-    | awk '{printf "%-50s %-s %-s\n",$1,$2,$3}' \
-    | sort --ignore-case --key 3 \
-  > ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}/${LIST_TITLE}_spread
-
-done < <(awk '$1 !~ /^#/ {print $0}' ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${ORIGIN_FILE} )
-
 function check_diff(){
   LISTNAME_DIR=$(dirname ${SPREADSHEAT_FILE} | xargs basename)
   CHECK_NUMBER_SIGN=$(cat ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${ORIGIN_FILE} | awk -v hoge=${LISTNAME_DIR} '$3 == hoge {print $1}' )
@@ -61,6 +35,33 @@ function notify(){
     notify-send  "⚠️ User is Not Found"   "${STORAGE_DIR}${BASE_DIR}${DOMAIN_DIR}/${LISTNAME_DIR}\n${REMOVE_USER_FROM_LIST}"
   fi
 }
+
+STORAGE_DIR=/mnt/640G
+VAR_DIR=/.config
+BASE_DIR=/gallery-dl
+DOMAIN_DIR=/twitter
+ORIGIN_FILE=twitter_list
+
+# get the URL of each user in the list
+while read -a TW_LIST
+do
+  LIST_URL=${TW_LIST[0]}
+  LIST_TITLE=${TW_LIST[2]}
+
+  if [[ ! ${LIST_URL} =~ ^https://x.com/i/lists/[0-9]{19}/members$ ]] ; then continue ; fi
+
+  # make directory of member's in the list at the base directory
+  mkdir -pv ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}
+  mkdir -pv    ${STORAGE_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}
+
+  gallery-dl --dump-json ${LIST_URL} \
+    | jq --raw-output --compact-output '.[][2] | ["https://x.com/i/user/" + .rest_id, "# " + .legacy.screen_name] | @tsv' \
+    | awk '{printf "%-50s %-s %-s\n",$1,$2,$3}' \
+    | sort --ignore-case --key 3 \
+  > ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${LIST_TITLE}/${LIST_TITLE}_spread
+
+done < <(awk '$1 !~ /^#/ {print $0}' ${HOME}${VAR_DIR}${BASE_DIR}${DOMAIN_DIR}/${ORIGIN_FILE} )
+
 
 while read SPREADSHEAT_FILE
 do

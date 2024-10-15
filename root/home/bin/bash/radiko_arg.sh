@@ -1,20 +1,6 @@
 #!/bin/bash
 # set -x
 
-# make directory
-REC_DIR=/mnt/640G/@radiko
-VAR_DIR=/.local/state/radiko
-
-DOTFILES=/repository/dotfiles/root/home
-LOCAL_LIB=/.local/lib/bash
-
-mkdir -pv ${REC_DIR}
-mkdir -pv ${HOME}${VAR_DIR}
-
-source ${HOME}${DOTFILES}${LOCAL_LIB}/_func_ffmpeg.bash
-source  ${HOME}${DOTFILES}${LOCAL_LIB}/_func_check.bash
-
-
 # usage
 function show_usage(){
   cat << _EOT_
@@ -42,33 +28,17 @@ function show_usage(){
 _EOT_
 }
 
-
-# check argment
-check_number_of_argment 4 $#
-
-# set option
-while getopts ":s:t:" opt ;
-do
-  case $opt in
-    s ) STATION_ID=${OPTARG} ;;
-    t ) TITLE_REGEX=${OPTARG} ;;
-    \? ) show_usage ; exit 1 ;;
-  esac
-done
-
-
-
 function authorization(){
   # get authorize key
   pid=$$
-  work_path=${HOME}
-  auth1_res="${work_path}/auth1_res.${pid}"
+  working_path=${HOME}
+  auth1_res="${working_path}/auth1_res.${pid}"
 
   # Define authorize key value (from http://radiko.jp/apps/js/playerCommon.js)
   AUTHKEY_VALUE="bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
   # Create authorize key file
-  authkey="${work_path}/authkey.txt"
+  authkey="${working_path}/authkey.txt"
   if [[ ! -f "${authkey}" ]]  ; then
     printf "%s" "${AUTHKEY_VALUE}" > ${authkey}
   fi
@@ -118,6 +88,14 @@ function change_argment_to_URL(){
   FILE=${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}
 }
 
+function del_audio_ffmpeg(){
+  if   [[ ${ENC_RET_VAL} -eq 0 ]]  ; then
+    rm $1  &&  notify-send "✅ Success" "🎵 $(basename ${1%.*}.$2)"
+  elif [[ ${ENC_RET_VAL} -eq 1 ]]  ; then
+    rm $1  &&  notify-send "❌ Failed"  "🎵 $(basename $1)"
+  fi
+}
+
 function conditional_branch(){
   if   [[ -e ${REC_DIR}/${FILE}.m4a ]]  &&  [[ -e ${REC_DIR}/${FILE}.mp3 ]]  ; then
     ENC_RET_VAL=0
@@ -157,11 +135,38 @@ function rm_authkey(){
   rm "auth1_res.${pid}" "authkey.txt"
 }
 
-# loop
-while read -a KKK
+function main(){
+  while read -a KKK
+  do
+    authorization
+    change_argment_to_URL
+    conditional_branch      "${REC_DIR}/${FILE}.m4a"  "mp3"
+    rm_authkey
+  done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' ${VAR_DIR}/week_${STATION_ID^^}_list | grep -iP ${TITLE_REGEX} )
+}
+
+# make directory
+REC_DIR=/mnt/640G/@radiko
+VAR_DIR=${XDG_STATE_HOME}/radiko
+WORK_PATH=$(realpath $(dirname "$0"))
+
+mkdir -pv ${REC_DIR}
+mkdir -pv ${VAR_DIR}
+
+source ${WORK_PATH}/_func_check.sh
+source ${WORK_PATH}/_func_ffmpeg.sh
+
+# check argment
+check_number_of_argment 4 $#
+
+# set option
+while getopts ":s:t:" opt ;
 do
-  authorization
-  change_argment_to_URL
-  conditional_branch      "${REC_DIR}/${FILE}.m4a"  "mp3"
-  rm_authkey
-done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' ${HOME}${VAR_DIR}/week_${STATION_ID^^}_list | grep -iP ${TITLE_REGEX} )
+  case $opt in
+    s ) STATION_ID=${OPTARG} ;;
+    t ) TITLE_REGEX=${OPTARG} ;;
+    \? ) show_usage ; exit 1 ;;
+  esac
+done
+
+main

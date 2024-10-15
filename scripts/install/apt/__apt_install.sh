@@ -1,8 +1,8 @@
 # !/bin/bash
 set -eu
 
-input_file=apt_packages.txt
 work_path=$(realpath $(dirname "$0"))
+input_file=$(find ${work_path}  -not \( -path $0 \)  -type f  -printf "%f\n")
 
 sudo apt-get update
 sudo apt-get upgrade
