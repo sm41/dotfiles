@@ -5,8 +5,5 @@
 
 
 # output PATH
---paths /mnt/640G
-
-
-
+--paths ${CLIENT_LOCAL_STORAGE}
 

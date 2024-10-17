@@ -30,8 +30,8 @@ _EOT_
 
 function authorization(){
   # get authorize key
-  pid=$$
-  working_path=${HOME}
+  pid="$$"
+  working_path="${HOME}"
   auth1_res="${working_path}/auth1_res.${pid}"
 
   # Define authorize key value (from http://radiko.jp/apps/js/playerCommon.js)
@@ -40,7 +40,7 @@ function authorization(){
   # Create authorize key file
   authkey="${working_path}/authkey.txt"
   if [[ ! -f "${authkey}" ]]  ; then
-    printf "%s" "${AUTHKEY_VALUE}" > ${authkey}
+    printf "%s" "${AUTHKEY_VALUE}" > "${authkey}"
   fi
 
   # Authorize 1    --cookie "${cookie}" \
@@ -75,40 +75,40 @@ function authorization(){
 
 # argment to URL from list
 function change_argment_to_URL(){
-  if [[ -z ${KKK[@]} ]] ; then
+  if [[ -z "${KKK[@]}" ]] ; then
     notify-send "❌ Error!!" "Contents is not found"
     rm_authkey && exit 1
   else
-    TIME_FT=${KKK[0]}
-    TIME_TO=${KKK[1]}
-    DUR=${KKK[2]}
-    TITLE=${KKK[3]}
+    TIME_FT="${KKK[0]}"
+    TIME_TO="${KKK[1]}"
+    DUR="${KKK[2]}"
+    TITLE="${KKK[3]}"
   fi
 
-  FILE=${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}
+  FILE="${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}"
 }
 
 function del_audio_ffmpeg(){
-  if   [[ ${ENC_RET_VAL} -eq 0 ]]  ; then
-    rm $1  &&  notify-send "✅ Success" "🎵 $(basename ${1%.*}.$2)"
-  elif [[ ${ENC_RET_VAL} -eq 1 ]]  ; then
-    rm $1  &&  notify-send "❌ Failed"  "🎵 $(basename $1)"
+  if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
+    rm "$1"  &&  notify-send "✅ Success" "🎵 $(basename "${1%.*}"."$2")"
+  elif [[ "${ENC_RET_VAL}" -eq 1 ]]  ; then
+    rm "$1"  &&  notify-send "❌ Failed"  "🎵 $(basename "$1")"
   fi
 }
 
 function conditional_branch(){
-  if   [[ -e ${REC_DIR}/${FILE}.m4a ]]  &&  [[ -e ${REC_DIR}/${FILE}.mp3 ]]  ; then
+  if   [[ -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
     ENC_RET_VAL=0
-    del_audio_ffmpeg  $1  $2
-  elif [[ -e ${REC_DIR}/${FILE}.m4a ]]  &&  [[ ! -e ${REC_DIR}/${FILE}.mp3 ]]  ; then
-    enc_audio_ffmpeg  $1  $2
-    del_audio_ffmpeg  $1  $2
-  elif [[ ! -e ${REC_DIR}/${FILE}.m4a ]]  &&  [[ -e ${REC_DIR}/${FILE}.mp3 ]]  ; then
+    del_audio_ffmpeg  "$1"  "$2"
+  elif [[ -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
+    enc_audio_ffmpeg  "$1"  "$2"
+    del_audio_ffmpeg  "$1"  "$2"
+  elif [[ ! -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
     :
-  elif [[ ! -e ${REC_DIR}/${FILE}.m4a ]]  &&  [[ ! -e ${REC_DIR}/${FILE}.mp3 ]]  ; then
+  elif [[ ! -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
     download_by_ffmpeg
-    enc_audio_ffmpeg  $1  $2
-    del_audio_ffmpeg  $1  $2
+    enc_audio_ffmpeg  "$1"  "$2"
+    del_audio_ffmpeg  "$1"  "$2"
   fi
 }
 
@@ -126,7 +126,7 @@ function download_by_ffmpeg(){
     -vn \
     -bsf:a aac_adtstoasc \
     -movflags faststart \
-  ${REC_DIR}/${FILE}.m4a \
+  "${REC_DIR}/${FILE}.m4a" \
   </dev/null
 }
 
@@ -142,29 +142,29 @@ function main(){
     change_argment_to_URL
     conditional_branch      "${REC_DIR}/${FILE}.m4a"  "mp3"
     rm_authkey
-  done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' ${VAR_DIR}/week_${STATION_ID^^}_list | grep -iP ${TITLE_REGEX} )
+  done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' "${VAR_DIR}/week_${STATION_ID^^}_list" | grep -iP ${TITLE_REGEX} )
 }
 
 # make directory
-REC_DIR=/mnt/640G/@radiko
-VAR_DIR=${XDG_STATE_HOME}/radiko
-WORK_PATH=$(realpath $(dirname "$0"))
+REC_DIR="${CLIENT_LOCAL_STORAGE}/@radiko"
+VAR_DIR="${XDG_STATE_HOME}/radiko"
+WORK_PATH="$(realpath $(dirname "$0"))"
 
-mkdir -pv ${REC_DIR}
-mkdir -pv ${VAR_DIR}
+mkdir -pv "${REC_DIR}"
+mkdir -pv "${VAR_DIR}"
 
-source ${WORK_PATH}/_func_check.sh
-source ${WORK_PATH}/_func_ffmpeg.sh
+source "${WORK_PATH}"/_func_check.sh
+source "${WORK_PATH}"/_func_ffmpeg.sh
 
 # check argment
-check_number_of_argment 4 $#
+check_number_of_argment 4 "$#"
 
 # set option
 while getopts ":s:t:" opt ;
 do
   case $opt in
-    s ) STATION_ID=${OPTARG} ;;
-    t ) TITLE_REGEX=${OPTARG} ;;
+    s ) STATION_ID="${OPTARG}" ;;
+    t ) TITLE_REGEX="${OPTARG}" ;;
     \? ) show_usage ; exit 1 ;;
   esac
 done

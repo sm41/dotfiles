@@ -1,6 +1,6 @@
 {
   "extractor":{
-    "base-directory": "/mnt/640G/gallery-dl",
+    "base-directory": "${CLIENT_LOCAL_STORAGE}/gallery-dl",
 
     "imgur": {
       "filename": "{date:%Y-%m-%d}__{id}__{title}.{extension}"

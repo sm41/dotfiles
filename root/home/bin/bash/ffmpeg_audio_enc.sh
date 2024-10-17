@@ -14,21 +14,21 @@ _EOT_
 function main(){
   while read target_file
   do
-    if [[ ${target_file##*.} =~ ^(m4a)$ ]] && [[ $1 =~ ^(mp3)$ ]] ; then
-      enc_audio_ffmpeg ${target_file}  $1
+    if [[ "${target_file##*.}" =~ ^(m4a)$ ]] && [[ "$1" =~ ^(mp3)$ ]] ; then
+      enc_audio_ffmpeg "${target_file}"  "$1"
     else
       continue
     fi
   done
 }
 
-WORK_PATH=$(realpath $(dirname "$0"))
+WORK_PATH="$(realpath $(dirname "$0"))"
 
 # check stdin
-source ${WORK_PATH}/_func_check.sh
-source ${WORK_PATH}/_func_ffmpeg.sh
+source "${WORK_PATH}/_func_check.sh"
+source "${WORK_PATH}/_func_ffmpeg.sh"
 
 
 check_stdin
-check_number_of_argment 1 $#
+check_number_of_argment 1 "$#"
 main

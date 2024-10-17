@@ -13,7 +13,7 @@ _EOT_
 # check extention
 # check aspect argment
 function check_container_and_aspect(){
-  if [[ ! ${VIDEO_FILE_PATH##*.} =~ ^(mp4|wmv|avi|mkv)$ ]] || [[ ! ${ASPECT_RATIO} =~ ^(4:3|16:9)$ ]] ; then
+  if [[ ! "${VIDEO_FILE_PATH##*.}" =~ ^(mp4|wmv|avi|mkv)$ ]] || [[ ! "${ASPECT_RATIO}" =~ ^(4:3|16:9)$ ]] ; then
     show_usage ; exit 1
   fi
 }
@@ -23,19 +23,19 @@ function main(){
 
   ffmpeg \
     -n \
-    -i ${VIDEO_FILE_PATH} \
+    -i "${VIDEO_FILE_PATH}" \
     -c copy \
-    -aspect ${ASPECT_RATIO} \
-  ${VIDEO_FILE_PATH%/*}/__${VIDEO_FILE_PATH##*/}
+    -aspect "${ASPECT_RATIO}" \
+  "${VIDEO_FILE_PATH%/*}/__${VIDEO_FILE_PATH##*/}"
 
 }
 
-VIDEO_FILE_PATH=$1
-ASPECT_RATIO=$2
-WORK_PATH=$(realpath $(dirname "$0"))
+VIDEO_FILE_PATH="$1"
+ASPECT_RATIO="$2"
+WORK_PATH="$(realpath $(dirname "$0"))"
 
-source ${WORK_PATH}/_func_check.sh
+source "${WORK_PATH}/_func_check.sh"
 
-check_number_of_argment 2 $#
+check_number_of_argment 2 "$#"
 check_container_and_aspect
-main $1 $2
+main "$1" "$2"

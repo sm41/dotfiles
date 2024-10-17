@@ -31,6 +31,7 @@ export  XDG_STATE_HOME="${HOME}/.local/state"
 
 # PATH
 export PATH=${PATH}:"${HOME}/bin/bash"
+export PATH=${PATH}:"${HOME}/.local/bin"
 
 # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
 # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
@@ -42,9 +43,9 @@ export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export      PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 
 # /mnt
-export   LOCAL_STORAGE_="/mnt/local/"
-export NETWORK_STORAGE_="/mnt/samba/"
-export NETWORK_STORAGE_="/mnt/samba/"
+export        CLIENT_LOCAL_STORAGE="/mnt/local/"
+export  CLIENT_NETWORK_STORAGE_333="/mnt/samba/"
+export  CLIENT_NETWORK_STORAGE_www="/mnt/samba/"
 
 
 # hogefuga=/etc/profile.d

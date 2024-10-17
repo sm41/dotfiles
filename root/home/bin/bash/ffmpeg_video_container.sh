@@ -14,14 +14,14 @@ _EOT_
 # change container extension
 function change_container_ffmpeg(){
 
-  INPUT_FILE=$1
-  TARGET_EXT=$2
+  INPUT_FILE="$1"
+  TARGET_EXT="$2"
 
   ffmpeg \
     -n \
-    -i ${INPUT_FILE} \
+    -i "${INPUT_FILE}" \
     -c copy \
-  ${INPUT_FILE%.*}.${TARGET_EXT} \
+  "${INPUT_FILE%.*}.${TARGET_EXT}" \
   </dev/null
 }
 
@@ -30,19 +30,19 @@ function change_container_ffmpeg(){
 function main(){
   while read target_file
   do
-    if [[ ${target_file##*.} =~ ^(mp4|wmv|avi|mkv|webm)$ ]] && [[ $1 =~ ^(mp4|mkv)$ ]] ;  then
-      change_container_ffmpeg  ${target_file}  $1
+    if [[ "${target_file##*.}" =~ ^(mp4|wmv|avi|mkv|webm)$ ]] && [[ "$1" =~ ^(mp4|mkv)$ ]] ;  then
+      change_container_ffmpeg  "${target_file}"  "$1"
     else
       continue
     fi
   done
 }
 
-WORK_PATH=$(realpath $(dirname "$0"))
+WORK_PATH="$(realpath $(dirname "$0"))"
 
 # check stdin
-source ${WORK_PATH}/_func_check.sh
+source "${WORK_PATH}/_func_check.sh"
 
 check_stdin
-check_number_of_argment 1 $#
-main $1
+check_number_of_argment 1 "$#"
+main "$1"

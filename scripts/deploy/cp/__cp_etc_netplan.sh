@@ -8,12 +8,12 @@ FHS_DIR=/etc
 ORIGIN_DIR=/netplan
 
 
-while read hogefuga
+while read target_file
 do
   sudo cp \
     --interactive \
     --backup=numbered \
-    ${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${hogefuga} \
-    ${FHS_DIR}${ORIGIN_DIR}/${hogefuga#sample.*}
+    "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${target_file}" \
+    "${FHS_DIR}${ORIGIN_DIR}/${target_file#sample.*}"
 
-done < <(find ${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR} -type f -printf '%f\n' | sort )
+done < <(find "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}" -type f -printf '%f\n' | sort )
