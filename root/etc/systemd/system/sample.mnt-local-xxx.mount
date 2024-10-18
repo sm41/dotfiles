@@ -10,9 +10,10 @@ Description = Mount Local Storage
 
 [Mount]
 What  = /dev/disk/by-uuid/828d687b-dba3-4018-a5fe-15ecaadf3a54
-Where = /mnt/%j
+Where = /mnt/local/%j
 Options = defaults
 Type  = ext4
+# EnvironmentFile = %h/.config/environment.d/env_mount.conf
 
 
 [Install]

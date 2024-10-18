@@ -14,6 +14,7 @@ Where = /mnt/samba/%j
 Options = credentials=/etc/samba/credentials,iocharset=utf8,rw,x-systemd.automount,uid=1000,gid=1000
 Type  = cifs
 TimeoutSec = 30
+# EnvironmentFile = %h/.config/environment.d/env_mount.conf
 
 [Install]
 WantedBy = default.target
