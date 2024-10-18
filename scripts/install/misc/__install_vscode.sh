@@ -1,5 +1,5 @@
 # !/bin/bash
-set -eux
+set -eu
 
 # VSCode
 curl -L https://go.microsoft.com/fwlink/?LinkID=760868 -o vscode.deb

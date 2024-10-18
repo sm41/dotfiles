@@ -1,5 +1,5 @@
 # !/bin/bash
-set -eux
+set -eu
 
 input_file="requirements.txt"
 work_path="$(realpath $(dirname "$0"))"

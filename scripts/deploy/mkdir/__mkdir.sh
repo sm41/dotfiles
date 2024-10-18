@@ -1,5 +1,5 @@
 # !/#/bash
-# set -eux
+set -eu
 
 # XDG
 mkdir -p "${XDG_CONFIG_HOME}"
