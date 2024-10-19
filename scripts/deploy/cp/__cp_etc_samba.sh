@@ -10,6 +10,8 @@ ORIGIN_DIR=/samba
 
 while read target_file
 do
+  sudo mkdir -p "${FHS_DIR}${ORIGIN_DIR}"
+
   sudo cp \
     --interactive \
     --backup=numbered \
