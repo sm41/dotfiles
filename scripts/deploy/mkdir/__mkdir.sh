@@ -18,8 +18,7 @@ mkdir -p "${HOME}/XDG_USER_DIRS/Pictures"
 mkdir -p "${HOME}/XDG_USER_DIRS/Videos"
 
 # /home
-mkdir -p "${HOME}/appimage"
-mkdir -p "${HOME}/bin/{bash,python}"
+mkdir -p "${HOME}/bin/{appimage,bash,python}"
 mkdir -p "${HOME}/repository"
 
 # /mnt

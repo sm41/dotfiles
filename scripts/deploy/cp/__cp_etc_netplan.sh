@@ -12,9 +12,7 @@ while read target_file
 do
   sudo mkdir -p "${FHS_DIR}${ORIGIN_DIR}"
 
-  sudo cp \
-    --interactive \
-    --backup=numbered \
+  sudo cp  -b \
     "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${target_file}" \
     "${FHS_DIR}${ORIGIN_DIR}/${target_file#sample.*}"
 
