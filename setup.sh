@@ -1,47 +1,30 @@
 #!/usr/bin/bash
 set -eu
 
-work_path=$(cd $(dirname $0) && pwd)
-array_file=( $(find  ${work_path}/zzz  -type f -printf "%f\n" | sort) )
+work_path=$(realpath $(dirname "$0"))
 
-# question
-read -p "🗨️  select  [ `echo ${array_file[@]}` ]  ==>  "  category_of_func
+echo $work_path
+exit 0
 
-# check input word
-  if printf '%s\n' "${array_file[@]}"  |  grep -qx ${category_of_func} ; then
-    echo "┗━ ✅ [ Match file name ]"
-  else
-    echo "┗━ ❌ [ Not match file name ]"
-    exit 1
-  fi
+# cp
+bash "${work_path}/scripts/deploy/cp/__cp_etc_netplan.sh"
+bash "${work_path}/scripts/deploy/cp/__cp_etc_samba.sh"
+bash "${work_path}/scripts/deploy/cp/__cp_etc_sysctl.d.sh"
+bash "${work_path}/scripts/deploy/cp/__cp_etc_systemd_system.sh"
 
-echo "+----------------------------------------------------------------+"
-# shell script file
-while read jjj || [[ -n ${jjj} ]]
-do
-  [[ ${jjj::1} = "#" ]] && continue
-  echo "📜  ${jjj##*/}"
-done < ${work_path}/zzz/${category_of_func}
+# ln
+bash "${work_path}/scripts/deploy/ln/__ln_soft_home_bin.sh"
+bash "${work_path}/scripts/deploy/ln/__ln_soft_home_config.sh"
+bash "${work_path}/scripts/deploy/ln/__ln_soft_home_local.sh"
+bash "${work_path}/scripts/deploy/ln/__ln_soft_home_mozilla.sh"
+bash "${work_path}/scripts/deploy/ln/__ln_soft_home_profile.sh"
 
-echo "+----------------------------------------------------------------+"
+# mkdir
+bash "${work_path}/scripts/deploy/mkdir/__mkdir.sh"
 
-while read list_of_func <&3 || [[ -n ${list_of_func} ]]
-do
+# install
+bash "${work_path}/scripts/install/apt/__apt_install.sh"
+bash "${work_path}/scripts/install/misc/__install_vscode.sh"
+bash "${work_path}/scripts/install/pip/__pip_install.sh"
 
-  [[ ${list_of_func::1} = "#" ]] && continue
 
-  read -p "┏━ 💲 ${list_of_func##*/}  [ y | n ]  ==>  "  selected_func
-
-  case ${selected_func} in
-    [Yy])
-      echo "┗━ ✅ execute"
-      eval $(echo ${list_of_func}) <&3
-    ;;
-    [Nn])
-      echo "┗━ ❌ cancel"
-    ;;
-  esac
-
-  echo "+----------------------------------------------------------------+"
-
-done 3< ${work_path}/zzz/${category_of_func}
