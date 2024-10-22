@@ -1,7 +1,16 @@
 #!/bin/bash
-# set -x
+set -eu
 
-# usage
+# variable
+REC_DIR="${CLIENT_LOCAL_STORAGE}/@radiko"
+VAR_DIR="${XDG_STATE_HOME}/radiko"
+WORK_PATH="$(realpath $(dirname "$0"))"
+
+# source
+source "${WORK_PATH}"/_func_check.sh
+source "${WORK_PATH}"/_func_ffmpeg.sh
+
+
 function show_usage(){
   cat << _EOT_
   Usage: $(basename "$0") -s "Station ID" -t "Program title"
@@ -73,7 +82,6 @@ function authorization(){
   "https://radiko.jp/v2/api/auth2"
 }
 
-# argment to URL from list
 function change_argment_to_URL(){
   if [[ -z "${KKK[@]}" ]] ; then
     notify-send "❌ Error!!" "Contents is not found"
@@ -130,7 +138,6 @@ function download_by_ffmpeg(){
   </dev/null
 }
 
-# remove authorize key
 function rm_authkey(){
   rm "auth1_res.${pid}" "authkey.txt"
 }
@@ -145,18 +152,10 @@ function main(){
   done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' "${VAR_DIR}/week_${STATION_ID^^}_list" | grep -iP ${TITLE_REGEX} )
 }
 
-# make directory
-REC_DIR="${CLIENT_LOCAL_STORAGE}/@radiko"
-VAR_DIR="${XDG_STATE_HOME}/radiko"
-WORK_PATH="$(realpath $(dirname "$0"))"
-
 mkdir -pv "${REC_DIR}"
 mkdir -pv "${VAR_DIR}"
 
-source "${WORK_PATH}"/_func_check.sh
-source "${WORK_PATH}"/_func_ffmpeg.sh
 
-# check argment
 check_number_of_argment 4 "$#"
 
 # set option

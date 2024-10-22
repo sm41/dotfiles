@@ -1,7 +1,9 @@
 #!/bin/bash
 set -eu
 
-# check status code
+# variable
+VAR_DIR="${XDG_STATE_HOME}/radiko"
+
 function check_status_code(){
   if   [[ $(curl -s -o /dev/null -w '%{http_code}\n' "https://radiko.jp/v3/station/list/JP8.xml") != 200 ]] ; then
     notify-send "❌ Error" "AREA_ID_HTTP_STATUS_CODE" && exit 1
@@ -23,7 +25,6 @@ function var_style(){
   && rm ${VAR_DIR}/week_${STATION_ID}.xml
 }
 
-# download program list
 function main(){
   while read STATION_ID
   do
@@ -32,7 +33,6 @@ function main(){
   done < <(curl --silent "https://radiko.jp/v3/station/list/JP8.xml" | grep --only-matching --perl-regexp '(?<=<id>).+(?=</id>)' )
 }
 
-
 # JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
 # 国土交通省 https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html
 # Area ID: JP8   https://radiko.jp/v3/station/list/JP8.xml
@@ -40,7 +40,6 @@ function main(){
 # https://radiko.jp/v3/program/station/date/20301231/TBS.xml
 # https://radiko.jp/v3/program/station/weekly/TBS.xml
 
-VAR_DIR="${XDG_STATE_HOME}/radiko"
 
 mkdir -pv "${VAR_DIR}"
 

@@ -1,5 +1,12 @@
 #!/bin/bash
-# set -eux
+set -eu
+
+# variable
+STORAGE_DIR="${CLIENT_LOCAL_STORAGE}"
+VAR_DIR=/.config
+BASE_DIR=/gallery-dl
+DOMAIN_DIR=/twitter
+ORIGIN_FILE=twitter_list
 
 function check_diff(){
   LISTNAME_DIR="$(dirname ${SPREADSHEAT_FILE} | xargs basename)"
@@ -36,11 +43,6 @@ function notify(){
   fi
 }
 
-STORAGE_DIR=/mnt/640G
-VAR_DIR=/.config
-BASE_DIR=/gallery-dl
-DOMAIN_DIR=/twitter
-ORIGIN_FILE=twitter_list
 
 # get the URL of each user in the list
 while read -a TW_LIST

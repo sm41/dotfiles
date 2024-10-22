@@ -1,5 +1,12 @@
 #!/bin/bash
-# set -x
+set -eu
+
+# variable
+WORK_PATH="$(realpath $(dirname "$0"))"
+
+# source
+source "${WORK_PATH}/_func_check.sh"
+source "${WORK_PATH}/_func_rename_pipe.sh"
 
 function show_usage(){
   cat << _EOT_
@@ -9,7 +16,6 @@ function show_usage(){
 _EOT_
 }
 
-# sed script OR function
 function check_sed_command(){
   if [[ "$1" =~ [sy]/.*/g?$  ]] ; then
     SED_COMMAND="$1"
@@ -19,7 +25,6 @@ function check_sed_command(){
   fi
 }
 
-# main
 function main(){
   while read TARGET_FILE
   do
@@ -30,12 +35,6 @@ function main(){
   done
 }
 
-WORK_PATH="$(realpath $(dirname "$0"))"
-
-source "${WORK_PATH}/_func_check.sh"
-source "${WORK_PATH}/_func_rename_pipe.sh"
-
-# check stdin and argment
 check_stdin
 check_number_of_argment 1 "$#"
 check_sed_command "$1"

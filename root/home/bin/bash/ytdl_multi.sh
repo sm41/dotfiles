@@ -1,7 +1,13 @@
 #!/bin/bash
-# set -x
+set -eu
 
-#
+# variable
+WORK_PATH="$(realpath $(dirname "$0"))"
+
+# source
+source "${WORK_PATH}"/_func_check.sh
+
+
 function show_usage(){
   cat << _EOT_
   Usage : "$(basename "$0")"  'https://hoge/fuga' OR 'hoge_list'
@@ -9,9 +15,8 @@ function show_usage(){
 _EOT_
 }
 
-# make directory and file
 function target_website(){
-  REC_DIR="/mnt/640G/@$1"
+  REC_DIR="${CLIENT_LOCAL_STORAGE}/@$1"
   VAR_DIR="${XDG_STATE_HOME}/yt-dlp/$1"
   DL_FILE="$1_list"
 
@@ -102,11 +107,6 @@ function main(){
     show_usage ; exit 1
   fi
 }
-
-
-WORK_PATH="$(realpath $(dirname "$0"))"
-
-source "${WORK_PATH}"/_func_check.sh
 
 check_number_of_argment 1 "$#"
 main "$1"

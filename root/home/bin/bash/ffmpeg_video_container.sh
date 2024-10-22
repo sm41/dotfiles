@@ -1,7 +1,13 @@
 #!/bin/bash
-set -e
+set -eu
 
-# usage
+# variable
+WORK_PATH="$(realpath $(dirname "$0"))"
+
+# source
+source "${WORK_PATH}/_func_check.sh"
+
+
 function show_usage(){
   cat << _EOT_
   Usage : find /hoge/fuga/ -name "*m4a" | $(basename "$0")  'container_type'
@@ -10,8 +16,6 @@ function show_usage(){
 _EOT_
 }
 
-
-# change container extension
 function change_container_ffmpeg(){
 
   INPUT_FILE="$1"
@@ -25,8 +29,6 @@ function change_container_ffmpeg(){
   </dev/null
 }
 
-
-# main
 function main(){
   while read target_file
   do
@@ -37,11 +39,6 @@ function main(){
     fi
   done
 }
-
-WORK_PATH="$(realpath $(dirname "$0"))"
-
-# check stdin
-source "${WORK_PATH}/_func_check.sh"
 
 check_stdin
 check_number_of_argment 1 "$#"

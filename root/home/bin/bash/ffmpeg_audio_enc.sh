@@ -1,7 +1,14 @@
 #!/bin/bash
-set -e
+set -eu
 
-# usage
+# variable
+WORK_PATH="$(realpath $(dirname "$0"))"
+
+# source
+source "${WORK_PATH}/_func_check.sh"
+source "${WORK_PATH}/_func_ffmpeg.sh"
+
+
 function show_usage(){
   cat << _EOT_
   Usage : find /hoge/fuga/ -name "*m4a" | $(basename "$0")  'codec_type'
@@ -10,7 +17,6 @@ function show_usage(){
 _EOT_
 }
 
-# main
 function main(){
   while read target_file
   do
@@ -21,13 +27,6 @@ function main(){
     fi
   done
 }
-
-WORK_PATH="$(realpath $(dirname "$0"))"
-
-# check stdin
-source "${WORK_PATH}/_func_check.sh"
-source "${WORK_PATH}/_func_ffmpeg.sh"
-
 
 check_stdin
 check_number_of_argment 1 "$#"
