@@ -35,6 +35,8 @@ function main(){
 
 }
 
-check_number_of_argment 2 "$#"
-check_container_and_aspect
-main "$1" "$2"
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+  check_number_of_argment 2 "$#"
+  check_container_and_aspect
+  main "$1" "$2"
+fi

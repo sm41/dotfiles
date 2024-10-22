@@ -28,6 +28,8 @@ function main(){
   done
 }
 
-check_stdin
-check_number_of_argment 1 "$#"
-main
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+  check_stdin
+  check_number_of_argment 1 "$#"
+  main
+fi

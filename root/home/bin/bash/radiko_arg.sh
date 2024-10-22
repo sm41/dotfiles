@@ -152,20 +152,25 @@ function main(){
   done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' "${VAR_DIR}/week_${STATION_ID^^}_list" | grep -iP ${TITLE_REGEX} )
 }
 
-mkdir -pv "${REC_DIR}"
-mkdir -pv "${VAR_DIR}"
 
 
-check_number_of_argment 4 "$#"
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
-# set option
-while getopts ":s:t:" opt ;
-do
-  case $opt in
-    s ) STATION_ID="${OPTARG}" ;;
-    t ) TITLE_REGEX="${OPTARG}" ;;
-    \? ) show_usage ; exit 1 ;;
-  esac
-done
+  mkdir -pv "${REC_DIR}"
+  mkdir -pv "${VAR_DIR}"
 
-main
+  check_number_of_argment 4 "$#"
+
+  # set option
+  while getopts ":s:t:" opt ;
+  do
+    case $opt in
+      s ) STATION_ID="${OPTARG}" ;;
+      t ) TITLE_REGEX="${OPTARG}" ;;
+      \? ) show_usage ; exit 1 ;;
+    esac
+  done
+
+  main
+
+fi

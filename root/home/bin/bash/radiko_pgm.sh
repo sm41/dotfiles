@@ -12,8 +12,8 @@ function check_status_code(){
   fi
 }
 
-# [ ',' / csv ],[ ' ' / list ]
 function var_style(){
+  # [ ',' / csv ],[ ' ' / list ]
   paste --delimiters="$1" \
     <(grep -oP '(?<=ft=")[0-9]+(?=")'       "${VAR_DIR}/week_${STATION_ID}.xml" ) \
     <(grep -oP '(?<=to=")[0-9]+(?=")'       "${VAR_DIR}/week_${STATION_ID}.xml" ) \
@@ -40,10 +40,11 @@ function main(){
 # https://radiko.jp/v3/program/station/date/20301231/TBS.xml
 # https://radiko.jp/v3/program/station/weekly/TBS.xml
 
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+  mkdir -pv "${VAR_DIR}"
 
-mkdir -pv "${VAR_DIR}"
+  check_status_code
+  main
 
-check_status_code
-main
-
-notify-send "✅ Success" "$(basename $0)"
+  notify-send "✅ Success" "$(basename $0)"
+fi

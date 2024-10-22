@@ -35,7 +35,9 @@ function main(){
   done
 }
 
-check_stdin
-check_number_of_argment 1 "$#"
-check_sed_command "$1"
-main "$1"
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+  check_stdin
+  check_number_of_argment 1 "$#"
+  check_sed_command "$1"
+  main "$1"
+fi
