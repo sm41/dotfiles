@@ -3,6 +3,7 @@
 class apple_podcast:
     pass
     elekata = {
+        "dow":     "火",
         "title":   "エレ片のケツビ",
         "url":     "https://podcasts.apple.com/jp/podcast/%E3%82%A8%E3%83%AC%E7%89%87%E3%81%AE%E3%82%B1%E3%83%84%E3%83%93/id1560299989",
     }
@@ -10,6 +11,7 @@ class apple_podcast:
 class megaphone_fm:
     pass
     # elekata = {
+    #     "dow":     "火",
     #     "title":   "エレ片のケツビ",
     #     "url":     "https://feeds.megaphone.fm/TBS2752996527",
     #     "anchor":  "新録",
@@ -18,10 +20,12 @@ class megaphone_fm:
 class tver:
     pass
     toiro = {
+        "dow":     "日",
         "title":   "住人十色",
         "url":     "https://tver.jp/series/srxbqmdpvs",
     }
     double = {
+        "dow":     "月",
         "title":   "ダブルチート 偽りの警官 Season2",
         "url":     "https://tver.jp/series/srv3fw5nhv",
     }

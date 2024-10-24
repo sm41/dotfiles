@@ -3,33 +3,34 @@ import os
 import sys
 
 
-# fff = "LOCAL_STORAGE_666"
-MNT     = "/mnt/640G"
-PODCAST = "/@podcast"
-TVER    = "/@tver"
+# MNT_ENV_VAR = "CLIENT_LOCAL_STORAGE"
+MNT_ENV_VAR = "CLIENT_LOCAL_STORAGE"
+PODCAST_DIR = "/@podcast"
+TVER_DIR    = "/@tver"
 
+MNT_PATH = os.getenv(MNT_ENV_VAR)
 
-# Env_Var = os.getenv(fff)
+# print(MNT_PATH + PODCAST_DIR)
 
-# if Env_Var is None:
-#     print(type(Env_Var))
-#     print(f"\"{fff}\" is not define")
-#     sys.exit
+# if MNT_PATH is None:
+#     print(type(MNT_PATH))
+#     print(f"\"{MNT_ENV_VAR}\" is not define")
+#     sys.exit()
 # else:
-#     if os.path.isdir(Env_Var):
-#         print(Env_Var)
-#         print(f"\"{Env_Var}\" is ok")
+#     if os.path.isdir(MNT_PATH):
+#         print(MNT_PATH)
+#         print(f"\"{MNT_PATH}\" is ok")
 #     else:
-#         print(Env_Var)
-#         print(f"\"{Env_Var}\" is not exist PATH")
-#         sys.exit
+#         print(MNT_PATH)
+#         print(f"\"{MNT_PATH}\" is not exist PATH")
+#         sys.exit()
 
 
 
 def apple_podcast(target_url):
     cmd_ytdlp = [
         "yt-dlp",
-        "--paths",  MNT + PODCAST,
+        "--paths",  MNT_PATH + PODCAST_DIR,
         "--output", "[Podcast]_%(series)s_%(upload_date>%Y-%m-%d)s_%(title)s.%(ext)s",
         target_url
     ]
@@ -39,7 +40,7 @@ def apple_podcast(target_url):
 def megaphone_fm(target_url):
     cmd_ytdlp = [
         "yt-dlp",
-        "--paths",  MNT + PODCAST,
+        "--paths",  MNT_PATH + PODCAST_DIR,
         "--output", "[Podcast]_" + __main__.soup[0] + "_" + __main__.soup[1] + ".%(ext)s",
         target_url
     ]
@@ -49,7 +50,7 @@ def megaphone_fm(target_url):
 def tver(target_url):
     cmd_ytdlp = [
         "yt-dlp",
-        "--paths",  MNT + TVER,
+        "--paths",  MNT_PATH + TVER_DIR,
         "--output", "[%(webpage_url_domain)s]_%(series)s_%(episode)s.%(ext)s",
         target_url
     ]

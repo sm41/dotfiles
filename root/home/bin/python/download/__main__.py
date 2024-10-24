@@ -30,8 +30,8 @@ EPISODE = soup[1]
 LINK    = soup[2]
 
 # # download
-method   = getattr(func_ytdlp, SET_PLATFORM)(LINK)
-result   = subprocess.run(method)
+method  = getattr(func_ytdlp, SET_PLATFORM)(LINK)
+result  = subprocess.run(method)
 
 if result.returncode == 0:
     notification.notify(
