@@ -1,9 +1,6 @@
 
 
-# create json file
 #--write-info-json
-
-
-# output PATH
+--embed-subs
 --paths ${CLIENT_LOCAL_STORAGE}
 

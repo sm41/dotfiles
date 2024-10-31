@@ -50,6 +50,7 @@ def megaphone_fm(target_url):
 def tver(target_url):
     cmd_ytdlp = [
         "yt-dlp",
+        "--embed-subs",
         "--paths",  MNT_PATH + TVER_DIR,
         "--output", "[%(webpage_url_domain)s]_%(series)s_%(episode)s.%(ext)s",
         target_url
