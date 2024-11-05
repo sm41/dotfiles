@@ -13,6 +13,6 @@ do
   CONFIG_DIR="${DOT_CONFIG/${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}}"
   mkdir -p "${CONFIG_DIR%/*}"
   # echo "${DOT_CONFIG}  ===>   ${CONFIG_DIR}"
-  ln -s -b "${DOT_CONFIG}"  "${CONFIG_DIR}"
+  ln -s "${DOT_CONFIG}"  "${CONFIG_DIR}"
 
 done < <( find "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${XDG_DIR}" -not \( -path "*/systemd/user*" \) -type f | sort )

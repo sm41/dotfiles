@@ -13,6 +13,6 @@ do
   HOME_BIN="${BIN_FILE/${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}}"
   mkdir -p "${HOME_BIN%/*}"
   # echo "${BIN_FILE}  ===>   ${HOME_BIN}"
-  ln -s -b "${BIN_FILE}"  "${HOME_BIN}"
+  ln -s "${BIN_FILE}"  "${HOME_BIN}"
 
 done < <( find "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}${XDG_DIR}" -not \( -path "*/__pycache__/*" \) -type f | sort )

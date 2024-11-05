@@ -12,7 +12,7 @@ rrr=".profile"
 
 while read USER_PROFILE
 do
-  echo "ln -s -b   "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+  echo "ln -s   "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
 
 done << edf
   ${aaa}
