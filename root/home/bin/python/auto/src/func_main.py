@@ -54,10 +54,9 @@ def main(vvvv):
     material = func_scrape.hhh(set_scraper, input_dict["url"])
     series, episode, link = func_parse.ppp(set_platform, material)
 
-    print(series, episode, link)
-
-    continue
-    sys.exit()
+    # print(series, episode, link)
+    # continue
+    # sys.exit()
 
     method  = func_ytdlp.ooo(link, set_platform)
     result  = subprocess.run(method)
