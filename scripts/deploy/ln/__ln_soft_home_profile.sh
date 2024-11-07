@@ -12,7 +12,18 @@ rrr=".profile"
 
 while read USER_PROFILE
 do
-  echo "ln -s   "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+
+  if    [[ ! -e "${LOCAL_DIR}"  ]] ; then
+    echo "ln -s   "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+
+  elif  [[ -L "${LOCAL_DIR}"  ]] ; then
+    echo "ln -s -f  "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+
+  elif  [[ ! -L "${LOCAL_DIR}"  ]] ; then
+    echo "ln -s -b  "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+
+  fi
+
 
 done << edf
   ${aaa}
