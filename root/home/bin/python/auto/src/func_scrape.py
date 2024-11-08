@@ -1,8 +1,8 @@
 
 from selenium import webdriver
+import urllib.request
 import time
 import bs4
-import urllib.request
 
 
 def selenium(url):

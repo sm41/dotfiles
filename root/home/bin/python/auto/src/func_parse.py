@@ -1,6 +1,6 @@
 
-import re
 import func_main
+import re
 
 def apple_podcast(bouillon):
   ROW_SERIES   = bouillon.select_one(func_main.set_selector["series"]).get_text()

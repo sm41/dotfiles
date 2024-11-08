@@ -1,10 +1,9 @@
 
-from array_dir import array_audio, array_video, array_element
-import func_parse, func_scrape, func_ytdlp
 from plyer    import notification
+import array_element
+import func_parse, func_scrape, func_ytdlp
+
 import subprocess
-
-
 import datetime
 import locale
 import sys
@@ -58,8 +57,8 @@ def main(vvvv):
     # continue
     # sys.exit()
 
-    method  = func_ytdlp.ooo(link, set_platform)
-    result  = subprocess.run(method)
+    method = func_ytdlp.ooo(link, set_platform)
+    result = subprocess.run(method)
 
     if result.returncode == 0:
       notification.notify(

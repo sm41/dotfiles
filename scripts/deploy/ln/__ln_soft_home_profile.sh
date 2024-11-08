@@ -6,6 +6,8 @@ DOTFILES_DIR=/dotfiles
 ROOT_DIR=/root
 FHS_DIR=/home
 
+TEMP_PATH="${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}"
+
 aaa=".bash_profile"
 fff=".bashrc"
 rrr=".profile"
@@ -14,15 +16,17 @@ while read USER_PROFILE
 do
 
   if    [[ ! -e "${LOCAL_DIR}"  ]] ; then
-    echo "ln -s   "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+    ln -s     "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   elif  [[ -L "${LOCAL_DIR}"  ]] ; then
-    echo "ln -s -f  "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+    ln -s -f  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   elif  [[ ! -L "${LOCAL_DIR}"  ]] ; then
-    echo "ln -s -b  "${HOME}${REPOSITORY_DIR}${DOTFILES_DIR}${ROOT_DIR}${FHS_DIR}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+    ln -s -b  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   fi
+
+  # echo "ln -s   "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
 
 
 done << edf
