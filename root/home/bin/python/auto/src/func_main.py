@@ -48,10 +48,9 @@ def main(vvvv):
     set_scraper  = input_dict["scraper"]
     # SET_MEMBER   = input_dict
 
-    global set_selector
     set_selector = get_tuple([ array_element ], "var", set_platform)[0]
     material = func_scrape.hhh(set_scraper, input_dict["url"])
-    series, episode, link = func_parse.ppp(set_platform, material)
+    series, episode, link = func_parse.ppp(set_platform, material, set_selector)
 
     # print(series, episode, link)
     # continue
