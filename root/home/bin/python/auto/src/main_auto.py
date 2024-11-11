@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 
 import array_audio, array_video, array_element
 import func_main

@@ -31,10 +31,10 @@ def xml(url):
   return soup
 
 
-def hhh(SCRAPER, url):
+def hhh(scraper, url):
 
-  if   SCRAPER == "selenium":
+  if   scraper == "selenium":
     return selenium(url)
 
-  elif SCRAPER == "xml":
+  elif scraper == "xml":
     return xml(url)
