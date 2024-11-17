@@ -157,7 +157,6 @@ function main(){
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
   mkdir -pv "${REC_DIR}"
-  mkdir -pv "${VAR_DIR}"
 
   check_number_of_argment 4 "$#"
 
