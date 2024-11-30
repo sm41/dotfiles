@@ -41,7 +41,7 @@ def tver(target_url):
 
 
 
-def ooo(target_url, platform):
+def rrr(target_url, platform):
 
   if   platform == "apple_podcast":
     return apple_podcast(target_url)
