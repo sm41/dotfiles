@@ -1,4 +1,3 @@
-# import array_element
 import func_main
 import os
 import sys

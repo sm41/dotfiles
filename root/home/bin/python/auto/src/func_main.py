@@ -1,6 +1,5 @@
 
 from plyer    import notification
-# import array_element
 import func_parse, func_scrape, func_ytdlp
 
 import subprocess
@@ -73,9 +72,9 @@ def main(vvvv, jp, js):
     material = func_scrape.hhh(set_scraper, input_dict["url"])
     series, episode, link = func_parse.ppp(set_platform, material, set_selector)
 
-    print(series, episode, link)
-    continue
-    sys.exit()
+    # print(series, episode, link)
+    # continue
+    # sys.exit()
 
     method = func_ytdlp.rrr(link, set_platform)
     result = subprocess.run(method)
