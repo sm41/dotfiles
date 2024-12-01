@@ -20,7 +20,7 @@ def tver(bouillon, cssslct):
 
 
 def megaphone_fm(FFF, cssslct):
-  bouillon = FFF.find("title", string=re.compile(func_main.SET_MEMBER["anchor"])).parent
+  bouillon = FFF.find("title", string=re.compile(cssslct["anchor"])).parent
 
   row_series   =      FFF.select_one(cssslct["series"]).get_text()
   row_episode  = bouillon.select_one(cssslct["episode"]).get_text()
@@ -30,7 +30,7 @@ def megaphone_fm(FFF, cssslct):
 
 
 def radiko(soup, cssslct):
-  bouillon = soup.find(string=re.compile(func_main.SET_MEMBER["title"])).parent.parent
+  bouillon = soup.find(string=re.compile(cssslct["title"])).parent.parent
 
   row_series   = bouillon.select_one(cssslct["series"]).get_text()
   row_episode  = bouillon.select_one(cssslct["episode"]).get_text()

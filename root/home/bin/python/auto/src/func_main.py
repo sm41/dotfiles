@@ -9,20 +9,6 @@ import sys
 import os
 import json
 
-# def get_tuple(module_set, target_key, find_value):
-
-#   dict_tuple = []
-
-#   for ooo in module_set:
-#     tuple_var = getattr(ooo, "tuple_dict")
-
-#     for var_dict in tuple_var:
-#       if not var_dict[target_key] == find_value:
-#         continue
-#       dict_tuple.append(var_dict)
-#   return dict_tuple
-
-
 
 def json_kit(j_path, j_set, target_key, find_value):
 
@@ -41,7 +27,6 @@ def json_kit(j_path, j_set, target_key, find_value):
   return dict_tuple
 
 
-
 def dow_yesterday(day_int:int):
   locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 
@@ -58,6 +43,17 @@ def check_arg():
     sys.exit()
 
 
+def ntfy(result, upper, lower):
+  if result.returncode == 0:
+    notification.notify(
+      title = "✅ Success",
+      message = f"{upper}\n{lower}"
+    )
+  else:
+    notification.notify(
+      title = "⚠️ failed",
+      message = f"{upper}\n{lower}"
+    )
 
 
 def main(vvvv, jp, js):
@@ -66,7 +62,7 @@ def main(vvvv, jp, js):
 
     set_platform = input_dict["platform"]
     set_scraper  = input_dict["scraper"]
-    # SET_MEMBER   = input_dict
+    # set_member   = input_dict
 
     set_selector = json_kit(jp, js, "var", set_platform)[0]
     material = func_scrape.hhh(set_scraper, input_dict["url"])
@@ -79,14 +75,4 @@ def main(vvvv, jp, js):
     method = func_ytdlp.rrr(link, set_platform)
     result = subprocess.run(method)
 
-    if result.returncode == 0:
-      notification.notify(
-        title = "✅ Success",
-        message = f"{series}\n{episode}"
-      )
-    else:
-      notification.notify(
-        title = "⚠️ failed",
-        message = f"{series}\n{episode}"
-      )
-
+    ntfy(result, series, episode)
