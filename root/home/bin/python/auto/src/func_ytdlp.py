@@ -1,5 +1,5 @@
 
-import func_main
+# import func_main
 import os
 
 mnt_path = os.getenv("CLIENT_LOCAL_STORAGE")

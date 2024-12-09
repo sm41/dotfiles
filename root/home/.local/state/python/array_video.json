@@ -44,24 +44,6 @@
     "url":      "https://tver.jp/series/sr6sfbw303",
     "platform": "tver",
     "scraper":  "selenium"
-  },
-
-  {
-    "var":      "karte",
-    "title":    "放課後カルテ",
-    "dow":      "土",
-    "url":      "https://tver.jp/series/srbzu3axsx",
-    "platform": "tver",
-    "scraper":  "selenium"
-  },
-
-  {
-    "var":      "kuzu",
-    "title":    "あのクズを殴ってやりたいんだ",
-    "dow":      "火",
-    "url":      "https://tver.jp/series/srsvfys6xj",
-    "platform": "tver",
-    "scraper":  "selenium"
   }
 
 ]

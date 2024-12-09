@@ -10,11 +10,11 @@ import os
 import json
 
 
-def json_kit(j_path, j_set, target_key, find_value):
+def json_kit(j_path, j_d_set, target_key, find_value):
 
   dict_tuple = []
 
-  for j_file in j_set:
+  for j_file in j_d_set:
     filename = os.path.join(j_path, 'python', j_file)
     with open(filename, mode='r') as f:
       j_data = json.load(f)
@@ -56,17 +56,21 @@ def ntfy(result, upper, lower):
     )
 
 
-def main(vvvv, jp, js):
+def main(vvvv, jp):
 
   for input_dict in vvvv:
 
     set_platform = input_dict["platform"]
     set_scraper  = input_dict["scraper"]
-    # set_member   = input_dict
 
-    set_selector = json_kit(jp, js, "var", set_platform)[0]
+    if "anchor" in input_dict:
+      set_anchor = input_dict["anchor"]
+    else:
+      set_anchor = None
+
+    # set_selector = json_kit(jp, js, "var", set_platform)[0]
     material = func_scrape.hhh(set_scraper, input_dict["url"])
-    series, episode, link = func_parse.ppp(set_platform, material, set_selector)
+    series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
 
     # print(series, episode, link)
     # continue
