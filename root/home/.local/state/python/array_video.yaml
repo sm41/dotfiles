@@ -1,0 +1,30 @@
+
+tver:
+  platform: tver
+  scraper:  selenium
+
+  contents:
+    toiro:
+      title: 住人十色
+      url:   https://tver.jp/series/srxbqmdpvs
+      plan:  [ {dow: 土, ancor: null} ]
+
+    rion:
+      title: ライオンの隠れ家
+      url:   https://tver.jp/series/srp6e5qh3b
+      plan:  [ {dow: 金, ancor: null} ]
+
+    okura:
+      title: オクラ～迷宮入り事件捜査～
+      url:   https://tver.jp/series/sr3r43aoeq
+      plan:  [ {dow: 火, ancor: null} ]
+
+    zenketsu:
+      title: 全領域異常解決室
+      url:   https://tver.jp/series/srhhcup5mk
+      plan:  [ {dow: 水, ancor: null} ]
+
+    monster:
+      title: モンスター
+      url:   https://tver.jp/series/sr6sfbw303
+      plan:  [ {dow: 月, ancor: null} ]

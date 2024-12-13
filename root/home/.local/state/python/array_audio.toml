@@ -1,0 +1,22 @@
+
+[apple_podcast]
+  platform = "apple_podcast"
+  scraper  = "selenium"
+
+  [apple_podcast.contents.elekata]
+    title  = "エレ片のケツビ"
+    url    = "https://podcasts.apple.com/jp/podcast/%E3%82%A8%E3%83%AC%E7%89%87%E3%81%AE%E3%82%B1%E3%83%84%E3%83%93/id1560299989"
+    [[apple_podcast.contents.elekata.plan]]
+      dow    = "月"
+      anchor = "新録"
+    [[apple_podcast.contents.elekata.plan]]
+      dow    = "土"
+      anchor = "本編"
+
+  [apple_podcast.contents.rocket]
+    title  = "ロケットマンショー"
+    url    = "https://podcasts.apple.com/jp/podcast/%E3%83%AD%E3%82%B1%E3%83%83%E3%83%88%E3%83%9E%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%BC/id1738995329"
+    [[apple_podcast.contents.rocket.plan]]
+      dow    = "火"
+      anchor = ""
+
