@@ -68,7 +68,6 @@ def main(vvvv, jp):
     else:
       set_anchor = None
 
-    # set_selector = json_kit(jp, js, "var", set_platform)[0]
     material = func_scrape.hhh(set_scraper, input_dict["url"])
     series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
 

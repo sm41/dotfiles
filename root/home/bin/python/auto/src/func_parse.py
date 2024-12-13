@@ -2,29 +2,32 @@
 import re
 
 def apple_podcast(bouillon):
-  series   = bouillon.find(class_="headings__title svelte-mr6v6m").get_text()
-  episode  = bouillon.find(class_="episode-details__title-text").get_text()
-  link     = bouillon.select_one("li.svelte-8rlk6b:nth-child(1) > div:nth-child(1) > a:nth-child(1)").attrs['href']
+
+  ooo_target = bouillon.find(class_ = re.compile("section--episode"))
+
+  series   =   bouillon.find(class_ = re.compile("headings__title")).get_text()
+  episode  = ooo_target.find(class_ = re.compile("episode-details__title-text")).get_text()
+  link     = ooo_target.find(class_ = re.compile("link-action")).attrs['href']
 
   return series, episode, link
 
 
-def test_apple(beautiful, anchor):
+def test_apple(bouillon, anchor):
 
-  pin_target = beautiful.find(class_="episode-details__title-text", text=re.compile(anchor))
-  pin_parent = pin_target.find_parent(class_="svelte-8rlk6b")
+  pin_target =   bouillon.find(class_ = "episode-details__title-text", text = re.compile(anchor))
+  pin_parent = pin_target.find_parent("li", class_ = re.compile("svelte"))
 
-  series   = beautiful.find(class_="headings__title svelte-mr6v6m").get_text()
-  episode  = pin_parent.find(class_="episode-details__title-text").get_text()
-  link     = pin_parent.find(class_="link-action svelte-1wtdvjb").attrs['href']
+  series   =   bouillon.find(class_ = re.compile("headings__title")).get_text()
+  episode  = pin_parent.find(class_ = re.compile("episode-details__title-text")).get_text()
+  link     = pin_parent.find(class_ = re.compile("link-action")).attrs['href']
 
   return series, episode, link
 
 
 def tver(bouillon):
-  series   = bouillon.find(class_="series-main_title__cOS46").get_text()
-  episode  = bouillon.find(class_="episode-row_title__6W7Ar").get_text()
-  link     = bouillon.find(class_="episode-row_container___2msI").attrs['href']
+  series   = bouillon.find(class_ = re.compile("series-main_title")).get_text()
+  episode  = bouillon.find(class_ = re.compile("episode-row_title")).get_text()
+  link     = bouillon.find(class_ = re.compile("episode-row_container")).attrs['href']
   link_mod = "https://tver.jp" + link
 
   return series, episode, link_mod
@@ -40,43 +43,21 @@ def megaphone_fm(FFF, cssslct):
   return series, episode, link
 
 
-# def apple_podcast(bouillon, cssslct):
-#   series   = bouillon.select_one(cssslct["series"]).get_text()
-#   episode  = bouillon.select_one(cssslct["episode"]).get_text()
-#   link     = bouillon.select_one(cssslct["link"]).attrs['href']
-
-#   return series, episode, link
-
-
-# def tver(bouillon, cssslct):
-#   series   = bouillon.select_one(cssslct["series"]).get_text()
-#   episode  = bouillon.select_one(cssslct["episode"]).get_text()
-#   link     = bouillon.select_one(cssslct["link"]).attrs['href']
-#   link_mod = "https://tver.jp" + link
-
-#   return series, episode, link_mod
-
-
-# def radiko(soup, cssslct):
-#   bouillon = soup.find(string=re.compile(cssslct["title"])).parent.parent
-
-#   series   = bouillon.select_one(cssslct["series"]).get_text()
-#   episode  = bouillon.select_one(cssslct["episode"]).get_text()
-#   link     = bouillon.select_one(cssslct["link"]).attrs['url']
-
-#   return series, episode, link
-
-
 
 def ppp(platform, material, anchor):
+
   if   platform == "apple_podcast":
-    if anchor == None:
+    if   anchor is None:
       return apple_podcast(material)
-    else:
+
+    elif anchor is not None:
       return test_apple(material, anchor)
+
   elif platform == "tver":
     return tver(material)
+
   # elif platform == "megaphone_fm":
   #   return megaphone_fm(material, selector)
+
   # elif platform == "radiko":
   #   return radiko(material, selector)
