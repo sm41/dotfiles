@@ -35,6 +35,5 @@ def hhh(scraper, url):
 
   if   scraper == "selenium":
     return selenium(url)
-
   elif scraper == "xml":
     return xml(url)

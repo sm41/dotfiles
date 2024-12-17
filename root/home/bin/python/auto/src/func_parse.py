@@ -1,21 +1,13 @@
 
 import re
 
-def apple_podcast(bouillon):
+def apple_podcast(bouillon, anchor):
 
-  ooo_target = bouillon.find(class_ = re.compile("section--episode"))
-
-  series   =   bouillon.find(class_ = re.compile("headings__title")).get_text()
-  episode  = ooo_target.find(class_ = re.compile("episode-details__title-text")).get_text()
-  link     = ooo_target.find(class_ = re.compile("link-action")).attrs['href']
-
-  return series, episode, link
-
-
-def test_apple(bouillon, anchor):
-
-  pin_target =   bouillon.find(class_ = "episode-details__title-text", text = re.compile(anchor))
-  pin_parent = pin_target.find_parent("li", class_ = re.compile("svelte"))
+  if   anchor is None:
+    pin_parent = bouillon.find(class_ = re.compile("section--episode"))
+  elif anchor is not None:
+    pin_target = bouillon.find(class_ = "episode-details__title-text", text = re.compile(anchor))
+    pin_parent = pin_target.find_parent("li", class_ = re.compile("svelte"))
 
   series   =   bouillon.find(class_ = re.compile("headings__title")).get_text()
   episode  = pin_parent.find(class_ = re.compile("episode-details__title-text")).get_text()
@@ -43,15 +35,10 @@ def megaphone_fm(FFF, cssslct):
   return series, episode, link
 
 
-
 def ppp(platform, material, anchor):
 
   if   platform == "apple_podcast":
-    if   anchor is None:
-      return apple_podcast(material)
-
-    elif anchor is not None:
-      return test_apple(material, anchor)
+    return apple_podcast(material, anchor)
 
   elif platform == "tver":
     return tver(material)

@@ -7,45 +7,46 @@ import datetime
 import locale
 import sys
 import os
-import json
 import yaml
 
 
-# def json_kit(j_path, j_d_set, target_key, find_value):
+def tgtg(y_path, y_d_set):
 
-#   dict_tuple = []
-
-#   for j_file in j_d_set:
-#     filename = os.path.join(j_path, 'python', j_file)
-#     with open(filename, mode='r') as f:
-#       j_data = json.load(f)
-
-#     for var_dict in j_data:
-#       if not var_dict[target_key] == find_value:
-#         continue
-#       dict_tuple.append(var_dict)
-
-#   return dict_tuple
-
-
-def yaml_kit(y_path, y_d_set, target_key, find_value):
-
-  dict_tuple = []
+  uuu = []
 
   for y_file in y_d_set:
     filename = os.path.join(y_path, 'python', y_file)
     with open(filename, mode='r') as f:
       y_data = yaml.load(f, Loader=yaml.FullLoader)
+      uuu.append(y_data)
+  return uuu
 
-    for pltfrm, objct in y_data.items():
-      for cntnts, siries in objct['contents'].items():
+
+def alt_dow(uuu, target_key, find_value):
+
+  dow_tuple = []
+
+  for iii in uuu:
+    for pltfrm, prpty in iii.items():
+      for cntnts, siries in prpty['contents'].items():
         for dwanchr in siries['plan']:
-          if not dwanchr[target_key] == find_value:
-            continue
-          pppp = dict(**objct['config'], **siries)
-          dict_tuple.append(pppp)
+          if dwanchr[target_key] == find_value:
+            pppp = {**prpty['config'], **siries}
+            dow_tuple.append(pppp)
+  return dow_tuple
 
-  return dict_tuple
+
+def alt_arg(uuu, target_key, find_value):
+
+  arg_tuple = []
+
+  for iii in uuu:
+    for pltfrm, prpty in iii.items():
+      for cntnts, siries in prpty['contents'].items():
+        if cntnts == find_value:
+          pppp = {**prpty['config'], **siries, 'yyyy':cntnts}
+          arg_tuple.append(pppp)
+  return arg_tuple
 
 
 def dow_yesterday(day_int:int):
@@ -77,32 +78,6 @@ def ntfy(result, upper, lower):
     )
 
 
-# def main(vvvv, jp):
-
-#   for input_dict in vvvv:
-
-#     set_platform = input_dict["platform"]
-#     set_scraper  = input_dict["scraper"]
-
-#     if "anchor" in input_dict:
-#       set_anchor = input_dict["anchor"]
-#     else:
-#       set_anchor = None
-
-#     material = func_scrape.hhh(set_scraper, input_dict["url"])
-#     series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
-
-#     # print(series, episode, link)
-#     # continue
-#     # sys.exit()
-
-#     method = func_ytdlp.rrr(link, set_platform)
-#     result = subprocess.run(method)
-
-#     ntfy(result, series, episode)
-
-
-
 def sub(vvvv, y_dow_symbol):
 
   for input_dict in vvvv:
@@ -112,15 +87,16 @@ def sub(vvvv, y_dow_symbol):
 
     for qqq in input_dict["plan"]:
       if qqq["dow"] == y_dow_symbol:
-        set_dow = qqq["dow"]
         set_anchor = qqq["anchor"]
+      elif "yyyy" in input_dict:
+        set_anchor = None
 
     material = func_scrape.hhh(set_scraper, input_dict["url"])
     series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
 
-    # print(series, episode, link)
-    # continue
-    # sys.exit()
+    print(series, episode, link)
+    continue
+    sys.exit()
 
     method = func_ytdlp.rrr(link, set_platform)
     result = subprocess.run(method)
