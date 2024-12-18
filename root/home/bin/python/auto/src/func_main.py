@@ -78,9 +78,9 @@ def ntfy(result, upper, lower):
     )
 
 
-def sub(vvvv, y_dow_symbol):
+def sub(dict_list, y_dow_symbol):
 
-  for input_dict in vvvv:
+  for input_dict in dict_list:
 
     set_platform = input_dict["platform"]
     set_scraper  = input_dict["scraper"]
@@ -94,9 +94,9 @@ def sub(vvvv, y_dow_symbol):
     material = func_scrape.hhh(set_scraper, input_dict["url"])
     series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
 
-    print(series, episode, link)
-    continue
-    sys.exit()
+    # print(series, episode, link)
+    # continue
+    # sys.exit()
 
     method = func_ytdlp.rrr(link, set_platform)
     result = subprocess.run(method)
