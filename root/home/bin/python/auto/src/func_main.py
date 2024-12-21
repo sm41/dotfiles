@@ -10,12 +10,13 @@ import os
 import yaml
 
 
-def tgtg(y_path, y_d_set):
+def anlys(yamls_dict_set, data_env_var):
 
+  yaml_file_path = os.getenv(data_env_var)
   uuu = []
 
-  for y_file in y_d_set:
-    filename = os.path.join(y_path, 'python', y_file)
+  for picked_yaml_file in yamls_dict_set:
+    filename = os.path.join(yaml_file_path, 'python', picked_yaml_file)
     with open(filename, mode='r') as f:
       y_data = yaml.load(f, Loader=yaml.FullLoader)
       uuu.append(y_data)
@@ -24,7 +25,7 @@ def tgtg(y_path, y_d_set):
 
 def alt_dow(uuu, target_key, find_value):
 
-  dow_tuple = []
+  dow_list = []
 
   for iii in uuu:
     for pltfrm, prpty in iii.items():
@@ -32,21 +33,21 @@ def alt_dow(uuu, target_key, find_value):
         for dwanchr in siries['plan']:
           if dwanchr[target_key] == find_value:
             pppp = {**prpty['config'], **siries}
-            dow_tuple.append(pppp)
-  return dow_tuple
+            dow_list.append(pppp)
+  return dow_list
 
 
 def alt_arg(uuu, target_key, find_value):
 
-  arg_tuple = []
+  arg_list = []
 
   for iii in uuu:
     for pltfrm, prpty in iii.items():
       for cntnts, siries in prpty['contents'].items():
         if cntnts == find_value:
           pppp = {**prpty['config'], **siries, 'yyyy':cntnts}
-          arg_tuple.append(pppp)
-  return arg_tuple
+          arg_list.append(pppp)
+  return arg_list
 
 
 def dow_yesterday(day_int:int):
@@ -78,7 +79,7 @@ def ntfy(result, upper, lower):
     )
 
 
-def sub(dict_list, y_dow_symbol):
+def sub(dict_list, y_dow_symbol, storage_path):
 
   for input_dict in dict_list:
 
@@ -98,7 +99,7 @@ def sub(dict_list, y_dow_symbol):
     # continue
     # sys.exit()
 
-    method = func_ytdlp.rrr(link, set_platform)
+    method = func_ytdlp.rrr(link, set_platform, storage_path)
     result = subprocess.run(method)
 
     ntfy(result, series, episode)

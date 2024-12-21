@@ -10,20 +10,20 @@ tver:
       url:   https://tver.jp/series/srxbqmdpvs
       plan:  [ {dow: 土, anchor: null} ]
 
-    rion:
-      title: ライオンの隠れ家
-      url:   https://tver.jp/series/srp6e5qh3b
-      plan:  [ {dow: 金, anchor: null} ]
+    # rion:
+    #   title: ライオンの隠れ家
+    #   url:   https://tver.jp/series/srp6e5qh3b
+    #   plan:  [ {dow: 金, anchor: null} ]
 
-    okura:
-      title: オクラ～迷宮入り事件捜査～
-      url:   https://tver.jp/series/sr3r43aoeq
-      plan:  [ {dow: 火, anchor: null} ]
+    # okura:
+    #   title: オクラ～迷宮入り事件捜査～
+    #   url:   https://tver.jp/series/sr3r43aoeq
+    #   plan:  [ {dow: 火, anchor: null} ]
 
-    zenketsu:
-      title: 全領域異常解決室
-      url:   https://tver.jp/series/srhhcup5mk
-      plan:  [ {dow: 水, anchor: null} ]
+    # zenketsu:
+    #   title: 全領域異常解決室
+    #   url:   https://tver.jp/series/srhhcup5mk
+    #   plan:  [ {dow: 水, anchor: null} ]
 
     monster:
       title: モンスター
