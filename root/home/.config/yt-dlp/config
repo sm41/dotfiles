@@ -2,5 +2,19 @@
 
 #--write-info-json
 --embed-subs
---paths ${CLIENT_LOCAL_STORAGE}
 
+--paths ${CLIENT_LOCAL_STORAGE}
+--output "%(title)s_[%(id)s].%(ext)s"
+
+--format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"
+--merge-output-format "mp4"
+
+
+--replace-in-metadata "series"  " " "_"
+--replace-in-metadata "series"  "　" "_"
+
+--replace-in-metadata "title"   " " "_"
+--replace-in-metadata "title"   "　" "_"
+
+--replace-in-metadata "episode"  " " "_"
+--replace-in-metadata "episode"  "　" "_"
