@@ -25,7 +25,7 @@ tver:
     #   url:   https://tver.jp/series/srhhcup5mk
     #   plan:  [ {dow: 水, anchor: null} ]
 
-    monster:
-      title: モンスター
-      url:   https://tver.jp/series/sr6sfbw303
-      plan:  [ {dow: 月, anchor: null} ]
+    # monster:
+    #   title: モンスター
+    #   url:   https://tver.jp/series/sr6sfbw303
+    #   plan:  [ {dow: 月, anchor: null} ]
