@@ -15,23 +15,19 @@ function show_usage(){
 _EOT_
 }
 
-function target_website(){
+function make_recdir(){
   REC_DIR="${CLIENT_LOCAL_STORAGE}/@$1"
-  VAR_DIR="${XDG_STATE_HOME}/yt-dlp/$1"
-  DL_FILE="$1_list"
-
   mkdir -pv "${REC_DIR}"
+}
+
+function make_statedir(){
+  VAR_DIR="${XDG_STATE_HOME}/yt-dlp/$1"
   mkdir -pv "${VAR_DIR}"
-  touch  "$_/${DL_FILE}"
 }
 
 function category(){
-  # CATEGORY_DIR=/"$(echo "$1" |awk -F "/" '{print $4}')"
-  # ACT_NAME_DIR=/"$(echo "$1" |awk -F "/" '{print $5}')"
-
   CATEGORY_DIR=/"$(awk -F "/" '{print $4}'  <<<  "$1")"
   ACT_NAME_DIR=/"$(awk -F "/" '{print $5}'  <<<  "$1")"
-
 
   mkdir -pv "${REC_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}"
   mkdir -pv "${VAR_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}"
@@ -42,21 +38,6 @@ function category(){
     --paths "${REC_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}" \
     --output "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s" \
   "https://pornhub.com${CATEGORY_DIR}${ACT_NAME_DIR}/videos/upload"
-}
-
-function download_podcast_list(){
-  yt-dlp \
-    --batch-file "${VAR_DIR}/${DL_FILE}" \
-    --paths "${REC_DIR}" \
-    --output '[Podcast]_%(series)s_%(upload_date>%Y-%m-%d)s_%(title)s.%(ext)s'
-}
-
-function download_tver_list(){
-  yt-dlp \
-    --batch-file "${VAR_DIR}/${DL_FILE}" \
-    --embed-subs \
-    --paths "${REC_DIR}" \
-    --output '[%(webpage_url_domain)s]_%(series)s_%(episode)s.%(ext)s'
 }
 
 function url_is_apple(){
@@ -81,27 +62,42 @@ function viewkey(){
   "$1"
 }
 
-function main(){
-  if   [[ "$1" =~ (_list)$ ]] ; then
-    target_website "${1%%_*}"
-    check_empty_file  "${VAR_DIR}/${DL_FILE}"
-    download_"${1%%_*}"_list
+function opop(){
 
-  elif [[ "$1" =~ ^https://tver.jp/episodes/ ]] ; then
-    target_website 'tver'
-    url_is_tver  "$1"
+  if [[ "${ppp}" =~ ^https://tver.jp/episodes/ ]] ; then
+    make_recdir   'tver'
+    url_is_tver   "${ppp}"
+  elif [[ "${ppp}" =~ ^https://podcasts.apple.com/ ]] ; then
+    make_recdir   'podcast'
+    url_is_apple  "${ppp}"
+  elif [[ "${ppp}" =~ pornhub.com/model/|pornhub.com/pornstar/ ]] ; then
+    make_recdir   'ph'
+    make_statedir 'ph'
+    category      "${ppp}"
+  elif [[ "${ppp}" =~ viewkey=.+$ ]] ; then
+    make_recdir   'ph'
+    viewkey       "${ppp}"
+  else
+    show_usage ; exit 1
+  fi
 
-  elif [[ "$1" =~ ^https://podcasts.apple.com/ ]] ; then
-    target_website 'podcast'
-    url_is_apple  "$1"
+}
 
-  elif [[ "$1" =~ pornhub.com/model/|pornhub.com/pornstar/ ]] ; then
-    target_website 'ph'
-    category  "$1"
+function sub(){
+  if   [[ -f "$1" ]] ; then
+    # check_empty_file  "$1"
+    while read ppp
+    do
+      if [[ "${ppp}" =~ ^#|^$ ]] ; then
+        :
+      else
+        opop "${ppp}"
+      fi
+    done < "$1"
 
-  elif [[ "$1" =~ viewkey=.+$ ]] ; then
-    target_website 'ph'
-    viewkey  "$1"
+  elif [[ "$1" =~ ^https:// ]] ; then
+    ppp="$1"
+    opop "${ppp}"
 
   else
     show_usage ; exit 1
@@ -110,6 +106,5 @@ function main(){
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   check_number_of_argment 1 "$#"
-  main "$1"
-
+  sub "$1"
 fi

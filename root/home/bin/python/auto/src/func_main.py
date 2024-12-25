@@ -12,11 +12,11 @@ import yaml
 
 def anlys(yamls_dict_set, data_env_var):
 
-  yaml_file_path = os.getenv(data_env_var)
+  yaml_dir_path = os.getenv(data_env_var)
   uuu = []
 
   for picked_yaml_file in yamls_dict_set:
-    filename = os.path.join(yaml_file_path, 'python', picked_yaml_file)
+    filename = os.path.join(yaml_dir_path, 'python', picked_yaml_file)
     with open(filename, mode='r') as f:
       y_data = yaml.load(f, Loader=yaml.FullLoader)
       uuu.append(y_data)
@@ -85,6 +85,7 @@ def sub(dict_list, y_dow_symbol, storage_path):
 
     set_platform = input_dict["platform"]
     set_scraper  = input_dict["scraper"]
+    set_url      = input_dict["url"]
 
     for qqq in input_dict["plan"]:
       if qqq["dow"] == y_dow_symbol:
@@ -92,7 +93,7 @@ def sub(dict_list, y_dow_symbol, storage_path):
       elif "yyyy" in input_dict:
         set_anchor = None
 
-    material = func_scrape.hhh(set_scraper, input_dict["url"])
+    material = func_scrape.hhh(set_scraper, set_url)
     series, episode, link = func_parse.ppp(set_platform, material, set_anchor)
 
     # print(series, episode, link)
