@@ -6,7 +6,7 @@ func_main.check_arg()
 arg_str  = sys.argv[1]
 
 data_env_var = "XDG_STATE_HOME"
-storage_path = "CLIENT_LOCAL_STORAGE"
+storage_path = "CLIENT_NETWORK_STORAGE_www"
 yaml_files_list = [ 'audio.yaml', 'video.yaml' ]
 
 y_dow_symbol  = func_main.dow_yesterday(1)

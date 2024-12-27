@@ -3,7 +3,8 @@
 #--write-info-json
 --embed-subs
 
---paths ${CLIENT_LOCAL_STORAGE}
+--paths temp:/tmp
+--paths home:${CLIENT_NETWORK_STORAGE_www}/test
 --output "%(title)s_[%(id)s].%(ext)s"
 
 --format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"

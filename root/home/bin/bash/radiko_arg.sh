@@ -2,7 +2,8 @@
 set -eu
 
 # variable
-REC_DIR="${CLIENT_LOCAL_STORAGE}/@radiko"
+TEMP_DIR="/tmp"
+REC_DIR="${CLIENT_NETWORK_STORAGE_www}/test/@radiko"
 VAR_DIR="${XDG_STATE_HOME}/radiko"
 WORK_PATH="$(realpath $(dirname "$0"))"
 
@@ -93,32 +94,34 @@ function change_argment_to_URL(){
     TITLE="${KKK[3]}"
   fi
 
-  FILE="${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}"
+  FILENAME="${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}"
 }
 
-function del_audio_ffmpeg(){
-  if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
-    rm "$1"  &&  notify-send "✅ Success" "🎵 $(basename "${1%.*}"."$2")"
-  elif [[ "${ENC_RET_VAL}" -eq 1 ]]  ; then
-    rm "$1"  &&  notify-send "❌ Failed"  "🎵 $(basename "$1")"
-  fi
+
+# function conditional_branch(){
+#   if   [[ -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
+#     ENC_RET_VAL=0
+#     del_audio_ffmpeg  "$1"  "$2"
+#   elif [[ -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
+#     enc_audio_ffmpeg  "$1"  "$2"
+#     del_audio_ffmpeg  "$1"  "$2"
+#   elif [[ ! -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
+#     :
+#   elif [[ ! -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
+#     download_by_ffmpeg
+#     enc_audio_ffmpeg  "$1"  "$2"
+#     del_audio_ffmpeg  "$1"  "$2"
+#   fi
+# }
+
+
+function test_branch(){
+  download_by_ffmpeg
+  enc_audio_ffmpeg    "${TEMP_DIR}/${FILENAME}.m4a"   "mp3"
+  delfile             "${TEMP_DIR}/${FILENAME}.m4a"
+  move_file           "${TEMP_DIR}/${FILENAME}.mp3"   "${REC_DIR}/${FILENAME}.mp3"
 }
 
-function conditional_branch(){
-  if   [[ -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
-    ENC_RET_VAL=0
-    del_audio_ffmpeg  "$1"  "$2"
-  elif [[ -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
-    enc_audio_ffmpeg  "$1"  "$2"
-    del_audio_ffmpeg  "$1"  "$2"
-  elif [[ ! -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
-    :
-  elif [[ ! -e "${REC_DIR}/${FILE}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILE}.mp3" ]]  ; then
-    download_by_ffmpeg
-    enc_audio_ffmpeg  "$1"  "$2"
-    del_audio_ffmpeg  "$1"  "$2"
-  fi
-}
 
 # download
 # Description = https://kazkn.com/post/2017/bash-loop-ffmpeg/
@@ -134,21 +137,43 @@ function download_by_ffmpeg(){
     -vn \
     -bsf:a aac_adtstoasc \
     -movflags faststart \
-  "${REC_DIR}/${FILE}.m4a" \
+  "${TEMP_DIR}/${FILENAME}.m4a" \
   </dev/null
+}
+
+function delfile(){
+  if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
+    rm "$1"
+  fi
+}
+
+function move_file(){
+  mv "$1" "$2"
 }
 
 function rm_authkey(){
   rm "auth1_res.${pid}" "authkey.txt"
 }
 
+function ntfy(){
+  if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
+    notify-send   "✅ Success"   "🎵 $(basename "${1%.*}"."$2")"
+  elif [[ "${ENC_RET_VAL}" -eq 1 ]]  ; then
+    notify-send   "❌ Failed"    "🎵 $(basename "$1")"
+  fi
+}
+
+
 function main(){
   while read -a KKK
   do
     authorization
     change_argment_to_URL
-    conditional_branch      "${REC_DIR}/${FILE}.m4a"  "mp3"
+    # conditional_branch      "${TEMP_DIR}/${FILENAME}.m4a"  "mp3"
+    test_branch
     rm_authkey
+    ntfy                "${TEMP_DIR}/${FILENAME}.m4a"   "mp3"
+
   done < <(awk '($2 > '`date +"%Y%m%d%H%M%S" --date '168 hours ago'`') && ($2 < '`date +"%Y%m%d%H%M%S"`')' "${VAR_DIR}/week_${STATION_ID^^}_list" | grep -iP ${TITLE_REGEX} )
 }
 

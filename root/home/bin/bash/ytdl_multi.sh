@@ -3,10 +3,10 @@ set -eu
 
 # variable
 WORK_PATH="$(realpath $(dirname "$0"))"
+home_path="${CLIENT_NETWORK_STORAGE_www}"
 
 # source
 source "${WORK_PATH}"/_func_check.sh
-
 
 function show_usage(){
   cat << _EOT_
@@ -16,7 +16,7 @@ _EOT_
 }
 
 function make_recdir(){
-  REC_DIR="${CLIENT_LOCAL_STORAGE}/@$1"
+  REC_DIR="${home_path}/test/@$1"
   mkdir -pv "${REC_DIR}"
 }
 
@@ -35,14 +35,14 @@ function category(){
 
   yt-dlp \
     --download-archive "${VAR_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}${ACT_NAME_DIR}.dllog" \
-    --paths "${REC_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}" \
+    --paths "home:${REC_DIR}${CATEGORY_DIR}${ACT_NAME_DIR}" \
     --output "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s" \
   "https://pornhub.com${CATEGORY_DIR}${ACT_NAME_DIR}/videos/upload"
 }
 
 function url_is_apple(){
   yt-dlp \
-    --paths "${REC_DIR}" \
+    --paths "home:${REC_DIR}" \
     --output '[Podcast]_%(series)s_%(upload_date>%Y-%m-%d)s_%(title)s.%(ext)s' \
   "$1"
 }
@@ -50,14 +50,14 @@ function url_is_apple(){
 function url_is_tver(){
   yt-dlp \
     --embed-subs \
-    --paths "${REC_DIR}" \
+    --paths "home:${REC_DIR}" \
     --output '[%(webpage_url_domain)s]_%(series)s_%(episode)s.%(ext)s' \
   "$1"
 }
 
 function viewkey(){
   yt-dlp \
-    --paths "${REC_DIR}" \
+    --paths "home:${REC_DIR}" \
     --output "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s" \
   "$1"
 }
