@@ -1,8 +1,9 @@
 
 tver:
   config:
-    platform: tver
-    scraper:  selenium
+    platform:  tver
+    scraper:   selenium
+    directory: "@tver"
 
   contents:
     toiro:
@@ -28,4 +29,4 @@ tver:
     # monster:
     #   title: モンスター
     #   url:   https://tver.jp/series/sr6sfbw303
-    #   plan:  [ {dow: 月, anchor: null} ]
+    #   plan:  [ {dow: 水, anchor: null} ]

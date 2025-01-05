@@ -1,0 +1,49 @@
+
+apple.com:
+  meta_list: [ "series", "episode", "url" ]
+  directory: "@podcast"
+
+  apple_podcast:
+    parts:     null
+    playlist:  false
+    platform:  "apple_podcast"
+
+
+tver.jp:
+  meta_list: [ "series", "episode", "original_url" ]
+  directory: "@tver"
+
+  tver:
+    parts:     [ "episodes" ]
+    playlist:  false
+    platform:  "tver"
+
+
+youtube.com:
+  meta_list: [ "channel", "title", "original_url" ]
+  directory: null
+
+  youtube_watch:
+    parts:     [ "watch" ]
+    playlist:  false
+    platform:  null
+  youtube_playlist:
+    parts:     [ "playlist" ]
+    playlist:  true
+    platform:  null
+
+
+pornhub.com:
+  meta_list: [ "uploader", "title", "original_url" ]
+  directory: "@ph"
+
+  ph_view:
+    parts:     [ "view_video.php" ]
+    playlist:  false
+    platform:  "ph_view"
+  ph_cat:
+    parts:     [ "model", "pornstar" ]
+    playlist:  true
+    platform:  "ph_cat"
+
+
