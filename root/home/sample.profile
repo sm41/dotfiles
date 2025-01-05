@@ -9,19 +9,18 @@
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 
 # XDG
-export XDG_CONFIG_HOME="${HOME}/.config"
 export  XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
 export   XDG_DATA_HOME="${HOME}/.local/share"
 export  XDG_STATE_HOME="${HOME}/.local/state"
 
 # /mnt
-export        CLIENT_LOCAL_STORAGE="/mnt/local/"
-export  CLIENT_NETWORK_STORAGE_333="/mnt/samba/"
-export  CLIENT_NETWORK_STORAGE_www="/mnt/samba/"
+export  CLIENT_NETWORK_STORAGE_111="/mnt/samba/111"
+export  CLIENT_NETWORK_STORAGE_222="/mnt/samba/222"
 
 # PATH
-export PATH=${PATH}:"${HOME}/bin/bash"
-export PATH=${PATH}:"${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/bin/bash"
+export PATH="${PATH}:${HOME}/.local/bin"
 
 # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
 # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
