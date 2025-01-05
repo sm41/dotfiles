@@ -41,7 +41,7 @@ _EOT_
 function authorization(){
   # get authorize key
   pid="$$"
-  working_path="${HOME}"
+  working_path="${TEMP_DIR}"
   auth1_res="${working_path}/auth1_res.${pid}"
 
   # Define authorize key value (from http://radiko.jp/apps/js/playerCommon.js)
@@ -97,29 +97,16 @@ function change_argment_to_URL(){
   FILENAME="${TITLE}_${TIME_FT:0:4}-${TIME_FT:4:2}-${TIME_FT:6:2}-${TIME_FT:8:4}"
 }
 
+function branch(){
+  if   [[ ! -e "${TEMP_DIR}/${FILENAME}.mp3" ]]  ; then
+    download_by_ffmpeg
+    enc_audio_ffmpeg    "${TEMP_DIR}/${FILENAME}.m4a"   "mp3"
+    del_file            "${TEMP_DIR}/${FILENAME}.m4a"
+    move_file           "${TEMP_DIR}/${FILENAME}.mp3"   "${REC_DIR}/${FILENAME}.mp3"
 
-# function conditional_branch(){
-#   if   [[ -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
-#     ENC_RET_VAL=0
-#     del_audio_ffmpeg  "$1"  "$2"
-#   elif [[ -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
-#     enc_audio_ffmpeg  "$1"  "$2"
-#     del_audio_ffmpeg  "$1"  "$2"
-#   elif [[ ! -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
-#     :
-#   elif [[ ! -e "${REC_DIR}/${FILENAME}.m4a" ]]  &&  [[ ! -e "${REC_DIR}/${FILENAME}.mp3" ]]  ; then
-#     download_by_ffmpeg
-#     enc_audio_ffmpeg  "$1"  "$2"
-#     del_audio_ffmpeg  "$1"  "$2"
-#   fi
-# }
-
-
-function test_branch(){
-  download_by_ffmpeg
-  enc_audio_ffmpeg    "${TEMP_DIR}/${FILENAME}.m4a"   "mp3"
-  delfile             "${TEMP_DIR}/${FILENAME}.m4a"
-  move_file           "${TEMP_DIR}/${FILENAME}.mp3"   "${REC_DIR}/${FILENAME}.mp3"
+  elif [[ -e "${TEMP_DIR}/${FILENAME}.mp3" ]]  ; then
+    :
+  fi
 }
 
 
@@ -141,18 +128,21 @@ function download_by_ffmpeg(){
   </dev/null
 }
 
-function delfile(){
+function del_file(){
   if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
     rm "$1"
   fi
 }
 
 function move_file(){
-  mv "$1" "$2"
+  if   [[ "${ENC_RET_VAL}" -eq 0 ]]  ; then
+    mv "$1" "$2"
+  fi
 }
 
 function rm_authkey(){
-  rm "auth1_res.${pid}" "authkey.txt"
+  rm  "${TEMP_DIR}/auth1_res.${pid}" \
+      "${TEMP_DIR}/authkey.txt"
 }
 
 function ntfy(){
@@ -169,8 +159,7 @@ function main(){
   do
     authorization
     change_argment_to_URL
-    # conditional_branch      "${TEMP_DIR}/${FILENAME}.m4a"  "mp3"
-    test_branch
+    branch
     rm_authkey
     ntfy                "${TEMP_DIR}/${FILENAME}.m4a"   "mp3"
 
