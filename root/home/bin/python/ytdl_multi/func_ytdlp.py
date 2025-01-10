@@ -43,6 +43,16 @@ def ph_cat(url, download_dir, archive_dir):
   return cmd_ytdlp
 
 
+def none(url, download_dir):
+  cmd_ytdlp = [
+    "yt-dlp",
+    "--embed-subs",
+    "--paths",  f"home:{download_dir}",
+    url
+  ]
+  return cmd_ytdlp
+
+
 def check_dir(dirname:Path):
   if dirname.is_dir():
     pass
@@ -60,7 +70,7 @@ def check_dir(dirname:Path):
 
 def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_dir_str:str):
 
-  down_dir = Path(storage_path, "test", yaml_data_dict["directory"])
+  down_dir = Path(storage_path, "test", yaml_data_dict["child_dir"])
   down_dir.mkdir(parents=True, exist_ok=True)
 
   if   yaml_data_dict["platform"] == "apple_podcast":
@@ -81,3 +91,6 @@ def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_d
     archive_dir.touch(exist_ok=True)
 
     return ph_cat(ntfy_meta_dict["link"], str(kmkm), str(archive_dir))
+
+  elif yaml_data_dict["platform"] == None:
+    return none(ntfy_meta_dict["link"], down_dir)

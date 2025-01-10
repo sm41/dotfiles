@@ -60,7 +60,7 @@ def out_yaml_data(url:str, deploy_yaml_list:list):
               if mmm in str(path_directory):
                 meta_dict = {
                   "platform":   dict['platform'],
-                  "directory":  path['directory'],
+                  "child_dir":  path['child_dir'],
                   "meta_list":  path['meta_list'],
                   "playlist":   dict['playlist'],
                   "path_tuple": path_directory.parts,
@@ -118,7 +118,7 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
       if qqq["dow"] == y_dow_str:
         ygyg = {
           "platform": input_dict["platform"],
-          "directory":input_dict["directory"],
+          "child_dir":input_dict["child_dir"],
           "scraper":  input_dict["scraper"],
           "link":     input_dict["url"],
           "anchor":   qqq["anchor"]
@@ -127,14 +127,14 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
   return fix_dow_list
 
 
-def looping(fix_dow_list, storage_path:str):
+def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
 
   for yaml_data_dict in fix_dow_list:
     material = func_scrape.hhh(yaml_data_dict["scraper"], yaml_data_dict["link"])
     series, episode, link = func_parse.ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
 
     ntfy_meta_dict = mix(series, episode, link)
-    method         = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, storage_path)
+    method         = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, storage_path, state_file_dir_str)
     result         = subprocess.run(method)
 
   return result, ntfy_meta_dict

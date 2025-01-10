@@ -33,7 +33,7 @@ def main():
     y_dow_str:str          = func_main.dow_yesterday(1)
     get_dow_list:list      = func_main.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
     fix_dow_list:list      = func_main.out_fix_dow(get_dow_list, y_dow_str)
-    result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str)
+    result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
     func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(fix_dow_list)
   else:
