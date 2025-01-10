@@ -1,17 +1,17 @@
 
 apple.com:
-  meta_list: [ "series", "episode", "url" ]
-  directory: "@podcast"
+  meta_list: [ "series", "episode", "original_url" ]
+  child_dir: "@podcast"
 
   apple_podcast:
-    parts:     null
+    parts:     [ "podcast" ]
     playlist:  false
     platform:  "apple_podcast"
 
 
 tver.jp:
   meta_list: [ "series", "episode", "original_url" ]
-  directory: "@tver"
+  child_dir: "@tver"
 
   tver:
     parts:     [ "episodes" ]
@@ -21,7 +21,7 @@ tver.jp:
 
 youtube.com:
   meta_list: [ "channel", "title", "original_url" ]
-  directory: null
+  child_dir: ""
 
   youtube_watch:
     parts:     [ "watch" ]
@@ -35,7 +35,7 @@ youtube.com:
 
 pornhub.com:
   meta_list: [ "uploader", "title", "original_url" ]
-  directory: "@ph"
+  child_dir: "@ph"
 
   ph_view:
     parts:     [ "view_video.php" ]

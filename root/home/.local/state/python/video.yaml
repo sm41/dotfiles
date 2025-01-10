@@ -3,7 +3,7 @@ tver:
   config:
     platform:  tver
     scraper:   selenium
-    directory: "@tver"
+    child_dir: "@tver"
 
   contents:
     toiro:
