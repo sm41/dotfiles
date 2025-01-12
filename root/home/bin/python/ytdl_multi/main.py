@@ -2,11 +2,11 @@
 
 import func_main, func_ytdlp
 from os import getenv
-import sys
-import subprocess
+from sys import argv
+from subprocess import run
 
 func_main.check_arg()
-argment_str:str  = sys.argv[1]
+argment_str:str  = argv[1]
 
 env_var_str:str = "XDG_STATE_HOME"
 state_file_dir_str:str = getenv(env_var_str)
@@ -23,7 +23,7 @@ def main():
     series, episode, link = func_main.out_ntfy_meta(argment_str, yaml_data_dict)
     ntfy_meta_dict:dict   = func_main.mix(series, episode, link)
     method                = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
-    result                = subprocess.run(method)
+    result                = run(method)
     func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(method)
   elif argment_str == "dow":

@@ -53,19 +53,11 @@ def none(url, download_dir):
   return cmd_ytdlp
 
 
-def check_dir(dirname:Path):
-  if dirname.is_dir():
-    pass
-  else:
-    dirname.mkdir()
-
-
-
-# ppp = Path("hogefuga", "piyopiyo")
-# ppp.mkdir(parents=True, exist_ok=True)
-# print(type(ppp))
-# hhh = Path(ppp, 'uuu.txt')
-# hhh.touch(exist_ok=True)
+# def check_dir(dirname:Path):
+#   if dirname.is_dir():
+#     pass
+#   else:
+#     dirname.mkdir()
 
 
 def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_dir_str:str):
@@ -83,10 +75,12 @@ def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_d
     return ph_view(ntfy_meta_dict["link"], down_dir)
 
   elif yaml_data_dict["platform"] == "ph_cat":
-    ctgry, actor = yaml_data_dict['path_tuple'][1], yaml_data_dict['path_tuple'][2]
+    ctgry = yaml_data_dict['path_tuple'][1]
+    actor = yaml_data_dict['path_tuple'][2]
 
     kmkm = down_dir.joinpath(ctgry, actor)
     kmkm.mkdir(parents=True, exist_ok=True)
+
     archive_dir = Path(state_file_dir_str, "yt-dlp", "ph", ctgry, actor)
     archive_dir.touch(exist_ok=True)
 

@@ -1,8 +1,8 @@
 
 from selenium import webdriver
 from urllib import request
-import time
-import bs4
+from time import sleep
+from bs4  import BeautifulSoup
 
 
 def selenium(url):
@@ -13,27 +13,27 @@ def selenium(url):
   # get source
   driver = webdriver.Firefox(options = fx_options)
   driver.get(url)
-  time.sleep(5)
+  sleep(5)
 
   # scraping
   get_html = driver.page_source
-  soup = bs4.BeautifulSoup(get_html, "html.parser")
+  soup = BeautifulSoup(get_html, "html.parser")
   driver.quit()
 
   return soup
 
 
-def xml(url):
-  # scraping
-  get_xml = request.urlopen(url)
-  soup = bs4.BeautifulSoup(get_xml, "xml")
+# def xml(url):
+#   # scraping
+#   get_xml = request.urlopen(url)
+#   soup = BeautifulSoup(get_xml, "xml")
 
-  return soup
+#   return soup
 
 
 def hhh(scraper, url):
 
   if   scraper == "selenium":
     return selenium(url)
-  elif scraper == "xml":
-    return xml(url)
+  # elif scraper == "xml":
+  #   return xml(url)

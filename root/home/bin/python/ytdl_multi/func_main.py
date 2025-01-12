@@ -1,21 +1,21 @@
-import func_parse, func_scrape, func_ytdlp
+from func_parse  import ppp
+from func_scrape import hhh
+from func_ytdlp  import vvv
 
-import datetime
-import locale
-import subprocess
-
+from datetime import date, timedelta
+from locale   import setlocale, LC_TIME
+from pathlib  import Path
+from plyer    import notification
+from subprocess import run
 from urllib.parse import urlparse
-from pathlib import Path
-from plyer   import notification
-
-import sys
-import yaml
+from yaml import load, FullLoader
+from sys import argv, exit
 
 
 def check_arg():
-  if(len(sys.argv) <= 1):
+  if(len(argv) <= 1):
     print('You need args!')
-    sys.exit()
+    exit()
 
 
 def anlys(yaml_files_list:list, state_file_dir_str:str):
@@ -26,7 +26,7 @@ def anlys(yaml_files_list:list, state_file_dir_str:str):
   for picked_yaml_file in yaml_files_list:
     filename = ddd.joinpath('python', picked_yaml_file)
     with filename.open(mode='r') as f:
-      y_data = yaml.load(f, Loader=yaml.FullLoader)
+      y_data = load(f, Loader=FullLoader)
       deploy_yaml_list.append(y_data)
   return deploy_yaml_list
 
@@ -80,17 +80,17 @@ def out_ntfy_meta(url:str, meta_tag:dict):
         "--print", meta_tag['meta_list'][2],
         url
       ]
-    meta = subprocess.run(get_meta_method, capture_output=True, text=True).stdout
+    meta = run(get_meta_method, capture_output=True, text=True).stdout
     series, episode, link = meta.splitlines()
 
   return series, episode, link
 
 
 def dow_yesterday(day_int:int):
-  locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+  setlocale(LC_TIME, 'ja_JP.UTF-8')
 
-  d_today      = datetime.date.today()
-  d_yesterday  = d_today - datetime.timedelta( days = day_int )
+  d_today      = date.today()
+  d_yesterday  = d_today - timedelta( days = day_int )
   y_dow_str:str = d_yesterday.strftime('%a')
   return y_dow_str
 
@@ -130,11 +130,11 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
 def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
 
   for yaml_data_dict in fix_dow_list:
-    material = func_scrape.hhh(yaml_data_dict["scraper"], yaml_data_dict["link"])
-    series, episode, link = func_parse.ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
+    material = hhh(yaml_data_dict["scraper"], yaml_data_dict["link"])
+    series, episode, link = ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
 
     ntfy_meta_dict = mix(series, episode, link)
-    method         = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, storage_path, state_file_dir_str)
-    result         = subprocess.run(method)
+    method         = vvv(yaml_data_dict, ntfy_meta_dict, storage_path, state_file_dir_str)
+    result         = run(method)
 
   return result, ntfy_meta_dict
