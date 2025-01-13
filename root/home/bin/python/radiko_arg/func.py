@@ -1,42 +1,107 @@
 #!/usr/bin/python3
 
 import urllib.request
+from argparse import ArgumentParser
+from base64 import b64encode
 from bs4   import BeautifulSoup
+from os import remove
 from plyer import notification
-import re
-import base64
-import argparse
-import sys
-import os
+from re import compile, IGNORECASE
+from sys import exit
+from datetime import datetime, timedelta
+# from locale   import setlocale, LC_TIME
 
 
 def check_ststus_code(subject):
   if subject.getcode() != 200:
     print(f"Ststus Code is {subject.getcode()} !!")
-    sys.exit()
+    exit()
 
 
 def analyse_argment():
-  parser = argparse.ArgumentParser()
+  parser = ArgumentParser()
 
-  parser.add_argument('-s', help='station_id', type=str, required=True)
-  parser.add_argument('-t', help='title',      type=str, required=True)
+  parser.add_argument('-s',  help='station_id',     type=str, required=True)
+  parser.add_argument('-t',  help='title',          type=str, required=True)
+  parser.add_argument('-ft', help='ft',             type=str, required=False)
+  parser.add_argument('-dl', help='dl',  action='store_true', required=False)
 
   optional_args = parser.parse_args()
   return optional_args
 
 
-def search_program(search_term, url):
+def now_time(day_int:int):
+  get_now = datetime.now()
+  get_past = get_now - timedelta( days = day_int )
+
+  today_now:str = get_now.strftime('%Y%m%d%H%M')+'00'
+  days_ago:str = get_past.strftime('%Y%m%d%H%M')+'00'
+  # return today_now.strftime('%Y%m%d%H%M')+'00'
+  return today_now, days_ago
+
+
+def search_program(search_term, url, today_now, days_ago, fftt):
   get_xml = urllib.request.urlopen(url)
   check_ststus_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
-  prog = soup.find("title", text=re.compile(search_term)).parent
+  keyword_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
 
-  time_ft:int  = prog.attrs['ft']
-  time_to:int  = prog.attrs['to']
-  title:str    = prog.title.string
-  filename:str = f"{title}_{time_ft[0:4]}_{time_ft[4:6]}_{time_ft[6:8]}_{time_ft[8:12]}"
-  return time_ft, time_to, filename
+  program_list = []
+
+  for keyword in keyword_list:
+    prog_detail = keyword.parent
+    if   days_ago >  prog_detail.attrs['to'] >  today_now:
+      continue
+    elif days_ago <= prog_detail.attrs['to'] <= today_now:
+      ddd = {
+        "ft":       prog_detail.attrs['ft'],
+        "to":       prog_detail.attrs['to'],
+        "time":     f"{prog_detail.attrs['ft'][0:4]}_{prog_detail.attrs['ft'][4:6]}_{prog_detail.attrs['ft'][6:8]}_{prog_detail.attrs['ft'][8:12]}",
+        "title":    prog_detail.title.string,
+      }
+      program_list.append(ddd)
+
+
+  if fftt is None:
+    return program_list
+
+  elif len(fftt) != 14:
+    print("There is an error in the '-ft' option")
+    exit()
+
+  elif len(fftt) == 14:
+    hogefuga_list = []
+    for rrr in program_list:
+      if rrr['ft'] == fftt:
+        hogefuga_list.append(rrr)
+    return hogefuga_list
+
+
+def branch(program_list, dl_flag):
+
+  if   len(program_list) > 1:
+    if dl_flag == True:
+      notification.notify(title = "⚠️ failed",  message = "upper")
+    elif dl_flag == False:
+      for vvv in program_list:
+        print(vvv)
+      print(f"Result {len(program_list)} Programs")
+    exit()
+
+  elif len(program_list) == 1:
+    if dl_flag == True:
+      return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}"
+    elif dl_flag == False:
+      print(program_list)
+      print("You can download it by adding '-dl' flag")
+    exit()
+
+  elif len(program_list) == 0:
+    if dl_flag == True:
+      notification.notify(title = "⚠️ failed",  message = "upper")
+    elif dl_flag == False:
+      print("Program is Not Found !!")
+    exit()
 
 
 def set_users_header():
@@ -67,7 +132,7 @@ def set_head_dict(auth_one):
 
 def get_partial(head_res, authkey):
   tmp_auth = authkey[head_res['KeyOffset']:  head_res['KeyOffset'] + head_res['KeyLength']]
-  partialkey = base64.b64encode(tmp_auth.encode('utf-8')).decode('utf-8')
+  partialkey = b64encode(tmp_auth.encode('utf-8')).decode('utf-8')
 
   return partialkey
 
@@ -112,7 +177,7 @@ def encode(tmp, path, filename):
 
 
 def delete(tmp, filename):
-  os.remove(f"{tmp}/{filename}.m4a")
+  remove(f"{tmp}/{filename}.m4a")
 
 
 def result(result, success, failure):

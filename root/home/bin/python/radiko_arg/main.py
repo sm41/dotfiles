@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-from plyer import notification
 from os import getenv, path
+from plyer import notification
+from subprocess import run
 import func
-import subprocess
 
 '''
 JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -39,6 +39,8 @@ optional_args = func.analyse_argment()
 
 station_id  = optional_args.s.upper()
 search_term = optional_args.t
+dl_flag = optional_args.dl
+fftt = optional_args.ft
 
 
 tmp_dir = "/tmp"
@@ -50,11 +52,14 @@ url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 
 auth1_url = "https://radiko.jp/v2/api/auth1"
 auth2_url = "https://radiko.jp/v2/api/auth2"
-authkey = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
+authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
 def main():
 
-  time_ft, time_to, filename = func.search_program(search_term, url)
+  today_now, days_ago = func.now_time(7)
+  program_list = func.search_program(search_term, url, today_now, days_ago, fftt)
+  time_ft, time_to, filename = func.branch(program_list, dl_flag)
+
   head_dict_1 = func.set_users_header()
   auth_one    = func.get_header(auth1_url, head_dict_1)
   head_res    = func.set_head_dict(auth_one)
@@ -63,10 +68,10 @@ def main():
   auth_two    = func.get_header(auth2_url, head_dict_2)
 
   download = func.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
-  result = subprocess.run(download)
+  result = run(download)
 
   encode = func.encode(tmp_dir, path, filename)
-  result2 = subprocess.run(encode)
+  result2 = run(encode)
 
   func.result(
     result,

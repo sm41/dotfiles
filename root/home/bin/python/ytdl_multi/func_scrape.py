@@ -23,17 +23,8 @@ def selenium(url):
   return soup
 
 
-# def xml(url):
-#   # scraping
-#   get_xml = request.urlopen(url)
-#   soup = BeautifulSoup(get_xml, "xml")
-
-#   return soup
-
-
 def hhh(scraper, url):
 
   if   scraper == "selenium":
     return selenium(url)
-  # elif scraper == "xml":
-  #   return xml(url)
+

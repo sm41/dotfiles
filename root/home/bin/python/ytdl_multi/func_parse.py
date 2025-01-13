@@ -32,6 +32,3 @@ def ppp(material, platform, anchor):
 
   elif platform == "tver":
     return tver(material)
-
-  # elif platform == "radiko":
-  #   return radiko(material, selector)
