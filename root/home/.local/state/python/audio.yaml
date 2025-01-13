@@ -16,11 +16,6 @@ apple_podcast:
       url:   https://podcasts.apple.com/jp/podcast/%E3%83%AD%E3%82%B1%E3%83%83%E3%83%88%E3%83%9E%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%BC/id1738995329
       plan:  [ {dow: 火, anchor: null} ]
 
-# radiko:
-#   config:
-#     platform: radiko
-#     scraper:  xml
-
 #   contents:
 #     elekata:
 #       title: エレ片のケツビ
