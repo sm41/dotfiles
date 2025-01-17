@@ -1,5 +1,5 @@
 from func_parse  import ppp
-from func_scrape import hhh
+from func_scrape import selenium
 from func_ytdlp  import vvv
 
 from datetime import date, timedelta
@@ -130,7 +130,7 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
 def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
 
   for yaml_data_dict in fix_dow_list:
-    material = hhh(yaml_data_dict["scraper"], yaml_data_dict["link"])
+    material = selenium(yaml_data_dict["scraper"], yaml_data_dict["link"])
     series, episode, link = ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
 
     ntfy_meta_dict = mix(series, episode, link)

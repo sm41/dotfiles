@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
 import urllib.request
+from datetime import datetime, timedelta
 from argparse import ArgumentParser
 from base64 import b64encode
-from bs4   import BeautifulSoup
-from os import remove
-from plyer import notification
-from re import compile, IGNORECASE
+from plyer  import notification
+from bs4    import BeautifulSoup
+from os  import remove
+from re  import compile, IGNORECASE
 from sys import exit
-from datetime import datetime, timedelta
 # from locale   import setlocale, LC_TIME
 
 
@@ -18,10 +18,10 @@ def check_ststus_code(subject):
     exit()
 
 
-def analyse_argment():
+def analyse_argment(s_dict):
   parser = ArgumentParser()
 
-  parser.add_argument('-s',  help='station_id',     type=str, required=True)
+  parser.add_argument('-s',  help='station_id',     type=str.upper, required=True, choices=s_dict.keys())
   parser.add_argument('-t',  help='title',          type=str, required=True)
   parser.add_argument('-ft', help='ft',             type=str, required=False)
   parser.add_argument('-dl', help='dl',  action='store_true', required=False)
@@ -56,7 +56,7 @@ def search_program(search_term, url, today_now, days_ago, fftt):
       ddd = {
         "ft":       prog_detail.attrs['ft'],
         "to":       prog_detail.attrs['to'],
-        "time":     f"{prog_detail.attrs['ft'][0:4]}_{prog_detail.attrs['ft'][4:6]}_{prog_detail.attrs['ft'][6:8]}_{prog_detail.attrs['ft'][8:12]}",
+        "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
         "title":    prog_detail.title.string,
       }
       program_list.append(ddd)

@@ -6,20 +6,20 @@ tver:
     child_dir: "@tver"
 
   contents:
+    gacchiri:
+      title: がっちりマンデー!!
+      url:   https://tver.jp/series/srgphhvnph
+      plan:  [ {dow: 月, anchor: null} ]
+
     toiro:
       title: 住人十色
       url:   https://tver.jp/series/srxbqmdpvs
       plan:  [ {dow: 土, anchor: null} ]
 
-    # rion:
-    #   title: ライオンの隠れ家
-    #   url:   https://tver.jp/series/srp6e5qh3b
-    #   plan:  [ {dow: 金, anchor: null} ]
-
-    # okura:
-    #   title: オクラ～迷宮入り事件捜査～
-    #   url:   https://tver.jp/series/sr3r43aoeq
-    #   plan:  [ {dow: 火, anchor: null} ]
+    call:
+      title: 119エマージェンシーコール
+      url:   https://tver.jp/series/sryavii6ry
+      plan:  [ {dow: 月, anchor: null} ]
 
     # zenketsu:
     #   title: 全領域異常解決室

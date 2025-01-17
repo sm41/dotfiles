@@ -5,37 +5,54 @@ from plyer import notification
 from subprocess import run
 import func
 
-'''
-JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
-国土交通省 https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html
-Area ID: JP8   https://radiko.jp/v3/station/list/JP8.xml
 
-https://radiko.jp/v3/program/station/date/20301231/TBS.xml
-https://radiko.jp/v3/program/station/weekly/TBS.xml
-'''
+#JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
+#国土交通省 https://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html
+#Area ID: JP8   https://radiko.jp/v3/station/list/JP8.xml
+#
+#https://radiko.jp/v3/program/station/date/20301231/TBS.xml
+#https://radiko.jp/v3/program/station/weekly/TBS.xml
 
-'''option
-Options:
-  -t TITLE        Program title
-  -s STATION      Station ID (see https://radiko.jp/v3/station/region/full.xml)
-    ├ "TBS"      # TBSラジオ
-    ├ "QRR"      # 文化放送
-    ├ "LFR"      # ニッポン放送
-    ├ "RN1"      # ラジオNIKKEI第1
-    ├ "RN2"      # ラジオNIKKEI第2
-    ├ "INT"      # interfm
-    ├ "FMT"      # tokyo fm
-    ├ "FMJ"      # j-wave
-    ├ "IBS"      # LuckyFM 茨城放送
-    ├ "JORF"     # ラジオ日本
-    ├ "BAYFM78"  # bayfm
-    ├ "NACK5"    # nack5
-    ├ "YFM"      # fm yokohama
-    ├ "JOAK"     # NHKラジオ第1（東京）
-    └ "JOAK-FM"  # NHK-FM（東京）
-'''
 
-optional_args = func.analyse_argment()
+#Options:
+#  -t TITLE        Program title
+#  -s STATION      Station ID (see https://radiko.jp/v3/station/region/full.xml)
+#    ├ "TBS"      # TBSラジオ
+#    ├ "QRR"      # 文化放送
+#    ├ "LFR"      # ニッポン放送
+#    ├ "RN1"      # ラジオNIKKEI第1
+#    ├ "RN2"      # ラジオNIKKEI第2
+#    ├ "INT"      # interfm
+#    ├ "FMT"      # tokyo fm
+#    ├ "FMJ"      # j-wave
+#    ├ "IBS"      # LuckyFM 茨城放送
+#    ├ "JORF"     # ラジオ日本
+#    ├ "BAYFM78"  # bayfm
+#    ├ "NACK5"    # nack5
+#    ├ "YFM"      # fm yokohama
+#    ├ "JOAK"     # NHKラジオ第1（東京）
+#    └ "JOAK-FM"  # NHK-FM（東京）
+
+s_dict = {
+  "TBS":     "TBSラジオ",
+  "QRR":     "文化放送",
+  "LFR":     "ニッポン放送",
+  "RN1":     "ラジオNIKKEI第1",
+  "RN2":     "ラジオNIKKEI第2",
+  "INT":     "interfm",
+  "FMT":     "tokyo fm",
+  "FMJ":     "j-wave",
+  "IBS":     "LuckyFM 茨城放送",
+  "JORF":    "ラジオ日本",
+  "BAYFM78": "bayfm",
+  "NACK5":   "nack5",
+  "YFM":     "fm yokohama",
+  "JOAK":    "NHKラジオ第1（東京）",
+  "JOAK-FM": "NHK-FM（東京）",
+}
+
+
+optional_args = func.analyse_argment(s_dict)
 
 station_id  = optional_args.s.upper()
 search_term = optional_args.t
