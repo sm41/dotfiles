@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import func_main, func_ytdlp
-from os import getenv
+from os  import getenv
 from sys import argv
 from subprocess import run
 
@@ -26,6 +26,7 @@ def main():
     result                = run(method)
     func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(method)
+
   elif argment_str == "dow":
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]
     anlys_yaml_list:list = func_main.anlys(yaml_files_list, state_file_dir_str)
@@ -36,6 +37,7 @@ def main():
     result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
     func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(fix_dow_list)
+
   else:
     print("Invailed Argment!")
 

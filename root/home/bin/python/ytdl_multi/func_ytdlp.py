@@ -53,13 +53,6 @@ def none(url, download_dir):
   return cmd_ytdlp
 
 
-# def check_dir(dirname:Path):
-#   if dirname.is_dir():
-#     pass
-#   else:
-#     dirname.mkdir()
-
-
 def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_dir_str:str):
 
   down_dir = Path(storage_path, "test", yaml_data_dict["child_dir"])

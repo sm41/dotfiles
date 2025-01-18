@@ -1,8 +1,6 @@
-
 from selenium import webdriver
 from time import sleep
 from bs4  import BeautifulSoup
-# from urllib import request
 
 
 def selenium(url):
@@ -18,10 +16,3 @@ def selenium(url):
   driver.quit()
 
   return soup
-
-
-# def hhh(scraper, url):
-
-#   if   scraper == "selenium":
-#     return selenium(url)
-

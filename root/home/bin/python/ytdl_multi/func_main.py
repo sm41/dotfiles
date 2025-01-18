@@ -6,10 +6,10 @@ from datetime import date, timedelta
 from locale   import setlocale, LC_TIME
 from pathlib  import Path
 from plyer    import notification
-from subprocess import run
+from subprocess   import run
 from urllib.parse import urlparse
 from yaml import load, FullLoader
-from sys import argv, exit
+from sys  import argv, exit
 
 
 def check_arg():
