@@ -21,10 +21,10 @@ def check_ststus_code(subject):
 def analyse_argment(s_dict):
   parser = ArgumentParser()
 
-  parser.add_argument('-s',  help='station_id',     type=str.upper, required=True, choices=s_dict.keys())
-  parser.add_argument('-t',  help='title',          type=str, required=True)
-  parser.add_argument('-ft', help='ft',             type=str, required=False)
-  parser.add_argument('-dl', help='dl',  action='store_true', required=False)
+  parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices=s_dict.keys())
+  parser.add_argument('-t',  help='title',      required=True,  type=str)
+  parser.add_argument('-ft', help='ft',         required=False, type=str)
+  parser.add_argument('-dl', help='download',   required=False, action='store_true')
 
   optional_args = parser.parse_args()
   return optional_args
@@ -77,29 +77,29 @@ def search_program(search_term, url, today_now, days_ago, fftt):
     return hogefuga_list
 
 
-def branch(program_list, dl_flag):
+def branch(program_list, download_flag):
 
   if   len(program_list) > 1:
-    if dl_flag == True:
+    if download_flag == True:
       notification.notify(title = "⚠️ failed",  message = "upper")
-    elif dl_flag == False:
+    elif download_flag == False:
       for vvv in program_list:
         print(vvv)
       print(f"Result {len(program_list)} Programs")
     exit()
 
   elif len(program_list) == 1:
-    if dl_flag == True:
+    if download_flag == True:
       return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}"
-    elif dl_flag == False:
+    elif download_flag == False:
       print(program_list)
       print("You can download it by adding '-dl' flag")
     exit()
 
   elif len(program_list) == 0:
-    if dl_flag == True:
+    if download_flag == True:
       notification.notify(title = "⚠️ failed",  message = "upper")
-    elif dl_flag == False:
+    elif download_flag == False:
       print("Program is Not Found !!")
     exit()
 

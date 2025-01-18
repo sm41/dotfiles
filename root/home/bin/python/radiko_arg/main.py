@@ -14,25 +14,6 @@ import func
 #https://radiko.jp/v3/program/station/weekly/TBS.xml
 
 
-#Options:
-#  -t TITLE        Program title
-#  -s STATION      Station ID (see https://radiko.jp/v3/station/region/full.xml)
-#    ├ "TBS"      # TBSラジオ
-#    ├ "QRR"      # 文化放送
-#    ├ "LFR"      # ニッポン放送
-#    ├ "RN1"      # ラジオNIKKEI第1
-#    ├ "RN2"      # ラジオNIKKEI第2
-#    ├ "INT"      # interfm
-#    ├ "FMT"      # tokyo fm
-#    ├ "FMJ"      # j-wave
-#    ├ "IBS"      # LuckyFM 茨城放送
-#    ├ "JORF"     # ラジオ日本
-#    ├ "BAYFM78"  # bayfm
-#    ├ "NACK5"    # nack5
-#    ├ "YFM"      # fm yokohama
-#    ├ "JOAK"     # NHKラジオ第1（東京）
-#    └ "JOAK-FM"  # NHK-FM（東京）
-
 s_dict = {
   "TBS":     "TBSラジオ",
   "QRR":     "文化放送",
@@ -54,28 +35,27 @@ s_dict = {
 
 optional_args = func.analyse_argment(s_dict)
 
-station_id  = optional_args.s.upper()
-search_term = optional_args.t
-dl_flag = optional_args.dl
+station_id    = optional_args.s.upper()
+search_term   = optional_args.t
+download_flag = optional_args.dl
 fftt = optional_args.ft
-
 
 tmp_dir = "/tmp"
 env_var = "CLIENT_NETWORK_STORAGE_www"
 storage = getenv(env_var)
-path = path.join(storage, "test", "@radiko")
+path    = path.join(storage, "test", "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
-
 auth1_url = "https://radiko.jp/v2/api/auth1"
 auth2_url = "https://radiko.jp/v2/api/auth2"
 authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
+
 
 def main():
 
   today_now, days_ago = func.now_time(7)
   program_list = func.search_program(search_term, url, today_now, days_ago, fftt)
-  time_ft, time_to, filename = func.branch(program_list, dl_flag)
+  time_ft, time_to, filename = func.branch(program_list, download_flag)
 
   head_dict_1 = func.set_users_header()
   auth_one    = func.get_header(auth1_url, head_dict_1)
