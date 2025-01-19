@@ -1,9 +1,8 @@
 
 tver:
   config:
-    platform:  tver
-    scraper:   selenium
     child_dir: "@tver"
+    platform:  tver
 
   contents:
     gacchiri:

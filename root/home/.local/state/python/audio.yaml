@@ -1,9 +1,8 @@
 
 apple_podcast:
   config:
-    platform:  apple_podcast
-    scraper:   selenium
     child_dir: "@podcast"
+    platform:  apple_podcast
 
   contents:
     elekata:
