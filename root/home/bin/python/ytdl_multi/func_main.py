@@ -119,7 +119,6 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
         ygyg = {
           "platform": input_dict["platform"],
           "child_dir":input_dict["child_dir"],
-          "scraper":  input_dict["scraper"],
           "link":     input_dict["url"],
           "anchor":   qqq["anchor"]
           }
@@ -130,7 +129,7 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
 def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
 
   for yaml_data_dict in fix_dow_list:
-    material = selenium(yaml_data_dict["scraper"], yaml_data_dict["link"])
+    material = selenium(yaml_data_dict["link"])
     series, episode, link = ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
 
     ntfy_meta_dict = mix(series, episode, link)

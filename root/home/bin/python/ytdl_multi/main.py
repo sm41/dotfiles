@@ -25,7 +25,7 @@ def main():
     method                = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
     result                = run(method)
     func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
-    # print(method)
+    # print(anlys_yaml_list)
 
   elif argment_str == "dow":
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]
