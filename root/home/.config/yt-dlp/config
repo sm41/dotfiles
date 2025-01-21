@@ -4,7 +4,7 @@
 --embed-subs
 
 # --paths temp:/tmp
---paths home:${CLIENT_NETWORK_STORAGE_www}/test
+--paths home:${CLIENT_NETWORK_STORAGE_misc}/test
 
 --output "%(title)s_[%(id)s].%(ext)s"
 --format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"

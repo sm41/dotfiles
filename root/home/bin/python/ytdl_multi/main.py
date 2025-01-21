@@ -8,11 +8,8 @@ from subprocess import run
 func_main.check_arg()
 argment_str:str  = argv[1]
 
-env_var_str:str = "XDG_STATE_HOME"
-state_file_dir_str:str = getenv(env_var_str)
-
-storage_path_str:str = "CLIENT_NETWORK_STORAGE_www"
-download_path_str:str = getenv(storage_path_str)
+state_file_dir_str:str = getenv("XDG_STATE_HOME")
+download_path_str:str  = getenv("CLIENT_NETWORK_STORAGE_misc")
 
 def main():
   if argment_str.startswith("https://"):

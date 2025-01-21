@@ -41,8 +41,7 @@ download_flag = optional_args.dl
 fftt = optional_args.ft
 
 tmp_dir = "/tmp"
-env_var = "CLIENT_NETWORK_STORAGE_www"
-storage = getenv(env_var)
+storage = getenv("CLIENT_NETWORK_STORAGE_misc")
 path    = path.join(storage, "test", "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"

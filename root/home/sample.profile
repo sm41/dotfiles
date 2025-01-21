@@ -15,8 +15,8 @@ export   XDG_DATA_HOME="${HOME}/.local/share"
 export  XDG_STATE_HOME="${HOME}/.local/state"
 
 # /mnt
-export  CLIENT_NETWORK_STORAGE_111="/mnt/samba/111"
-export  CLIENT_NETWORK_STORAGE_222="/mnt/samba/222"
+export  CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
+export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
 
 # PATH
 export PATH="${PATH}:${HOME}/bin/bash"

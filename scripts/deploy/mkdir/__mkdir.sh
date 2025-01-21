@@ -22,8 +22,8 @@ mkdir -p "${HOME}/bin/{appimage,bash,python}"
 mkdir -p "${HOME}/repository"
 
 # /mnt
-sudo mkdir -p "${CLIENT_NETWORK_STORAGE_111}"
-sudo mkdir -p "${CLIENT_NETWORK_STORAGE_222}"
+sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
+sudo mkdir -p "${CLIENT_NETWORK_STORAGE_rec}"
 
 # python
 mkdir -p "${PYTHON_HISTORY}"
