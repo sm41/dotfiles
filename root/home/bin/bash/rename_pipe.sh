@@ -17,7 +17,7 @@ _EOT_
 }
 
 function check_sed_command(){
-  if [[ "$1" =~ [sy]/.*/g?$  ]] ; then
+  if [[ "$1" =~ [sy][/|].*[/|]g?$  ]] ; then
     SED_COMMAND="$1"
     SED_ARG="sed_arg"
   else
