@@ -3,7 +3,7 @@
 from os import getenv, path
 from plyer import notification
 from subprocess import run
-import func
+import func, func_auth, func_dl
 
 
 #JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -56,22 +56,22 @@ def main():
   program_list = func.search_program(search_term, url, today_now, days_ago, fftt)
   time_ft, time_to, filename = func.branch(program_list, download_flag)
 
-  head_dict_1 = func.set_users_header()
-  auth_one    = func.get_header(auth1_url, head_dict_1)
-  head_res    = func.set_head_dict(auth_one)
-  partialkey  = func.get_partial(head_res, authkey)
-  head_dict_2 = func.set_head_dict_2(partialkey, head_res)
-  auth_two    = func.get_header(auth2_url, head_dict_2)
+  head_dict_1 = func_auth.set_users_header()
+  auth_one    = func_auth.get_header(auth1_url, head_dict_1)
+  head_res    = func_auth.set_head_dict(auth_one)
+  partialkey  = func_auth.get_partial(head_res, authkey)
+  head_dict_2 = func_auth.set_head_dict_2(partialkey, head_res)
+  auth_two    = func_auth.get_header(auth2_url, head_dict_2)
 
-  download = func.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
-  result = run(download)
+  download = func_dl.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
+  result   = run(download)
 
-  encode = func.encode(tmp_dir, path, filename)
+  encode  = func_dl.encode(tmp_dir, path, filename)
   result2 = run(encode)
 
   func.result(
     result,
-    func.delete(tmp_dir, filename),
+    func_dl.delete(tmp_dir, filename),
     "pass"
     )
   func.result(

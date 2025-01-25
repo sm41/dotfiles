@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import func_main, func_ytdlp
+import func_main, func_ytdlp, func_dow, func_url, func_share
 from os  import getenv
 from sys import argv
 from subprocess import run
@@ -14,25 +14,25 @@ download_path_str:str  = getenv("CLIENT_NETWORK_STORAGE_misc")
 def main():
   if argment_str.startswith("https://"):
     yaml_files_list:list = [ 'uuu.yaml' ]
-    anlys_yaml_list:list = func_main.anlys(yaml_files_list, state_file_dir_str)
+    anlys_yaml_list:list = func_share.anlys(yaml_files_list, state_file_dir_str)
 
-    yaml_data_dict:dict   = func_main.out_yaml_data(argment_str, anlys_yaml_list)
-    series, episode, link = func_main.out_ntfy_meta(argment_str, yaml_data_dict)
+    yaml_data_dict:dict   = func_url.out_yaml_data(argment_str, anlys_yaml_list)
+    series, episode, link = func_url.out_ntfy_meta(argment_str, yaml_data_dict)
     ntfy_meta_dict:dict   = func_main.mix(series, episode, link)
     method                = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
-    result                = run(method)
-    func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
-    # print(anlys_yaml_list)
+    # result                = run(method)
+    func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
+    print(method)
 
   elif argment_str == "dow":
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]
-    anlys_yaml_list:list = func_main.anlys(yaml_files_list, state_file_dir_str)
+    anlys_yaml_list:list = func_share.anlys(yaml_files_list, state_file_dir_str)
 
-    y_dow_str:str          = func_main.dow_yesterday(1)
-    get_dow_list:list      = func_main.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
-    fix_dow_list:list      = func_main.out_fix_dow(get_dow_list, y_dow_str)
+    y_dow_str:str          = func_dow.dow_yesterday(1)
+    get_dow_list:list      = func_dow.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
+    fix_dow_list:list      = func_dow.out_fix_dow(get_dow_list, y_dow_str)
     result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
-    func_main.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
+    func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(fix_dow_list)
 
   else:
