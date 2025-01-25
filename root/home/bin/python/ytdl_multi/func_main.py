@@ -31,3 +31,4 @@ def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
     result         = run(method)
 
   return result, ntfy_meta_dict
+  # return method

@@ -41,6 +41,7 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
         ygyg = {
           "platform": input_dict["platform"],
           "child_dir":input_dict["child_dir"],
+          "header":   input_dict["header"],
           "link":     input_dict["url"],
           "anchor":   qqq["anchor"]
           }

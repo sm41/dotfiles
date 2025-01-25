@@ -20,9 +20,9 @@ def main():
     series, episode, link = func_url.out_ntfy_meta(argment_str, yaml_data_dict)
     ntfy_meta_dict:dict   = func_main.mix(series, episode, link)
     method                = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
-    # result                = run(method)
+    result                = run(method)
     func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
-    print(method)
+    # print(method)
 
   elif argment_str == "dow":
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]
@@ -32,8 +32,9 @@ def main():
     get_dow_list:list      = func_dow.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
     fix_dow_list:list      = func_dow.out_fix_dow(get_dow_list, y_dow_str)
     result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
+    method = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
     func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
-    # print(fix_dow_list)
+    # print(method)
 
   else:
     print("Invailed Argment!")

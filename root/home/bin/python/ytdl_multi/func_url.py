@@ -20,6 +20,7 @@ def out_yaml_data(url:str, deploy_yaml_list:list):
                   "platform":   dict['platform'],
                   "child_dir":  path['child_dir'],
                   "meta_list":  path['meta_list'],
+                  "header":     "[%(webpage_url_domain)s]",
                   "playlist":   dict['playlist'],
                   "path_tuple": path_directory.parts,
                   }
