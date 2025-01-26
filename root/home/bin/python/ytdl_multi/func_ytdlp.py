@@ -1,32 +1,13 @@
 from pathlib import Path
 
-def apple_podcast(dict, dict2, download_dir):
-  cmd_ytdlp = [
-    "yt-dlp",
-    "--paths",  f"home:{download_dir}",
-    "--output", f"{dict2['header']}_%(series)s_%(upload_date>%Y-%m-%d)s_%(title)s.%(ext)s",
-    dict['link']
-  ]
-  return cmd_ytdlp
 
-
-def tver(dict, dict2, download_dir):
+def sshhrr(dict, dict2, download_dir):
   cmd_ytdlp = [
     "yt-dlp",
     "--embed-subs",
     "--paths",  f"home:{download_dir}",
-    "--output", f"{dict2['header']}_%(series)s_%(episode)s.%(ext)s",
+    "--output", f"{dict2['header']}",
     dict['link']
-  ]
-  return cmd_ytdlp
-
-
-def ph_view(url, download_dir):
-  cmd_ytdlp = [
-    "yt-dlp",
-    "--paths",  f"home:{download_dir}",
-    "--output", "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s",
-    url
   ]
   return cmd_ytdlp
 
@@ -42,12 +23,12 @@ def ph_cat(url, download_dir, archive_dir):
   return cmd_ytdlp
 
 
-def none(url, download_dir):
+def none(dict, download_dir):
   cmd_ytdlp = [
     "yt-dlp",
     "--embed-subs",
     "--paths",  f"home:{download_dir}",
-    url
+    dict['link']
   ]
   return cmd_ytdlp
 
@@ -57,14 +38,8 @@ def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_d
   down_dir = Path(storage_path, "test", yaml_data_dict["child_dir"])
   down_dir.mkdir(parents=True, exist_ok=True)
 
-  if   yaml_data_dict["platform"] == "apple_podcast":
-    return apple_podcast(ntfy_meta_dict, yaml_data_dict, down_dir)
-
-  elif yaml_data_dict["platform"] == "tver":
-    return tver(ntfy_meta_dict, yaml_data_dict, down_dir)
-
-  elif yaml_data_dict["platform"] == "ph_view":
-    return ph_view(ntfy_meta_dict["link"], down_dir)
+  if   yaml_data_dict["platform"] == "apple_podcast" or "tver" or "ph_view":
+    return sshhrr(ntfy_meta_dict, yaml_data_dict, down_dir)
 
   elif yaml_data_dict["platform"] == "ph_cat":
     ctgry = yaml_data_dict['path_tuple'][1]
@@ -79,4 +54,4 @@ def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_d
     return ph_cat(ntfy_meta_dict["link"], str(kmkm), str(archive_dir))
 
   elif yaml_data_dict["platform"] == None:
-    return none(ntfy_meta_dict["link"], down_dir)
+    return none(ntfy_meta_dict, down_dir)
