@@ -3,7 +3,7 @@ apple.com:
   child_dir: "@podcast"
   meta_list: [ "series", "episode", "original_url" ]
 
-  apple_podcast:
+  single:
     parts:     [ "podcast" ]
     playlist:  false
     platform:  "apple_podcast"
@@ -13,7 +13,7 @@ tver.jp:
   child_dir: "@tver"
   meta_list: [ "series", "episode", "original_url" ]
 
-  tver:
+  single:
     parts:     [ "episodes" ]
     playlist:  false
     platform:  "tver"
@@ -23,11 +23,11 @@ youtube.com:
   child_dir: ""
   meta_list: [ "channel", "title", "original_url" ]
 
-  youtube_watch:
+  single:
     parts:     [ "watch" ]
     playlist:  false
     platform:  null
-  youtube_playlist:
+  list:
     parts:     [ "playlist" ]
     playlist:  true
     platform:  null
@@ -37,11 +37,11 @@ pornhub.com:
   child_dir: "@ph"
   meta_list: [ "uploader", "title", "original_url" ]
 
-  ph_view:
+  single:
     parts:     [ "view_video.php" ]
     playlist:  false
     platform:  "ph_view"
-  ph_cat:
+  list:
     parts:     [ "model", "pornstar" ]
     playlist:  true
     platform:  "ph_cat"

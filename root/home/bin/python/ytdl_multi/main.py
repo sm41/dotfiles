@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import func_main, func_ytdlp, func_dow, func_url, func_share
+import func_dow, func_url, func_share
+from func_ytdlp import vvv
+from subprocess import run
 from os  import getenv
 from sys import argv
-from subprocess import run
 
-func_main.check_arg()
+func_share.check_arg()
 argment_str:str  = argv[1]
 
 state_file_dir_str:str = getenv("XDG_STATE_HOME")
@@ -18,8 +19,8 @@ def main():
 
     yaml_data_dict:dict   = func_url.out_yaml_data(argment_str, anlys_yaml_list)
     series, episode, link = func_url.out_ntfy_meta(argment_str, yaml_data_dict)
-    ntfy_meta_dict:dict   = func_main.mix(series, episode, link)
-    method                = func_ytdlp.vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
+    ntfy_meta_dict:dict   = func_share.mix(series, episode, link)
+    method                = vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
     result                = run(method)
     func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(method)
@@ -31,9 +32,8 @@ def main():
     y_dow_str:str          = func_dow.dow_yesterday(1)
     get_dow_list:list      = func_dow.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
     fix_dow_list:list      = func_dow.out_fix_dow(get_dow_list, y_dow_str)
-    result, ntfy_meta_dict = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
-    method = func_main.looping(fix_dow_list, download_path_str, state_file_dir_str)
-    func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
+    # result, ntfy_meta_dict = func_dow.looping(fix_dow_list, download_path_str, state_file_dir_str)
+    func_dow.looping(fix_dow_list, download_path_str, state_file_dir_str)
     # print(method)
 
   else:

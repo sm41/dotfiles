@@ -69,12 +69,12 @@ def main():
   encode  = func_dl.encode(tmp_dir, path, filename)
   result2 = run(encode)
 
-  func.result(
+  func_dl.result(
     result,
     func_dl.delete(tmp_dir, filename),
     "pass"
     )
-  func.result(
+  func_dl.result(
     result2,
     notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
     "pass"

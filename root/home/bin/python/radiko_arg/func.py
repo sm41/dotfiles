@@ -101,9 +101,3 @@ def branch(program_list, download_flag):
       print("Program is Not Found !!")
     exit()
 
-
-def result(result, success, failure):
-  if result.returncode == 0:
-    success
-  else:
-    failure
