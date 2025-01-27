@@ -56,6 +56,7 @@ def search_program(search_term, url, today_now, days_ago, fftt):
         "to":       prog_detail.attrs['to'],
         "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
         "title":    prog_detail.title.string,
+        "img":      prog_detail.img.string,
       }
       program_list.append(ddd)
 
@@ -88,7 +89,7 @@ def branch(program_list, download_flag):
 
   elif len(program_list) == 1:
     if download_flag == True:
-      return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}"
+      return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}", program_list[0]['img']
     elif download_flag == False:
       print(program_list)
       print("You can download it by adding '-dl' flag")

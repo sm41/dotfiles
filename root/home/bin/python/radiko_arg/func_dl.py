@@ -18,11 +18,16 @@ def ffmpeg(authtoken, station_id, time_ft, time_to, path, filename):
   return download
 
 
-def encode(tmp, path, filename):
+def encode(tmp, path, filename, img):
   encode = [
     "ffmpeg",
       "-n",
       "-i",  f"{tmp}/{filename}.m4a",
+      "-i",  f"{img}",
+      "-map", "0",
+      "-map", "1",
+      "-metadata:s:v", "title='Album cover'",
+      "-metadata:s:v", "comment='Cover (Front)'",
       "-loglevel", "warning",
       "-b:a", "48k",
     f"{path}/{filename}.mp3"

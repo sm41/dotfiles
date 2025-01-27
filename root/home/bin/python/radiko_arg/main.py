@@ -54,7 +54,7 @@ def main():
 
   today_now, days_ago = func.now_time(7)
   program_list = func.search_program(search_term, url, today_now, days_ago, fftt)
-  time_ft, time_to, filename = func.branch(program_list, download_flag)
+  time_ft, time_to, filename, img = func.branch(program_list, download_flag)
 
   head_dict_1 = func_auth.set_users_header()
   auth_one    = func_auth.get_header(auth1_url, head_dict_1)
@@ -66,7 +66,7 @@ def main():
   download = func_dl.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
   result   = run(download)
 
-  encode  = func_dl.encode(tmp_dir, path, filename)
+  encode  = func_dl.encode(tmp_dir, path, filename, img)
   result2 = run(encode)
 
   func_dl.result(
