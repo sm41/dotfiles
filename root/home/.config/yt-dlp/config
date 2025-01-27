@@ -1,9 +1,9 @@
 
-
-#--write-info-json
+--embed-thumbnail
 --embed-subs
 
 # --paths temp:/tmp
+--paths temp:${CLIENT_NETWORK_STORAGE_misc}
 --paths home:${CLIENT_NETWORK_STORAGE_misc}/test
 
 --output "%(title)s_[%(id)s].%(ext)s"
