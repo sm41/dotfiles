@@ -41,8 +41,8 @@ download_flag = optional_args.dl
 fftt = optional_args.ft
 
 tmp_dir = "/tmp"
-storage = getenv("CLIENT_NETWORK_STORAGE_misc")
-path    = path.join(storage, "test", "@radiko")
+env_dir = getenv("CLIENT_NETWORK_STORAGE_misc")
+ssttrrgg    = path.join(env_dir, "test", "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"
@@ -64,18 +64,18 @@ def main():
   auth_two    = func_auth.get_header(auth2_url, head_dict_2)
 
   download = func_dl.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
-  result   = run(download)
+  result_1 = run(download)
 
-  encode  = func_dl.encode(tmp_dir, path, filename, img)
-  result2 = run(encode)
+  encode   = func_dl.encode(tmp_dir, ssttrrgg, filename, img)
+  result_2 = run(encode)
 
   func_dl.result(
-    result,
+    result_1,
     func_dl.delete(tmp_dir, filename),
     "pass"
     )
   func_dl.result(
-    result2,
+    result_2,
     notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
     "pass"
     # notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")

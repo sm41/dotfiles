@@ -1,8 +1,8 @@
 
 from os  import remove
 
-def ffmpeg(authtoken, station_id, time_ft, time_to, path, filename):
-  download = [
+def ffmpeg(authtoken:str, station_id:str, time_ft:str, time_to:str, path:str, filename:str):
+  download:list = [
     "ffmpeg",
       "-loglevel", "warning",
       "-n",
@@ -18,9 +18,10 @@ def ffmpeg(authtoken, station_id, time_ft, time_to, path, filename):
   return download
 
 
-def encode(tmp, path, filename, img):
-  encode = [
+def encode(tmp:str, path:str, filename:str, img:str):
+  encode:list = [
     "ffmpeg",
+      "-loglevel", "warning",
       "-n",
       "-i",  f"{tmp}/{filename}.m4a",
       "-i",  f"{img}",
@@ -28,14 +29,13 @@ def encode(tmp, path, filename, img):
       "-map", "1",
       "-metadata:s:v", "title='Album cover'",
       "-metadata:s:v", "comment='Cover (Front)'",
-      "-loglevel", "warning",
       "-b:a", "48k",
     f"{path}/{filename}.mp3"
   ]
   return encode
 
 
-def delete(tmp, filename):
+def delete(tmp:str, filename:str):
   remove(f"{tmp}/{filename}.m4a")
 
 

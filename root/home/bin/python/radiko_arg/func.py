@@ -16,7 +16,7 @@ def check_ststus_code(subject):
     exit()
 
 
-def analyse_argment(s_dict):
+def analyse_argment(s_dict:dict):
   parser = ArgumentParser()
 
   parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices=s_dict.keys())
@@ -34,7 +34,7 @@ def now_time(day_int:int):
 
   today_now:str = get_now.strftime('%Y%m%d%H%M')+'00'
   days_ago:str = get_past.strftime('%Y%m%d%H%M')+'00'
-  # return today_now.strftime('%Y%m%d%H%M')+'00'
+
   return today_now, days_ago
 
 
