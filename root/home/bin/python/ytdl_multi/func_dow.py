@@ -22,18 +22,19 @@ def out_get_dow(deploy_yaml_list:list, target_key, find_value):
 
   dow_list:list = []
 
-  for iii in deploy_yaml_list:
-    for pltfrm, prpty in iii.items():
+  for select_yaml in deploy_yaml_list:
+    for pltfrm, prpty in select_yaml.items():
       for genre, param in prpty.items():
         if genre == 'config':
           continue
-        for cnfg, lstky in param.items():
-          if cnfg == "header":
+        for cntnts, series in param.items():
+          if cntnts != "contents":
             continue
-          for dwanchr in lstky['plan']:
-            if dwanchr[target_key] == find_value:
-              hypr = {**prpty['config'], 'header':param['header'], **lstky}
-              dow_list.append(hypr)
+          for title, spec in series.items():
+            for hoge in spec['plan']:
+              if hoge[target_key] == find_value:
+                hypr = {**prpty['config'], 'header':param['header'], **spec}
+                dow_list.append(hypr)
   return dow_list
 
 
@@ -45,8 +46,8 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
     for qqq in input_dict["plan"]:
       if qqq["dow"] == y_dow_str:
         ygyg = {
-          "platform": input_dict["platform"],
           "child_dir":input_dict["child_dir"],
+          "platform": input_dict["platform"],
           "header":   input_dict["header"],
           "link":     input_dict["url"],
           "anchor":   qqq["anchor"]
@@ -69,3 +70,23 @@ def looping(fix_dow_list:list, storage_path:str, state_file_dir_str:str):
 
   # return result, ntfy_meta_dict
   # return method
+
+
+
+def www(deploy_yaml_list:list, keyword:str):
+
+  hogefuga = []
+
+  for select_yaml in deploy_yaml_list:
+    for pltfrm, prpty in select_yaml.items():
+      for genre, param in prpty.items():
+        if genre == 'config':
+          continue
+        for cntnts, series in param.items():
+          if cntnts != "contents":
+            continue
+          for title, spec in series.items():
+            if title == keyword:
+              hypr = {**prpty['config'], 'header':param['header'], 'link':spec['url'], 'anchor':spec['plan'][0]['anchor']}
+              hogefuga.append(hypr)
+  return hogefuga

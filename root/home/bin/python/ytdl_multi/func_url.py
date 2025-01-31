@@ -17,8 +17,8 @@ def out_yaml_data(url:str, deploy_yaml_list:list):
             for mmm in dict['parts']:
               if mmm in str(path_directory):
                 meta_dict = {
-                  "platform":   dict['platform'],
                   "child_dir":  path['child_dir'],
+                  "platform":   dict['platform'],
                   "meta_list":  path['meta_list'],
                   "header":     path['header'],
                   "playlist":   dict['playlist'],

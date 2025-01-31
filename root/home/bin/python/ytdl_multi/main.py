@@ -25,15 +25,19 @@ def main():
     func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
     # print(method)
 
-  elif argment_str == "dow":
+  elif not argment_str.startswith("https://"):
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]
     anlys_yaml_list:list = func_share.anlys(yaml_files_list, state_file_dir_str)
 
-    y_dow_str:str        = func_dow.dow_yesterday(1)
-    get_dow_list:list    = func_dow.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
-    fix_dow_list:list    = func_dow.out_fix_dow(get_dow_list, y_dow_str)
+    if   argment_str == "dow":
+      y_dow_str:str      = func_dow.dow_yesterday(1)
+      get_dow_list:list  = func_dow.out_get_dow(anlys_yaml_list, "dow", y_dow_str)
+      fix_dow_list:list  = func_dow.out_fix_dow(get_dow_list, y_dow_str)
+    elif argment_str != "dow":
+      fix_dow_list:list  = func_dow.www(anlys_yaml_list, argment_str)
+
     func_dow.looping(fix_dow_list, download_path_str, state_file_dir_str)
-    # print(method)
+    # print(fix_dow_list)
 
   else:
     print("Invailed Argment!")
