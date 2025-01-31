@@ -6,63 +6,71 @@ tver:
 
 
   inform:
-    header: "[情報]"
+    header: "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
-    gacchiri:
-      title: がっちりマンデー!!
-      url:   https://tver.jp/series/srgphhvnph
-      plan:  [ {dow: 日, anchor: null} ]
+    contents:
+      gacchiri:
+        title: がっちりマンデー!!
+        url:   https://tver.jp/series/srgphhvnph
+        plan:  [ {dow: 日, anchor: null} ]
 
 
   house:
-    header: "[住まい]"
+    header: "[住まい]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
-    toiro:
-      title: 住人十色
-      url:   https://tver.jp/series/srxbqmdpvs
-      plan:  [ {dow: 土, anchor: null} ]
+    contents:
+      toiro:
+        title: 住人十色
+        url:   https://tver.jp/series/srxbqmdpvs
+        plan:  [ {dow: 土, anchor: null} ]
+
+      sugoi:
+        title: となりのスゴイ家
+        url:   https://tver.jp/series/sr1s8kvhrt
+        plan:  [ {dow: 金, anchor: null} ]
 
 
   drama:
-    header: "[ドラマ]"
+    header: "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
 
-    mikami:
-      title: 御上先生
-      url:   https://tver.jp/series/sr2wexxwqg
-      plan:  [ {dow: 日, anchor: null} ]
+    contents:
+      mikami:
+        title: 御上先生
+        url:   https://tver.jp/series/sr2wexxwqg
+        plan:  [ {dow: 日, anchor: null} ]
 
-    call:
-      title: 119エマージェンシーコール
-      url:   https://tver.jp/series/sryavii6ry
-      plan:  [ {dow: 月, anchor: null} ]
+      call:
+        title: 119エマージェンシーコール
+        url:   https://tver.jp/series/sryavii6ry
+        plan:  [ {dow: 月, anchor: null} ]
 
-    secret:
-      title: 秘密～THE TOP SECRET～
-      url:   https://tver.jp/series/sr9o8p6pm5
-      plan:  [ {dow: 月, anchor: null} ]
+      secret:
+        title: 秘密～THE TOP SECRET～
+        url:   https://tver.jp/series/sr9o8p6pm5
+        plan:  [ {dow: 月, anchor: null} ]
 
-    madoka:
-      title: まどか26歳、研修医やってます！
-      url:   https://tver.jp/series/sr2wopca43
-      plan:  [ {dow: 火, anchor: null} ]
+      madoka:
+        title: まどか26歳、研修医やってます！
+        url:   https://tver.jp/series/sr2wopca43
+        plan:  [ {dow: 火, anchor: null} ]
 
-    eyesee:
-      title: アイシー～瞬間記憶捜査・柊班～
-      url:   https://tver.jp/series/sri5u7y01n
-      plan:  [ {dow: 火, anchor: null} ]
+      eyesee:
+        title: アイシー～瞬間記憶捜査・柊班～
+        url:   https://tver.jp/series/sri5u7y01n
+        plan:  [ {dow: 火, anchor: null} ]
 
-    mondai:
-      title: 問題物件
-      url:   https://tver.jp/series/sromzosp1f
-      plan:  [ {dow: 水, anchor: null} ]
+      mondai:
+        title: 問題物件
+        url:   https://tver.jp/series/sromzosp1f
+        plan:  [ {dow: 水, anchor: null} ]
 
-    dragon:
-      title: 法廷のドラゴン
-      url:   https://tver.jp/series/srfzo5ibu1
-      plan:  [ {dow: 金, anchor: null} ]
+      dragon:
+        title: 法廷のドラゴン
+        url:   https://tver.jp/series/srfzo5ibu1
+        plan:  [ {dow: 金, anchor: null} ]
 
-    dance:
-      title: クジャクのダンス、誰が見た？
-      url:   https://tver.jp/series/sruwkvjipf
-      plan:  [ {dow: 金, anchor: null} ]
+      dance:
+        title: クジャクのダンス、誰が見た？
+        url:   https://tver.jp/series/sruwkvjipf
+        plan:  [ {dow: 金, anchor: null} ]
 

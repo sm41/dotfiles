@@ -2,6 +2,7 @@
 apple.com:
   child_dir: "@podcast"
   meta_list: [ "series", "episode", "original_url" ]
+  header:    "[Podcast]_%(series)s_%(upload_date>%Y-%m-%d)s_%(title)s.%(ext)s"
 
   single:
     parts:     [ "podcast" ]
@@ -12,6 +13,7 @@ apple.com:
 tver.jp:
   child_dir: "@tver"
   meta_list: [ "series", "episode", "original_url" ]
+  header:    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
   single:
     parts:     [ "episodes" ]
@@ -22,6 +24,7 @@ tver.jp:
 youtube.com:
   child_dir: ""
   meta_list: [ "channel", "title", "original_url" ]
+  header:    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]"
 
   single:
     parts:     [ "watch" ]
@@ -36,6 +39,7 @@ youtube.com:
 pornhub.com:
   child_dir: "@ph"
   meta_list: [ "uploader", "title", "original_url" ]
+  header:    "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s"
 
   single:
     parts:     [ "view_video.php" ]
