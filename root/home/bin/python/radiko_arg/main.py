@@ -42,7 +42,7 @@ fftt = optional_args.ft
 
 tmp_dir = "/tmp"
 env_dir = getenv("CLIENT_NETWORK_STORAGE_misc")
-ssttrrgg    = path.join(env_dir, "test", "@radiko")
+ssttrrgg    = path.join(env_dir, "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"

@@ -22,9 +22,9 @@ def get_header(auth_n_url:str, head_dict_n:list):
 
 def set_head_dict(auth_one:dict):
 
-  AuthToken:str = auth_one['x-radiko-authtoken']
-  KeyLength:int = auth_one["x-radiko-keylength"]
-  KeyOffset:int = auth_one["x-radiko-keyoffset"]
+  AuthToken:str = str(auth_one['x-radiko-authtoken'])
+  KeyLength:int = int(auth_one["x-radiko-keylength"])
+  KeyOffset:int = int(auth_one["x-radiko-keyoffset"])
 
   head_res:dict = {
     "AuthToken": AuthToken,
