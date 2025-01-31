@@ -1,10 +1,12 @@
 
+# --write-info-json
+# --no-clean-infojson
 --embed-thumbnail
 --embed-subs
 
-# --paths temp:/tmp
+# --paths infojson:/tmp
 --paths temp:${CLIENT_NETWORK_STORAGE_misc}
---paths home:${CLIENT_NETWORK_STORAGE_misc}/test
+--paths home:${CLIENT_NETWORK_STORAGE_misc}/temp
 
 --output "%(title)s_[%(id)s].%(ext)s"
 --format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"
