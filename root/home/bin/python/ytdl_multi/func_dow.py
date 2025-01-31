@@ -18,7 +18,7 @@ def dow_yesterday(day_int:int):
   return y_dow_str
 
 
-def out_get_dow(deploy_yaml_list, target_key, find_value):
+def out_get_dow(deploy_yaml_list:list, target_key, find_value):
 
   dow_list:list = []
 
@@ -55,7 +55,7 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
   return fix_dow_list
 
 
-def looping(fix_dow_list, storage_path:str, state_file_dir_str:str):
+def looping(fix_dow_list:list, storage_path:str, state_file_dir_str:str):
 
   for yaml_data_dict in fix_dow_list:
     material = selenium(yaml_data_dict["link"])

@@ -24,10 +24,10 @@ def anlys(yaml_files_list:list, state_file_dir_str:str):
   return deploy_yaml_list
 
 
-def mix(series, episode, link):
-  key_data:list   = [ "upper", "lower", "link" ]
-  value_data:list = [ series, episode, link ]
-  mix_dict:dict = dict(zip(key_data, value_data))
+def mix(series:str, episode:str, link:str):
+  key_data   = [ "upper", "lower", "link" ]
+  value_data = [ series, episode, link ]
+  mix_dict   = dict(zip(key_data, value_data))
 
   return mix_dict
 

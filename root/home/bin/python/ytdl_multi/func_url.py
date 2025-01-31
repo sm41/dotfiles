@@ -32,7 +32,7 @@ def out_ntfy_meta(url:str, meta_tag:dict):
   if meta_tag['playlist']:
     series, episode, link = "hoge", "fuga", url
   else:
-    get_meta_method = [
+    get_meta_method:list = [
       "yt-dlp",
         "--print", meta_tag['meta_list'][0],
         "--print", meta_tag['meta_list'][1],

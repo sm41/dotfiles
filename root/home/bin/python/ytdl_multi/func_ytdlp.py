@@ -1,13 +1,13 @@
 from pathlib import Path
 
 
-def sshhrr(dict, dict2, download_dir):
+def sshhrr(dict:dict, dict2:dict, download_dir:str):
   cmd_ytdlp = [
     "yt-dlp",
-    "--embed-subs",
-    "--paths",  f"home:{download_dir}",
-    "--output", f"{dict2['header']}",
-    dict['link']
+      "--embed-subs",
+      "--paths",  f"home:{download_dir}",
+      "--output", f"{dict['header']}",
+    dict2['link']
   ]
   return cmd_ytdlp
 
@@ -15,9 +15,9 @@ def sshhrr(dict, dict2, download_dir):
 def ph_cat(url, download_dir, archive_dir):
   cmd_ytdlp = [
     "yt-dlp",
-    "--download-archive",    archive_dir,
-    "--paths",               f"home:{download_dir}",
-    "--output",              "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s",
+      "--download-archive",    archive_dir,
+      "--paths",               f"home:{download_dir}",
+      "--output",              "[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s",
     url
   ]
   return cmd_ytdlp
@@ -26,8 +26,8 @@ def ph_cat(url, download_dir, archive_dir):
 def none(dict, download_dir):
   cmd_ytdlp = [
     "yt-dlp",
-    "--embed-subs",
-    "--paths",  f"home:{download_dir}",
+      "--embed-subs",
+      "--paths",  f"home:{download_dir}",
     dict['link']
   ]
   return cmd_ytdlp
@@ -35,11 +35,11 @@ def none(dict, download_dir):
 
 def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_dir_str:str):
 
-  down_dir = Path(storage_path, "test", yaml_data_dict["child_dir"])
+  down_dir = Path(storage_path, yaml_data_dict["child_dir"])
   down_dir.mkdir(parents=True, exist_ok=True)
 
   if   yaml_data_dict["platform"] == "apple_podcast" or "tver" or "ph_view":
-    return sshhrr(ntfy_meta_dict, yaml_data_dict, down_dir)
+    return sshhrr(yaml_data_dict, ntfy_meta_dict, down_dir)
 
   elif yaml_data_dict["platform"] == "ph_cat":
     ctgry = yaml_data_dict['path_tuple'][1]
