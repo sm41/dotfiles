@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 import func_dow, func_url, func_share
-from func_ytdlp import vvv
-from subprocess import run
+# from func_ytdlp import vvv
+# from subprocess import run
 from os  import getenv
 from sys import argv
 
@@ -19,10 +19,8 @@ def main():
 
     yaml_data_dict:dict   = func_url.out_yaml_data(argment_str, anlys_yaml_list)
     series, episode, link = func_url.out_ntfy_meta(argment_str, yaml_data_dict)
-    ntfy_meta_dict:dict   = func_share.mix(series, episode, link)
-    method                = vvv(yaml_data_dict, ntfy_meta_dict, download_path_str, state_file_dir_str)
-    result                = run(method)
-    func_share.ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
+
+    func_share.bbb(series, episode, link, download_path_str, yaml_data_dict)
     # print(method)
 
   elif not argment_str.startswith("https://"):

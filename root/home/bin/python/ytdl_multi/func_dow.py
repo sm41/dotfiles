@@ -1,8 +1,8 @@
 
 from func_parse  import ppp
 from func_scrape import selenium
-from func_ytdlp  import vvv
-from func_share  import ntfy, mix
+# from func_ytdlp  import vvv
+import func_share
 
 from subprocess  import run
 from datetime import date, timedelta
@@ -56,23 +56,6 @@ def out_fix_dow(dict_list:list, y_dow_str:str):
   return fix_dow_list
 
 
-def looping(fix_dow_list:list, storage_path:str, state_file_dir_str:str):
-
-  for yaml_data_dict in fix_dow_list:
-    material = selenium(yaml_data_dict["link"])
-    series, episode, link = ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
-
-    ntfy_meta_dict = mix(series, episode, link)
-    method         = vvv(yaml_data_dict, ntfy_meta_dict, storage_path, state_file_dir_str)
-    result         = run(method)
-
-    ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
-
-  # return result, ntfy_meta_dict
-  # return method
-
-
-
 def www(deploy_yaml_list:list, keyword:str):
 
   hogefuga = []
@@ -90,3 +73,13 @@ def www(deploy_yaml_list:list, keyword:str):
               hypr = {**prpty['config'], 'header':param['header'], 'link':spec['url'], 'anchor':spec['plan'][0]['anchor']}
               hogefuga.append(hypr)
   return hogefuga
+
+
+def looping(fix_dow_list:list, download_path_str:str, state_file_dir_str:str):
+
+  for yaml_data_dict in fix_dow_list:
+    material = selenium(yaml_data_dict["link"])
+    series, episode, link  = ppp(material, yaml_data_dict["platform"], yaml_data_dict["anchor"])
+
+    func_share.bbb(series, episode, link, download_path_str, yaml_data_dict)
+    # print(method)

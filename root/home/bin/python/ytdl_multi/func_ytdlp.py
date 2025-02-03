@@ -1,13 +1,13 @@
 from pathlib import Path
 
 
-def sshhrr(dict:dict, dict2:dict, download_dir:str):
+def sshhrr(paths, id, ext, link):
   cmd_ytdlp = [
     "yt-dlp",
       "--embed-subs",
-      "--paths",  f"home:{download_dir}",
-      "--output", f"{dict['header']}",
-    dict2['link']
+      "--paths",  paths,
+      "--output", f"{id}.{ext}",
+    link
   ]
   return cmd_ytdlp
 
@@ -23,35 +23,32 @@ def ph_cat(url, download_dir, archive_dir):
   return cmd_ytdlp
 
 
-def none(dict, download_dir):
+def none(paths, link):
   cmd_ytdlp = [
     "yt-dlp",
       "--embed-subs",
-      "--paths",  f"home:{download_dir}",
-    dict['link']
+      "--paths",  paths,
+    link
   ]
   return cmd_ytdlp
 
 
-def vvv(yaml_data_dict:dict, ntfy_meta_dict:dict, storage_path:str, state_file_dir_str:str):
-
-  down_dir = Path(storage_path, yaml_data_dict["child_dir"])
-  down_dir.mkdir(parents=True, exist_ok=True)
+def vvv(yaml_data_dict, ntfy_meta_dict, paths, id, ext):
 
   if   yaml_data_dict["platform"] == "apple_podcast" or "tver" or "ph_view":
-    return sshhrr(yaml_data_dict, ntfy_meta_dict, down_dir)
+    return sshhrr(paths, id, ext, ntfy_meta_dict['link'])
 
-  elif yaml_data_dict["platform"] == "ph_cat":
-    ctgry = yaml_data_dict['path_tuple'][1]
-    actor = yaml_data_dict['path_tuple'][2]
+  # elif yaml_data_dict["platform"] == "ph_cat":
+  #   ctgry = yaml_data_dict['path_tuple'][1]
+  #   actor = yaml_data_dict['path_tuple'][2]
 
-    kmkm = down_dir.joinpath(ctgry, actor)
-    kmkm.mkdir(parents=True, exist_ok=True)
+  #   kmkm = down_dir.joinpath(ctgry, actor)
+  #   kmkm.mkdir(parents=True, exist_ok=True)
 
-    archive_dir = Path(state_file_dir_str, "yt-dlp", "ph", ctgry, actor)
-    archive_dir.touch(exist_ok=True)
+  #   archive_dir = Path(state_file_dir_str, "yt-dlp", "ph", ctgry, actor)
+  #   archive_dir.touch(exist_ok=True)
 
-    return ph_cat(ntfy_meta_dict["link"], str(kmkm), str(archive_dir))
+  #   return ph_cat(ntfy_meta_dict["link"], str(kmkm), str(archive_dir))
 
   elif yaml_data_dict["platform"] == None:
-    return none(ntfy_meta_dict, down_dir)
+    return none(paths, ntfy_meta_dict['link'])

@@ -39,7 +39,7 @@ def out_ntfy_meta(url:str, meta_tag:dict):
         "--print", meta_tag['meta_list'][2],
         url
       ]
-    meta = run(get_meta_method, capture_output=True, text=True).stdout
+    meta = run(get_meta_method, capture_output=True, text=True).stdout.strip()
     series, episode, link = meta.splitlines()
 
   return series, episode, link
