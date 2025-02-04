@@ -1,10 +1,8 @@
 
 from func_parse  import ppp
 from func_scrape import selenium
-# from func_ytdlp  import vvv
 import func_share
 
-from subprocess  import run
 from datetime import date, timedelta
 from locale   import setlocale, LC_TIME
 

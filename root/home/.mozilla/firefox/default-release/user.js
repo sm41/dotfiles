@@ -54,6 +54,8 @@ user_pref("browser.urlbar.suggest.history",false);         // オプション  -
 
 user_pref("browser.zoom.siteSpecific",false);              // サイトごとの拡大・縮小を記憶する
 
+// user_pref("clipboard.autocopy",false);              //
+
 user_pref("devtools.chrome.enabled",true);                 // 開発ツール (CSS etc..)
 user_pref("devtools.debugger.remote-enabled",true);        // 開発ツール (CSS etc..)
 user_pref("dom.disable_window_move_resize",true);          // (JavaScriptによる)ウィンドウの移動･リサイズ の無効化

@@ -2,10 +2,10 @@
 from yaml import load, FullLoader
 from func_ytdlp  import vvv
 from subprocess import run
-from pathlib  import Path
+# from pathlib  import Path
 from plyer    import notification
 from sys import argv, exit
-from os  import path, rename
+from os  import path, rename, makedirs
 
 
 def check_arg():
@@ -14,22 +14,39 @@ def check_arg():
     exit()
 
 
+# def anlys(yaml_files_list:list, state_file_dir_str:str):
+
+#   deploy_yaml_list:list = []
+#   ddd = Path(state_file_dir_str)
+
+#   for picked_yaml_file in yaml_files_list:
+#     filename = ddd.joinpath('python', picked_yaml_file)
+#     with filename.open(mode='r') as f:
+#       y_data = load(f, Loader=FullLoader)
+#       deploy_yaml_list.append(y_data)
+#   return deploy_yaml_list
+
 def anlys(yaml_files_list:list, state_file_dir_str:str):
 
   deploy_yaml_list:list = []
-  ddd = Path(state_file_dir_str)
 
   for picked_yaml_file in yaml_files_list:
-    filename = ddd.joinpath('python', picked_yaml_file)
-    with filename.open(mode='r') as f:
+    filename = path.join(state_file_dir_str, 'python', picked_yaml_file)
+    with open(filename, mode='r') as f:
       y_data = load(f, Loader=FullLoader)
       deploy_yaml_list.append(y_data)
   return deploy_yaml_list
 
 
+# def anlys_path(download_path, yaml_data_dict):
+#   down_dir = Path(download_path, yaml_data_dict["child_dir"])
+#   down_dir.mkdir(parents=True, exist_ok=True)
+#   return down_dir
+
+
 def anlys_path(download_path, yaml_data_dict):
-  down_dir = Path(download_path, yaml_data_dict["child_dir"])
-  down_dir.mkdir(parents=True, exist_ok=True)
+  down_dir = path.join(download_path, yaml_data_dict["child_dir"])
+  makedirs(down_dir, exist_ok=True)
   return down_dir
 
 

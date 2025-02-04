@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
 import func_dow, func_url, func_share
-# from func_ytdlp import vvv
-# from subprocess import run
 from os  import getenv
 from sys import argv
 

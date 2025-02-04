@@ -24,7 +24,7 @@ tver.jp:
 youtube.com:
   child_dir: ""
   meta_list: [ "channel", "title", "original_url" ]
-  header:    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]"
+  header:    "[%(webpage_url_domain)s]_%(title)s_[%(id)s].%(ext)s"
 
   single:
     parts:     [ "watch" ]
