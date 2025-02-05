@@ -35,7 +35,11 @@ def set_head_dict(auth_one:dict):
 
 
 def get_partial(head_res:dict, authkey:str):
-  tmp_auth = authkey[head_res['KeyOffset']:  head_res['KeyOffset'] + head_res['KeyLength']]
+
+  KeyOffset:int = head_res['KeyOffset']
+  KeyLength:int = head_res['KeyLength']
+
+  tmp_auth = authkey[KeyOffset:  KeyOffset + KeyLength]
   partialkey = b64encode(tmp_auth.encode('utf-8')).decode('utf-8')
 
   return partialkey
