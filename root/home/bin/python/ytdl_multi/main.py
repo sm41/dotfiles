@@ -19,7 +19,7 @@ def main():
     series, episode, link = func_url.out_ntfy_meta(argment_str, yaml_data_dict)
 
     func_share.bbb(series, episode, link, download_path_str, yaml_data_dict)
-    # print(method)
+    # print(yaml_data_dict)
 
   elif not argment_str.startswith("https://"):
     yaml_files_list:list = [ 'audio.yaml', 'video.yaml' ]

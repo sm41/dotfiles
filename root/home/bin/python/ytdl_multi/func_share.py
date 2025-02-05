@@ -66,21 +66,29 @@ def ntfy(result, upper:str, lower:str):
 
 def get_path_and_filename(yaml_data_dict:dict, ntfy_meta_dict:dict, down_dir:str):
 
-  header = yaml_data_dict['header']
-  link   = ntfy_meta_dict['link']
+  if ('playlist' in yaml_data_dict) and (yaml_data_dict['playlist'] == True):
+    paths  = down_dir
+    output = yaml_data_dict['header']
+    id     = None
+    ext    = None
 
-  cmd_ytdlp = [
-    "yt-dlp",
-      "--paths",  f"home:{down_dir}",
-      "--output", f"{header}",
-      "--print",  "filename",
-      "--print",  "id",
-      "--print",  "ext",
-    link
-  ]
-  ddd = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
-  ppp, id, ext = ddd.splitlines()
-  paths, output = path.split(ppp)
+  elif ('playlist' not in yaml_data_dict) or (yaml_data_dict['playlist'] == False):
+    header = yaml_data_dict['header']
+    link   = ntfy_meta_dict['link']
+
+    cmd_ytdlp = [
+      "yt-dlp",
+        "--paths",  f"home:{down_dir}",
+        "--output", f"{header}",
+        "--print",  "filename",
+        "--print",  "id",
+        "--print",  "ext",
+      link
+    ]
+    ddd = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
+    ppp, id, ext = ddd.splitlines()
+    paths, output = path.split(ppp)
+
   return paths, output, id, ext
 
 
@@ -94,7 +102,7 @@ def bbb(series, episode, link, download_path_str, yaml_data_dict):
   ntfy_meta_dict         = mix(series, episode, link)
   down_dir               = anlys_path(download_path_str, yaml_data_dict)
   paths, output, id, ext = get_path_and_filename(yaml_data_dict, ntfy_meta_dict, down_dir)
-  method                 = vvv(yaml_data_dict, ntfy_meta_dict, paths, id, ext)
+  method                 = vvv(yaml_data_dict, ntfy_meta_dict, paths, output, id, ext)
   result                 = run(method)
   rnm(paths, output, id, ext)
   ntfy(result, ntfy_meta_dict["upper"], ntfy_meta_dict["lower"])
