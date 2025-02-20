@@ -1,6 +1,6 @@
 
 from base64 import b64encode
-import urllib.request
+from urllib import request
 
 
 def set_users_header():
@@ -14,8 +14,8 @@ def set_users_header():
 
 
 def get_header(auth_n_url:str, head_dict_n:list):
-  req = urllib.request.Request(url=auth_n_url, headers=head_dict_n, method="GET")
-  with urllib.request.urlopen(req) as res:
+  req = request.Request(url=auth_n_url, headers=head_dict_n, method="GET")
+  with request.urlopen(req) as res:
     auth_n = res.headers
   return auth_n
 

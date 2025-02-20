@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-import urllib.request
 from datetime import datetime, timedelta
 from argparse import ArgumentParser
+from urllib import request
 from plyer  import notification
 from bs4    import BeautifulSoup
 from re  import compile, IGNORECASE
@@ -39,7 +39,7 @@ def now_time(day_int:int):
 
 
 def search_program(search_term, url, today_now, days_ago, fftt):
-  get_xml = urllib.request.urlopen(url)
+  get_xml = request.urlopen(url)
   check_ststus_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
   keyword_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))

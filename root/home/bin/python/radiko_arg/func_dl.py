@@ -6,13 +6,13 @@ def ffmpeg(authtoken:str, station_id:str, time_ft:str, time_to:str, path:str, fi
     "ffmpeg",
       "-loglevel", "warning",
       "-n",
-      "-fflags", "+discardcorrupt",
+      # "-fflags", "+discardcorrupt",
       "-headers", f"X-Radiko-Authtoken: {authtoken}",
       "-i", f"https://radiko.jp/v2/api/ts/playlist.m3u8?station_id={station_id}&l=15&ft={time_ft}&to={time_to}",
-      "-acodec", "copy",
-      "-vn",
-      "-bsf:a", "aac_adtstoasc",
-      "-movflags", "faststart",
+      "-codec", "copy",
+      # "-vn",
+      # "-bsf:a", "aac_adtstoasc",
+      # "-movflags", "faststart",
     f"{path}/{filename}.m4a"
   ]
   return download
