@@ -1,0 +1,11 @@
+
+megaphone:
+  elekata:
+    title: エレ片のケツビ
+    url:   https://feeds.megaphone.fm/TBS2752996527
+    plan:  [ {dow: 月, anchor: 新録}, {dow: 土, anchor: 本編} ]
+
+  rocket:
+    title: ロケットマンショー
+    url:   https://feeds.megaphone.fm/rocketmanshow
+    plan:  [ {dow: 火, anchor: null} ]
