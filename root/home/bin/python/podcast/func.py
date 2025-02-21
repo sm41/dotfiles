@@ -29,7 +29,7 @@ def get_searchterms(rrr, search_term):
     search_term = ".+"
 
   for iii in rrr:
-    if match(search_term,   iii.title.string):
+    if match(search_term, iii.title.string):
       target_item = iii
       break
 
