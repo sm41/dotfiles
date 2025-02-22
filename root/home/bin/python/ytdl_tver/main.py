@@ -2,13 +2,13 @@
 
 from os  import getenv
 from sys import argv
-import func_dow, func_share, func_dl
+import func_dow, func_share, func_dl, func_scrape
 
 func_share.check_arg()
 argment_str = argv[1]
 
-download_path:str  = getenv("CLIENT_NETWORK_STORAGE_misc")
-state_file_dir:str = getenv("XDG_STATE_HOME")
+download_path  = getenv("CLIENT_NETWORK_STORAGE_misc")
+state_file_dir = getenv("XDG_STATE_HOME")
 yaml_file = 'vvv.yaml'
 
 
@@ -33,8 +33,11 @@ def main():
     elif argment_str != "dow":
       fix_list  = func_dow.www(loaded_yaml, argment_str)
 
-    func_dow.looping(fix_list, download_path)
-    # print(fix_list)
+    for yaml_config in fix_list:
+      material = func_scrape.selenium(yaml_config["url"])
+      url      = func_scrape.tver(material)
+      sel_list = func_share.get_ntfy_meta(url, yaml_config)
+      func_dl.bbb(sel_list, download_path, yaml_config)
 
   else:
     print("Invailed Argment!")

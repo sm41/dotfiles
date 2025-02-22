@@ -1,7 +1,6 @@
 
 from datetime import date, timedelta
 from locale   import setlocale, LC_TIME
-import func_dl, func_scrape, func_share
 
 
 def dow_yesterday(day_int:int):
@@ -74,12 +73,12 @@ def www(deploy_yaml:list, keyword:str):
   return hogefuga
 
 
-def looping(fix_dow_list:list, download_path:str):
+# def looping(fix_dow_list:list, download_path:str):
 
-  for yaml_config in fix_dow_list:
-    material = func_scrape.selenium(yaml_config["url"])
-    url = func_scrape.tver(material)
-    sel_list = func_share.get_ntfy_meta(url, yaml_config)
+#   for yaml_config in fix_dow_list:
+#     material = func_scrape.selenium(yaml_config["url"])
+#     url = func_scrape.tver(material)
+#     sel_list = func_share.get_ntfy_meta(url, yaml_config)
 
-    func_dl.bbb(sel_list, download_path, yaml_config)
-    # print(kkk)
+#     func_dl.bbb(sel_list, download_path, yaml_config)
+#     # print(kkk)

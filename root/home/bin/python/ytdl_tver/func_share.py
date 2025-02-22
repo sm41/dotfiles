@@ -1,10 +1,8 @@
 
-from yaml import load, FullLoader
 from subprocess import run
 from pathlib    import Path
-# from plyer  import notification
-from sys    import argv, exit
-# from os  import path, rename, makedirs
+from sys  import argv, exit
+from yaml import load, FullLoader
 
 
 def check_arg():

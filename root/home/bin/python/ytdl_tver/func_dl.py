@@ -7,8 +7,8 @@ from plyer  import notification
 def mix(value):
   key_data   = [ "upper", "lower", "url" ]
   value_data = value
-  ull_dict   = dict(zip(key_data, value_data))
-  return ull_dict
+  ulu_dict   = dict(zip(key_data, value_data))
+  return ulu_dict
 
 
 
@@ -65,12 +65,12 @@ def ntfy(result, upper:str, lower:str):
 
 
 def bbb(sel_list, download_path, yaml_config):
-  ull_dict               = mix(sel_list)
+  ulu_dict               = mix(sel_list)
   down_dir               = anlys_path(download_path, yaml_config)
-  paths, output, id, ext = get_path_and_filename(yaml_config, ull_dict, down_dir)
-  method                 = ytdlp(paths, id, ext, ull_dict['url'])
+  paths, output, id, ext = get_path_and_filename(yaml_config, ulu_dict, down_dir)
+  method                 = ytdlp(paths, id, ext, ulu_dict['url'])
   result                 = run(method)
   rnm(paths, output, id, ext)
-  ntfy(result, ull_dict["upper"], ull_dict["lower"])
+  ntfy(result, ulu_dict["upper"], ulu_dict["lower"])
   # print(method)
 
