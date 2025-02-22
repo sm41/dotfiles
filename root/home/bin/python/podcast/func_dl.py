@@ -1,5 +1,6 @@
 
-from pathlib    import Path
+from pathlib  import Path
+from plyer    import notification
 import shutil
 
 
@@ -30,3 +31,9 @@ def rnm(tmp_dir, storage, filename):
   newpath = Path(storage, filename)
   shutil.move(oldpath, newpath)
 
+
+def ntfy(result, upper:str, lower:str):
+  if result.returncode == 0:
+    notification.notify(title = "✅ Success", message = f"{upper}\n{lower}")
+  else:
+    notification.notify(title = "⚠️ failed", message = f"{upper}\n{lower}")

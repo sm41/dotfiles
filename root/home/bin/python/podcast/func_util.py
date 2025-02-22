@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from locale   import setlocale, LC_TIME, LC_ALL
 from pathlib  import Path
 from yaml import load, FullLoader
-from sys import argv
+from sys  import argv
 
 
 def check_arg():

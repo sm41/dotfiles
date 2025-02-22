@@ -1,8 +1,8 @@
 
-from os import getenv, path
 from subprocess import run
-import func, func_dl, func_util
+from os  import getenv, path
 from sys import argv
+import func, func_dl, func_util
 
 func_util.check_arg()
 argment_str = argv[1]
@@ -35,10 +35,11 @@ def main():
     soup     = func.makesoup(uuu)
     qqq      = func.getconf(soup, sss)
     download = func_dl.dl(qqq, tmp_dir)
-    # print(download)
+    result   = run(download)
 
-    run(download)
-    func.rnm(tmp_dir, storage_dir, qqq['name'])
+    func_dl.rnm(tmp_dir, storage_dir, qqq['name'])
+    # func_dl.ntfy(result,)
+
 
 if __name__ == "__main__":
   main()

@@ -1,5 +1,5 @@
 
-from datetime import date, timedelta, datetime
+from datetime import datetime
 from locale import setlocale, LC_TIME, LC_ALL
 from urllib import request
 from bs4  import BeautifulSoup
