@@ -2,6 +2,17 @@ from selenium import webdriver
 from bs4  import BeautifulSoup
 from time import sleep
 from re   import compile
+from datetime import date, timedelta
+from locale   import setlocale, LC_TIME
+
+
+def dow_yesterday(day_int:int):
+  setlocale(LC_TIME, 'ja_JP.UTF-8')
+
+  d_today      = date.today()
+  d_yesterday  = d_today - timedelta( days = day_int )
+  y_dow_str:str = d_yesterday.strftime('%a')
+  return y_dow_str
 
 
 def selenium(url):

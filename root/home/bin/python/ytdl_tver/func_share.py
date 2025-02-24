@@ -11,7 +11,13 @@ def check_arg():
     exit()
 
 
-def load_yaml(yaml_file, state_file_dir:str):
+def anlys_path(download_path):
+  down_dir = Path(download_path, "@tver")
+  down_dir.mkdir(parents=True, exist_ok=True)
+  return down_dir
+
+
+def load_yaml(yaml_file, state_file_dir):
   filename = Path(state_file_dir, 'python', yaml_file)
   with filename.open(mode='r') as f:
     y_data = load(f, Loader=FullLoader)
@@ -30,13 +36,13 @@ def get_ntfy_meta(url:str, meta_tag:dict):
 
   get_meta_method:list = [
     "yt-dlp",
-      "--print", meta_tag['meta_list'][0],
-      "--print", meta_tag['meta_list'][1],
-      "--print", meta_tag['meta_list'][2],
+      "--print", "series",
+      "--print", "episode",
+      "--print", "original_url",
       url
     ]
   meta = run(get_meta_method, capture_output=True, text=True).stdout.strip()
-  [ series, episode, link ] = meta.splitlines()
-  return [ series, episode, link ]
+  [ series, episode, url ] = meta.splitlines()
+  return [ series, episode, url ]
 
 

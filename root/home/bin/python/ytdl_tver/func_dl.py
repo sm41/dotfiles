@@ -11,13 +11,6 @@ def mix(value):
   return ulu_dict
 
 
-
-def anlys_path(download_path, yaml_config):
-  down_dir = Path(download_path, yaml_config["child_dir"])
-  down_dir.mkdir(parents=True, exist_ok=True)
-  return down_dir
-
-
 def get_path_and_filename(yaml_config:dict, sel_dict:dict, down_dir:str):
 
   header = yaml_config['header']
@@ -29,30 +22,28 @@ def get_path_and_filename(yaml_config:dict, sel_dict:dict, down_dir:str):
       "--output", f"{header}",
       "--print",  "filename",
       "--print",  "id",
-      "--print",  "ext",
     link
   ]
   ddd = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
-  ppp, id, ext = ddd.splitlines()
+  ppp, id = ddd.splitlines()
   paths, output = Path(ppp).parent, Path(ppp).name
 
-  return paths, output, id, ext
+  return paths, output, id
 
 
-
-def ytdlp(paths, id, ext, link):
+def ytdlp(paths, id, link):
   cmd_ytdlp = [
     "yt-dlp",
       "--embed-subs",
       "--paths",  str(paths),
-      "--output", f"{id}.{ext}",
+      "--output", f"{id}.mp4",
     link
   ]
   return cmd_ytdlp
 
 
-def rnm(paths, output, id, ext):
-  oldpath = Path(paths, f"{id}.{ext}")
+def rnm(paths, output, id):
+  oldpath = Path(paths, f"{id}.mp4")
   newpath = Path(paths, output)
   oldpath.rename(newpath)
 
@@ -64,13 +55,12 @@ def ntfy(result, upper:str, lower:str):
     notification.notify(title = "⚠️ failed", message = f"{upper}\n{lower}")
 
 
-def bbb(sel_list, download_path, yaml_config):
-  ulu_dict               = mix(sel_list)
-  down_dir               = anlys_path(download_path, yaml_config)
-  paths, output, id, ext = get_path_and_filename(yaml_config, ulu_dict, down_dir)
-  method                 = ytdlp(paths, id, ext, ulu_dict['url'])
-  result                 = run(method)
-  rnm(paths, output, id, ext)
+def bbb(seu_list, storage_path, yaml_config):
+  ulu_dict          = mix(seu_list)
+  paths, output, id = get_path_and_filename(yaml_config, ulu_dict, storage_path)
+  method            = ytdlp(paths, id, ulu_dict['url'])
+  result            = run(method)
+  rnm(paths, output, id)
   ntfy(result, ulu_dict["upper"], ulu_dict["lower"])
   # print(method)
 
