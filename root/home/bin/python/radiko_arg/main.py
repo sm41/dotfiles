@@ -42,7 +42,7 @@ fftt = optional_args.ft
 
 tmp_dir  = "/tmp"
 env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-ssttrrgg = path.join(env_dir, "@radiko")
+storage_dir = path.join(env_dir, "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"
@@ -67,7 +67,7 @@ def main():
   download = func_dl.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
   result_1 = run(download)
 
-  encode   = func_dl.encode(tmp_dir, ssttrrgg, filename, img)
+  encode   = func_dl.encode(tmp_dir, storage_dir, filename, img)
   result_2 = run(encode)
 
   func_dl.result(

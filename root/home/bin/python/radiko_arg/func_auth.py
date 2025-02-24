@@ -4,7 +4,7 @@ from urllib import request
 
 
 def set_users_header():
-  head_dict_1:dict = {
+  head_dict_1 = {
   "X-Radiko-App":         "pc_html5",
   "X-Radiko-App-Version": "0.0.1",
   "X-Radiko-Device":      "pc",
@@ -13,20 +13,20 @@ def set_users_header():
   return head_dict_1
 
 
-def get_header(auth_n_url:str, head_dict_n:list):
+def get_header(auth_n_url, head_dict_n):
   req = request.Request(url=auth_n_url, headers=head_dict_n, method="GET")
   with request.urlopen(req) as res:
     auth_n = res.headers
   return auth_n
 
 
-def set_head_dict(auth_one:dict):
+def set_head_dict(auth_one):
 
-  AuthToken:str = str(auth_one['x-radiko-authtoken'])
-  KeyLength:int = int(auth_one["x-radiko-keylength"])
-  KeyOffset:int = int(auth_one["x-radiko-keyoffset"])
+  AuthToken = str(auth_one['x-radiko-authtoken'])
+  KeyLength = int(auth_one["x-radiko-keylength"])
+  KeyOffset = int(auth_one["x-radiko-keyoffset"])
 
-  head_res:dict = {
+  head_res = {
     "AuthToken": AuthToken,
     "KeyLength": KeyLength,
     "KeyOffset": KeyOffset
@@ -34,7 +34,7 @@ def set_head_dict(auth_one:dict):
   return head_res
 
 
-def get_partial(head_res:dict, authkey:str):
+def get_partial(head_res, authkey):
 
   KeyOffset:int = head_res['KeyOffset']
   KeyLength:int = head_res['KeyLength']
@@ -45,11 +45,11 @@ def get_partial(head_res:dict, authkey:str):
   return partialkey
 
 
-def set_head_dict_2(partialkey:str, head_res:dict):
+def set_head_dict_2(partialkey, head_res):
 
-  X_Radiko_AuthToken:str = head_res['AuthToken']
+  X_Radiko_AuthToken = head_res['AuthToken']
 
-  head_dict_2:dict = {
+  head_dict_2 = {
     "X-Radiko-Device":      "pc",
     "X-Radiko-User":        "dummy_user",
     "X-Radiko-AuthToken":   X_Radiko_AuthToken,

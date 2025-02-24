@@ -14,7 +14,7 @@ def check_ststus_code(subject):
     exit()
 
 
-def analyse_argment(s_dict:dict):
+def analyse_argment(s_dict):
   parser = ArgumentParser()
 
   parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices=s_dict.keys())
