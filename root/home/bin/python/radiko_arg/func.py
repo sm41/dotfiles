@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 
 from datetime import datetime, timedelta
 from argparse import ArgumentParser
@@ -7,7 +6,6 @@ from plyer  import notification
 from bs4    import BeautifulSoup
 from re  import compile, IGNORECASE
 from sys import exit
-# from locale   import setlocale, LC_TIME
 
 
 def check_ststus_code(subject):
@@ -38,15 +36,19 @@ def now_time(day_int:int):
   return today_now, days_ago
 
 
-def search_program(search_term, url, today_now, days_ago, fftt):
+def makesoup(search_term, url):
   get_xml = request.urlopen(url)
   check_ststus_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
-  keyword_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
+  find_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
+  return find_list
+
+
+def search_program(find_list, today_now, days_ago, fftt):
 
   program_list = []
 
-  for keyword in keyword_list:
+  for keyword in find_list:
     prog_detail = keyword.parent
     if   days_ago >  prog_detail.attrs['to'] >  today_now:
       continue
@@ -92,13 +94,13 @@ def branch(program_list, download_flag):
       return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}", program_list[0]['img']
     elif download_flag == False:
       print(program_list)
-      print("You can download it by adding '-dl' flag")
+      print("✅ You can download it by adding '-dl' flag")
     exit()
 
   elif len(program_list) == 0:
     if download_flag == True:
       notification.notify(title = "⚠️ failed",  message = "upper")
     elif download_flag == False:
-      print("Program is Not Found !!")
+      print("⚠️ Program is Not Found !!")
     exit()
 

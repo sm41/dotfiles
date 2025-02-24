@@ -40,9 +40,9 @@ search_term   = optional_args.t
 download_flag = optional_args.dl
 fftt = optional_args.ft
 
-tmp_dir = "/tmp"
-env_dir = getenv("CLIENT_NETWORK_STORAGE_misc")
-ssttrrgg    = path.join(env_dir, "@radiko")
+tmp_dir  = "/tmp"
+env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
+ssttrrgg = path.join(env_dir, "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"
@@ -53,7 +53,8 @@ authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 def main():
 
   today_now, days_ago = func.now_time(7)
-  program_list = func.search_program(search_term, url, today_now, days_ago, fftt)
+  find_list    = func.makesoup(search_term, url)
+  program_list = func.search_program(find_list, today_now, days_ago, fftt)
   time_ft, time_to, filename, img = func.branch(program_list, download_flag)
 
   head_dict_1 = func_auth.set_users_header()
