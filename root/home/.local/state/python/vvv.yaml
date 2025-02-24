@@ -1,11 +1,8 @@
 
 tver:
   config:
-    child_dir: "@tver"
-    header:    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    meta_list: [ "series", "episode", "original_url" ]
-    platform:  tver
-    url:       "https://tver.jp/"
+    header: "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    # meta_list: [ "series", "episode", "original_url" ]
 
   inform:
     header: "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"

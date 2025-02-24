@@ -1,10 +1,18 @@
 
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from locale import setlocale, LC_TIME, LC_ALL
 from urllib import request
 from bs4  import BeautifulSoup
 from re   import match
 
+
+def dow_yesterday(day_int:int):
+  setlocale(LC_TIME, 'ja_JP.UTF-8')
+
+  d_today      = date.today()
+  d_yesterday  = d_today - timedelta( days = day_int )
+  y_dow_str:str = d_yesterday.strftime('%a')
+  return y_dow_str
 
 
 def change_format(episode_date):
