@@ -6,6 +6,12 @@ from plyer    import notification
 import shutil
 
 
+def anlys_path(*path_parts):
+  down_dir = Path(*path_parts)
+  down_dir.mkdir(parents=True, exist_ok=True)
+  return down_dir
+
+
 def rnm(tmp_dir, storage, filename):
   oldpath = Path(tmp_dir, filename)
   newpath = Path(storage, filename)
@@ -25,8 +31,8 @@ def check_arg():
     exit()
 
 
-def load_yaml(state_file_dir, yaml_file):
-  filename = Path(state_file_dir, 'python', yaml_file)
+def load_yaml(*path_parts):
+  filename = Path(*path_parts)
   with filename.open(mode='r') as f:
     y_data = load(f, Loader=FullLoader)
   return y_data

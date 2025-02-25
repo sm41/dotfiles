@@ -11,14 +11,13 @@ tmp_dir   = "/tmp"
 yaml_file = "ppp.yaml"
 download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
 state_file_dir = getenv("XDG_STATE_HOME")
-storage_dir = path.join(download_dir, "@podcast")
-
+storage_dir = func_util.anlys_path(download_dir, "@podcast")
 
 
 def main():
 
   y_dow        = func.dow_yesterday(1)
-  loaded_yaml  = func_util.load_yaml(state_file_dir, yaml_file)
+  loaded_yaml  = func_util.load_yaml(state_file_dir, 'python', yaml_file)
 
   if argment_str == "dow":
     today_list = func_none.get_today_list(loaded_yaml, y_dow)
