@@ -11,14 +11,14 @@ def check_arg():
     exit()
 
 
-def anlys_path(download_path):
-  down_dir = Path(download_path, "@tver")
+def anlys_path(*path_parts):
+  down_dir = Path(*path_parts)
   down_dir.mkdir(parents=True, exist_ok=True)
   return down_dir
 
 
-def load_yaml(yaml_file, state_file_dir):
-  filename = Path(state_file_dir, 'python', yaml_file)
+def load_yaml(*path_parts):
+  filename = Path(*path_parts)
   with filename.open(mode='r') as f:
     y_data = load(f, Loader=FullLoader)
   return y_data

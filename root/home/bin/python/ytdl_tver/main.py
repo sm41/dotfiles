@@ -10,11 +10,11 @@ argment_str = argv[1]
 download_path  = getenv("CLIENT_NETWORK_STORAGE_misc")
 state_file_dir = getenv("XDG_STATE_HOME")
 yaml_file = 'vvv.yaml'
-storage_path = func_share.anlys_path(download_path)
+storage_path = func_share.anlys_path(download_path, "@tver")
 
 def main():
 
-  loaded_yaml = func_share.load_yaml(yaml_file, state_file_dir)
+  loaded_yaml = func_share.load_yaml(state_file_dir, 'python', yaml_file)
 
   if argment_str.startswith("https://tver.jp/episodes/"):
 
@@ -26,8 +26,7 @@ def main():
 
     if   argment_str == "dow":
       y_dow     = func_scrape.dow_yesterday(1)
-      dow_list  = func_none.out_get_dow(loaded_yaml, "dow", y_dow)
-      fix_list  = func_none.out_fix_dow(dow_list, y_dow)
+      fix_list  = func_none.out_get_dow(loaded_yaml, y_dow)
     elif argment_str != "dow":
       fix_list  = func_none.www(loaded_yaml, argment_str)
 
