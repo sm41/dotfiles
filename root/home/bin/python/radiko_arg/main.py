@@ -42,7 +42,7 @@ fftt = optional_args.ft
 
 tmp_dir  = "/tmp"
 env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-storage_dir = path.join(env_dir, "@radiko")
+storage_dir = func.anlys_path(env_dir, "@radiko")
 
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"
@@ -70,17 +70,16 @@ def main():
   encode   = func_dl.encode(tmp_dir, storage_dir, filename, img)
   result_2 = run(encode)
 
-  func_dl.result(
-    result_1,
+
+  if result_1.returncode == 0:
     func_dl.delete(tmp_dir, filename),
-    "pass"
-    )
-  func_dl.result(
-    result_2,
+  else:
+    pass
+
+  if result_2.returncode == 0:
     notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
-    "pass"
-    # notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
-    )
+  else:
+    notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
 
 
 if __name__ == "__main__":

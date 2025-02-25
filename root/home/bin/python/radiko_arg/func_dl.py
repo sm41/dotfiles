@@ -38,9 +38,3 @@ def encode(tmp, path, filename, img):
 def delete(tmp, filename):
   remove(f"{tmp}/{filename}.m4a")
 
-
-def result(result, success, failure):
-  if result.returncode == 0:
-    success
-  else:
-    failure

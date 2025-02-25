@@ -1,6 +1,7 @@
 
 from datetime import datetime, timedelta
 from argparse import ArgumentParser
+from pathlib  import Path
 from urllib import request
 from plyer  import notification
 from bs4    import BeautifulSoup
@@ -24,6 +25,12 @@ def analyse_argment(s_dict):
 
   optional_args = parser.parse_args()
   return optional_args
+
+
+def anlys_path(*path_parts):
+  down_dir = Path(*path_parts)
+  down_dir.mkdir(parents=True, exist_ok=True)
+  return down_dir
 
 
 def now_time(day_int:int):
