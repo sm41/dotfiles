@@ -1,6 +1,4 @@
 
-from os  import remove
-
 def ffmpeg(authtoken, station_id, time_ft, time_to, path, filename):
   download = [
     "ffmpeg",
@@ -33,8 +31,4 @@ def encode(tmp, path, filename, img):
     f"{path}/{filename}.mp3"
   ]
   return encode
-
-
-def delete(tmp, filename):
-  remove(f"{tmp}/{filename}.m4a")
 

@@ -4,8 +4,7 @@ from argparse import ArgumentParser
 from pathlib  import Path
 from urllib import request
 from plyer  import notification
-from bs4    import BeautifulSoup
-from re  import compile, IGNORECASE
+from bs4 import BeautifulSoup
 from sys import exit
 
 
@@ -37,18 +36,17 @@ def now_time(day_int:int):
   get_now = datetime.now()
   get_past = get_now - timedelta( days = day_int )
 
-  today_now:str = get_now.strftime('%Y%m%d%H%M')+'00'
-  days_ago:str = get_past.strftime('%Y%m%d%H%M')+'00'
+  today_now = get_now.strftime('%Y%m%d%H%M')+'00'
+  days_ago = get_past.strftime('%Y%m%d%H%M')+'00'
 
   return today_now, days_ago
 
 
-def makesoup(search_term, url):
+def makesoup(url):
   get_xml = request.urlopen(url)
   check_ststus_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
-  find_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
-  return find_list
+  return soup
 
 
 def search_program(find_list, today_now, days_ago, fftt):

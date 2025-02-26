@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from os import getenv, path
+from os import getenv, remove
+from re import compile, IGNORECASE
 from plyer import notification
 from subprocess import run
 import func, func_auth, func_dl
@@ -40,20 +41,21 @@ search_term   = optional_args.t
 download_flag = optional_args.dl
 fftt = optional_args.ft
 
-tmp_dir  = "/tmp"
-env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-storage_dir = func.anlys_path(env_dir, "@radiko")
-
 url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 auth1_url = "https://radiko.jp/v2/api/auth1"
 auth2_url = "https://radiko.jp/v2/api/auth2"
 authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
+tmp_dir  = "/tmp"
+env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
+storage_dir = func.anlys_path(env_dir, "@radiko")
+
 
 def main():
 
   today_now, days_ago = func.now_time(7)
-  find_list    = func.makesoup(search_term, url)
+  soup      = func.makesoup(url)
+  find_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
   program_list = func.search_program(find_list, today_now, days_ago, fftt)
   time_ft, time_to, filename, img = func.branch(program_list, download_flag)
 
@@ -72,7 +74,7 @@ def main():
 
 
   if result_1.returncode == 0:
-    func_dl.delete(tmp_dir, filename),
+    remove(f"{tmp_dir}/{filename}.m4a"),
   else:
     pass
 
