@@ -9,17 +9,16 @@ argment_str = argv[1]
 
 download_path  = getenv("CLIENT_NETWORK_STORAGE_misc")
 state_file_dir = getenv("XDG_STATE_HOME")
-yaml_file = 'vvv.yaml'
-storage_path = func_share.anlys_path(download_path, "@tver")
 
 def main():
 
-  loaded_yaml = func_share.load_yaml(state_file_dir, 'python', yaml_file)
+  storage_path = func_share.anlys_path(download_path, "@tver")
+  loaded_yaml  = func_share.load_yaml(state_file_dir, "python", "vvv.yaml")
 
   if argment_str.startswith("https://tver.jp/episodes/"):
 
     yaml_config = func_share.get_yaml_data(loaded_yaml)
-    seu_list    = func_share.get_ntfy_meta(argment_str, yaml_config)
+    seu_list    = func_share.get_ntfy_meta(argment_str)
     func_dl.bbb(seu_list, storage_path, yaml_config)
 
   elif not argment_str.startswith("https://tver.jp/episodes/"):

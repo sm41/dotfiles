@@ -30,9 +30,9 @@ def selenium(url):
   return soup
 
 
-def tver(bouillon):
+def tver(soup:BeautifulSoup):
 
-  url     = bouillon.find(class_ = compile("episode-row_container")).attrs['href']
+  url     = soup.find(class_ = compile("episode-row_container")).attrs['href']
   url_mod = "https://tver.jp" + url
   return url_mod
 

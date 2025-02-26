@@ -32,7 +32,7 @@ def get_yaml_data(loaded_yaml):
         return series
 
 
-def get_ntfy_meta(url:str, meta_tag:dict):
+def get_ntfy_meta(url):
 
   get_meta_method:list = [
     "yt-dlp",
