@@ -24,14 +24,20 @@ def change_format(episode_date):
   return yyy
 
 
+def check_ststus_code(subject):
+  if subject.getcode() != 200:
+    print(f"Ststus Code is {subject.getcode()} !!")
+    exit()
+
+
 def makesoup(url):
   get_xml = request.urlopen(url)
-  # check_ststus_code(get_xml)
+  check_ststus_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
   return soup
 
 
-def get_searchterms(rrr, search_term):
+def get_searchitem(rrr, search_term):
 
   if search_term is None:
     search_term = ".+"
@@ -44,14 +50,14 @@ def get_searchterms(rrr, search_term):
   return target_item
 
 
-def getconf(soup, search_term):
+def getconf(soup:BeautifulSoup, search_term):
   root_obj = soup.find("channel")
 
   series_title = root_obj.title.string
   series_img   = root_obj.image.url.string.split('?')[0]
 
   rrr = soup.find_all("item", limit=50)
-  target_item = get_searchterms(rrr, search_term)
+  target_item = get_searchitem(rrr, search_term)
 
   episode_title = target_item.title.string
   episode_date  = target_item.pubDate.string
@@ -61,6 +67,8 @@ def getconf(soup, search_term):
   filename = f"[Podcast]_{series_title}_{ddd}_{episode_title}.mp3"
 
   qqq = {
+    "series_title": series_title,
+    "episode_title": episode_title,
     "img": series_img,
     "url": episode_url,
     "name": filename
