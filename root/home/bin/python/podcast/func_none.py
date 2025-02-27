@@ -1,5 +1,4 @@
 
-
 def get_today_list(y_data, y_dow_str):
 
   eee = []

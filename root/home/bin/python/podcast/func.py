@@ -1,18 +1,9 @@
 
 from datetime import datetime, date, timedelta
 from locale import setlocale, LC_TIME, LC_ALL
-from urllib import request
-from bs4  import BeautifulSoup
-from re   import match
-
-
-def dow_yesterday(day_int:int):
-  setlocale(LC_TIME, 'ja_JP.UTF-8')
-
-  d_today      = date.today()
-  d_yesterday  = d_today - timedelta( days = day_int )
-  y_dow_str:str = d_yesterday.strftime('%a')
-  return y_dow_str
+from bs4 import BeautifulSoup
+from re  import match, sub, compile
+from mytool import abc
 
 
 def change_format(episode_date):
@@ -22,19 +13,6 @@ def change_format(episode_date):
   dt_tz = datetime.strptime(episode_date, format_str_tz)
   yyy = dt_tz.strftime("%Y-%m-%d")
   return yyy
-
-
-def check_ststus_code(subject):
-  if subject.getcode() != 200:
-    print(f"Ststus Code is {subject.getcode()} !!")
-    exit()
-
-
-def makesoup(url):
-  get_xml = request.urlopen(url)
-  check_ststus_code(get_xml)
-  soup = BeautifulSoup(get_xml, "xml")
-  return soup
 
 
 def get_searchitem(rrr, search_term):
@@ -51,24 +29,25 @@ def get_searchitem(rrr, search_term):
 
 
 def getconf(soup:BeautifulSoup, search_term):
-  root_obj = soup.find("channel")
-
+  root_obj     = soup.find("channel")
   series_title = root_obj.title.string
   series_img   = root_obj.image.url.string.split('?')[0]
 
-  rrr = soup.find_all("item", limit=50)
-  target_item = get_searchitem(rrr, search_term)
-
+  target_obj  = soup.find_all("item", limit=50)
+  target_item = get_searchitem(target_obj, search_term)
   episode_title = target_item.title.string
   episode_date  = target_item.pubDate.string
   episode_url   = target_item.enclosure.attrs['url'].split('?')[0]
-  ddd = change_format(episode_date)
 
-  filename = f"[Podcast]_{series_title}_{ddd}_{episode_title}.mp3"
+  ddd = change_format(episode_date)
+  sss = abc.zen2han(series_title)
+  eee = abc.zen2han(episode_title)
+
+  filename = f"[Podcast]_{sss}_{ddd}_{eee}.mp3"
 
   qqq = {
-    "series_title": series_title,
-    "episode_title": episode_title,
+    "series_title": sss,
+    "episode_title": eee,
     "img": series_img,
     "url": episode_url,
     "name": filename
