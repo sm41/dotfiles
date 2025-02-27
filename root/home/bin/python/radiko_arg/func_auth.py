@@ -35,13 +35,10 @@ def set_head_dict(auth_one):
 
 
 def get_partial(head_res, authkey):
-
   KeyOffset:int = head_res['KeyOffset']
   KeyLength:int = head_res['KeyLength']
-
   tmp_auth = authkey[KeyOffset:  KeyOffset + KeyLength]
   partialkey = b64encode(tmp_auth.encode('utf-8')).decode('utf-8')
-
   return partialkey
 
 
@@ -55,4 +52,14 @@ def set_head_dict_2(partialkey, head_res):
     "X-Radiko-AuthToken":   X_Radiko_AuthToken,
     "X-Radiko-PartialKey":  partialkey
   }
+  return head_dict_2
+
+
+def auth(auth1_url, auth2_url, authkey):
+  head_dict_1 = set_users_header()
+  auth_one    = get_header(auth1_url, head_dict_1)
+  head_res    = set_head_dict(auth_one)
+  partialkey  = get_partial(head_res, authkey)
+  head_dict_2 = set_head_dict_2(partialkey, head_res)
+  auth_two    = get_header(auth2_url, head_dict_2)
   return head_dict_2

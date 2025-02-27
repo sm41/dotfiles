@@ -1,10 +1,10 @@
-#!/usr/bin/python3
 
 from os import getenv, remove
 from re import compile, IGNORECASE
 from plyer import notification
 from subprocess import run
 import func, func_auth, func_dl
+from mytool import abc
 
 
 #JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -48,25 +48,20 @@ authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
 tmp_dir  = "/tmp"
 env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-storage_dir = func.anlys_path(env_dir, "@radiko")
+storage_dir = abc.anlys_path(env_dir, "@radiko")
 
 
 def main():
 
   today_now, days_ago = func.now_time(7)
-  soup      = func.makesoup(url)
+  soup      = abc.makesoup(url)
   find_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
   program_list = func.search_program(find_list, today_now, days_ago, fftt)
   time_ft, time_to, filename, img = func.branch(program_list, download_flag)
 
-  head_dict_1 = func_auth.set_users_header()
-  auth_one    = func_auth.get_header(auth1_url, head_dict_1)
-  head_res    = func_auth.set_head_dict(auth_one)
-  partialkey  = func_auth.get_partial(head_res, authkey)
-  head_dict_2 = func_auth.set_head_dict_2(partialkey, head_res)
-  auth_two    = func_auth.get_header(auth2_url, head_dict_2)
+  authtoken = func_auth.auth(auth1_url, auth2_url, authkey)
 
-  download = func_dl.ffmpeg(head_dict_2['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
+  download = func_dl.ffmpeg(authtoken['X-Radiko-AuthToken'], station_id, time_ft, time_to, tmp_dir, filename)
   result_1 = run(download)
 
   encode   = func_dl.encode(tmp_dir, storage_dir, filename, img)

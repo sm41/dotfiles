@@ -1,17 +1,9 @@
 
 from datetime import datetime, timedelta
 from argparse import ArgumentParser
-from pathlib  import Path
-from urllib import request
 from plyer  import notification
-from bs4 import BeautifulSoup
 from sys import exit
-
-
-def check_ststus_code(subject):
-  if subject.getcode() != 200:
-    print(f"Ststus Code is {subject.getcode()} !!")
-    exit()
+from mytool import abc
 
 
 def analyse_argment(s_dict):
@@ -26,27 +18,12 @@ def analyse_argment(s_dict):
   return optional_args
 
 
-def anlys_path(*path_parts):
-  down_dir = Path(*path_parts)
-  down_dir.mkdir(parents=True, exist_ok=True)
-  return down_dir
-
-
 def now_time(day_int:int):
   get_now = datetime.now()
   get_past = get_now - timedelta( days = day_int )
-
   today_now = get_now.strftime('%Y%m%d%H%M')+'00'
   days_ago = get_past.strftime('%Y%m%d%H%M')+'00'
-
   return today_now, days_ago
-
-
-def makesoup(url):
-  get_xml = request.urlopen(url)
-  check_ststus_code(get_xml)
-  soup = BeautifulSoup(get_xml, "xml")
-  return soup
 
 
 def search_program(find_list, today_now, days_ago, fftt):
@@ -62,7 +39,7 @@ def search_program(find_list, today_now, days_ago, fftt):
         "ft":       prog_detail.attrs['ft'],
         "to":       prog_detail.attrs['to'],
         "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-        "title":    prog_detail.title.string,
+        "title":    abc.zen2han(prog_detail.title.string),
         "img":      prog_detail.img.string,
       }
       program_list.append(ddd)
@@ -72,8 +49,7 @@ def search_program(find_list, today_now, days_ago, fftt):
     return program_list
 
   elif len(fftt) != 14:
-    print("There is an error in the '-ft' option")
-    exit()
+    exit("There is an error in the '-ft' option")
 
   elif len(fftt) == 14:
     hogefuga_list = []
