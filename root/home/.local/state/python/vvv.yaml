@@ -2,7 +2,6 @@
 tver:
   config:
     header: "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    # meta_list: [ "series", "episode", "original_url" ]
 
   inform:
     header: "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
@@ -11,7 +10,7 @@ tver:
       gacchiri:
         title: がっちりマンデー!!
         url:   https://tver.jp/series/srgphhvnph
-        plan:  [ {dow: 日, anchor: null} ]
+        dow:   [日]
 
 
   house:
@@ -21,12 +20,12 @@ tver:
       toiro:
         title: 住人十色
         url:   https://tver.jp/series/srxbqmdpvs
-        plan:  [ {dow: 土, anchor: null} ]
+        dow:   [土]
 
       sugoi:
         title: となりのスゴイ家
         url:   https://tver.jp/series/sr1s8kvhrt
-        plan:  [ {dow: 金, anchor: null} ]
+        dow:   [金]
 
 
   drama:
@@ -36,40 +35,40 @@ tver:
       mikami:
         title: 御上先生
         url:   https://tver.jp/series/sr2wexxwqg
-        plan:  [ {dow: 日, anchor: null} ]
+        dow:   [日]
 
       call:
         title: 119エマージェンシーコール
         url:   https://tver.jp/series/sryavii6ry
-        plan:  [ {dow: 月, anchor: null} ]
+        dow:   [月]
 
       secret:
         title: 秘密～THE TOP SECRET～
         url:   https://tver.jp/series/sr9o8p6pm5
-        plan:  [ {dow: 月, anchor: null} ]
+        dow:   [月]
 
       madoka:
         title: まどか26歳、研修医やってます！
         url:   https://tver.jp/series/sr2wopca43
-        plan:  [ {dow: 火, anchor: null} ]
+        dow:   [火]
 
       eyesee:
         title: アイシー～瞬間記憶捜査・柊班～
         url:   https://tver.jp/series/sri5u7y01n
-        plan:  [ {dow: 火, anchor: null} ]
+        dow:   [火]
 
       mondai:
         title: 問題物件
         url:   https://tver.jp/series/sromzosp1f
-        plan:  [ {dow: 水, anchor: null} ]
+        dow:   [水]
 
       dragon:
         title: 法廷のドラゴン
         url:   https://tver.jp/series/srfzo5ibu1
-        plan:  [ {dow: 金, anchor: null} ]
+        dow:   [金]
 
       dance:
         title: クジャクのダンス、誰が見た？
         url:   https://tver.jp/series/sruwkvjipf
-        plan:  [ {dow: 金, anchor: null} ]
+        dow:   [金]
 

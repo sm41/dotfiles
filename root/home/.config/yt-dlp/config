@@ -1,4 +1,5 @@
 
+--concurrent-fragments 5
 # --write-info-json
 # --no-clean-infojson
 --embed-thumbnail
