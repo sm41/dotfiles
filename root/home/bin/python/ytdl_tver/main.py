@@ -1,38 +1,35 @@
 
-from os  import getenv
+# from os  import getenv
 from sys import argv, exit
-import func_share, func_dl, func_scrape, func_none
+import func_dl, func_scrape
 from mytool import abc
 
 
-abc.check_arg()
-argment_str = argv[1]
-
-download_path  = getenv("CLIENT_NETWORK_STORAGE_misc")
-state_file_dir = getenv("XDG_STATE_HOME")
-
 def main():
 
-  storage_path = abc.anlys_path(download_path, "@tver")
-  loaded_yaml  = abc.load_yaml(state_file_dir, "python", "vvv.yaml")
+  abc.check_arg()
+  variable = func_scrape.gen_var()
+  dldl = func_dl.direct_link()
 
-  if argment_str.startswith("https://tver.jp/episodes/"):
-    yaml_config = func_share.get_yaml_data(loaded_yaml)
-    seu_list    = func_share.get_ntfy_meta(argment_str)
-    func_dl.bbb(seu_list, storage_path, yaml_config)
-  elif not argment_str.startswith("https://tver.jp/episodes/"):
-    if   argment_str == "dow":
+  if variable.arg.startswith("https://tver.jp/episodes/"):
+    dldl.get_base_yaml(variable.loaded_yaml)
+    dldl.get_ntfy_meta(variable.arg)
+    func_dl.bbb(dldl.series, dldl.episode, dldl.url, variable.storage_path, dldl.ghq)
+
+  elif not variable.arg.startswith("https://tver.jp/episodes/"):
+    if   variable.arg == "dow":
       y_dow     = abc.dow_yesterday(1)
-      fix_list  = func_none.out_get_dow(loaded_yaml, y_dow)
-    elif argment_str != "dow":
-      fix_list  = func_none.www(loaded_yaml, argment_str)
-    # print(fix_list)
+      fix_list  = func_scrape.out_get_dow(variable.loaded_yaml, y_dow)
+    elif variable.arg != "dow":
+      fix_list  = func_scrape.www2(variable.loaded_yaml, variable.arg)
 
-    for yaml_config in fix_list:
-      material = func_scrape.selenium(yaml_config["url"])
-      url      = func_scrape.tver(material)
-      seu_list = func_share.get_ntfy_meta(url)
-      func_dl.bbb(seu_list, storage_path, yaml_config)
+    zxc = func_scrape.scrp()
+    for bmw in fix_list:
+      zxc.selenium(bmw["url"])
+      zxc.tver(zxc.soup)
+      dldl.get_ntfy_meta(zxc.url)
+      func_dl.bbb(dldl.series, dldl.episode, dldl.url,  variable.storage_path, bmw)
+
   else:
     exit("Invailed Argment!")
 
