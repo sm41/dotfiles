@@ -1,45 +1,34 @@
 
 from subprocess import run
-from os  import getenv, path
-from sys import argv
-import func, func_none
 from mytool import abc
-
-
-abc.check_arg()
-argment_str = argv[1]
-
-tmp_dir   = "/tmp"
-download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
-state_file_dir = getenv("XDG_STATE_HOME")
-storage_dir = abc.anlys_path(download_dir, "@podcast")
+import func
 
 
 def main():
 
+  abc.check_arg()
+  variable = func.gen_var()
+  branch   = func.check_arg()
+
   y_dow        = abc.dow_yesterday(1)
-  loaded_yaml  = abc.load_yaml(state_file_dir, "python", "ppp.yaml")
+  loaded_yaml  = abc.load_yaml(variable.state_file_dir, "python", "ppp.yaml")
 
-  if argment_str == "dow":
-    today_list = func_none.get_today_list(loaded_yaml, y_dow)
+  if variable.arg == "dow":
+    branch.get_today_list2(loaded_yaml, y_dow)
   else:
-    today_list = func_none.yui(loaded_yaml, argment_str)
-  # print(today_list)
+    branch.yui2(loaded_yaml, variable.arg)
 
-
-  for ttt in today_list:
-
+  for ttt in branch.eee:
     uuu = ttt['url']
     sss = ttt['plan']['anchor']
 
     soup     = abc.makesoup(uuu)
-    qqq      = func.getconf(soup, sss)
-    download = func_none.dl(qqq, tmp_dir)
-    print(download)
-    # result   = run(download)
-    # abc.rnm(tmp_dir, qqq['name'], storage_dir, qqq['name'])
-    # abc.ntfy(result, qqq['series_title'], qqq['episode_title'])
-
+    source   = func.gen_tag(soup, sss)
+    download = func.dl(source.url, source.img, source.name, variable.tmp_dir)
+    # print(download)
+    result   = run(download)
+    abc.rnm(variable.tmp_dir, source.name, variable.storage_dir, source.name)
+    abc.ntfy(result, source.series, source.episode)
 
 if __name__ == "__main__":
   main()

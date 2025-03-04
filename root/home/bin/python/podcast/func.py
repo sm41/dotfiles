@@ -1,9 +1,20 @@
 
 from datetime import datetime, date, timedelta
 from locale import setlocale, LC_TIME, LC_ALL
-from bs4 import BeautifulSoup
-from re  import match, sub, compile
+# from bs4 import BeautifulSoup
+from re  import match
 from mytool import abc
+from os  import getenv
+from sys import argv
+
+
+class gen_var:
+  def __init__(self):
+    self.arg            = argv[1]
+    self.tmp_dir        = "/tmp"
+    self.download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.state_file_dir = getenv("XDG_STATE_HOME")
+    self.storage_dir    = abc.anlys_path(self.download_dir, "@podcast")
 
 
 def change_format(episode_date):
@@ -28,30 +39,48 @@ def get_searchitem(rrr, search_term):
   return target_item
 
 
-def getconf(soup:BeautifulSoup, search_term):
-  root_obj     = soup.find("channel")
-  series_title = root_obj.title.string
-  series_img   = root_obj.image.url.string.split('?')[0]
+class gen_tag:
+  def __init__(self, soup, search_term):
+    __root_obj   = soup.find("channel")
+    __item_list  = soup.find_all("item", limit=50)
+    __target_obj = get_searchitem(__item_list, search_term)
 
-  target_obj  = soup.find_all("item", limit=50)
-  target_item = get_searchitem(target_obj, search_term)
-  episode_title = target_item.title.string
-  episode_date  = target_item.pubDate.string
-  episode_url   = target_item.enclosure.attrs['url'].split('?')[0]
+    self.series  = abc.zen2han(__root_obj.title.string)
+    self.episode = abc.zen2han(__target_obj.title.string)
+    self.date    = change_format(__target_obj.pubDate.string)
+    self.img     = __root_obj.image.url.string.split('?')[0]
+    self.url     = __target_obj.enclosure.attrs['url'].split('?')[0]
+    self.name    = f"[Podcast]_{self.series}_{self.date}_{self.episode}.mp3"
 
-  ddd = change_format(episode_date)
-  sss = abc.zen2han(series_title)
-  eee = abc.zen2han(episode_title)
 
-  filename = f"[Podcast]_{sss}_{ddd}_{eee}.mp3"
+class check_arg:
+  def __init__(self):
+    self.eee = []
 
-  qqq = {
-    "series_title": sss,
-    "episode_title": eee,
-    "img": series_img,
-    "url": episode_url,
-    "name": filename
-  }
+  def get_today_list2(self, y_data, y_dow_str):
+    for key, value in y_data['megaphone'].items():
+      for pln in value['plan']:
+        if pln['dow'] == y_dow_str:
+          self.eee.append({**value, "plan": pln})
 
-  return qqq
+  def yui2(self, y_data, args):
+    for ttl, cnfg in y_data['megaphone'].items():
+      if ttl == args:
+        self.eee.append({**cnfg, "plan": cnfg['plan'][0]})
 
+
+
+def dl(url, img, filename, tmp_dir):
+  download = [
+    "ffmpeg",
+      "-loglevel", "warning",
+      "-i",   url,
+      "-i",   img,
+      "-map", "0:a",
+      "-map", "1:v",
+      "-metadata:s:v", "title='Album cover'",
+      "-metadata:s:v", "comment='Cover (Front)'",
+      "-codec", "copy",
+    f"{tmp_dir}/{filename}"
+  ]
+  return download
