@@ -4,26 +4,65 @@ from argparse import ArgumentParser
 from plyer  import notification
 from sys import exit
 from mytool import abc
+from os  import getenv
 
 
-def analyse_argment(s_dict):
-  parser = ArgumentParser()
+class check_arg:
 
-  parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices=s_dict.keys())
-  parser.add_argument('-t',  help='title',      required=True,  type=str)
-  parser.add_argument('-ft', help='ft',         required=False, type=str)
-  parser.add_argument('-dl', help='download',   required=False, action='store_true')
+  s_dict = {
+  "TBS":     "TBSラジオ",
+  "QRR":     "文化放送",
+  "LFR":     "ニッポン放送",
+  "RN1":     "ラジオNIKKEI第1",
+  "RN2":     "ラジオNIKKEI第2",
+  "INT":     "interfm",
+  "FMT":     "tokyo fm",
+  "FMJ":     "j-wave",
+  "IBS":     "LuckyFM 茨城放送",
+  "JORF":    "ラジオ日本",
+  "BAYFM78": "bayfm",
+  "NACK5":   "nack5",
+  "YFM":     "fm yokohama",
+  "JOAK":    "NHKラジオ第1（東京）",
+  "JOAK-FM": "NHK-FM（東京）",
+}
 
-  optional_args = parser.parse_args()
-  return optional_args
+  def __init__(self):
+    __parser = ArgumentParser()
+    __parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices=self.s_dict.keys())
+    __parser.add_argument('-t',  help='title',      required=True,  type=str)
+    __parser.add_argument('-ft', help='ft',         required=False, type=str)
+    __parser.add_argument('-dl', help='download',   required=False, action='store_true')
+
+    __optional_args = __parser.parse_args()
+
+    self.station_id  = __optional_args.s.upper()
+    self.search_term = __optional_args.t
+    self.dl_flag     = __optional_args.dl
+    self.fftt        = __optional_args.ft
 
 
-def now_time(day_int:int):
-  get_now = datetime.now()
-  get_past = get_now - timedelta( days = day_int )
-  today_now = get_now.strftime('%Y%m%d%H%M')+'00'
-  days_ago = get_past.strftime('%Y%m%d%H%M')+'00'
-  return today_now, days_ago
+class gen_var:
+  def __init__(self):
+    self.tmp_dir  = "/tmp"
+    __env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.storage_path = abc.anlys_path(__env_dir, "@radiko")
+
+
+class gen_link:
+  def __init__(self, station_id):
+    self.auth1_url = "https://radiko.jp/v2/api/auth1"
+    self.auth2_url = "https://radiko.jp/v2/api/auth2"
+    self.authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
+    self.url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
+
+
+class time:
+  def __init__(self, day_int):
+    __get_now  = datetime.now()
+    __get_past = __get_now - timedelta( days = day_int )
+    self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
+    self.days_ago = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
 def search_program(find_list, today_now, days_ago, fftt):
@@ -39,8 +78,8 @@ def search_program(find_list, today_now, days_ago, fftt):
         "ft":       prog_detail.attrs['ft'],
         "to":       prog_detail.attrs['to'],
         "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-        "title":    abc.zen2han(prog_detail.title.string),
         "img":      prog_detail.img.string,
+        "title":    abc.zen2han(prog_detail.title.string),
       }
       program_list.append(ddd)
 
@@ -59,29 +98,45 @@ def search_program(find_list, today_now, days_ago, fftt):
     return hogefuga_list
 
 
-def branch(program_list, download_flag):
+def branch(program_list, dl_flag):
 
   if   len(program_list) > 1:
-    if download_flag == True:
+    if dl_flag == True:
       notification.notify(title = "⚠️ failed",  message = "upper")
-    elif download_flag == False:
+    elif dl_flag == False:
       for vvv in program_list:
         print(vvv)
-      print(f"Result {len(program_list)} Programs")
+      print(f"📢 Result {len(program_list)} Programs")
     exit()
 
   elif len(program_list) == 1:
-    if download_flag == True:
+    if dl_flag == True:
       return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}", program_list[0]['img']
-    elif download_flag == False:
+    elif dl_flag == False:
       print(program_list)
       print("✅ You can download it by adding '-dl' flag")
     exit()
 
   elif len(program_list) == 0:
-    if download_flag == True:
+    if dl_flag == True:
       notification.notify(title = "⚠️ failed",  message = "upper")
-    elif download_flag == False:
+    elif dl_flag == False:
       print("⚠️ Program is Not Found !!")
     exit()
 
+
+
+class s_pr:
+  def __init__(self, find_list, today_now, days_ago, fftt):
+
+    for keyword in find_list:
+      prog_detail = keyword.parent
+      if   days_ago >  prog_detail.attrs['to'] >  today_now:
+        continue
+      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+
+        self.ft =  prog_detail.attrs['ft'],
+        self.to =  prog_detail.attrs['to'],
+        self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
+        self.title =  abc.zen2han(prog_detail.title.string),
+        self.img   =  prog_detail.img.string,
