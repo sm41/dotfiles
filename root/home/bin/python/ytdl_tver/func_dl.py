@@ -39,7 +39,7 @@ class oda:
     ]
     __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
     __ppp, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__ppp).parent,   abc.zen2han(Path(__ppp).name)
+    self.paths, self.output = Path(__ppp).parent, abc.zen2han(Path(__ppp).name)
 
 
   def ytdlp(self, paths, id, link):
@@ -56,7 +56,7 @@ def bbb(series, episode, url, storage_path, yaml_config):
   gfv = oda()
   gfv.get_path_and_filename(yaml_config, url, storage_path)
   gfv.ytdlp(gfv.paths, gfv.id, url)
-  # result            = run(method)
-  # abc.rnm(paths, f"{id}.mp4", paths, output)
-  # abc.ntfy(result, series, episode)
-  print(gfv.method)
+  result = run(gfv.method)
+  abc.rnm(gfv.paths, f"{gfv.id}.mp4", gfv.paths, gfv.output)
+  abc.ntfy(result, series, episode)
+  # print(gfv.method)

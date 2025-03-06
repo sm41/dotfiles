@@ -9,7 +9,8 @@ def main():
 
   abc.check_arg()
   variable = func_scrape.gen_var()
-  dldl = func_dl.direct_link()
+  zxc      = func_scrape.scrp()
+  dldl     = func_dl.direct_link()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
     dldl.get_base_yaml(variable.loaded_yaml)
@@ -23,7 +24,6 @@ def main():
     elif variable.arg != "dow":
       fix_list  = func_scrape.www2(variable.loaded_yaml, variable.arg)
 
-    zxc = func_scrape.scrp()
     for bmw in fix_list:
       zxc.selenium(bmw["url"])
       zxc.tver(zxc.soup)
