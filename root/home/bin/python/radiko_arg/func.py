@@ -10,22 +10,22 @@ from os  import getenv
 class check_arg:
 
   s_dict = {
-  "TBS":     "TBSラジオ",
-  "QRR":     "文化放送",
-  "LFR":     "ニッポン放送",
-  "RN1":     "ラジオNIKKEI第1",
-  "RN2":     "ラジオNIKKEI第2",
-  "INT":     "interfm",
-  "FMT":     "tokyo fm",
-  "FMJ":     "j-wave",
-  "IBS":     "LuckyFM 茨城放送",
-  "JORF":    "ラジオ日本",
-  "BAYFM78": "bayfm",
-  "NACK5":   "nack5",
-  "YFM":     "fm yokohama",
-  "JOAK":    "NHKラジオ第1（東京）",
-  "JOAK-FM": "NHK-FM（東京）",
-}
+    "TBS":     "TBSラジオ",
+    "QRR":     "文化放送",
+    "LFR":     "ニッポン放送",
+    "RN1":     "ラジオNIKKEI第1",
+    "RN2":     "ラジオNIKKEI第2",
+    "INT":     "interfm",
+    "FMT":     "tokyo fm",
+    "FMJ":     "j-wave",
+    "IBS":     "LuckyFM 茨城放送",
+    "JORF":    "ラジオ日本",
+    "BAYFM78": "bayfm",
+    "NACK5":   "nack5",
+    "YFM":     "fm yokohama",
+    "JOAK":    "NHKラジオ第1（東京）",
+    "JOAK-FM": "NHK-FM（東京）",
+  }
 
   def __init__(self):
     __parser = ArgumentParser()
@@ -140,3 +140,35 @@ class s_pr:
         self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
         self.title =  abc.zen2han(prog_detail.title.string),
         self.img   =  prog_detail.img.string,
+
+
+
+class fastforward:
+  def __init__(self):
+    pass
+
+  def dl(self, authtoken, station_id, time_ft, time_to, path, filename):
+    self.download = [
+      "ffmpeg",
+        "-loglevel", "warning",
+        "-n",
+        "-headers", f"X-Radiko-Authtoken: {authtoken}",
+        "-i", f"https://radiko.jp/v2/api/ts/playlist.m3u8?station_id={station_id}&l=15&ft={time_ft}&to={time_to}",
+        "-codec", "copy",
+      f"{path}/{filename}.m4a"
+    ]
+
+  def enc(self, tmp, path, filename, img):
+    self.encode = [
+      "ffmpeg",
+        "-loglevel", "warning",
+        "-n",
+        "-i",  f"{tmp}/{filename}.m4a",
+        "-i",  f"{img}",
+        "-map", "0",
+        "-map", "1",
+        "-metadata:s:v", "title='Album cover'",
+        "-metadata:s:v", "comment='Cover (Front)'",
+        "-b:a", "48k",
+      f"{path}/{filename}.mp3"
+    ]

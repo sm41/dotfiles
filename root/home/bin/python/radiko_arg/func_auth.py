@@ -71,13 +71,7 @@ from urllib import request
 class oth:
   def __init__(self, auth1_url, auth2_url, authkey):
 
-    __head_dict_1 = {
-    "X-Radiko-App":         "pc_html5",
-    "X-Radiko-App-Version": "0.0.1",
-    "X-Radiko-Device":      "pc",
-    "X-Radiko-User":        "dummy_user"
-    }
-
+    __head_dict_1 = self.set_users_header()
     __auth_one    = self.get_header(auth1_url, __head_dict_1)
     __head_res    = self.set_head_dict(__auth_one)
     __partialkey  = self.get_partial(__head_res, authkey)
@@ -87,14 +81,24 @@ class oth:
     self.xat = __head_dict_2['X-Radiko-AuthToken']
 
 
-  def get_header(auth_n_url, head_dict_n):
+  def set_users_header(self):
+    head_dict_1 = {
+      "X-Radiko-App":         "pc_html5",
+      "X-Radiko-App-Version": "0.0.1",
+      "X-Radiko-Device":      "pc",
+      "X-Radiko-User":        "dummy_user"
+    }
+    return head_dict_1
+
+
+  def get_header(self, auth_n_url, head_dict_n):
     req = request.Request(url=auth_n_url, headers=head_dict_n, method="GET")
     with request.urlopen(req) as res:
       auth_n = res.headers
     return auth_n
 
 
-  def set_head_dict(auth_one):
+  def set_head_dict(self, auth_one):
 
     AuthToken = str(auth_one['x-radiko-authtoken'])
     KeyLength = int(auth_one["x-radiko-keylength"])
@@ -108,7 +112,7 @@ class oth:
     return head_res
 
 
-  def get_partial(head_res, authkey):
+  def get_partial(self, head_res, authkey):
     KeyOffset:int = head_res['KeyOffset']
     KeyLength:int = head_res['KeyLength']
     tmp_auth = authkey[KeyOffset:  KeyOffset + KeyLength]
@@ -116,7 +120,7 @@ class oth:
     return partialkey
 
 
-  def set_head_dict_2(partialkey, head_res):
+  def set_head_dict_2(self, partialkey, head_res):
 
     X_Radiko_AuthToken = head_res['AuthToken']
 

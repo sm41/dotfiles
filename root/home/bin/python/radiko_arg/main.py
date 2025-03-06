@@ -3,7 +3,7 @@ from os import getenv, remove
 from re import compile, IGNORECASE
 from plyer import notification
 from subprocess import run
-import func, func_auth, func_dl
+import func, func_auth
 from mytool import abc
 
 
@@ -18,19 +18,17 @@ from mytool import abc
 def main():
 
   chkarg   = func.check_arg()
+  linker   = func.gen_link(chkarg.station_id)
   valiable = func.gen_var()
   time     = func.time(7)
-  fff      = func_dl.fastforward()
+  fff      = func.fastforward()
+  ooo      = func_auth.oth(linker.auth1_url, linker.auth2_url, linker.authkey)
 
-
-
-  soup = abc.makesoup(url)
+  soup = abc.makesoup(linker.url)
   find_list = soup.find_all("title", text=compile(chkarg.search_term, flags=IGNORECASE))
+
   program_list = func.search_program(find_list, time.today_now, time.days_ago, chkarg.fftt)
   time_ft, time_to, filename, img = func.branch(program_list, chkarg.dl_flag)
-
-  # authtoken = func_auth.auth(auth1_url, auth2_url, authkey)
-  ooo = func_auth.oth(auth1_url, auth2_url, authkey)
 
   fff.dl(ooo.xat, chkarg.station_id, time_ft, time_to, valiable.tmp_dir, filename)
   result_1  = run(fff.download)
@@ -41,14 +39,13 @@ def main():
 
 
   if result_1.returncode == 0:
-    remove(f"{valiable.tmp_dir}/{filename}.m4a"),
-  else:
-    pass
+    remove(f"{valiable.tmp_dir}/{filename}.m4a")
 
-  if result_2.returncode == 0:
-    notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
-  else:
-    notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
+  abc.ntfy(result_2, f"{filename}.mp3")
+  # if result_2.returncode == 0:
+  #   notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
+  # else:
+  #   notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
 
 
 if __name__ == "__main__":
