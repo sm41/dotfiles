@@ -9,13 +9,17 @@ def main():
 
   abc.check_arg()
   variable = func_scrape.gen_var()
-  zxc      = func_scrape.scrp()
-  dldl     = func_dl.direct_link()
+  scraper  = func_scrape.scrp()
+  # dldl     = func_dl.direct_link()
+  testes   = func_dl.test()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
-    dldl.get_base_yaml(variable.loaded_yaml)
-    dldl.get_ntfy_meta(variable.arg)
-    func_dl.bbb(dldl.series, dldl.episode, dldl.url, variable.storage_path, dldl.ghq)
+    testes.get_base_yaml(variable.loaded_yaml)
+    # dldl.get_ntfy_meta(variable.arg)
+    testes.integrate(variable.arg, variable.storage_path, testes.ghq)
+    # func_dl.bbb(dldl.series, dldl.episode, dldl.url, variable.storage_path, dldl.ghq)
+    func_dl.ccc(testes.series, testes.episode, testes.url, testes.id, testes.paths, testes.output)
+    # print(testes.series, testes.episode, testes.url, testes.paths, testes.output)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
     if   variable.arg == "dow":
@@ -25,10 +29,12 @@ def main():
       fix_list  = func_scrape.www2(variable.loaded_yaml, variable.arg)
 
     for bmw in fix_list:
-      zxc.selenium(bmw["url"])
-      zxc.tver(zxc.soup)
-      dldl.get_ntfy_meta(zxc.url)
-      func_dl.bbb(dldl.series, dldl.episode, dldl.url,  variable.storage_path, bmw)
+      scraper.selenium(bmw["url"])
+      scraper.tver(scraper.soup)
+      # dldl.get_ntfy_meta(scraper.url)
+      testes.integrate(scraper.url, variable.storage_path, bmw)
+      # func_dl.bbb(dldl.series, dldl.episode, dldl.url, variable.storage_path, bmw)
+      func_dl.ccc(testes.series, testes.episode, testes.url, testes.id, testes.paths, testes.output)
 
   else:
     exit("Invailed Argment!")
