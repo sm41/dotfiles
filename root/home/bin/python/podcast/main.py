@@ -20,15 +20,15 @@ def main():
 
   for ttt in branch.eee:
     uuu = ttt['url']
-    sss = ttt['plan']['anchor']
+    # sss = ttt['dow']
 
     soup     = abc.makesoup(uuu)
-    source   = func.gen_tag(soup, sss)
+    source   = func.gen_tag(soup)
     download = func.dl(source.url, source.img, source.name, variable.tmp_dir)
-    # print(download)
-    result   = run(download)
-    abc.rnm(variable.tmp_dir, source.name, variable.storage_dir, source.name)
-    abc.ntfy(result, source.series, source.episode)
+    print(download)
+    # result   = run(download)
+    # abc.rnm(variable.tmp_dir, source.name, variable.storage_dir, source.name)
+    # abc.ntfy(result, source.series, source.episode)
 
 if __name__ == "__main__":
   main()

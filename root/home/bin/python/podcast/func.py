@@ -26,30 +26,16 @@ def change_format(episode_date):
   return yyy
 
 
-def get_searchitem(rrr, search_term):
-
-  if search_term is None:
-    search_term = ".+"
-
-  for iii in rrr:
-    if match(search_term, iii.title.string):
-      target_item = iii
-      break
-
-  return target_item
-
-
 class gen_tag:
-  def __init__(self, soup, search_term):
-    __root_obj   = soup.find("channel")
-    __item_list  = soup.find_all("item", limit=50)
-    __target_obj = get_searchitem(__item_list, search_term)
+  def __init__(self, soup):
+    __root_obj = soup.find("channel")
+    __item_obj = soup.find("item")
 
     self.series  = abc.zen2han(__root_obj.title.string)
-    self.episode = abc.zen2han(__target_obj.title.string)
-    self.date    = change_format(__target_obj.pubDate.string)
+    self.episode = abc.zen2han(__item_obj.title.string)
+    self.date    = change_format(__item_obj.pubDate.string)
     self.img     = __root_obj.image.url.string.split('?')[0]
-    self.url     = __target_obj.enclosure.attrs['url'].split('?')[0]
+    self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
     self.name    = f"[Podcast]_{self.series}_{self.date}_{self.episode}.mp3"
 
 
@@ -59,14 +45,14 @@ class check_arg:
 
   def get_today_list2(self, y_data, y_dow_str):
     for key, value in y_data['megaphone'].items():
-      for pln in value['plan']:
-        if pln['dow'] == y_dow_str:
+      for pln in value['dow']:
+        if pln == y_dow_str:
           self.eee.append({**value, "plan": pln})
 
   def yui2(self, y_data, args):
     for ttl, cnfg in y_data['megaphone'].items():
       if ttl == args:
-        self.eee.append({**cnfg, "plan": cnfg['plan'][0]})
+        self.eee.append({**cnfg})
 
 
 
