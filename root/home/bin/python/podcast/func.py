@@ -2,7 +2,6 @@
 from datetime import datetime, date, timedelta
 from locale import setlocale, LC_TIME, LC_ALL
 # from bs4 import BeautifulSoup
-from re  import match
 from mytool import abc
 from os  import getenv
 from sys import argv
@@ -15,15 +14,6 @@ class gen_var:
     self.download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.state_file_dir = getenv("XDG_STATE_HOME")
     self.storage_dir    = abc.anlys_path(self.download_dir, "@podcast")
-
-
-def change_format(episode_date):
-  setlocale(LC_TIME, (None,None))
-
-  format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
-  dt_tz = datetime.strptime(episode_date, format_str_tz)
-  yyy = dt_tz.strftime("%Y-%m-%d")
-  return yyy
 
 
 class gen_tag:
@@ -54,6 +44,14 @@ class check_arg:
       if ttl == args:
         self.eee.append({**cnfg})
 
+
+def change_format(episode_date):
+  setlocale(LC_TIME, (None,None))
+
+  format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
+  dt_tz = datetime.strptime(episode_date, format_str_tz)
+  yyy = dt_tz.strftime("%Y-%m-%d")
+  return yyy
 
 
 def dl(url, img, filename, tmp_dir):
