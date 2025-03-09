@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 from argparse import ArgumentParser
 from plyer  import notification
 from sys import exit
-from mytool import abc
 from os  import getenv
+from mytool import abc
 
 
-class check_arg:
+class set_arg:
 
   s_dict = {
     "TBS":     "TBSラジオ",
@@ -34,8 +34,7 @@ class check_arg:
     __parser.add_argument('-ft', help='ft',         required=False, type=str)
     __parser.add_argument('-dl', help='download',   required=False, action='store_true')
 
-    __optional_args = __parser.parse_args()
-
+    __optional_args  = __parser.parse_args()
     self.station_id  = __optional_args.s.upper()
     self.search_term = __optional_args.t
     self.dl_flag     = __optional_args.dl
@@ -60,7 +59,7 @@ class gen_link:
 class time:
   def __init__(self, day_int):
     __get_now  = datetime.now()
-    __get_past = __get_now - timedelta( days = day_int )
+    __get_past = __get_now - timedelta(day_int)
     self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
     self.days_ago = __get_past.strftime('%Y%m%d%H%M')+'00'
 

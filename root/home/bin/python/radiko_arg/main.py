@@ -17,20 +17,20 @@ from mytool import abc
 
 def main():
 
-  chkarg   = func.check_arg()
-  linker   = func.gen_link(chkarg.station_id)
+  setarg   = func.set_arg()
+  linker   = func.gen_link(setarg.station_id)
   valiable = func.gen_var()
   time     = func.time(7)
   fff      = func.fastforward()
   ooo      = func_auth.oth(linker.auth1_url, linker.auth2_url, linker.authkey)
 
   soup = abc.makesoup(linker.url)
-  find_list = soup.find_all("title", text=compile(chkarg.search_term, flags=IGNORECASE))
+  find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
-  program_list = func.search_program(find_list, time.today_now, time.days_ago, chkarg.fftt)
-  time_ft, time_to, filename, img = func.branch(program_list, chkarg.dl_flag)
+  program_list = func.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
+  time_ft, time_to, filename, img = func.branch(program_list, setarg.dl_flag)
 
-  fff.dl(ooo.xat, chkarg.station_id, time_ft, time_to, valiable.tmp_dir, filename)
+  fff.dl(ooo.xrat, setarg.station_id, time_ft, time_to, valiable.tmp_dir, filename, img)
   result_1  = run(fff.download)
 
   fff.enc(valiable.tmp_dir, valiable.storage_path, filename, img)
@@ -38,10 +38,10 @@ def main():
   # print(fff.download)
 
 
-  if result_1.returncode == 0:
-    remove(f"{valiable.tmp_dir}/{filename}.m4a")
+  # if result_1.returncode == 0:
+  #   remove(f"{valiable.tmp_dir}/{filename}.m4a")
 
-  abc.ntfy(result_2, f"{filename}.mp3")
+  # abc.ntfy(result_2, f"{filename}.mp3")
   # if result_2.returncode == 0:
   #   notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
   # else:
