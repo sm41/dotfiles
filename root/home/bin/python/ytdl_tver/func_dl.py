@@ -13,7 +13,7 @@ class test:
     self.__pre_id      = "id"
 
   def get_base_yaml(self, loaded_yaml):
-    self.config = loaded_yaml['tver']['config']
+    self.config = loaded_yaml['tver']['_http']
 
   def integrate(self, url, down_dir, yaml_config):
     __header = yaml_config['header']
@@ -46,7 +46,7 @@ def ytdlp(paths, id, link):
 
 def ccc(series, episode, url, id, paths, output):
   method = ytdlp(paths, id, url)
-  print(method)
-  # result = run(method)
-  # abc.rnm(paths, f"{id}.mp4", paths, output)
-  # abc.ntfy(result, series, episode)
+  # print(method)
+  result = run(method)
+  abc.rnm(paths, f"{id}.mp4", paths, output)
+  abc.ntfy(result, series, episode)
