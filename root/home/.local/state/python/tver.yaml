@@ -1,0 +1,82 @@
+
+tver:
+  _common:
+    - &header_base   "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_inform "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_house  "[住まい]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_drama  "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
+
+  _http:
+    header : *header_base
+
+  # inform:
+  gacchiri:
+    title  : がっちりマンデー!!
+    url    : https://tver.jp/series/srgphhvnph
+    dow    : [日]
+    header : *header_inform
+
+
+  # house:
+  toiro:
+    title  : 住人十色
+    url    : https://tver.jp/series/srxbqmdpvs
+    dow    : [土]
+    header : *header_house
+
+  sugoi:
+    title  : となりのスゴイ家
+    url    : https://tver.jp/series/sr1s8kvhrt
+    dow    : [金]
+    header : *header_house
+
+
+  # drama:
+  mikami:
+    title  : 御上先生
+    url    : https://tver.jp/series/sr2wexxwqg
+    dow    : [日]
+    header : *header_drama
+
+  call:
+    title  : 119エマージェンシーコール
+    url    : https://tver.jp/series/sryavii6ry
+    dow    : [月]
+    header : *header_drama
+
+  secret:
+    title  : 秘密～THE TOP SECRET～
+    url    : https://tver.jp/series/sr9o8p6pm5
+    dow    : [月]
+    header : *header_drama
+
+  madoka:
+    title  : まどか26歳、研修医やってます！
+    url    : https://tver.jp/series/sr2wopca43
+    dow    : [火]
+    header : *header_drama
+
+  eyesee:
+    title  : アイシー～瞬間記憶捜査・柊班～
+    url    : https://tver.jp/series/sri5u7y01n
+    dow    : [火]
+    header : *header_drama
+
+  mondai:
+    title  : 問題物件
+    url    : https://tver.jp/series/sromzosp1f
+    dow    : [水]
+    header : *header_drama
+
+  dragon:
+    title  : 法廷のドラゴン
+    url    : https://tver.jp/series/srfzo5ibu1
+    dow    : [金]
+    header : *header_drama
+
+  dance:
+    title  : クジャクのダンス、誰が見た？
+    url    : https://tver.jp/series/sruwkvjipf
+    dow    : [金]
+    header : *header_drama
+
