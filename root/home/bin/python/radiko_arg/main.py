@@ -38,14 +38,14 @@ def main():
   # print(fff.download)
 
 
-  # if result_1.returncode == 0:
-  #   remove(f"{valiable.tmp_dir}/{filename}.m4a")
+  if result_1.returncode == 0:
+    remove(f"{valiable.tmp_dir}/{filename}.m4a")
 
-  # abc.ntfy(result_2, f"{filename}.mp3")
-  # if result_2.returncode == 0:
-  #   notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
-  # else:
-  #   notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
+  abc.ntfy(result_2, f"{filename}.mp3")
+  if result_2.returncode == 0:
+    notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
+  else:
+    notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
 
 
 if __name__ == "__main__":
