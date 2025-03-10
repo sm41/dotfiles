@@ -14,9 +14,9 @@ def check_arg():
     exit('You need args!')
 
 
-def check_status_code(subject):  # スペルミスを修正
+def check_status_code(subject):
   if subject.getcode() != 200:
-    print(f"Status Code is {subject.getcode()} !!")  # スペルミスを修正
+    print(f"Status Code is {subject.getcode()} !!")
     exit()
 
 
@@ -47,7 +47,7 @@ def load_yaml(*path_parts):
 
 def makesoup(url):
   get_xml = request.urlopen(url)
-  check_status_code(get_xml)  # スペルミスを修正
+  check_status_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
   return soup
 
