@@ -13,7 +13,7 @@ class gen_var:
     self.tmp_dir        = "/tmp"
     self.download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.state_file_dir = getenv("XDG_STATE_HOME")
-    self.storage_dir    = abc.anlys_path(self.download_dir, "@podcast")
+    self.storage_dir    = abc.ctrl_path.anlys_path(self.download_dir, "@podcast")
 
 
 class gen_tag:
@@ -21,25 +21,26 @@ class gen_tag:
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
 
-    self.series  = abc.zen2han(__root_obj.title.string)
-    self.episode = abc.zen2han(__item_obj.title.string)
+    self.series  = abc.ctrl_file.zen2han(__root_obj.title.string)
+    self.episode = abc.ctrl_file.zen2han(__item_obj.title.string)
     self.date    = change_format(__item_obj.pubDate.string)
     self.img     = __root_obj.image.url.string.split('?')[0]
     self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
-    self.name    = f"[Podcast]_{self.series}_{self.date}_{self.episode}.mp3"
+    self.ext     = abc.ctrl_file.get_ext(self.url)
+    self.name    = abc.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
 class check_arg:
   def __init__(self):
     self.eee = []
 
-  def get_today_list2(self, y_data, y_dow_str):
+  def today_list(self, y_data, y_dow_str):
     for key, value in y_data['megaphone'].items():
       for pln in value['dow']:
         if pln == y_dow_str:
           self.eee.append({**value, "plan": pln})
 
-  def yui2(self, y_data, args):
+  def series_name(self, y_data, args):
     for ttl, cnfg in y_data['megaphone'].items():
       if ttl == args:
         self.eee.append({**cnfg})
@@ -54,7 +55,7 @@ def change_format(episode_date):
   return yyy
 
 
-def dl(url, img, filename, tmp_dir):
+def dl(url, img, filename, ext, tmp_dir):
   download = [
     "ffmpeg",
       "-loglevel", "warning",
@@ -65,6 +66,6 @@ def dl(url, img, filename, tmp_dir):
       "-metadata:s:v", "title='Album cover'",
       "-metadata:s:v", "comment='Cover (Front)'",
       "-codec", "copy",
-    f"{tmp_dir}/{filename}"
+    f"{tmp_dir}/{filename}{ext}"
   ]
   return download
