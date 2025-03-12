@@ -45,7 +45,7 @@ class gen_var:
   def __init__(self):
     self.tmp_dir  = "/tmp"
     __env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_path = abc.anlys_path(__env_dir, "@radiko")
+    self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
 
 
 class gen_link:
@@ -78,7 +78,7 @@ def search_program(find_list, today_now, days_ago, fftt):
         "to":       prog_detail.attrs['to'],
         "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
         "img":      prog_detail.img.string,
-        "title":    abc.zen2han(prog_detail.title.string),
+        "title":    abc.ctrl_file.zen2han(prog_detail.title.string),
       }
       program_list.append(ddd)
 
@@ -99,30 +99,23 @@ def search_program(find_list, today_now, days_ago, fftt):
 
 def branch(program_list, dl_flag):
 
-  if   len(program_list) > 1:
-    if dl_flag == True:
-      notification.notify(title = "⚠️ failed",  message = "upper")
-    elif dl_flag == False:
-      for vvv in program_list:
-        print(vvv)
-      print(f"📢 Result {len(program_list)} Programs")
-    exit()
-
-  elif len(program_list) == 1:
-    if dl_flag == True:
+  if len(program_list) == 1:
+    if dl_flag:
       return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}", program_list[0]['img']
-    elif dl_flag == False:
+    else:
       print(program_list)
       print("✅ You can download it by adding '-dl' flag")
     exit()
-
-  elif len(program_list) == 0:
-    if dl_flag == True:
-      notification.notify(title = "⚠️ failed",  message = "upper")
-    elif dl_flag == False:
+  else:
+    if dl_flag:
+      notification.notify(title = "⚠️ failed",  message = "Not One")
+    elif program_list:
+      for vvv in program_list:
+        print(vvv)
+      print(f"📢 Result {len(program_list)} Programs")
+    else:
       print("⚠️ Program is Not Found !!")
     exit()
-
 
 
 class s_pr:
@@ -137,7 +130,7 @@ class s_pr:
         self.ft =  prog_detail.attrs['ft'],
         self.to =  prog_detail.attrs['to'],
         self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-        self.title =  abc.zen2han(prog_detail.title.string),
+        self.title =  abc.ctrl_file.zen2han(prog_detail.title.string),
         self.img   =  prog_detail.img.string,
 
 

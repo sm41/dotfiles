@@ -30,7 +30,7 @@ def main():
   program_list = func.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
   time_ft, time_to, filename, img = func.branch(program_list, setarg.dl_flag)
 
-  fff.dl(ooo.xrat, setarg.station_id, time_ft, time_to, valiable.tmp_dir, filename, img)
+  fff.dl(ooo.xrat, setarg.station_id, time_ft, time_to, valiable.tmp_dir, filename)
   result_1  = run(fff.download)
 
   fff.enc(valiable.tmp_dir, valiable.storage_path, filename, img)
@@ -42,10 +42,6 @@ def main():
     remove(f"{valiable.tmp_dir}/{filename}.m4a")
 
   abc.ntfy(result_2, f"{filename}.mp3")
-  if result_2.returncode == 0:
-    notification.notify(title = "✅ Success", message = f"{filename}.mp3"),
-  else:
-    notification.notify(title = "⚠️ failed",  message = f"{filename}.mp3")
 
 
 if __name__ == "__main__":
