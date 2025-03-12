@@ -5,7 +5,7 @@ from mytool import abc
 
 
 def main():
-  abc.check_arg()
+  abc.check_any.check_arg()
   variable = func.gen_var()
   scraper  = func.scrp()
   testes   = func_dl.test()
@@ -14,7 +14,7 @@ def main():
   if variable.arg.startswith("https://tver.jp/episodes/"):
     testes.get_base_yaml(variable.loaded_yaml)
     testes.integrate(variable.arg, variable.storage_path, testes.config)
-    func_dl.ccc(testes.series, testes.episode, testes.url, testes.id, testes.paths, testes.output)
+    func_dl.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
     if   variable.arg == "dow":
@@ -29,7 +29,7 @@ def main():
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)
       testes.integrate(scraper.url, variable.storage_path, bmw)
-      func_dl.ccc(testes.series, testes.episode, testes.url, testes.id, testes.paths, testes.output)
+      func_dl.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 
   else:
     exit("Invailed Argment!")

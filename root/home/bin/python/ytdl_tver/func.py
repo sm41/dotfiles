@@ -13,7 +13,7 @@ class gen_var:
     self.arg = argv[1]
     __env_dl    = getenv("CLIENT_NETWORK_STORAGE_misc")
     __env_state = getenv("XDG_STATE_HOME")
-    self.storage_path = abc.anlys_path(__env_dl, "@tver")
+    self.storage_path = abc.ctrl_path.anlys_path(__env_dl, "@tver")
     self.loaded_yaml  = abc.load_yaml(__env_state, "python", "tver.yaml")
 
 
