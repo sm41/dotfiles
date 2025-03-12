@@ -9,15 +9,52 @@ from sys  import argv, exit
 from plyer import notification
 
 
-def check_arg():
-  if(len(argv) <= 1):
-    exit('You need args!')
+class check_any:
+  def __init__(self):
+    pass
+
+  def check_arg():
+    if(len(argv) <= 1):
+      exit('You need args!')
+
+  def check_status_code(subject):
+    if subject.getcode() != 200:
+      print(f"Status Code is {subject.getcode()} !!")
+      exit()
 
 
-def check_status_code(subject):
-  if subject.getcode() != 200:
-    print(f"Status Code is {subject.getcode()} !!")
-    exit()
+class ctrl_file:
+  def __init__(self, input):
+    pass
+
+  def zen2han(input):
+    z_digit = '＃（）： 　／１２３４５６７８９０ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
+    h_digit = '#():__-1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+    z2h_digit = str.maketrans(z_digit, h_digit)
+    output    = input.translate(z2h_digit)
+    return output
+
+  def get_basename(input):
+    return Path(input).stem
+
+  def get_ext(input):
+    return Path(input).suffix
+
+
+class ctrl_path:
+  def __init__(self):
+    pass
+
+  def rnm(bfr_path, aftr_path):
+    oldpath = Path(bfr_path)
+    newpath = Path(aftr_path)
+    shutil.move(oldpath, newpath)
+
+  def anlys_path(*path_parts):
+    down_dir = Path(*path_parts)
+    down_dir.mkdir(parents=True, exist_ok=True)
+    return down_dir
 
 
 def dow_yesterday(day_int:int):
@@ -29,15 +66,6 @@ def dow_yesterday(day_int:int):
   return y_dow_str
 
 
-def zen2han(input):
-  z_digit = '＃（）： 　／１２３４５６７８９０ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
-  h_digit = '#():__-1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-
-  z2h_digit = str.maketrans(z_digit, h_digit)
-  iop = input.translate(z2h_digit)
-  return iop
-
-
 def load_yaml(*path_parts):
   filename = Path(*path_parts)
   with filename.open(mode='r') as f:
@@ -47,25 +75,29 @@ def load_yaml(*path_parts):
 
 def makesoup(url):
   get_xml = request.urlopen(url)
-  check_status_code(get_xml)
+  check_any.check_status_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
   return soup
 
 
-def ntfy(result, upper, lower):
+def ntfy(result, text):
   if result.returncode == 0:
-    notification.notify(title = "✅ Success", message = f"{upper}\n{lower}")
+    notification.notify(title = "✅ Success", message = text)
   else:
-    notification.notify(title = "⚠️ failed", message = f"{upper}\n{lower}")
+    notification.notify(title = "⚠️ failed", message = text)
 
 
-def rnm(bfr_dir, bfr_name, aftr_dir, aftr_name):
-  oldpath = Path(bfr_dir, bfr_name)
-  newpath = Path(aftr_dir, aftr_name)
-  shutil.move(oldpath, newpath)
+def byte_count(input, limit=245):
+  length = len(str(input).encode('utf-8'))
 
+  if length < limit:
+      return input
 
-def anlys_path(*path_parts):
-  down_dir = Path(*path_parts)
-  down_dir.mkdir(parents=True, exist_ok=True)
-  return down_dir
+  if length > limit:
+      ttt = input[:-1]
+      result = byte_count(ttt, limit) # 再帰呼び出しの結果を返す
+
+      if len(result.encode('utf-8')) < limit:
+          return result + "[@]"
+      else:
+          return result
