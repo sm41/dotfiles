@@ -13,10 +13,12 @@ class check_any:
   def __init__(self):
     pass
 
+  @staticmethod
   def check_arg():
-    if(len(argv) <= 1):
+    if len(argv) <= 1:
       exit('You need args!')
 
+  @staticmethod
   def check_status_code(subject):
     if subject.getcode() != 200:
       print(f"Status Code is {subject.getcode()} !!")
@@ -24,8 +26,22 @@ class check_any:
 
 
 class ctrl_file:
-  def __init__(self, input):
+  def __init__(self):
     pass
+
+  def byte_count(input, limit=245):
+    length = len(str(input).encode('utf-8'))
+
+    if length < limit:
+        return input
+
+    if length > limit:
+        ttt = input[:-1]
+        result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
+
+        if len(result.encode('utf-8')) < limit:
+            return result + "[@]"
+        return result
 
   def zen2han(input):
     z_digit = '＃（）： 　／１２３４５６７８９０ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
@@ -46,11 +62,13 @@ class ctrl_path:
   def __init__(self):
     pass
 
+  @staticmethod
   def rnm(bfr_path, aftr_path):
     oldpath = Path(bfr_path)
     newpath = Path(aftr_path)
     shutil.move(oldpath, newpath)
 
+  @staticmethod
   def anlys_path(*path_parts):
     down_dir = Path(*path_parts)
     down_dir.mkdir(parents=True, exist_ok=True)
@@ -73,7 +91,7 @@ def load_yaml(*path_parts):
   return y_data
 
 
-def makesoup(url):
+def xml2soup(url):
   get_xml = request.urlopen(url)
   check_any.check_status_code(get_xml)
   soup = BeautifulSoup(get_xml, "xml")
@@ -86,18 +104,3 @@ def ntfy(result, text):
   else:
     notification.notify(title = "⚠️ failed", message = text)
 
-
-def byte_count(input, limit=245):
-  length = len(str(input).encode('utf-8'))
-
-  if length < limit:
-      return input
-
-  if length > limit:
-      ttt = input[:-1]
-      result = byte_count(ttt, limit) # 再帰呼び出しの結果を返す
-
-      if len(result.encode('utf-8')) < limit:
-          return result + "[@]"
-      else:
-          return result
