@@ -14,6 +14,8 @@ class gen_var:
     self.download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.state_file_dir = getenv("XDG_STATE_HOME")
     self.storage_dir    = abc.ctrl_path.anlys_path(self.download_dir, "@podcast")
+    self.y_dow          = abc.dow_yesterday(1)
+    self.loaded_yaml    = abc.load_yaml(self.state_file_dir, "python", "ppp.yaml")
 
 
 class gen_tag:
@@ -27,7 +29,7 @@ class gen_tag:
     self.img     = __root_obj.image.url.string.split('?')[0]
     self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
     self.ext     = abc.ctrl_file.get_ext(self.url)
-    self.name    = abc.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
+    self.name    = abc.ctrl_file.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
 class check_arg:
