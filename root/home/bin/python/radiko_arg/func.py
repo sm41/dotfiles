@@ -42,26 +42,19 @@ class set_arg:
 
 
 class gen_var:
-  def __init__(self):
-    self.tmp_dir  = "/tmp"
-    __env_dir  = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
-
-
-class gen_link:
   def __init__(self, station_id):
-    self.auth1_url = "https://radiko.jp/v2/api/auth1"
-    self.auth2_url = "https://radiko.jp/v2/api/auth2"
-    self.authkey   = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
-    self.url = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
+    self.tmp_dir      = "/tmp"
+    __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
+    self.url          = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 
 
 class time:
   def __init__(self, day_int):
-    __get_now  = datetime.now()
-    __get_past = __get_now - timedelta(day_int)
+    __get_now      = datetime.now()
+    __get_past     = __get_now - timedelta(day_int)
     self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
-    self.days_ago = __get_past.strftime('%Y%m%d%H%M')+'00'
+    self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
 def search_program(find_list, today_now, days_ago, fftt):
@@ -118,20 +111,20 @@ def branch(program_list, dl_flag):
     exit()
 
 
-class s_pr:
-  def __init__(self, find_list, today_now, days_ago, fftt):
+# class s_pr:
+#   def __init__(self, find_list, today_now, days_ago, fftt):
 
-    for keyword in find_list:
-      prog_detail = keyword.parent
-      if   days_ago >  prog_detail.attrs['to'] >  today_now:
-        continue
-      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+#     for keyword in find_list:
+#       prog_detail = keyword.parent
+#       if   days_ago >  prog_detail.attrs['to'] >  today_now:
+#         continue
+#       elif days_ago <= prog_detail.attrs['to'] <= today_now:
 
-        self.ft =  prog_detail.attrs['ft'],
-        self.to =  prog_detail.attrs['to'],
-        self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-        self.title =  abc.ctrl_file.zen2han(prog_detail.title.string),
-        self.img   =  prog_detail.img.string,
+#         self.ft =  prog_detail.attrs['ft'],
+#         self.to =  prog_detail.attrs['to'],
+#         self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
+#         self.title =  abc.ctrl_file.zen2han(prog_detail.title.string),
+#         self.img   =  prog_detail.img.string,
 
 
 

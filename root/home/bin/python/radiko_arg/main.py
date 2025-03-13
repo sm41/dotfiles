@@ -18,13 +18,12 @@ from mytool import abc
 def main():
 
   setarg   = func.set_arg()
-  linker   = func.gen_link(setarg.station_id)
-  valiable = func.gen_var()
+  valiable = func.gen_var(setarg.station_id)
   time     = func.time(7)
   fff      = func.fastforward()
-  ooo      = func_auth.oth(linker.auth1_url, linker.auth2_url, linker.authkey)
+  ooo      = func_auth.oth()
 
-  soup = abc.makesoup(linker.url)
+  soup = abc.xml2soup(valiable.url)
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
   program_list = func.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
@@ -36,7 +35,6 @@ def main():
   fff.enc(valiable.tmp_dir, valiable.storage_path, filename, img)
   result_2  = run(fff.encode)
   # print(fff.download)
-
 
   if result_1.returncode == 0:
     remove(f"{valiable.tmp_dir}/{filename}.m4a")
