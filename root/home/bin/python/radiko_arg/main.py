@@ -23,7 +23,7 @@ def main():
   fff      = func.fastforward()
   ooo      = func_auth.oth()
 
-  soup = abc.xml2soup(valiable.url)
+  soup = abc.data2soup(valiable.url, "xml")
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
   program_list = func.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
