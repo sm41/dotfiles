@@ -16,7 +16,7 @@ class gen_var:
     __env_dl          = getenv("CLIENT_NETWORK_STORAGE_misc")
     __env_state       = getenv("XDG_STATE_HOME")
     self.storage_path = abc.ctrl_path.anlys_path(__env_dl, "@tver")
-    self.loaded_yaml  = abc.load_yaml(__env_state, "python", "tver.yaml")
+    self.loaded_yaml  = abc.load_file(__env_state, "python", "tver.yaml")
     self.y_dow        = abc.dow_yesterday(1)
 
 
@@ -39,7 +39,7 @@ class scrp:
     self.url = "https://tver.jp" + __url
 
 
-class rty:
+class anlys:
   def __init__(self):
     self.result_list = []
 
@@ -71,12 +71,7 @@ class rty:
 
 class test:
   def __init__(self):
-    self.__pre_series  = "series"
-    self.__pre_episode = "episode"
-    self.__pre_url     = "original_url"
-    self.__pre_filname = "filename"
-    self.__pre_ext     = "ext"
-    self.__pre_id      = "id"
+    pass
 
   def get_base_yaml(self, loaded_yaml):
     self.config = loaded_yaml['tver']['_http']
@@ -87,26 +82,26 @@ class test:
       "yt-dlp",
         "--paths",  f"home:{down_dir}",
         "--output", f"{__header}",
-        "--print",  self.__pre_series,
-        "--print",  self.__pre_episode,
-        "--print",  self.__pre_url,
-        "--print",  self.__pre_filname,
-        "--print",  self.__pre_ext,
-        "--print",  self.__pre_id,
+        "--print",  "series",
+        "--print",  "episode",
+        "--print",  "original_url",
+        "--print",  "filename",
+        "--print",  "ext",
+        "--print",  "id",
       url
     ]
     __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
-    self.series, self.episode, self.url, __ppp, self.ext, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__ppp).parent, abc.ctrl_file.zen2han(Path(__ppp).stem)
+    self.series, self.episode, self.url, __filename, self.ext, self.id = __ddd.splitlines()
+    self.paths, self.output = Path(__filename).parent, abc.ctrl_file.zen2han(Path(__filename).stem)
 
 
-def ytdlp(paths, id, ext, link):
+def ytdlp(paths, id, ext, url):
   method = [
     "yt-dlp",
       "--embed-subs",
       "--paths",  str(paths),
       "--output", f"{id}.{ext}",
-    link
+    url
   ]
   return method
 
@@ -116,5 +111,5 @@ def ccc(series, episode, url, ext, id, paths, output):
   # print(method)
   result = run(method)
   output = abc.ctrl_file.byte_count(output, 245)
-  abc.ctrl_path.rnm(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
+  abc.ctrl_path.rnm_path(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
   abc.ntfy(result, f"{series}\n{episode}")

@@ -7,9 +7,7 @@ import func
 def main():
   abc.check_any.check_arg()
   variable = func.gen_var()
-  scraper  = func.scrp()
   testes   = func.test()
-  dfgh     = func.rty()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
     testes.get_base_yaml(variable.loaded_yaml)
@@ -17,13 +15,15 @@ def main():
     func.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
+    scraper = func.scrp()
+    anlys   = func.anlys()
 
     if   variable.arg == "dow":
-      dfgh.find_key_value_list(variable.loaded_yaml, variable.y_dow)
+      anlys.find_key_value_list(variable.loaded_yaml, variable.y_dow)
     elif variable.arg != "dow":
-      dfgh.find_key_dict(variable.loaded_yaml, variable.arg)
+      anlys.find_key_dict(variable.loaded_yaml, variable.arg)
 
-    for bmw in dfgh.result_list:
+    for bmw in anlys.result_list:
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)
       testes.integrate(scraper.url, variable.storage_path, bmw)
