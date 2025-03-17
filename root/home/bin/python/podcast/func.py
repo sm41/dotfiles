@@ -15,11 +15,14 @@ class gen_var:
     self.state_file_dir = getenv("XDG_STATE_HOME")
     self.storage_dir    = abc.ctrl_path.anlys_path(self.download_dir, "@podcast")
     self.y_dow          = abc.dow_yesterday(1)
-    self.loaded_yaml    = abc.load_yaml(self.state_file_dir, "python", "ppp.yaml")
+    self.loaded_yaml    = abc.load_file(self.state_file_dir, "python", "ppp.yaml")
 
 
 class gen_tag:
-  def __init__(self, soup):
+  def __init__(self):
+    pass
+
+  def hoge(self, soup):
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
 
