@@ -68,11 +68,11 @@ tver:
     dow    : [水]
     header : *header_drama
 
-  dragon:
-    title  : 法廷のドラゴン
-    url    : https://tver.jp/series/srfzo5ibu1
-    dow    : [金]
-    header : *header_drama
+  # dragon:
+  #   title  : 法廷のドラゴン
+  #   url    : https://tver.jp/series/srfzo5ibu1
+  #   dow    : [金]
+  #   header : *header_drama
 
   dance:
     title  : クジャクのダンス、誰が見た？

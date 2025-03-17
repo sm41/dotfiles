@@ -36,12 +36,12 @@ class ctrl_file:
         return input
 
     if length > limit:
-        ttt = input[:-1]
-        result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
+      ttt = input[:-1]
+      result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
 
-        if len(result.encode('utf-8')) < limit:
-            return result + "[@]"
-        return result
+      if len(result.encode('utf-8')) < limit:
+        return result + "[@]"
+      return result
 
   def zen2han(input):
     z_digit = '＃（）： 　／１２３４５６７８９０ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
@@ -63,7 +63,7 @@ class ctrl_path:
     pass
 
   @staticmethod
-  def rnm(bfr_path, aftr_path):
+  def rnm_path(bfr_path, aftr_path):
     oldpath = Path(bfr_path)
     newpath = Path(aftr_path)
     shutil.move(oldpath, newpath)
@@ -84,17 +84,17 @@ def dow_yesterday(day_int:int):
   return y_dow_str
 
 
-def load_yaml(*path_parts):
+def load_file(*path_parts):
   filename = Path(*path_parts)
   with filename.open(mode='r') as f:
     y_data = load(f, Loader=FullLoader)
   return y_data
 
 
-def xml2soup(url):
+def data2soup(url, type):
   get_xml = request.urlopen(url)
   check_any.check_status_code(get_xml)
-  soup = BeautifulSoup(get_xml, "xml")
+  soup = BeautifulSoup(get_xml, type)
   return soup
 
 
