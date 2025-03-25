@@ -1,8 +1,13 @@
 
+# https://scrapbox.io/Mijinko/yt-dlp_--format
+
 --concurrent-fragments 5
 # --write-info-json
 # --no-clean-infojson
 --embed-thumbnail
+--embed-metadata
+--embed-chapters
+--embed-info-json
 --embed-subs
 
 # --paths infojson:/tmp
@@ -10,15 +15,16 @@
 --paths home:${CLIENT_NETWORK_STORAGE_misc}/temp
 
 --output "%(title)s_[%(id)s].%(ext)s"
---format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"
+--format "( bv[vcodec !~= 'vp0?9'] + ba )[ ext ~= '(mp4|mp3)' ]"
+# --format "bv[vcodec !~= 'vp0?9']+ba[acodec ~= 'mp?4a?'] / [ext ~= '(mp4|mp3)']"
 --merge-output-format "mp4"
 
 
---replace-in-metadata "series"  " " "_"
---replace-in-metadata "series"  "　" "_"
+--replace-in-metadata "series"   " "   "_"
+--replace-in-metadata "series"   "　"   "_"
 
---replace-in-metadata "title"   " " "_"
---replace-in-metadata "title"   "　" "_"
+--replace-in-metadata "title"    " "   "_"
+--replace-in-metadata "title"    "　"   "_"
 
---replace-in-metadata "episode"  " " "_"
---replace-in-metadata "episode"  "　" "_"
+--replace-in-metadata "episode"  " "   "_"
+--replace-in-metadata "episode"  "　"   "_"

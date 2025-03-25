@@ -8,6 +8,8 @@ def main():
   abc.check_any.check_arg()
   variable = func.gen_var()
   testes   = func.test()
+  scraper  = func.scrp()
+  anlys    = func.anlys()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
     testes.get_base_yaml(variable.loaded_yaml)
@@ -15,9 +17,6 @@ def main():
     func.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
-    scraper = func.scrp()
-    anlys   = func.anlys()
-
     if   variable.arg == "dow":
       anlys.find_key_value_list(variable.loaded_yaml, variable.y_dow)
     elif variable.arg != "dow":
@@ -26,6 +25,7 @@ def main():
     for bmw in anlys.result_list:
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)
+      # print(scraper.url)
       testes.integrate(scraper.url, variable.storage_path, bmw)
       func.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 

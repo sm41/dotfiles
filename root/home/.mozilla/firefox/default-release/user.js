@@ -90,8 +90,6 @@ user_pref("mousewheel.with_meta.action",0);                // ━╋━ ( 0:"何
 user_pref("mousewheel.with_shift.action",0);               // ━┫
 user_pref("mousewheel.with_win.action",0);                 // ━┛
 
-// user_pref("network.dns.disablePrefetch",false);             // DNS Prefetch の無効化
-// user_pref("network.dns.disablePrefetchFromHTTPS",false);    // DNS Prefetch の無効化
 user_pref("network.dns.echconfig.enabled",true);           // ECH (Encrypted Client Hello)
 user_pref("network.dns.http3_echconfig.enabled",true);     // ECH (Encrypted Client Hello)
 user_pref("network.dns.use_https_rr_as_altsvc",true);      // ECH (Encrypted Client Hello)
@@ -103,7 +101,6 @@ user_pref("network.IDN_show_punycode",true);               // ホモグラフ攻
 user_pref("network.prefetch-next",false);                  // Prefetch の有効化
 
 user_pref("network.trr.mode",3);                           // "Trusted Recursive Resolver" の挙動 ( 0: defaultでTRRを使わない / 1: より速い方を使用 / 2: TRRを優先的に使い普通のDNSも使う / 3: TRRだけを使う )
-user_pref("network.trr.wait-for-portal",true);             //
 
 
 // "https://blog.halpas.com/archives/2938" / "https://en.wikipedia.org/wiki/Public_recursive_name_server"
@@ -111,7 +108,7 @@ user_pref("network.trr.wait-for-portal",true);             //
 // user_pref("network.trr.bootstrapAddress","1.1.1.2");                                // Cloudflare
 // user_pref("network.trr.uri","https://security.cloudflare-dns.com/dns-query");       // Cloudflare
 user_pref("network.trr.bootstrapAddress","208.67.222.222");                         // OpenDNS (Cisco)
-user_pref("network.trr.uri","https://doh.opendns.com/dns-query");                   // OpenDNS (Cisco)
+user_pref("network.trr.uri","https://dns.umbrella.com/dns-query");                   // OpenDNS (Cisco)
 
 // user_pref("privacy.webrtc.hideGlobalIndicator",true);                     // discord ???
 user_pref("permissions.default.camera",2);                                //0 オプション  ->  プライバシーとセキュリティ  ->  許可設定  ->  カメラ    ( 0:Ask / 1.Always / 2.Never )
@@ -149,4 +146,5 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets",true);    // use
 user_pref("toolkit.tabbox.switchByScrolling",true);                       // タブ上でのホイールによる移動の有効化
 
 user_pref("ui.submenuDelay",25);                                          // 【新規作成】サブメニュー表示 の遅延時間(マイクロ秒)
-
+// user_pref("sidebar.expandOnHover",true);                                 //
+// user_pref("sidebar.animation.expand-on-hover.duration-ms",25);           //

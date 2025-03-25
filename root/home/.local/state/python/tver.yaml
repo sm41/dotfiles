@@ -32,11 +32,11 @@ tver:
 
 
   # drama:
-  mikami:
-    title  : 御上先生
-    url    : https://tver.jp/series/sr2wexxwqg
-    dow    : [日]
-    header : *header_drama
+  # mikami:
+  #   title  : 御上先生
+  #   url    : https://tver.jp/series/sr2wexxwqg
+  #   dow    : [日]
+  #   header : *header_drama
 
   call:
     title  : 119エマージェンシーコール
@@ -50,11 +50,11 @@ tver:
     dow    : [月]
     header : *header_drama
 
-  madoka:
-    title  : まどか26歳、研修医やってます！
-    url    : https://tver.jp/series/sr2wopca43
-    dow    : [火]
-    header : *header_drama
+  # madoka:
+  #   title  : まどか26歳、研修医やってます！
+  #   url    : https://tver.jp/series/sr2wopca43
+  #   dow    : [火]
+  #   header : *header_drama
 
   eyesee:
     title  : アイシー～瞬間記憶捜査・柊班～
