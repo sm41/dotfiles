@@ -57,75 +57,65 @@ class time:
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
-def search_program(find_list, today_now, days_ago, fftt):
+class wsx:
 
-  program_list = []
+  def __init__(self):
+    self.program_list = []
 
-  for keyword in find_list:
-    prog_detail = keyword.parent
-    if   days_ago >  prog_detail.attrs['to'] >  today_now:
-      continue
-    elif days_ago <= prog_detail.attrs['to'] <= today_now:
-      ddd = {
-        "ft":       prog_detail.attrs['ft'],
-        "to":       prog_detail.attrs['to'],
-        "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-        "img":      prog_detail.img.string,
-        "title":    abc.ctrl_file.zen2han(prog_detail.title.string),
-      }
-      program_list.append(ddd)
+  def search_program(self, find_list, today_now, days_ago, fftt):
 
-
-  if fftt is None:
-    return program_list
-
-  elif len(fftt) != 14:
-    exit("There is an error in the '-ft' option")
-
-  elif len(fftt) == 14:
-    hogefuga_list = []
-    for rrr in program_list:
-      if rrr['ft'] == fftt:
-        hogefuga_list.append(rrr)
-    return hogefuga_list
+    for keyword in find_list:
+      prog_detail = keyword.parent
+      if   days_ago >  prog_detail.attrs['to'] >  today_now:
+        continue
+      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+        ddd = {
+          "ft":       prog_detail.attrs['ft'],
+          "to":       prog_detail.attrs['to'],
+          "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
+          "img":      prog_detail.img.string,
+          "title":    abc.ctrl_file.zen2han(prog_detail.title.string),
+        }
+        self.program_list.append(ddd)
 
 
-def branch(program_list, dl_flag):
+    if fftt is None:
+      pass
 
-  if len(program_list) == 1:
-    if dl_flag:
-      return program_list[0]['ft'], program_list[0]['to'], f"{program_list[0]['title']}_{program_list[0]['time']}", program_list[0]['img']
+    elif len(fftt) != 14:
+      exit("There is an error in the '-ft' option")
+
+    elif len(fftt) == 14:
+      self.hogefuga_list = []
+      for rrr in self.program_list:
+        if rrr['ft'] == fftt:
+          self.hogefuga_list.append(rrr)
+          break
+      self.program_list = self.hogefuga_list
+
+
+  def branch(self, program_list, dl_flag):
+
+    if len(program_list) == 1:
+      if dl_flag:
+        self.time_ft  = program_list[0]['ft']
+        self.time_to  = program_list[0]['to']
+        self.filename = f"{program_list[0]['title']}_{program_list[0]['time']}"
+        self.img      = program_list[0]['img']
+      else:
+        print(program_list)
+        print("✅ You can download it by adding '-dl' flag")
+        exit()
     else:
-      print(program_list)
-      print("✅ You can download it by adding '-dl' flag")
-    exit()
-  else:
-    if dl_flag:
-      notification.notify(title = "⚠️ failed",  message = "Not One")
-    elif program_list:
-      for vvv in program_list:
-        print(vvv)
-      print(f"📢 Result {len(program_list)} Programs")
-    else:
-      print("⚠️ Program is Not Found !!")
-    exit()
-
-
-# class s_pr:
-#   def __init__(self, find_list, today_now, days_ago, fftt):
-
-#     for keyword in find_list:
-#       prog_detail = keyword.parent
-#       if   days_ago >  prog_detail.attrs['to'] >  today_now:
-#         continue
-#       elif days_ago <= prog_detail.attrs['to'] <= today_now:
-
-#         self.ft =  prog_detail.attrs['ft'],
-#         self.to =  prog_detail.attrs['to'],
-#         self.time  =  f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
-#         self.title =  abc.ctrl_file.zen2han(prog_detail.title.string),
-#         self.img   =  prog_detail.img.string,
-
+      if dl_flag:
+        notification.notify(title = "⚠️ failed",  message = "Not One")
+      elif program_list:
+        for vvv in program_list:
+          print(vvv)
+        print(f"📢 Result {len(program_list)} Programs")
+      else:
+        print("⚠️ Program is Not Found !!")
+      exit()
 
 
 class fastforward:

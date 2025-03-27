@@ -1,7 +1,7 @@
 
-from os import getenv, remove
+from os import remove
 from re import compile, IGNORECASE
-from plyer import notification
+# from plyer import notification
 from subprocess import run
 import func, func_auth
 from mytool import abc
@@ -22,24 +22,25 @@ def main():
   time     = func.time(7)
   fff      = func.fastforward()
   ooo      = func_auth.oth()
+  vbn      = func.wsx()
 
   soup = abc.data2soup(valiable.url, "xml")
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
-  program_list = func.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
-  time_ft, time_to, filename, img = func.branch(program_list, setarg.dl_flag)
+  vbn.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
+  vbn.branch(vbn.program_list, setarg.dl_flag)
 
-  fff.dl(ooo.xrat, setarg.station_id, time_ft, time_to, valiable.tmp_dir, filename)
-  result_1  = run(fff.download)
+  fff.dl(ooo.xrat, setarg.station_id, vbn.time_ft, vbn.time_to, valiable.tmp_dir, vbn.filename)
+  fff.enc(valiable.tmp_dir, valiable.storage_path, vbn.filename, vbn.img)
 
-  fff.enc(valiable.tmp_dir, valiable.storage_path, filename, img)
-  result_2  = run(fff.encode)
+  result_1 = run(fff.download)
+  result_2 = run(fff.encode)
   # print(fff.download)
 
   if result_1.returncode == 0:
-    remove(f"{valiable.tmp_dir}/{filename}.m4a")
+    remove(f"{valiable.tmp_dir}/{vbn.filename}.m4a")
 
-  abc.ntfy(result_2, f"{filename}.mp3")
+  abc.ntfy(result_2, f"{vbn.filename}.mp3")
 
 
 if __name__ == "__main__":

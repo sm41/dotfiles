@@ -25,7 +25,6 @@ def main():
     for bmw in anlys.result_list:
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)
-      # print(scraper.url)
       testes.integrate(scraper.url, variable.storage_path, bmw)
       func.ccc(testes.series, testes.episode, testes.url, testes.ext, testes.id, testes.paths, testes.output)
 

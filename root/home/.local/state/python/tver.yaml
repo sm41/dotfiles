@@ -56,17 +56,17 @@ tver:
   #   dow    : [火]
   #   header : *header_drama
 
-  eyesee:
-    title  : アイシー～瞬間記憶捜査・柊班～
-    url    : https://tver.jp/series/sri5u7y01n
-    dow    : [火]
-    header : *header_drama
+  # eyesee:
+  #   title  : アイシー～瞬間記憶捜査・柊班～
+  #   url    : https://tver.jp/series/sri5u7y01n
+  #   dow    : [火]
+  #   header : *header_drama
 
-  mondai:
-    title  : 問題物件
-    url    : https://tver.jp/series/sromzosp1f
-    dow    : [水]
-    header : *header_drama
+  # mondai:
+  #   title  : 問題物件
+  #   url    : https://tver.jp/series/sromzosp1f
+  #   dow    : [水]
+  #   header : *header_drama
 
   # dragon:
   #   title  : 法廷のドラゴン
