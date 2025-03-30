@@ -1,7 +1,7 @@
 
 from subprocess import run
-from pathlib  import Path
-from mytool import abc
+from pathlib import Path
+from mytool  import abc
 import func
 
 
@@ -22,7 +22,6 @@ def main():
     source.hoge(soup)
     download = func.dl(source.url, source.img, source.name, source.ext, variable.tmp_dir)
     result   = run(download)
-    # print(download)
     abc.ctrl_path.rnm_path(Path(variable.tmp_dir, source.name + source.ext), Path(variable.storage_dir, source.name + source.ext))
     abc.ntfy(result, f"{source.series}\n{source.episode}")
 

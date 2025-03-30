@@ -5,12 +5,10 @@
 --embed-thumbnail
 --embed-metadata
 --embed-chapters
-# --embed-info-json
 --embed-subs
 
 --convert-thumbnails 'jpg'
 
-# --paths infojson:/tmp
 --paths temp:${CLIENT_NETWORK_STORAGE_misc}
 --paths home:${CLIENT_NETWORK_STORAGE_misc}/temp
 

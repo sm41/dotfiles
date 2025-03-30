@@ -33,9 +33,9 @@ tver:
 
   # drama:
   # mikami:
-  #   title  : 御上先生
-  #   url    : https://tver.jp/series/sr2wexxwqg
-  #   dow    : [日]
+  #   title  :
+  #   url    :
+  #   dow    :
   #   header : *header_drama
 
   call:
@@ -51,32 +51,32 @@ tver:
     header : *header_drama
 
   # madoka:
-  #   title  : まどか26歳、研修医やってます！
-  #   url    : https://tver.jp/series/sr2wopca43
-  #   dow    : [火]
+  #   title  :
+  #   url    :
+  #   dow    :
   #   header : *header_drama
 
   # eyesee:
-  #   title  : アイシー～瞬間記憶捜査・柊班～
-  #   url    : https://tver.jp/series/sri5u7y01n
-  #   dow    : [火]
+  #   title  :
+  #   url    :
+  #   dow    :
   #   header : *header_drama
 
   # mondai:
-  #   title  : 問題物件
-  #   url    : https://tver.jp/series/sromzosp1f
-  #   dow    : [水]
+  #   title  :
+  #   url    :
+  #   dow    :
   #   header : *header_drama
 
   # dragon:
-  #   title  : 法廷のドラゴン
-  #   url    : https://tver.jp/series/srfzo5ibu1
-  #   dow    : [金]
+  #   title  :
+  #   url    :
+  #   dow    :
   #   header : *header_drama
 
-  dance:
-    title  : クジャクのダンス、誰が見た？
-    url    : https://tver.jp/series/sruwkvjipf
-    dow    : [金]
-    header : *header_drama
+  # dance:
+  #   title  :
+  #   url    :
+  #   dow    :
+  #   header : *header_drama
 
