@@ -35,48 +35,48 @@ tver:
   # mikami:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 
-  call:
-    title  : 119エマージェンシーコール
-    url    : https://tver.jp/series/sryavii6ry
-    dow    : [月]
-    header : *header_drama
+  # call:
+  #   title  :
+  #   url    :
+  #   dow    : []
+  #   header : *header_drama
 
-  secret:
-    title  : 秘密～THE TOP SECRET～
-    url    : https://tver.jp/series/sr9o8p6pm5
-    dow    : [月]
-    header : *header_drama
+  # secret:
+  #   title  :
+  #   url    :
+  #   dow    : []
+  #   header : *header_drama
 
   # madoka:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 
   # eyesee:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 
   # mondai:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 
   # dragon:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 
   # dance:
   #   title  :
   #   url    :
-  #   dow    :
+  #   dow    : []
   #   header : *header_drama
 

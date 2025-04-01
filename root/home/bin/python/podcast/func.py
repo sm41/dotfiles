@@ -38,15 +38,16 @@ class gen_tag:
 class check_arg:
   def __init__(self):
     self.eee = []
+    self.__platform = 'megaphone'
 
   def today_list(self, y_data, y_dow_str):
-    for key, value in y_data['megaphone'].items():
+    for key, value in y_data[self.__platform].items():
       for pln in value['dow']:
         if pln == y_dow_str:
           self.eee.append({**value, "plan": pln})
 
   def series_name(self, y_data, args):
-    for ttl, cnfg in y_data['megaphone'].items():
+    for ttl, cnfg in y_data[self.__platform].items():
       if ttl == args:
         self.eee.append({**cnfg})
 
