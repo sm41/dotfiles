@@ -51,6 +51,7 @@ user_pref("browser.tabs.maxOpenBeforeWarn",2);             // タブを同時に
 
 user_pref("browser.urlbar.suggest.topsites",false);        // オプション  ->  プライバシーとセキュリティ  ->  ブラウザープライバシー  ->  アドレスバー  ->  トップサイト
 user_pref("browser.urlbar.suggest.history",false);         // オプション  ->  プライバシーとセキュリティ  ->  ブラウザープライバシー  ->  アドレスバー  ->  ブラウジング履歴
+user_pref("browser.urlbar.suggest.trending",false);        // オプション  ->  検索  ->  検索候補  ->  トレンド検索の候補を表示する
 
 user_pref("browser.zoom.siteSpecific",false);              // サイトごとの拡大・縮小を記憶する
 

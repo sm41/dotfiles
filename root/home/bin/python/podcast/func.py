@@ -1,28 +1,28 @@
 
 from datetime import datetime, date, timedelta
 from locale import setlocale, LC_TIME, LC_ALL
-# from bs4 import BeautifulSoup
 from mytool import abc
 from os  import getenv
 from sys import argv
+from dataclasses import dataclass, InitVar, field
 
-
+@dataclass
 class gen_var:
-  def __init__(self):
-    self.arg            = argv[1]
-    self.tmp_dir        = "/tmp"
-    self.download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.state_file_dir = getenv("XDG_STATE_HOME")
-    self.storage_dir    = abc.ctrl_path.anlys_path(self.download_dir, "@podcast")
-    self.y_dow          = abc.dow_yesterday(1)
-    self.loaded_yaml    = abc.load_file(self.state_file_dir, "python", "ppp.yaml")
+  def __post_init__(self):
+    self.arg          = argv[1]
+    self.tmp_dir      = "/tmp"
+    download_dir      = getenv("CLIENT_NETWORK_STORAGE_misc")
+    state_file_dir    = getenv("XDG_STATE_HOME")
+    self.storage_dir  = abc.ctrl_path.anlys_path(download_dir, "@podcast")
+    self.y_dow        = abc.dow_yesterday(1)
+    self.loaded_yaml  = abc.load_file(state_file_dir, "python", "ppp.yaml")
 
 
+@dataclass
 class gen_tag:
-  def __init__(self):
-    pass
+  soup: InitVar
 
-  def hoge(self, soup):
+  def __post_init__(self, soup):
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
 
@@ -35,21 +35,21 @@ class gen_tag:
     self.name    = abc.ctrl_file.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
+@dataclass
 class check_arg:
-  def __init__(self):
-    self.eee = []
-    self.__platform = 'megaphone'
+  __reserve: list = field(default_factory=list)
+  __platform: str = 'megaphone'
 
   def today_list(self, y_data, y_dow_str):
     for key, value in y_data[self.__platform].items():
       for pln in value['dow']:
         if pln == y_dow_str:
-          self.eee.append({**value, "plan": pln})
+          self.__reserve.append({**value, "plan": pln})
 
   def series_name(self, y_data, args):
     for ttl, cnfg in y_data[self.__platform].items():
       if ttl == args:
-        self.eee.append({**cnfg})
+        self.__reserve.append({**cnfg})
 
 
 def change_format(episode_date):

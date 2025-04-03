@@ -8,22 +8,22 @@ from re  import compile
 from os  import getenv
 from sys import argv
 from mytool import abc
+from dataclasses import dataclass, field, InitVar
 
 
+@dataclass
 class gen_var:
-  def __init__(self):
+  def __post_init__(self):
     self.arg          = argv[1]
-    __env_dl          = getenv("CLIENT_NETWORK_STORAGE_misc")
-    __env_state       = getenv("XDG_STATE_HOME")
-    self.storage_path = abc.ctrl_path.anlys_path(__env_dl, "@tver")
-    self.loaded_yaml  = abc.load_file(__env_state, "python", "tver.yaml")
+    self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.__env_state  = getenv("XDG_STATE_HOME")
+    self.storage_path = abc.ctrl_path.anlys_path(self.__env_dl, "@tver")
+    self.loaded_yaml  = abc.load_file(self.__env_state, "python", "tver.yaml")
     self.y_dow        = abc.dow_yesterday(1)
 
 
+@dataclass
 class scrp:
-  def __init__(self):
-    pass
-
   def selenium(self, url):
     __fx_options = webdriver.FirefoxOptions()
     __fx_options.add_argument("--headless")
@@ -39,9 +39,9 @@ class scrp:
     self.url = "https://tver.jp" + __url
 
 
+@dataclass
 class anlys:
-  def __init__(self):
-    self.result_list = []
+  result_list: list = field(default_factory=list)
 
   def find_key_dict(self, data, target_key):
     if isinstance(data, dict):
@@ -69,10 +69,8 @@ class anlys:
               # break  # 同じtitleのデータが複数回追加されないようにする
 
 
+@dataclass
 class test:
-  def __init__(self):
-    pass
-
   def get_base_yaml(self, loaded_yaml):
     self.config = loaded_yaml['tver']['_http']
 

@@ -7,12 +7,11 @@ from yaml import load, FullLoader
 from bs4  import BeautifulSoup
 from sys  import argv, exit
 from plyer import notification
+from dataclasses import dataclass, InitVar, field
 
 
+@dataclass
 class check_any:
-  def __init__(self):
-    pass
-
   @staticmethod
   def check_arg():
     if len(argv) <= 1:
@@ -25,10 +24,8 @@ class check_any:
       exit()
 
 
+@dataclass
 class ctrl_file:
-  def __init__(self):
-    pass
-
   def byte_count(input, limit=245):
     length = len(str(input).encode('utf-8'))
 
@@ -58,10 +55,8 @@ class ctrl_file:
     return Path(input).suffix
 
 
+@dataclass
 class ctrl_path:
-  def __init__(self):
-    pass
-
   @staticmethod
   def rnm_path(bfr_path, aftr_path):
     oldpath = Path(bfr_path)
