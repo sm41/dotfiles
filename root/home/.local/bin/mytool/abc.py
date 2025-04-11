@@ -26,7 +26,7 @@ class check_any:
 
 @dataclass
 class ctrl_file:
-  def byte_count(input, limit=245):
+  def byte_count(input, limit=240):
     length = len(str(input).encode('utf-8'))
 
     if length < limit:
@@ -70,27 +70,30 @@ class ctrl_path:
     return down_dir
 
 
+@dataclass
+class gen_obj:
+  @staticmethod
+  def load_file(*path_parts):
+    filename = Path(*path_parts)
+    with filename.open(mode='r') as f:
+      y_data = load(f, Loader=FullLoader)
+    return y_data
+
+  @staticmethod
+  def data2soup(url, type):
+    get_xml = request.urlopen(url)
+    check_any.check_status_code(get_xml)
+    soup = BeautifulSoup(get_xml, type)
+    return soup
+
+
 def dow_yesterday(day_int:int):
   setlocale(LC_TIME, 'ja_JP.UTF-8')
 
-  d_today      = date.today()
-  d_yesterday  = d_today - timedelta( days = day_int )
-  y_dow_str = d_yesterday.strftime('%a')
+  d_today     = date.today()
+  d_yesterday = d_today - timedelta( days = day_int )
+  y_dow_str   = d_yesterday.strftime('%a')
   return y_dow_str
-
-
-def load_file(*path_parts):
-  filename = Path(*path_parts)
-  with filename.open(mode='r') as f:
-    y_data = load(f, Loader=FullLoader)
-  return y_data
-
-
-def data2soup(url, type):
-  get_xml = request.urlopen(url)
-  check_any.check_status_code(get_xml)
-  soup = BeautifulSoup(get_xml, type)
-  return soup
 
 
 def ntfy(result, text):

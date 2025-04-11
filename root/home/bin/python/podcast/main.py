@@ -16,13 +16,10 @@ def main():
   else:
     branch.series_name(variable.loaded_yaml, variable.arg)
 
-  for ttt in branch.eee:
-    soup = abc.data2soup(ttt['url'], "xml")
+  for ttt in branch.reserve_list:
+    soup = abc.gen_obj.data2soup(ttt['url'], "xml")
     source   = func.gen_tag(soup)
     download = func.dl(source.url, source.img, source.name, source.ext, variable.tmp_dir)
     result   = run(download)
     abc.ctrl_path.rnm_path(Path(variable.tmp_dir, source.name + source.ext), Path(variable.storage_dir, source.name + source.ext))
     abc.ntfy(result, f"{source.series}\n{source.episode}")
-
-if __name__ == "__main__":
-  main()

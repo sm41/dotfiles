@@ -1,5 +1,5 @@
 
-from datetime import datetime, date, timedelta
+from datetime import datetime
 from locale import setlocale, LC_TIME, LC_ALL
 from mytool import abc
 from os  import getenv
@@ -8,14 +8,15 @@ from dataclasses import dataclass, InitVar, field
 
 @dataclass
 class gen_var:
+  tmp_dir:str = "/tmp"
+
   def __post_init__(self):
     self.arg          = argv[1]
-    self.tmp_dir      = "/tmp"
-    download_dir      = getenv("CLIENT_NETWORK_STORAGE_misc")
-    state_file_dir    = getenv("XDG_STATE_HOME")
-    self.storage_dir  = abc.ctrl_path.anlys_path(download_dir, "@podcast")
+    __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")
+    __state_file_dir  = getenv("XDG_STATE_HOME")
+    self.storage_dir  = abc.ctrl_path.anlys_path(__download_dir, "@podcast")
+    self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "python", "ppp.yaml")
     self.y_dow        = abc.dow_yesterday(1)
-    self.loaded_yaml  = abc.load_file(state_file_dir, "python", "ppp.yaml")
 
 
 @dataclass
@@ -37,19 +38,19 @@ class gen_tag:
 
 @dataclass
 class check_arg:
-  __reserve: list = field(default_factory=list)
+  reserve_list: list = field(default_factory=list)
   __platform: str = 'megaphone'
 
   def today_list(self, y_data, y_dow_str):
     for key, value in y_data[self.__platform].items():
       for pln in value['dow']:
         if pln == y_dow_str:
-          self.__reserve.append({**value, "plan": pln})
+          self.reserve_list.append({**value, "plan": pln})
 
   def series_name(self, y_data, args):
     for ttl, cnfg in y_data[self.__platform].items():
       if ttl == args:
-        self.__reserve.append({**cnfg})
+        self.reserve_list.append({**cnfg})
 
 
 def change_format(episode_date):

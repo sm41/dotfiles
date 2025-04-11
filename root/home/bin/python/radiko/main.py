@@ -1,10 +1,11 @@
 
 from os import remove
 from re import compile, IGNORECASE
-# from plyer import notification
 from subprocess import run
 import func, func_auth
 from mytool import abc
+from sys import argv
+import __main__
 
 
 #JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -15,7 +16,7 @@ from mytool import abc
 #https://radiko.jp/v3/program/station/weekly/TBS.xml
 
 
-def main():
+def arg():
 
   setarg   = func.set_arg()
   valiable = func.gen_var(setarg.station_id)
@@ -24,7 +25,7 @@ def main():
   ooo      = func_auth.oth()
   vbn      = func.wsx()
 
-  soup = abc.data2soup(valiable.url, "xml")
+  soup = abc.gen_obj.data2soup(valiable.url, "xml")
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
   vbn.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
@@ -43,5 +44,14 @@ def main():
   abc.ntfy(result_2, f"{vbn.filename}.mp3")
 
 
-if __name__ == "__main__":
-  main()
+def dow():
+  dy = abc.dow_yesterday(1)
+  fff = abc.gen_obj.load_file("/home/simon/.local/state/python/rrr.yaml")
+  print(__main__.__file__)
+
+def main():
+  if   argv[1] == "dow":
+    dow()
+  elif argv[1] != "dow":
+    arg()
+

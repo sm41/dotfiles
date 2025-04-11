@@ -36,31 +36,31 @@ class set_arg:
     __parser.add_argument('-ft', help='ft',         required=False, type=str)
     __parser.add_argument('-dl', help='download',   required=False, action='store_true')
 
-    self.__opt_args  = __parser.parse_args()
-    self.station_id  = self.__opt_args.s.upper()
-    self.search_term = self.__opt_args.t
-    self.dl_flag     = self.__opt_args.dl
-    self.fftt        = self.__opt_args.ft
+    __opt_args  = __parser.parse_args()
+    self.station_id  = __opt_args.s.upper()
+    self.search_term = __opt_args.t
+    self.dl_flag     = __opt_args.dl
+    self.fftt        = __opt_args.ft
 
 
 @dataclass
 class gen_var:
-  station_id: str
+  station_id: InitVar[str]
   tmp_dir = "/tmp"
 
-  def __post_init__(self):
+  def __post_init__(self, station_id):
     __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
-    self.url          = f"https://radiko.jp/v3/program/station/weekly/{self.station_id}.xml"
+    self.url          = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 
 
 @dataclass
 class time:
-  day_int: int
+  day_int: InitVar[int]
 
-  def __post_init__(self):
+  def __post_init__(self, day_int):
     __get_now       = datetime.now()
-    __get_past      = __get_now - timedelta(self.day_int)
+    __get_past      = __get_now - timedelta(day_int)
     self.today_now  = __get_now.strftime('%Y%m%d%H%M')+'00'
     self.days_ago   = __get_past.strftime('%Y%m%d%H%M')+'00'
 

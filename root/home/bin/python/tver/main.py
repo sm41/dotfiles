@@ -31,5 +31,3 @@ def main():
   else:
     exit("Invailed Argment!")
 
-# if __name__ == "__main__":
-#   main()

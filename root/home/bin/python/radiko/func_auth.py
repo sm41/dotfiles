@@ -1,19 +1,21 @@
 
 from base64 import b64encode
 from urllib import request
+from dataclasses import dataclass
 
+@dataclass
 class oth:
   __auth1_url   = "https://radiko.jp/v2/api/auth1"
   __auth2_url   = "https://radiko.jp/v2/api/auth2"
   __authkey     = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
-  def __init__(self):
+  def __post_init__(self):
     __head_dict_1 = self.set_users_header()
-    __auth_one    = self.get_header(oth.__auth1_url, __head_dict_1)
+    __auth_one    = self.get_header(self.__auth1_url, __head_dict_1)
     __head_res    = self.set_head_dict(__auth_one)
-    __partialkey  = self.get_partial(__head_res, oth.__authkey)
+    __partialkey  = self.get_partial(__head_res, self.__authkey)
     __head_dict_2 = self.set_head_dict_2(__partialkey, __head_res)
-    __auth_two    = self.get_header(oth.__auth2_url, __head_dict_2)
+    __auth_two    = self.get_header(self.__auth2_url, __head_dict_2)
 
     self.xrat = __head_dict_2['X-Radiko-AuthToken']
 
