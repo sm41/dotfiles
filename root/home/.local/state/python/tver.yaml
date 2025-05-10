@@ -32,41 +32,41 @@ tver:
 
 
   # drama:
-  # mikami:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  hero:
+    title  : いつか、ヒーロー
+    url    : https://tver.jp/series/srky9b57px
+    dow    : [日]
+    header : *header_drama
 
-  # call:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  caster:
+    title  : キャスター
+    url    : https://tver.jp/series/srwqgoqak5
+    dow    : [日]
+    header : *header_drama
 
-  # secret:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  taigan:
+    title  : 対岸の家事～これが、私の生きる道！～
+    url    : https://tver.jp/series/srpkhlu4ow
+    dow    : [火]
+    header : *header_drama
 
-  # madoka:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  asura:
+    title  : Dr.アシュラ
+    url    : https://tver.jp/series/srm72fsffb
+    dow    : [水]
+    header : *header_drama
 
-  # eyesee:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  yami:
+    title  : 恋は闇
+    url    : https://tver.jp/series/sra3p46w4m
+    dow    : [水]
+    header : *header_drama
 
-  # mondai:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
+  ignite:
+    title  : イグナイト -法の無法者-
+    url    : https://tver.jp/series/srw144tsf4
+    dow    : [金]
+    header : *header_drama
 
   # dragon:
   #   title  :

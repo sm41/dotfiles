@@ -45,7 +45,7 @@ class check_arg:
     for key, value in y_data[self.__platform].items():
       for pln in value['dow']:
         if pln == y_dow_str:
-          self.reserve_list.append({**value, "plan": pln})
+          self.reserve_list.append({**value})
 
   def series_name(self, y_data, args):
     for ttl, cnfg in y_data[self.__platform].items():

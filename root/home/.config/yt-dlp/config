@@ -1,7 +1,7 @@
 
 # https://scrapbox.io/Mijinko/yt-dlp_--format
 
---concurrent-fragments 5
+# --concurrent-fragments 5
 --embed-thumbnail
 # --embed-metadata
 --embed-chapters

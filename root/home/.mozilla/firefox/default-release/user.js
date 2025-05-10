@@ -60,13 +60,13 @@ user_pref("browser.zoom.siteSpecific",false);              // サイトごとの
 user_pref("devtools.chrome.enabled",true);                 // 開発ツール (CSS etc..)
 user_pref("devtools.debugger.remote-enabled",true);        // 開発ツール (CSS etc..)
 user_pref("dom.disable_window_move_resize",true);          // (JavaScriptによる)ウィンドウの移動･リサイズ の無効化
-user_pref("dom.security.https_only_mode",false);           // オプション  ->  プライバシーとセキュリティ  ->  HTTPS-Only モード  ->  すべてのウィンドウで HTTPS-Only モードを有効にする
+// user_pref("dom.security.https_only_mode",false);           // オプション  ->  プライバシーとセキュリティ  ->  HTTPS-Only モード  ->  すべてのウィンドウで HTTPS-Only モードを有効にする
 
 user_pref("extensions.update.interval",10800);             // アドオンの更新間隔 (1h = 3600)
 user_pref("extensions.webextensions.restrictedDomains","accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,sync.services.mozilla.com");			//
 
-user_pref("font.name.monospace.ja",           "Liberation Mono,  Roboto Mono,  JetBrains Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
-user_pref("font.name.monospace.x-western",    "Liberation Mono,  Roboto Mono,  JetBrains Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
+user_pref("font.name.monospace.ja",           "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
+user_pref("font.name.monospace.x-western",    "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
 user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Liberation Sans,  Nimbus Sans L,  IPA Pゴシック,  Takao Pゴシック");   // ゴシック   (ひげ飾り 無し)
 user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Liberation Sans,  Nimbus Sans L,  IPA Pゴシック,  Takao Pゴシック");   // サンセリフ (ひげ飾り 無し)
 user_pref("font.name.serif.ja",               "Roboto serif,  Liberation Serif,  IPA P明朝,  Takao P明朝");      // 明朝体 (ひげ飾り 有り)
