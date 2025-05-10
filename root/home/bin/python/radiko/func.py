@@ -59,10 +59,10 @@ class time:
   day_int: InitVar[int]
 
   def __post_init__(self, day_int):
-    __get_now       = datetime.now()
-    __get_past      = __get_now - timedelta(day_int)
-    self.today_now  = __get_now.strftime('%Y%m%d%H%M')+'00'
-    self.days_ago   = __get_past.strftime('%Y%m%d%H%M')+'00'
+    __get_now      = datetime.now()
+    __get_past     = __get_now - timedelta(day_int)
+    self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
+    self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
 @dataclass

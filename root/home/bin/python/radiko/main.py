@@ -16,7 +16,7 @@ import __main__
 #https://radiko.jp/v3/program/station/weekly/TBS.xml
 
 
-def arg():
+def main():
 
   setarg   = func.set_arg()
   valiable = func.gen_var(setarg.station_id)
@@ -42,16 +42,4 @@ def arg():
     remove(f"{valiable.tmp_dir}/{vbn.filename}.m4a")
 
   abc.ntfy(result_2, f"{vbn.filename}.mp3")
-
-
-def dow():
-  dy = abc.dow_yesterday(1)
-  fff = abc.gen_obj.load_file("/home/simon/.local/state/python/rrr.yaml")
-  print(__main__.__file__)
-
-def main():
-  if   argv[1] == "dow":
-    dow()
-  elif argv[1] != "dow":
-    arg()
 
