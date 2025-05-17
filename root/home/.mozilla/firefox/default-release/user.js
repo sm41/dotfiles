@@ -55,7 +55,8 @@ user_pref("browser.urlbar.suggest.trending",false);        // オプション  -
 
 user_pref("browser.zoom.siteSpecific",false);              // サイトごとの拡大・縮小を記憶する
 
-// user_pref("clipboard.autocopy",false);              //
+user_pref("clipboard.autocopy",false);             //
+// user_pref("middlemouse.paste",false);              //
 
 user_pref("devtools.chrome.enabled",true);                 // 開発ツール (CSS etc..)
 user_pref("devtools.debugger.remote-enabled",true);        // 開発ツール (CSS etc..)

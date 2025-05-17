@@ -1,10 +1,11 @@
 
 tver:
   _common:
-    - &header_base   "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    - &header_inform "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    - &header_house  "[住まい]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    - &header_drama  "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
+    - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_drama   "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
+    - &header_house   "[住まい]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_inform  "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_variety "[バラエティ]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
   _http:
     header : *header_base
@@ -15,6 +16,20 @@ tver:
     url    : https://tver.jp/series/srgphhvnph
     dow    : [日]
     header : *header_inform
+
+
+  # variety
+  moyasama:
+    title  : モヤモヤさまぁ～ず2
+    url    : https://tver.jp/series/sr9an4t9ow
+    dow    : [土]
+    header : *header_variety
+
+  samasama:
+    title  : さまぁ～ず×さまぁ～ず BS さまぁ～ず
+    url    : https://tver.jp/series/srrtg4d0mx
+    dow    : [土]
+    header : *header_variety
 
 
   # house:
@@ -67,16 +82,3 @@ tver:
     url    : https://tver.jp/series/srw144tsf4
     dow    : [金]
     header : *header_drama
-
-  # dragon:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
-
-  # dance:
-  #   title  :
-  #   url    :
-  #   dow    : []
-  #   header : *header_drama
-
