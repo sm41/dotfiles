@@ -16,7 +16,7 @@ class gen_var:
     __state_file_dir  = getenv("XDG_STATE_HOME")
     self.storage_dir  = abc.ctrl_path.anlys_path(__download_dir, "@podcast")
     self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "python", "ppp.yaml")
-    self.y_dow        = abc.dow_yesterday(1)
+    self.root_string  = next(iter(self.loaded_yaml))
 
 
 @dataclass
@@ -38,8 +38,11 @@ class gen_tag:
 
 @dataclass
 class check_arg:
+  root_obj: InitVar
   reserve_list: list = field(default_factory=list)
-  __platform: str = 'megaphone'
+
+  def __post_init__(self, root_obj):
+    self.__platform: str = root_obj
 
   def today_list(self, y_data, y_dow_str):
     for key, value in y_data[self.__platform].items():

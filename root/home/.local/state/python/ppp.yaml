@@ -10,7 +10,7 @@ megaphone:
     url   : https://feeds.megaphone.fm/rocketmanshow
     dow   : [火]
 
-  # hakuzan:
-  #   title : 問わず語りの神田伯山
-  #   url   : https://feeds.megaphone.fm/TBS7474162925
-  #   dow   : [金]
+  hakuzan:
+    title : 問わず語りの神田伯山
+    url   : https://feeds.megaphone.fm/TBS7474162925
+    dow   : [金]

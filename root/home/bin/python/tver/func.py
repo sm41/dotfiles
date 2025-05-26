@@ -19,7 +19,7 @@ class gen_var:
     self.__env_state  = getenv("XDG_STATE_HOME")
     self.storage_path = abc.ctrl_path.anlys_path(self.__env_dl, "@tver")
     self.loaded_yaml  = abc.gen_obj.load_file(self.__env_state, "python", "tver.yaml")
-    self.y_dow        = abc.dow_yesterday(1)
+    # self.y_dow        = abc.dow_yesterday(1)
 
 
 @dataclass
@@ -70,7 +70,7 @@ class anlys:
 
 
 @dataclass
-class test:
+class gen_tag:
   def get_base_yaml(self, loaded_yaml):
     self.config = loaded_yaml['tver']['_http']
 
@@ -93,6 +93,17 @@ class test:
     self.paths, self.output = Path(__filename).parent, abc.ctrl_file.zen2han(Path(__filename).stem)
 
 
+def insert_quoter(filename:str, year, q_date):
+
+  if year is None or q_date is None:
+    return filename
+
+  if filename.startswith("[ドラマ]"):
+    return filename.replace('_', f'_[{year}-Q{q_date}]_', 1)
+  else:
+    return filename
+
+
 def ytdlp(paths, id, ext, url):
   method = [
     "yt-dlp",
@@ -104,10 +115,10 @@ def ytdlp(paths, id, ext, url):
   return method
 
 
-def ccc(series, episode, url, ext, id, paths, output):
+def ccc(series, episode, url, ext, id, paths, output, year, q_date):
   method = ytdlp(paths, id, ext, url)
-  # print(method)
   result = run(method)
+  output = insert_quoter(output, year, q_date)
   output = abc.ctrl_file.byte_count(output, 245)
   abc.ctrl_path.rnm_path(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
   abc.ntfy(result, f"{series}\n{episode}")

@@ -10,7 +10,7 @@ user_pref("network.cookie.sameSite.schemeful",true);                      //
 ////////////////////////	about:config	////////////////////////
 
 user_pref("accessibility.browsewithcaret_shortcut.enabled",false);        // キャレットブラウズモード (F7キー) の有効化
-user_pref("alerts.showFavicons",true);                                    // Push通知 ファビコン
+// user_pref("alerts.showFavicons",true);                                    // Push通知 ファビコン
 
 user_pref("beacon.enabled",false);                         // 位置情報
 user_pref("geo.enabled",false);                            // 位置情報
@@ -68,8 +68,8 @@ user_pref("extensions.webextensions.restrictedDomains","accounts-static.cdn.mozi
 
 user_pref("font.name.monospace.ja",           "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
 user_pref("font.name.monospace.x-western",    "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
-user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Liberation Sans,  Nimbus Sans L,  IPA Pゴシック,  Takao Pゴシック");   // ゴシック   (ひげ飾り 無し)
-user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Liberation Sans,  Nimbus Sans L,  IPA Pゴシック,  Takao Pゴシック");   // サンセリフ (ひげ飾り 無し)
+user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック,  Takao Pゴシック");   // ゴシック   (ひげ飾り 無し)
+user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック,  Takao Pゴシック");   // サンセリフ (ひげ飾り 無し)
 user_pref("font.name.serif.ja",               "Roboto serif,  Liberation Serif,  IPA P明朝,  Takao P明朝");      // 明朝体 (ひげ飾り 有り)
 user_pref("font.name.serif.x-western",        "Roboto serif,  Liberation Serif,  IPA P明朝,  Takao P明朝");      // セリフ (ひげ飾り 有り)
 

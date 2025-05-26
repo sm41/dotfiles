@@ -26,6 +26,7 @@ class check_any:
 
 @dataclass
 class ctrl_file:
+  @staticmethod
   def byte_count(input, limit=240):
     length = len(str(input).encode('utf-8'))
 
@@ -37,9 +38,10 @@ class ctrl_file:
       result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
 
       if len(result.encode('utf-8')) < limit:
-        return result + "[@]"
+        return result + "[…]"
       return result
 
+  @staticmethod
   def zen2han(input):
     z_digit = '＃（）： 　／１２３４５６７８９０ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
     h_digit = '#():__-1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
@@ -48,9 +50,11 @@ class ctrl_file:
     output    = input.translate(z2h_digit)
     return output
 
+  @staticmethod
   def get_basename(input):
     return Path(input).stem
 
+  @staticmethod
   def get_ext(input):
     return Path(input).suffix
 
@@ -94,6 +98,18 @@ def dow_yesterday(day_int:int):
   d_yesterday = d_today - timedelta( days = day_int )
   y_dow_str   = d_yesterday.strftime('%a')
   return y_dow_str
+
+
+@dataclass
+class ctrl_date:
+  day_int: InitVar[int]
+
+  def __post_init__(self, day_int:int):
+    setlocale(LC_TIME, 'ja_JP.UTF-8')
+    self.d_today     = date.today()
+    self.d_yesterday = self.d_today - timedelta( days = day_int )
+    self.y_dow       = self.d_yesterday.strftime('%a')
+    self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
 
 
 def ntfy(result, text):
