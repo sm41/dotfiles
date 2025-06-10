@@ -35,10 +35,9 @@ function check_argment(){
   fi
 }
 
-
 function main(){
-  while read inputfile; do
-
+  while read inputfile
+  do
     filename="${inputfile##*/}"
     # old_ext="${filename##*.}"
     old_file="${filename%.*}"
@@ -47,11 +46,8 @@ function main(){
     ffmpeg -i "${old_path}/${old_file}.${old_ext}" \
               "${new_path}/${new_file}.${new_ext}"
 
-    # echo "${new_path}/${new_file}.${new_ext}"
-
   done < <(find "${arg_str}" -type f -name "*.${old_ext}" | sort -V)
 }
-
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   # check_file

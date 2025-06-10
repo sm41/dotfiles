@@ -28,10 +28,12 @@ function check_sed_command(){
 function main(){
   while read TARGET_FILE
   do
-    echo \""${TARGET_FILE##*/}"\" \
-    | "${SED_ARG}"  \
-    | xargs -I {} \
-    echo mv  \""${TARGET_FILE%/*}"/"${TARGET_FILE##*/}"\"  \""${TARGET_FILE%/*}"/{}\"  2> /dev/null
+    base_dir="${TARGET_FILE%/*}"
+    old_name="${TARGET_FILE##*/}"
+    new_name="$(echo "${old_name}" | "${SED_ARG}")"
+
+    echo mv  \"${base_dir}/${old_name}\"  \"${base_dir}/${new_name}\"
+
   done
 }
 
@@ -39,5 +41,5 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   check_stdin
   check_number_of_argment 1 "$#"
   check_sed_command "$1"
-  main "$1"
+  main
 fi

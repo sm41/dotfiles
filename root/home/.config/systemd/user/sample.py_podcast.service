@@ -6,5 +6,5 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/.local/bin/ytdl_multi.py  dow
+ExecStart = /usr/bin/python3   %h/.local/bin/podcast.py  dow
 # EnvironmentFile = %h/.config/environment.d/env_scraping

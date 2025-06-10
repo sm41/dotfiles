@@ -8,6 +8,6 @@ function zen2han(){
     -e 'y/ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' \
     -e 'y/ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ/abcdefghijklmnopqrstuvwxyz/' \
     -e 'y/０１２３４５６７８９/0123456789/' \
-    -e 'y/（）/\(\)/' \
+    -e 'y/＃：（）/#:\(\)/' \
     -e 'y/ 　/__/'
 }

@@ -110,7 +110,7 @@ user_pref("network.trr.mode",3);                           // "Trusted Recursive
 // user_pref("network.trr.bootstrapAddress","1.1.1.2");                                // Cloudflare
 // user_pref("network.trr.uri","https://security.cloudflare-dns.com/dns-query");       // Cloudflare
 user_pref("network.trr.bootstrapAddress","208.67.222.222");                         // OpenDNS (Cisco)
-user_pref("network.trr.uri","https://dns.umbrella.com/dns-query");                   // OpenDNS (Cisco)
+user_pref("network.trr.uri","https://dns.umbrella.com/dns-query");                  // OpenDNS (Cisco)
 
 // user_pref("privacy.webrtc.hideGlobalIndicator",true);                     // discord ???
 user_pref("permissions.default.camera",2);                                //0 オプション  ->  プライバシーとセキュリティ  ->  許可設定  ->  カメラ    ( 0:Ask / 1.Always / 2.Never )
