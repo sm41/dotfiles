@@ -15,7 +15,7 @@ class gen_var:
     __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")
     __state_file_dir  = getenv("XDG_STATE_HOME")
     self.storage_dir  = abc.ctrl_path.anlys_path(__download_dir, "@podcast")
-    self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "python", "ppp.yaml")
+    self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "python", "podcast.yaml")
     self.root_string  = next(iter(self.loaded_yaml))
 
 

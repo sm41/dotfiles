@@ -47,23 +47,23 @@ tver:
 
 
   # drama:
-  hero:
-    title  : いつか、ヒーロー
-    url    : https://tver.jp/series/srky9b57px
-    dow    : [日]
-    header : *header_drama
+  # senkyo:
+  #   title  :放送局占拠
+  #   url    :https://tver.jp/series/srxmr1z44t
+  #   dow    :[土]
+  #   header : *header_drama
 
-  caster:
-    title  : キャスター
-    url    : https://tver.jp/series/srwqgoqak5
-    dow    : [日]
-    header : *header_drama
+  # caster:
+  #   title  :DOPE　麻薬取締部特捜課
+  #   url    :https://tver.jp/series/sr3b3odx0x1
+  #   dow    :[金]
+  #   header : *header_drama
 
-  taigan:
-    title  : 対岸の家事～これが、私の生きる道！～
-    url    : https://tver.jp/series/srpkhlu4ow
-    dow    : [火]
-    header : *header_drama
+  # taigan:
+  #   title  :
+  #   url    :
+  #   dow    :
+  #   header : *header_drama
 
   asura:
     title  : Dr.アシュラ
@@ -71,11 +71,11 @@ tver:
     dow    : [水]
     header : *header_drama
 
-  yami:
-    title  : 恋は闇
-    url    : https://tver.jp/series/sra3p46w4m
-    dow    : [水]
-    header : *header_drama
+  # yami:
+  #   title  : 恋は闇
+  #   url    : https://tver.jp/series/sra3p46w4m
+  #   dow    : [水]
+  #   header : *header_drama
 
   ignite:
     title  : イグナイト -法の無法者-

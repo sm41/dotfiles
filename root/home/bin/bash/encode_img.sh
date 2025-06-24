@@ -39,7 +39,6 @@ function main(){
   while read inputfile
   do
     filename="${inputfile##*/}"
-    # old_ext="${filename##*.}"
     old_file="${filename%.*}"
     new_file="$(echo "${old_file}" | zen2han)"
 
