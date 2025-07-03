@@ -39,11 +39,11 @@ tver:
     dow    : [土]
     header : *header_house
 
-  sugoi:
-    title  : となりのスゴイ家
-    url    : https://tver.jp/series/sr1s8kvhrt
-    dow    : [金]
-    header : *header_house
+  # sugoi:
+  #   title  : となりのスゴイ家
+  #   url    : https://tver.jp/series/sr1s8kvhrt
+  #   dow    : [金]
+  #   header : *header_house
 
 
   # drama:
@@ -65,11 +65,11 @@ tver:
   #   dow    :
   #   header : *header_drama
 
-  asura:
-    title  : Dr.アシュラ
-    url    : https://tver.jp/series/srm72fsffb
-    dow    : [水]
-    header : *header_drama
+  # asura:
+  #   title  : Dr.アシュラ
+  #   url    : https://tver.jp/series/srm72fsffb
+  #   dow    : [水]
+  #   header : *header_drama
 
   # yami:
   #   title  : 恋は闇
@@ -77,8 +77,8 @@ tver:
   #   dow    : [水]
   #   header : *header_drama
 
-  ignite:
-    title  : イグナイト -法の無法者-
-    url    : https://tver.jp/series/srw144tsf4
-    dow    : [金]
-    header : *header_drama
+  # ignite:
+  #   title  : イグナイト -法の無法者-
+  #   url    : https://tver.jp/series/srw144tsf4
+  #   dow    : [金]
+  #   header : *header_drama

@@ -42,8 +42,10 @@ function main(){
     old_file="${filename%.*}"
     new_file="$(echo "${old_file}" | zen2han)"
 
-    ffmpeg -i "${old_path}/${old_file}.${old_ext}" \
-              "${new_path}/${new_file}.${new_ext}"
+    ffmpeg \
+      -nostdin \
+      -i "${old_path}/${old_file}.${old_ext}" \
+          "${new_path}/${new_file}.${new_ext}"
 
   done < <(find "${arg_str}" -type f -name "*.${old_ext}" | sort -V)
 }
