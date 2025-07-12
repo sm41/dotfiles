@@ -25,7 +25,7 @@ def main():
   ooo      = func_auth.oth()
   vbn      = func.wsx()
 
-  soup = abc.gen_obj.data2soup(valiable.url, "xml")
+  soup = abc.Gen_Obj.data2soup(valiable.url, "xml")
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
   vbn.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)

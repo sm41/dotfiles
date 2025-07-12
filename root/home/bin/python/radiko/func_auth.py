@@ -3,13 +3,13 @@ from base64 import b64encode
 from urllib import request
 from dataclasses import dataclass
 
-@dataclass
+# @dataclass
 class oth:
   __auth1_url   = "https://radiko.jp/v2/api/auth1"
   __auth2_url   = "https://radiko.jp/v2/api/auth2"
   __authkey     = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
-  def __post_init__(self):
+  def __init__(self):
     __head_dict_1 = self.set_users_header()
     __auth_one    = self.get_header(self.__auth1_url, __head_dict_1)
     __head_res    = self.set_head_dict(__auth_one)
@@ -38,7 +38,6 @@ class oth:
 
 
   def set_head_dict(self, auth_one):
-
     AuthToken = str(auth_one['x-radiko-authtoken'])
     KeyLength = int(auth_one["x-radiko-keylength"])
     KeyOffset = int(auth_one["x-radiko-keyoffset"])
@@ -60,7 +59,6 @@ class oth:
 
 
   def set_head_dict_2(self, partialkey, head_res):
-
     X_Radiko_AuthToken = head_res['AuthToken']
 
     head_dict_2 = {

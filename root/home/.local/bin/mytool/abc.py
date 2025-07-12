@@ -7,11 +7,10 @@ from yaml import load, FullLoader
 from bs4  import BeautifulSoup
 from sys  import argv, exit
 from plyer import notification
-from dataclasses import dataclass, InitVar, field
+# from dataclasses import dataclass, InitVar, field
 
 
-@dataclass
-class check_any:
+class Check_Any:
   @staticmethod
   def check_arg():
     if len(argv) <= 1:
@@ -24,8 +23,7 @@ class check_any:
       exit()
 
 
-@dataclass
-class ctrl_file:
+class Ctrl_File:
   @staticmethod
   def byte_count(input, limit=240):
     length = len(str(input).encode('utf-8'))
@@ -35,7 +33,7 @@ class ctrl_file:
 
     if length > limit:
       ttt = input[:-1]
-      result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
+      result = Ctrl_File.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
 
       if len(result.encode('utf-8')) < limit:
         return result + "[…]"
@@ -59,8 +57,7 @@ class ctrl_file:
     return Path(input).suffix
 
 
-@dataclass
-class ctrl_path:
+class Ctrl_Path:
   @staticmethod
   def rnm_path(bfr_path, aftr_path):
     oldpath = Path(bfr_path)
@@ -74,8 +71,7 @@ class ctrl_path:
     return down_dir
 
 
-@dataclass
-class gen_obj:
+class Gen_Obj:
   @staticmethod
   def load_file(*path_parts):
     filename = Path(*path_parts)
@@ -86,9 +82,18 @@ class gen_obj:
   @staticmethod
   def data2soup(url, type):
     get_xml = request.urlopen(url)
-    check_any.check_status_code(get_xml)
+    Check_Any.check_status_code(get_xml)
     soup = BeautifulSoup(get_xml, type)
     return soup
+
+
+class Ctrl_Date:
+  def __init__(self, day_int:int):
+    setlocale(LC_TIME, 'ja_JP.UTF-8')
+    self.d_today     = date.today()
+    self.d_yesterday = self.d_today - timedelta( days = day_int )
+    self.y_dow       = self.d_yesterday.strftime('%a')
+    self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
 
 
 def dow_yesterday(day_int:int):
@@ -98,18 +103,6 @@ def dow_yesterday(day_int:int):
   d_yesterday = d_today - timedelta( days = day_int )
   y_dow_str   = d_yesterday.strftime('%a')
   return y_dow_str
-
-
-@dataclass
-class ctrl_date:
-  day_int: InitVar[int]
-
-  def __post_init__(self, day_int:int):
-    setlocale(LC_TIME, 'ja_JP.UTF-8')
-    self.d_today     = date.today()
-    self.d_yesterday = self.d_today - timedelta( days = day_int )
-    self.y_dow       = self.d_yesterday.strftime('%a')
-    self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
 
 
 def ntfy(result, text):

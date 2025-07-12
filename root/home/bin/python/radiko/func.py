@@ -5,12 +5,10 @@ from plyer  import notification
 from sys import exit
 from os  import getenv
 from mytool import abc
-from dataclasses import dataclass, field, InitVar
+# from dataclasses import dataclass, field, InitVar
 
 
-@dataclass
 class set_arg:
-
   s_dict = {
     "TBS":     "TBSラジオ",
     "QRR":     "文化放送",
@@ -29,7 +27,7 @@ class set_arg:
     "JOAK-FM": "NHK-FM（東京）",
   }
 
-  def __post_init__(self):
+  def __init__(self):
     __parser = ArgumentParser()
     __parser.add_argument('-s',  help='station_id', required=True,  type=str.upper, choices = self.s_dict.keys())
     __parser.add_argument('-t',  help='title',      required=True,  type=str)
@@ -43,31 +41,26 @@ class set_arg:
     self.fftt        = __opt_args.ft
 
 
-@dataclass
 class gen_var:
-  station_id: InitVar[str]
   tmp_dir = "/tmp"
 
-  def __post_init__(self, station_id):
-    __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
+  def __init__(self, station_id: str):
+    env_dir           = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.storage_path = abc.Ctrl_Path.anlys_path(env_dir, "@radiko")
     self.url          = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 
 
-@dataclass
 class time:
-  day_int: InitVar[int]
-
-  def __post_init__(self, day_int):
+  def __init__(self, day_int):
     __get_now      = datetime.now()
     __get_past     = __get_now - timedelta(day_int)
     self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
-@dataclass
 class wsx:
-  program_list: list = field(default_factory=list)
+  def __init__(self):
+    self.program_list = []
 
   def search_program(self, find_list, today_now, days_ago, fftt):
 
@@ -81,7 +74,7 @@ class wsx:
           "to":       prog_detail.attrs['to'],
           "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
           "img":      prog_detail.img.string,
-          "title":    abc.ctrl_file.zen2han(prog_detail.title.string),
+          "title":    abc.Ctrl_File.zen2han(prog_detail.title.string),
         }
         self.program_list.append(ddd)
 
@@ -125,7 +118,6 @@ class wsx:
       exit()
 
 
-@dataclass
 class fastforward:
   def dl(self, authtoken, station_id, time_ft, time_to, path, filename):
     self.download = [
