@@ -5,8 +5,8 @@ from mytool import abc
 from sys import exit
 
 def main():
-  abc.check_any.check_arg()
-  variable = func.gen_var()
+  abc.Check_Any.check_arg()
+  variable = func.GenVar()
 
   if variable.parts.path == "/view_video.php":
     variable.ytdlp(str(variable.storage_dir), variable.arg)

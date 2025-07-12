@@ -3,14 +3,13 @@ import urllib.parse
 from sys import argv
 from os  import getenv
 from mytool import abc
-from dataclasses import dataclass
 
-@dataclass
-class gen_var:
-  def __post_init__(self):
+
+class GenVar:
+  def __init__(self):
     self.arg          = argv[1]
     __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_dir  = abc.ctrl_path.anlys_path(__download_dir, "@ph")
+    self.storage_dir  = abc.Ctrl_Path.anlys_path(__download_dir, "@ph")
     self.parts        = urllib.parse.urlparse(self.arg)
 
 

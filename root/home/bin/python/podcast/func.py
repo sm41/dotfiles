@@ -4,56 +4,48 @@ from locale import setlocale, LC_TIME, LC_ALL
 from mytool import abc
 from os  import getenv
 from sys import argv
-from dataclasses import dataclass, InitVar, field
-
-@dataclass
-class gen_var:
-  tmp_dir:str = "/tmp"
-
-  def __post_init__(self):
-    self.arg          = argv[1]
-    __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")
-    __state_file_dir  = getenv("XDG_STATE_HOME")
-    self.storage_dir  = abc.ctrl_path.anlys_path(__download_dir, "@podcast")
-    self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "python", "podcast.yaml")
-    self.root_string  = next(iter(self.loaded_yaml))
 
 
-@dataclass
-class gen_tag:
-  soup: InitVar
+class GenVar:
+  def __init__(self):
+    self.tmp_dir     = "/tmp"
+    self.arg         = argv[1]
+    download_dir     = getenv("CLIENT_NETWORK_STORAGE_misc")
+    state_file_dir   = getenv("XDG_STATE_HOME")
+    self.storage_dir = abc.Ctrl_Path.anlys_path(download_dir, "@podcast")
+    self.loaded_yaml = abc.Gen_Obj.load_file(state_file_dir, "python", "podcast.yaml")
+    self.root_string = next(iter(self.loaded_yaml))
 
-  def __post_init__(self, soup):
+
+class GenTag:
+  def __init__(self, soup):
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
 
-    self.series  = abc.ctrl_file.zen2han(__root_obj.title.string)
-    self.episode = abc.ctrl_file.zen2han(__item_obj.title.string)
+    self.series  = abc.Ctrl_File.zen2han(__root_obj.title.string)
+    self.episode = abc.Ctrl_File.zen2han(__item_obj.title.string)
     self.date    = change_format(__item_obj.pubDate.string)
     self.img     = __root_obj.image.url.string.split('?')[0]
     self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
-    self.ext     = abc.ctrl_file.get_ext(self.url)
-    self.name    = abc.ctrl_file.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
+    self.ext     = abc.Ctrl_File.get_ext(self.url)
+    self.name    = abc.Ctrl_File.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
-@dataclass
-class check_arg:
-  root_obj: InitVar
-  reserve_list: list = field(default_factory=list)
-
-  def __post_init__(self, root_obj):
-    self.__platform: str = root_obj
+class CheckArg:
+  def __init__(self, root_obj: str):
+    self._platform = root_obj
+    self.reserve_list: list[dict] = []
 
   def today_list(self, y_data, y_dow_str):
-    for key, value in y_data[self.__platform].items():
-      for pln in value['dow']:
-        if pln == y_dow_str:
-          self.reserve_list.append({**value})
+    for key, value in y_data[self._platform].items():
+      if y_dow_str in value.get('dow', []):
+        self.reserve_list.append({**value})
 
   def series_name(self, y_data, args):
-    for ttl, cnfg in y_data[self.__platform].items():
+    for ttl, cnfg in y_data[self._platform].items():
       if ttl == args:
         self.reserve_list.append({**cnfg})
+
 
 
 def change_format(episode_date):

@@ -5,8 +5,8 @@ import func
 
 
 def main():
-  abc.check_any.check_arg()
-  variable = func.gen_var()
+  abc.Check_Any.check_arg()
+  variable = func.GenVar()
   tag_tag  = func.gen_tag()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
@@ -16,8 +16,8 @@ def main():
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
     scraper = func.scrp()
-    anlys   = func.anlys()
-    before  = abc.ctrl_date(1)
+    anlys   = func.Anlys()
+    before  = abc.Ctrl_Date(1)
 
     if   variable.arg == "dow":
       anlys.find_key_value_list(variable.loaded_yaml, before.y_dow)
