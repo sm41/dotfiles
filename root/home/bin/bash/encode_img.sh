@@ -1,36 +1,55 @@
 #!/bin/bash
 set -eu
 
+# variable
 WORK_PATH="$(realpath $(dirname "$0"))"
-source "${WORK_PATH}/_func_rename_pipe.sh"
-
+arg_str="$1"
 old_ext=png
 new_ext=jpg
-arg_str="$1"
-base_path="$(dirname "${arg_str}")"
-old_dir="$(basename "${arg_str}")"
-new_dir="$(echo "${old_dir}_[encoded]" | zen2han)"
+hogefuga="_[encoded]"
 
-function check_file(){
-  if find "${arg_str}" -type f -name "*.${old_ext}" | grep -q . ; then
-    :
-  else
-    echo "${FUNCNAME[0]}"
-    exit 1
-  fi
+# source
+source "${WORK_PATH}/_func_check.sh"
+source "${WORK_PATH}/_func_rename_pipe.sh"
+
+function show_usage(){
+  cat << _EOT_
+  Usage :
+    $(basename "$0") ~/foo/bar/
+    OR
+    $(basename "$0") ~/foo/bar/foo.png
+
+    Convert image files with the .${old_ext} extension to .${new_ext} format.
+    If a directory is specified, all .${old_ext} files inside will be processed.
+    If a file is specified, only that file will be processed.
+
+  Arguments
+    \$1   = sed command OR 'function_name'
+_EOT_
 }
 
 function check_argment(){
   if [[ -d "${arg_str}" ]] ; then
-    check_file
-    old_path="${base_path}/${old_dir}"
-    new_path="${base_path}/${new_dir}"
-    mkdir -p "${new_path}"
-  elif [[ "${arg_str}" =~ ".${old_ext}"$ ]] ; then
-    old_path="${base_path}"
-    new_path="${base_path}"
+    if [[ ${arg_str} =~ ^(.*)/(.+)/$ ]]; then
+      base_path="${BASH_REMATCH[1]}"
+      old_dir="${BASH_REMATCH[2]}"
+      new_dir="$(echo "${old_dir}${hogefuga}" | zen2han)"
+
+      old_path="${base_path}/${old_dir}"
+      new_path="${base_path}/${new_dir}"
+      # mkdir -p "${new_path}"
+    fi
+
+  elif [[ -f "${arg_str}" && "${arg_str}" =~ ".${old_ext}"$ ]] ; then
+    if [[ ${arg_str} =~ ^(.*)/(.+)$ ]]; then
+      base_path="${BASH_REMATCH[1]}"
+      old_path="${base_path}"
+      new_path="${base_path}"
+    fi
+
   else
     echo "${FUNCNAME[0]}"
+    show_usage
     exit 1
   fi
 }
@@ -42,16 +61,19 @@ function main(){
     old_file="${filename%.*}"
     new_file="$(echo "${old_file}" | zen2han)"
 
-    ffmpeg \
-      -nostdin \
-      -i "${old_path}/${old_file}.${old_ext}" \
-          "${new_path}/${new_file}.${new_ext}"
+    # ffmpeg \
+    #   -nostdin \
+    #   -i "${old_path}/${old_file}.${old_ext}" \
+    #       "${new_path}/${new_file}.${new_ext}"
+
+    echo "${old_path}/${old_file}.${old_ext}"
+    echo "${new_path}/${new_file}.${new_ext}"
 
   done < <(find "${arg_str}" -type f -name "*.${old_ext}" | sort -V)
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-  # check_file
+  check_number_of_argment 1 "$#"
   check_argment
   main
 fi

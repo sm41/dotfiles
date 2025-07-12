@@ -10,9 +10,17 @@ source "${WORK_PATH}/_func_rename_pipe.sh"
 
 function show_usage(){
   cat << _EOT_
-  Usage : find /hoge/fuga/foo.txt | $(basename "$0") 's/foo/bar/g' OR 'function_name'
-    stdin = PATH (or strings)
-    \$1   = sed command OR 'function_name'
+  Usage :
+    find /hoge/fuga/ -name "*foo*" | $(basename "$0") 's/foo/bar/g'
+    OR
+    find /hoge/fuga/foo.txt | $(basename "$0") 'function_name' (ex : 'zen2han')
+
+  Arguments :
+    stdin : A list of file paths (e.g., from 'find')
+    \$1   : (Either one)
+          - a 'sed' expression like 's/foo/bar/g'
+          - a function name defined in the script
+
 _EOT_
 }
 
@@ -38,8 +46,8 @@ function main(){
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-  check_stdin
   check_number_of_argment 1 "$#"
+  check_stdin
   check_sed_command "$1"
-  main
+  # main
 fi

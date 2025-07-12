@@ -6,7 +6,8 @@ function check_stdin(){
   elif [[ ! -p /dev/stdin ]] ; then
     echo "# function ERROR -> ${FUNCNAME[0]}"
     echo "# No input from pipe"
-    show_usage ; exit 1
+    show_usage
+    exit 1
   fi
 }
 

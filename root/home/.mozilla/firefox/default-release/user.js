@@ -66,12 +66,12 @@ user_pref("dom.disable_window_move_resize",true);          // (JavaScriptによ�
 user_pref("extensions.update.interval",10800);             // アドオンの更新間隔 (1h = 3600)
 user_pref("extensions.webextensions.restrictedDomains","accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,sync.services.mozilla.com");			//
 
-user_pref("font.name.monospace.ja",           "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
-user_pref("font.name.monospace.x-western",    "Liberation Mono,  Roboto Mono,  IPAゴシック,  Takaoゴシック");     // 等幅
-user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック,  Takao Pゴシック");   // ゴシック   (ひげ飾り 無し)
-user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック,  Takao Pゴシック");   // サンセリフ (ひげ飾り 無し)
-user_pref("font.name.serif.ja",               "Roboto serif,  Liberation Serif,  IPA P明朝,  Takao P明朝");      // 明朝体 (ひげ飾り 有り)
-user_pref("font.name.serif.x-western",        "Roboto serif,  Liberation Serif,  IPA P明朝,  Takao P明朝");      // セリフ (ひげ飾り 有り)
+user_pref("font.name.monospace.ja",           "Liberation Mono,  Roboto Mono,  IPAゴシック");     // 等幅
+user_pref("font.name.monospace.x-western",    "Liberation Mono,  Roboto Mono,  IPAゴシック");     // 等幅
+user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック");   // ゴシック   (ひげ飾り 無し)
+user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Nimbus Sans L,  Liberation Sans,  IPA Pゴシック");   // サンセリフ (ひげ飾り 無し)
+user_pref("font.name.serif.ja",               "Roboto serif,  Liberation Serif,  IPA P明朝");      // 明朝体 (ひげ飾り 有り)
+user_pref("font.name.serif.x-western",        "Roboto serif,  Liberation Serif,  IPA P明朝");      // セリフ (ひげ飾り 有り)
 
 user_pref("full-screen-api.warning.timeout",0);                 // HTML5動画のフルスクリーン警告非表示
 
