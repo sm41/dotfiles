@@ -8,8 +8,8 @@ import func
 def main():
 
   abc.Check_Any.check_arg()
-  variable = func.GenVar()
-  branch   = func.CheckArg(variable.root_string)
+  variable = func.Gen_Var()
+  branch   = func.Check_Arg(variable.root_string)
   before   = abc.Ctrl_Date(1)
 
   if variable.arg == "dow":
@@ -19,7 +19,7 @@ def main():
 
   for ttt in branch.reserve_list:
     soup   = abc.Gen_Obj.data2soup(ttt['url'], "xml")
-    source = func.GenTag(soup)
+    source = func.Gen_Tag(soup)
 
     download = func.dl(source.url, source.img, source.name, source.ext, variable.tmp_dir)
     result   = run(download)

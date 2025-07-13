@@ -6,8 +6,8 @@ import func
 
 def main():
   abc.Check_Any.check_arg()
-  variable = func.GenVar()
-  tag_tag  = func.gen_tag()
+  variable = func.Gen_Var()
+  tag_tag  = func.Gen_Tag()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
     tag_tag.get_base_yaml(variable.loaded_yaml)
@@ -15,7 +15,7 @@ def main():
     func.ccc(tag_tag.series, tag_tag.episode, tag_tag.url, tag_tag.ext, tag_tag.id, tag_tag.paths, tag_tag.output, None, None)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
-    scraper = func.scrp()
+    scraper = func.Scrp()
     anlys   = func.Anlys()
     before  = abc.Ctrl_Date(1)
 

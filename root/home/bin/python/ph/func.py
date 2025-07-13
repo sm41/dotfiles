@@ -5,7 +5,7 @@ from os  import getenv
 from mytool import abc
 
 
-class GenVar:
+class Gen_Var:
   def __init__(self):
     self.arg          = argv[1]
     __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")

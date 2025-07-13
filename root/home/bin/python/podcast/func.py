@@ -6,7 +6,7 @@ from os  import getenv
 from sys import argv
 
 
-class GenVar:
+class Gen_Var:
   def __init__(self):
     self.tmp_dir     = "/tmp"
     self.arg         = argv[1]
@@ -17,7 +17,7 @@ class GenVar:
     self.root_string = next(iter(self.loaded_yaml))
 
 
-class GenTag:
+class Gen_Tag:
   def __init__(self, soup):
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
@@ -31,7 +31,7 @@ class GenTag:
     self.name    = abc.Ctrl_File.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
-class CheckArg:
+class Check_Arg:
   def __init__(self, root_obj: str):
     self._platform = root_obj
     self.reserve_list: list[dict] = []

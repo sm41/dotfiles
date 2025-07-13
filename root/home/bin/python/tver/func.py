@@ -11,7 +11,7 @@ from mytool import abc
 # from dataclasses import dataclass, field, InitVar
 
 
-class GenVar:
+class Gen_Var:
   def __init__(self):
     self.arg          = argv[1]
     self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
@@ -21,7 +21,7 @@ class GenVar:
     # self.y_dow        = abc.dow_yesterday(1)
 
 
-class scrp:
+class Scrp:
   def selenium(self, url):
     __fx_options = webdriver.FirefoxOptions()
     __fx_options.add_argument("--headless")
@@ -67,7 +67,7 @@ class Anlys:
               # break  # 同じtitleのデータが複数回追加されないようにする
 
 
-class gen_tag:
+class Gen_Tag:
   def get_base_yaml(self, loaded_yaml):
     self.config = loaded_yaml['tver']['_http']
 
