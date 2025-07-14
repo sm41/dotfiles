@@ -6,5 +6,4 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/bash      %h/.local/bin/radiko_arg.py $%I
-EnvironmentFile = %h/.config/environment.d/env_radiko
+ExecStart = /usr/bin/python3   %h/.local/bin/radiko.py $%I
