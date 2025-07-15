@@ -4,11 +4,11 @@ from argparse import ArgumentParser
 from plyer  import notification
 from sys import exit
 from os  import getenv
-from mytool import abc
+from mytool import utils
 # from dataclasses import dataclass, field, InitVar
 
 
-class set_arg:
+class Set_Arg:
   s_dict = {
     "TBS":     "TBSラジオ",
     "QRR":     "文化放送",
@@ -41,16 +41,16 @@ class set_arg:
     self.fftt        = __opt_args.ft
 
 
-class gen_var:
+class Gen_Var:
   tmp_dir = "/tmp"
 
   def __init__(self, station_id: str):
     env_dir           = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_path = abc.Ctrl_Path.anlys_path(env_dir, "@radiko")
+    self.storage_path = utils.Ctrl_Path.anlys_path(env_dir, "@radiko")
     self.url          = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 
 
-class time:
+class Time:
   def __init__(self, day_int):
     __get_now      = datetime.now()
     __get_past     = __get_now - timedelta(day_int)
@@ -58,7 +58,7 @@ class time:
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
-class wsx:
+class Wsx:
   def __init__(self):
     self.program_list = []
 
@@ -74,7 +74,7 @@ class wsx:
           "to":       prog_detail.attrs['to'],
           "time":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}-{prog_detail.attrs['ft'][8:12]}",
           "img":      prog_detail.img.string,
-          "title":    abc.Ctrl_File.zen2han(prog_detail.title.string),
+          "title":    utils.Ctrl_File.zen2han(prog_detail.title.string),
         }
         self.program_list.append(ddd)
 
@@ -118,7 +118,7 @@ class wsx:
       exit()
 
 
-class fastforward:
+class Fastforward:
   def dl(self, authtoken, station_id, time_ft, time_to, path, filename):
     self.download = [
       "ffmpeg",

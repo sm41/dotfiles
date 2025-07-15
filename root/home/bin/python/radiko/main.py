@@ -3,7 +3,7 @@ from os import remove
 from re import compile, IGNORECASE
 from subprocess import run
 import func, func_auth
-from mytool import abc
+from mytool import utils
 from sys import argv
 import __main__
 
@@ -18,14 +18,14 @@ import __main__
 
 def main():
 
-  setarg   = func.set_arg()
-  valiable = func.gen_var(setarg.station_id)
-  time     = func.time(7)
-  fff      = func.fastforward()
-  ooo      = func_auth.oth()
-  vbn      = func.wsx()
+  setarg   = func.Set_Arg()
+  valiable = func.Gen_Var(setarg.station_id)
+  time     = func.Time(7)
+  fff      = func.Fastforward()
+  ooo      = func_auth.Oth()
+  vbn      = func.Wsx()
 
-  soup = abc.Gen_Obj.data2soup(valiable.url, "xml")
+  soup = utils.Gen_Obj.data2soup(valiable.url, "xml")
   find_list = soup.find_all("title", text=compile(setarg.search_term, flags=IGNORECASE))
 
   vbn.search_program(find_list, time.today_now, time.days_ago, setarg.fftt)
@@ -41,5 +41,5 @@ def main():
   if result_1.returncode == 0:
     remove(f"{valiable.tmp_dir}/{vbn.filename}.m4a")
 
-  abc.ntfy(result_2, f"{vbn.filename}.mp3")
+  utils.ntfy(result_2, f"{vbn.filename}.mp3")
 

@@ -7,7 +7,7 @@ from time import sleep
 from re  import compile
 from os  import getenv
 from sys import argv
-from mytool import abc
+from mytool import utils
 # from dataclasses import dataclass, field, InitVar
 
 
@@ -16,9 +16,9 @@ class Gen_Var:
     self.arg          = argv[1]
     self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.__env_state  = getenv("XDG_STATE_HOME")
-    self.storage_path = abc.Ctrl_Path.anlys_path(self.__env_dl, "@tver")
-    self.loaded_yaml  = abc.Gen_Obj.load_file(self.__env_state, "python", "tver.yaml")
-    # self.y_dow        = abc.dow_yesterday(1)
+    self.storage_path = utils.Ctrl_Path.anlys_path(self.__env_dl, "@tver")
+    self.loaded_yaml  = utils.Gen_Obj.load_file(self.__env_state, "python", "tver.yaml")
+    # self.y_dow        = utils.dow_yesterday(1)
 
 
 class Scrp:
@@ -87,7 +87,7 @@ class Gen_Tag:
     ]
     __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
     self.series, self.episode, self.url, __filename, self.ext, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__filename).parent, abc.Ctrl_File.zen2han(Path(__filename).stem)
+    self.paths, self.output = Path(__filename).parent, utils.Ctrl_File.zen2han(Path(__filename).stem)
 
 
 def insert_quoter(filename:str, year, q_date):
@@ -116,6 +116,6 @@ def ccc(series, episode, url, ext, id, paths, output, year, q_date):
   method = ytdlp(paths, id, ext, url)
   result = run(method)
   output = insert_quoter(output, year, q_date)
-  output = abc.Ctrl_File.byte_count(output, 245)
-  abc.Ctrl_Path.rnm_path(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
-  abc.ntfy(result, f"{series}\n{episode}")
+  output = utils.Ctrl_File.byte_count(output, 245)
+  utils.Ctrl_Path.rnm_path(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
+  utils.ntfy(result, f"{series}\n{episode}")

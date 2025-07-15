@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from locale import setlocale, LC_TIME, LC_ALL
-from mytool import abc
+from mytool import utils
 from os  import getenv
 from sys import argv
 
@@ -12,8 +12,8 @@ class Gen_Var:
     self.arg         = argv[1]
     download_dir     = getenv("CLIENT_NETWORK_STORAGE_misc")
     state_file_dir   = getenv("XDG_STATE_HOME")
-    self.storage_dir = abc.Ctrl_Path.anlys_path(download_dir, "@podcast")
-    self.loaded_yaml = abc.Gen_Obj.load_file(state_file_dir, "python", "podcast.yaml")
+    self.storage_dir = utils.Ctrl_Path.anlys_path(download_dir, "@podcast")
+    self.loaded_yaml = utils.Gen_Obj.load_file(state_file_dir, "python", "podcast.yaml")
     self.root_string = next(iter(self.loaded_yaml))
 
 
@@ -22,13 +22,13 @@ class Gen_Tag:
     __root_obj = soup.find("channel")
     __item_obj = soup.find("item")
 
-    self.series  = abc.Ctrl_File.zen2han(__root_obj.title.string)
-    self.episode = abc.Ctrl_File.zen2han(__item_obj.title.string)
+    self.series  = utils.Ctrl_File.zen2han(__root_obj.title.string)
+    self.episode = utils.Ctrl_File.zen2han(__item_obj.title.string)
     self.date    = change_format(__item_obj.pubDate.string)
     self.img     = __root_obj.image.url.string.split('?')[0]
     self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
-    self.ext     = abc.Ctrl_File.get_ext(self.url)
-    self.name    = abc.Ctrl_File.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
+    self.ext     = utils.Ctrl_File.get_ext(self.url)
+    self.name    = utils.Ctrl_File.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
 class Check_Arg:

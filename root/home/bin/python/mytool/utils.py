@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import shutil
 from datetime import datetime, date, timedelta
 from pathlib  import Path

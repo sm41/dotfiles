@@ -1,11 +1,11 @@
 
 from sys import exit
-from mytool import abc
+from mytool import utils
 import func
 
 
 def main():
-  abc.Check_Any.check_arg()
+  utils.Check_Any.check_arg()
   variable = func.Gen_Var()
   tag_tag  = func.Gen_Tag()
 
@@ -17,7 +17,7 @@ def main():
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
     scraper = func.Scrp()
     anlys   = func.Anlys()
-    before  = abc.Ctrl_Date(1)
+    before  = utils.Ctrl_Date(1)
 
     if   variable.arg == "dow":
       anlys.find_key_value_list(variable.loaded_yaml, before.y_dow)

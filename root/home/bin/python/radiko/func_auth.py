@@ -3,8 +3,8 @@ from base64 import b64encode
 from urllib import request
 from dataclasses import dataclass
 
-# @dataclass
-class oth:
+
+class Oth:
   __auth1_url   = "https://radiko.jp/v2/api/auth1"
   __auth2_url   = "https://radiko.jp/v2/api/auth2"
   __authkey     = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
