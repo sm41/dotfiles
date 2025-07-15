@@ -16,7 +16,7 @@ export  XDG_STATE_HOME="${HOME}/.local/state"
 
 # /mnt
 export  CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
-export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
+# export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
 
 # PATH
 export PATH="${PATH}:${HOME}/bin/bash"
@@ -26,8 +26,8 @@ export PATH="${PATH}:${HOME}/.local/bin"
 # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
 # python
-# export          PYTHONPATH=
-export      PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
-export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
-export      PYTHONUSERBASE="${XDG_DATA_HOME}/python"
+export          PYTHONPATH="${PYTHONPATH}:${HOME}/bin/python"
+export      PYTHON_HISTORY="${PYTHON_HISTORY}:${XDG_STATE_HOME}/python/history"
+export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX}:${XDG_CACHE_HOME}/python"
+export      PYTHONUSERBASE="${PYTHONUSERBASE}:${XDG_DATA_HOME}/python"
 

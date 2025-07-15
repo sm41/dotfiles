@@ -23,9 +23,10 @@ mkdir -p "${HOME}/repository"
 
 # /mnt
 sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
-sudo mkdir -p "${CLIENT_NETWORK_STORAGE_rec}"
+# sudo mkdir -p "${CLIENT_NETWORK_STORAGE_rec}"
 
 # python
+mkdir -p "${PYTHONPATH}"
 mkdir -p "${PYTHON_HISTORY}"
 mkdir -p "${PYTHONPYCACHEPREFIX}"
 mkdir -p "${PYTHONUSERBASE}"

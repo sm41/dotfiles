@@ -3,7 +3,7 @@ set -eu
 
 work_path=$(realpath $(dirname "$0"))
 
-echo $work_path
+echo "${work_path}"
 exit 0
 
 # cp

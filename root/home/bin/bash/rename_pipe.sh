@@ -49,5 +49,5 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   check_number_of_argment 1 "$#"
   check_stdin
   check_sed_command "$1"
-  # main
+  main
 fi
