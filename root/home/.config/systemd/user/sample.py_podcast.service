@@ -6,4 +6,4 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/.local/bin/podcast.py  dow
+ExecStart = /usr/bin/python3   %h/bin/python/podcast.py  dow

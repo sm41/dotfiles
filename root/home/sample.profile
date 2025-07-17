@@ -20,6 +20,7 @@ export  CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
 
 # PATH
 export PATH="${PATH}:${HOME}/bin/bash"
+export PATH="${PATH}:${HOME}/bin/python"
 export PATH="${PATH}:${HOME}/.local/bin"
 
 # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
