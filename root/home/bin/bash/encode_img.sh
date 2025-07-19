@@ -33,7 +33,8 @@ function check_argment(){
     if [[ ${arg_str} =~ ^(.*)/(.+)/$ ]]; then
       base_path="${BASH_REMATCH[1]}"
       old_dir="${BASH_REMATCH[2]}"
-      new_dir="$(echo "${old_dir}${hogefuga}" | zen2han)"
+      # new_dir="$(echo "${old_dir}${hogefuga}" | zen2han)"
+      new_dir="$(zen2han <<< "${old_dir}${hogefuga}")"
 
       old_path="${base_path}/${old_dir}"
       new_path="${base_path}/${new_dir}"
@@ -59,7 +60,8 @@ function main(){
   do
     filename="${inputfile##*/}"
     old_file="${filename%.*}"
-    new_file="$(echo "${old_file}" | zen2han)"
+    # new_file="$(echo "${old_file}" | zen2han)"
+    new_file="$(zen2han <<< "${old_file}")"
 
     # ffmpeg \
     #   -nostdin \
