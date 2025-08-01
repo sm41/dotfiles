@@ -1,0 +1,37 @@
+
+
+name: shellscript test
+on: push
+# branches-ignore: '**'
+jobs:
+    scripts:
+        if: true
+        runs-on: ubuntu-latest
+
+        strategy:
+          fail-fast: false
+          matrix:
+            script:
+            # - scripts/install/apt/__apt_install.sh
+            # - scripts/install/misc/__install_vscode.sh
+            # - scripts/install/pip/__pip_install.sh
+            - test.sh
+
+        steps:
+          - name: chekout
+            uses: actions/checkout@v4
+
+          - name: test script
+            run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
+
+
+    makefile:
+        if: false
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: chekout
+            uses: actions/checkout@v4
+
+          - name: test
+            run:  setup.sh

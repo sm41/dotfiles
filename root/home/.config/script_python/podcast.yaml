@@ -1,0 +1,18 @@
+
+# https://www.podbean.com/site/search/index
+
+megaphone:
+  elekata:
+    title : エレ片のポッ！
+    url   : https://feeds.megaphone.fm/TBS2752996527
+    dow   : [土]
+
+  rocket:
+    title : ロケットマンショー
+    url   : https://feeds.megaphone.fm/rocketmanshow
+    dow   : [火]
+
+  hakuzan:
+    title : 問わず語りの神田伯山
+    url   : https://feeds.megaphone.fm/TBS7474162925
+    dow   : [金]
