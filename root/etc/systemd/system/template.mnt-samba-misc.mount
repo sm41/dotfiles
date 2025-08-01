@@ -1,0 +1,15 @@
+[Unit]
+Description = Mount Share at boot
+Requires = NetworkManager.service
+After = network-online.target
+Wants = network-online.target
+
+[Mount]
+What = //${SERVER_IP_ADDRESS}/%j
+Where = /mnt/samba/%j
+Options = credentials=/etc/samba/credentials,iocharset=utf8,rw,_netdev,x-systemd.automount,file_mode=0777,dir_mode=0777,uid=1000,gid=1000
+Type = cifs
+TimeoutSec = 30
+
+[Install]
+WantedBy = default.target
