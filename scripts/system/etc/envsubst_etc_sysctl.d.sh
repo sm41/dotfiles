@@ -23,16 +23,6 @@ generate_file="77_ipv6-privacy.conf"
 template_file="template.${generate_file}"
 
 
-function desktop(){
-  export IFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
-  # export IPADDR="192.168.1.19/24"
-}
-
-function server(){
-  export IFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
-  # export IPADDR="192.168.1.38/24"
-}
-
 TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${template_file}"
 # GENERATE_PATH="${FHS_DIR}${ORIGIN_DIR}/${generate_file}"
 GENERATE_PATH="${HOME}/${generate_file}"
@@ -40,11 +30,8 @@ GENERATE_PATH="${HOME}/${generate_file}"
 # echo ${TEMPLATE_PATH}
 # echo ${GENERATE_PATH}
 
-if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-  desktop
-
-elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-  server
+if  [[ ${HOSTNAME} =~ ^.*desktop$ ]]  ||  [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
+  export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
 
 else
   # echo "Invalid argument"

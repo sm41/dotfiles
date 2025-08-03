@@ -24,13 +24,11 @@ template_file="template.${generate_file}"
 
 
 function desktop(){
-  export IFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
-  export IPADDR="192.168.1.19/24"
+  export IPADDR="${DESKTOP_IP_ADDRESS}/24"
 }
 
 function server(){
-  export IFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
-  export IPADDR="192.168.1.38/24"
+  export IPADDR="${SERVER_IP_ADDRESS}/24"
 }
 
 TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${template_file}"

@@ -14,11 +14,11 @@ set -eu
 
 
 function desktop(){
-  export SAMBA_MOUNT_PATH="/mnt/samba/misc"
+  export SAMBA_MOUNT_PATH="${CLIENT_NETWORK_STORAGE_misc}"
 }
 
 function server(){
-  export SAMBA_MOUNT_PATH="/mnt/local/misc"
+  export SAMBA_MOUNT_PATH="${SERVER_LOCAL_STORAGE_misc}"
 }
 
 HOSTNAME="${HOSTNAME:-$(hostname)}"

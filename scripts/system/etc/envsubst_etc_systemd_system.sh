@@ -11,24 +11,32 @@ set -eu
 
 
 function desktop(){
-  export UUID="0123456789"
+  temp_path="${CLIENT_NETWORK_STORAGE_misc#/}"
+  redefinition_path="${temp_path//\//-}"
+
+  generate_file="${redefinition_path}.mount"
+  template_file="template.mnt-samba-xxx.mount"
 }
 
 function server(){
-  export SERVER_IP_ADDRESS="192.168.1.38"
+  temp_path="${SERVER_LOCAL_STORAGE_misc#/}"
+  redefinition_path="${temp_path//\//-}"
+
+  generate_file="${redefinition_path}.mount"
+  template_file="template.mnt-local-xxx.mount"
+
+  export UUID=""
+
 }
 
+
 HOSTNAME="${HOSTNAME:-$(hostname)}"
-mount_dir="misc"
+
 
 if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-  generate_file="mnt-samba-${mount_dir}.mount"
-  template_file="template.${generate_file}"
   desktop
 
 elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-  generate_file="mnt-local-${mount_dir}.mount"
-  template_file="template.${generate_file}"
   server
 
 else
@@ -51,8 +59,8 @@ TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${template_file
 # GENERATE_PATH="${FHS_DIR}${ORIGIN_DIR}/${generate_file}"
 GENERATE_PATH="${HOME}/${generate_file}"
 
-# echo ${TEMPLATE_PATH}
-# echo ${GENERATE_PATH}
+echo ${TEMPLATE_PATH}
+echo ${GENERATE_PATH}
 
 
-envsubst < "${TEMPLATE_PATH}" > "${GENERATE_PATH}"
+# envsubst < "${TEMPLATE_PATH}" > "${GENERATE_PATH}"

@@ -18,13 +18,16 @@ function share(){
   export   XDG_DATA_HOME="${HOME}/.local/share"
   export  XDG_STATE_HOME="${HOME}/.local/state"
 
+  # NetWork
+  export DESKTOP_IP_ADDRESS="192.168.1.9"
+  export SERVER_IP_ADDRESS="192.168.1.38"
+  export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
+
 }
 
 function desktop(){
   # /mnt
-  export  CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
-  # export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
-
+  export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
 
   # PATH
   export PATH="${PATH}:${HOME}/bin/bash"
@@ -47,8 +50,7 @@ function desktop(){
 
 function server(){
   # /mnt
-  export    SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
-  # export    SERVER_LOCAL_STORAGE_rec="/mnt/local/rec"
+  export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
 
   # docker
   export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"

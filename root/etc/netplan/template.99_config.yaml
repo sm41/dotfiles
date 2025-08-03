@@ -2,7 +2,7 @@ network:
   version: 2
   renderer: NetworkManager
   ethernets:
-    ${IFACE}:
+    ${NETWORK_INTERFACE}:
       dhcp4: false
       dhcp6: false
       ipv6-privacy: true
