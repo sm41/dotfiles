@@ -2,7 +2,7 @@
 set -eu
 
 work_path="$(realpath $(dirname "$0"))"
-input_file="docker_repo_list.sh"
+input_file="container_repo_list.sh"
 
 
 # cd ${HOME}/repository
