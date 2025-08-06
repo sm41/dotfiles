@@ -16,23 +16,26 @@ TEMP_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}"
 while read USER_PROFILE
 do
 
-  # if    [[ ! -e "${LOCAL_DIR}"  ]] ; then
-  #   ln -s     "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
+  LOCAL_DIR="${HOME}/${USER_PROFILE}"
+
+  # if    [[ ! -f "${LOCAL_DIR}"  ]] ; then
+  #   cp     "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   # elif  [[ -L "${LOCAL_DIR}"  ]] ; then
-  #   ln -s -f  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
+  #   cp -f  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   # elif  [[ ! -L "${LOCAL_DIR}"  ]] ; then
-  #   ln -s -b  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
+  #   cp -b  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
 
   # fi
 
-  echo "ln -s   "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
+  # cp -b  "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
+  cp  -b  --suffix=_`date +%Y%m%d_%H%M` "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}"
+
+  # echo "ln -s   "${TEMP_PATH}/sample${USER_PROFILE}"   "${HOME}/${USER_PROFILE}" "
 
 done << edf
-  ".bash_profile"
-  ".bashrc"
-  ".profile"
+  .profile
 edf
 
 exit 0

@@ -22,6 +22,10 @@ ORIGIN_DIR=/netplan
 generate_file="99_config.yaml"
 template_file="template.${generate_file}"
 
+TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${template_file}"
+# GENERATE_PATH="${FHS_DIR}${ORIGIN_DIR}/${generate_file}"
+GENERATE_PATH="${HOME}/${generate_file}"
+
 
 function desktop(){
   export IPADDR="${DESKTOP_IP_ADDRESS}/24"
@@ -30,10 +34,6 @@ function desktop(){
 function server(){
   export IPADDR="${SERVER_IP_ADDRESS}/24"
 }
-
-TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}/${template_file}"
-# GENERATE_PATH="${FHS_DIR}${ORIGIN_DIR}/${generate_file}"
-GENERATE_PATH="${HOME}/${generate_file}"
 
 # echo ${TEMPLATE_PATH}
 # echo ${GENERATE_PATH}

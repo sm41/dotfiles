@@ -31,7 +31,7 @@ esac
 # nのバリデーション
 [ "$n" -lt 1 ] || [ "$n" -gt "$N" ] && echo "n must be between 1 and $N (got $n)" && exit 1
 
-# グループ・モードごとの L, M を設定（dlc1, dlc2 は仮値）
+# グループ・モードごとの L, M を設定
 case "$group" in
   st)
     case "$mode" in
@@ -66,4 +66,6 @@ case "$group" in
 esac
 
 # 計算と出力
-echo "scale=3; $L + (($M - $L) * ($n - 1)) / ($N - 1)" | bc -l
+dc=$(echo "scale=3; $L + (($M - $L) * ($n - 1)) / ($N - 1)" | bc -l)
+
+echo -e "・Mission_Pack : ${group} \n・Mission_Number : ${n} \n・難易度係数: ${dc}"

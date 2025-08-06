@@ -63,4 +63,4 @@ echo ${TEMPLATE_PATH}
 echo ${GENERATE_PATH}
 
 
-# envsubst < "${TEMPLATE_PATH}" > "${GENERATE_PATH}"
+envsubst < "${TEMPLATE_PATH}" > "${GENERATE_PATH}"

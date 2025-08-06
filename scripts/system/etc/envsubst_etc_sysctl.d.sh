@@ -31,7 +31,7 @@ GENERATE_PATH="${HOME}/${generate_file}"
 # echo ${GENERATE_PATH}
 
 if  [[ ${HOSTNAME} =~ ^.*desktop$ ]]  ||  [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-  export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
+  :
 
 else
   # echo "Invalid argument"
