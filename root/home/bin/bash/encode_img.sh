@@ -30,6 +30,10 @@ _EOT_
 
 function check_argment(){
   if [[ -d "${arg_str}" ]] ; then
+    if [[ "${arg_str}" =~ ^.*/$ ]] ; then
+      arg_str="${arg_str/%\//}"
+    fi
+
     if [[ ${arg_str} =~ ^(.*)/(.+)$ ]]; then
       base_path="${BASH_REMATCH[1]}"
       old_dir="${BASH_REMATCH[2]}"

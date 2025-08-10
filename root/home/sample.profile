@@ -30,23 +30,24 @@ function desktop(){
   export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
 
   # PATH
-  export PATH="${PATH}:${HOME}/bin/bash"
-  export PATH="${PATH}:${HOME}/bin/python"
-  export PATH="${PATH}:${HOME}/.local/bin"
+  export PATH="${PATH}":"${HOME}/bin/bash"
+  export PATH="${PATH}":"${HOME}/bin/python"
+  export PATH="${PATH}":"${HOME}/.local/bin"
 
 
   # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
   # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
   # python
-  export          PYTHONPATH="${PYTHONPATH}:${HOME}/bin/python"
-  export      PYTHON_HISTORY="${PYTHON_HISTORY}:${XDG_STATE_HOME}/python/history"
-  export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX}:${XDG_CACHE_HOME}/python"
-  export      PYTHONUSERBASE="${PYTHONUSERBASE}:${XDG_DATA_HOME}/python"
+  export              PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}${HOME}/bin/python"
+  export          PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
+  export     PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
+  # export          PYTHONUSERBASE="${XDG_DATA_HOME}/python"
+  # export PYTHONDONTWRITEBYTECODE=1
+
+  # export PYTHONPATH="${PYTHONPATH}":"${PYTHONUSERBASE}"
 
 }
-
-
 
 function server(){
   # /mnt
@@ -55,16 +56,13 @@ function server(){
   # docker
   export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
-
 }
 
+share
 
 
-
-if   [[ ${HOSTNAME} =~ ^*desktop$ ]] ; then
+if   [[ "${HOSTNAME}" =~ ^.*desktop$ ]] ; then
   desktop
-elif [[ ${HOSTNAME} =~ ^*server$ ]] ; then
+elif [[ "${HOSTNAME}" =~ ^.*server$ ]] ; then
   server
-else
-  :
 fi

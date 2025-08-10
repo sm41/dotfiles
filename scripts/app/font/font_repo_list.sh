@@ -2,10 +2,12 @@
 
 # Noto
 
-# declare -A Noto_CJK_JP=(
-#   ["url_1"]=https://github.com/notofonts/noto-cjk/blob/main/Sans/Variable/OTF/NotoSansCJKjp-VF.otf
-#   ["url_2"]=https://github.com/notofonts/noto-cjk/blob/main/Sans/Variable/OTF/Mono/NotoSansMonoCJKjp-VF.otf
-#   ["url_3"]=https://github.com/notofonts/noto-cjk/blob/main/Serif/Variable/OTF/NotoSerifCJKjp-VF.otf
+# declare -A Noto_ColorEmoji=(
+#   ["url_1"]=https://github.com/google/fonts/blob/main/ofl/notocoloremoji/NotoColorEmoji-Regular.ttf
+# )
+
+# declare -A Noto_Emoji=(
+#   ["url_1"]=https://github.com/google/fonts/blob/main/ofl/notoemoji/NotoEmoji%5Bwght%5D.ttf
 # )
 
 declare -A Noto_Sans_JP=(

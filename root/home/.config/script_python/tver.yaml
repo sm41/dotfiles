@@ -3,11 +3,11 @@
 
 tver:
   _common:
-    - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
     - &header_drama   "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
-    - &header_house   "[住まい]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    - &header_inform  "[情報]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-    - &header_variety "[バラエティ]_[%(channel)s]_[%(upload_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_house   "[住まい]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_inform  "[情報]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+    - &header_variety "[バラエティ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
   _http:
     header : *header_base

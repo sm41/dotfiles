@@ -49,7 +49,13 @@ do
       echo "BLOB_API    : ${blob_api}"
       echo "DL_NAME     : ${name}"
       echo "DL_URL      : ${url}"
-      curl -s -L -o "${font_dir}/${name}" "${url}" --create-dirs
+
+      if curl -f -s -S -L -o "${font_dir}/${name}" "${url}" --create-dirs ; then
+        echo "✅ Downloaded: ${name} to ${font_dir}"
+      else
+        echo "🆖 Failed to download: ${name} from ${url}"
+      fi
+
     done
 
     echo "----------------------------------------"

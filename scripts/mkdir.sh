@@ -36,7 +36,7 @@ function desktop() {
   mkdir -p "${PYTHONPATH}"
   mkdir -p "${PYTHON_HISTORY}"
   mkdir -p "${PYTHONPYCACHEPREFIX}"
-  mkdir -p "${PYTHONUSERBASE}"
+  # mkdir -p "${PYTHONUSERBASE}"
 
 }
 
