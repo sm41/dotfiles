@@ -1,6 +1,6 @@
 {
   "extractor":{
-    "base-directory": "${CLIENT_NETWORK_STORAGE_misc}//misc/gallery-dl",
+    "base-directory": "${CLIENT_NETWORK_STORAGE_misc}/@ai/gallery-dl",
 
     "imgur": {
       "filename": "{date:%Y-%m-%d}__{id}__{title}.{extension}"

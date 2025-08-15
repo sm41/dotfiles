@@ -24,6 +24,10 @@ def main():
     elif variable.arg != "dow":
       anlys.find_key_dict(variable.loaded_yaml, variable.arg)
 
+    if not anlys.result_list:
+      print("Not Found")
+      exit(0)
+
     for bmw in anlys.result_list:
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)

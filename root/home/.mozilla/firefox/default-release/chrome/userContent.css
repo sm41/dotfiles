@@ -7,12 +7,12 @@ font-family                 : Times/Arial/monospace 等 -->　引用符で囲う
 
 
 
-/*
+
 @font-face {
-  font-family: "Roboto";
+  font-family: "Arial";
   src: local("Roboto Flex");
   }
-*/
+
 
 
 *{

@@ -38,7 +38,6 @@ function main(){
   do
     base_dir="${TARGET_FILE%/*}"
     old_name="${TARGET_FILE##*/}"
-    # new_name="$(echo "${old_name}" | "${SED_ARG}")"
     new_name="$("${SED_ARG}" <<< "${old_name}")"
 
     echo mv  \"${base_dir}/${old_name}\"  \"${base_dir}/${new_name}\"

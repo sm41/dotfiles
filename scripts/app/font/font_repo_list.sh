@@ -2,14 +2,6 @@
 
 # Noto
 
-# declare -A Noto_ColorEmoji=(
-#   ["url_1"]=https://github.com/google/fonts/blob/main/ofl/notocoloremoji/NotoColorEmoji-Regular.ttf
-# )
-
-# declare -A Noto_Emoji=(
-#   ["url_1"]=https://github.com/google/fonts/blob/main/ofl/notoemoji/NotoEmoji%5Bwght%5D.ttf
-# )
-
 declare -A Noto_Sans_JP=(
   ["url_1"]=https://github.com/google/fonts/blob/main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf
 )

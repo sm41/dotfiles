@@ -14,6 +14,6 @@ audacious
 
 
 #ffmpeg
-fonts-ipafont
+# fonts-ipafont
 #jq
 solaar
