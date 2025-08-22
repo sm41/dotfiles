@@ -20,7 +20,7 @@ function share(){
 
   # NetWork
   export DESKTOP_IP_ADDRESS="192.168.1.9"
-  export SERVER_IP_ADDRESS="192.168.1.38"
+  export  SERVER_IP_ADDRESS="192.168.1.38"
   export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
 
 }

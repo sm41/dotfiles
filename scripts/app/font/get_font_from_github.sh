@@ -7,15 +7,6 @@ input_file="font_repo_list.sh"
 source ${work_path}/font_repo_list.sh
 
 
-# function encode_api(){
-#   blob_url=$1
-
-#   echo ${blob_url} | \
-#     sed -e "s|/github.com/|/api.github.com/repos/|" \
-#         -e "s|/blob/main/|/contents/|"
-# }
-
-
 function encode_api(){
   blob_url=$1
 
