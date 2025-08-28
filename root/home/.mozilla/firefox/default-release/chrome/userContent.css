@@ -13,7 +13,10 @@ font-family                 : Times/Arial/monospace 等 -->　引用符で囲う
   src: local("Roboto Flex");
   }
 
-
+@font-face {
+  font-family: "Noto Sans JP";
+  src: local("IPA Pゴシック");
+  }
 
 *{
   font-family : sans-serif ;
