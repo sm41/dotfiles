@@ -1,0 +1,9 @@
+[Unit]
+Description = service unit of Scraping Program
+Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFiles_and_support_for_/etc/sysconfig_files
+# ${FOOBAR} は変数を 1 つの単語に展開し、$FOOBAR は空白の変数値を複数の単語に分割します
+# unitname-Mon@env_arg.service
+
+[Service]
+Type = oneshot
+ExecStart = /usr/bin/python3   %h/bin/python/scraping.py

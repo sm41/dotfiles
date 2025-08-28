@@ -33,11 +33,11 @@ tver:
     dow    : [土]
     header : *header_variety
 
-  life:
-    title  : ララLIFE
-    url    : https://tver.jp/series/srpg7xtokz
-    dow    : [金]
-    header : *header_variety
+  # life:
+  #   title  : ララLIFE
+  #   url    : https://tver.jp/series/srpg7xtokz
+  #   dow    : [金]
+  #   header : *header_variety
 
 
   # house:

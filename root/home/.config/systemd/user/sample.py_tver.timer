@@ -3,7 +3,7 @@ Description = timer unit of Scraping Program
 
 
 [Timer]
-OnCalendar = *-*-* 5:30:00
+OnCalendar = *-*-*  5:30:00
 Persistent = true
 RandomizedDelaySec = 60s
 

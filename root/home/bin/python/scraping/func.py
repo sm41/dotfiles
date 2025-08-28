@@ -4,15 +4,16 @@ from time import sleep
 import yaml
 from pathlib import Path
 import inspect
+from os import getenv
 
 
-def get_yaml_path(filename="state.yaml"):
-  script_dir = Path(__file__).resolve().parent
-  state_file = script_dir / filename
-  return state_file
+def get_yaml_path():
+  state_file_dir  = getenv("XDG_CONFIG_HOME")
+  state_file_PATH = Path(state_file_dir, "script_python", "scraping.yaml")
+  return state_file_PATH
 
 
-def isexist_dict(method_name, state_file):
+def isexist_dict(method_name, state_file: Path):
   if not state_file.exists():
     with open(state_file, 'w', encoding='utf-8') as f:
       return None

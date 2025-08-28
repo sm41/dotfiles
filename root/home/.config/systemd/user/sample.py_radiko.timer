@@ -3,7 +3,7 @@ Description = Get Radiko Weekly Program
 Documentation = https://man.archlinux.org/man/systemd.unit.5.en
 
 [Timer]
-OnCalendar = %j *-*-* 18:30:00
+OnCalendar = %j  *-*-*  18:30:00
 Persistent = true
 RandomizedDelaySec = 60s
 
