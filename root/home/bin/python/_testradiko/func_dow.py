@@ -1,7 +1,7 @@
 
 from dataclasses import dataclass, field, InitVar
 from os  import getenv
-from mytool import abc
+from mytool import utils
 import __main__
 
 
@@ -12,7 +12,7 @@ class gen_var:
   def __post_init__(self):
     # __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
     __state_file_dir  = getenv("XDG_CONFIG_HOME")
-    self.loaded_yaml  = abc.gen_obj.load_file(__state_file_dir, "script_python", "radiko.yaml")
+    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(__state_file_dir, "script_python", "radiko.yaml")
     # self.storage_path = abc.ctrl_path.anlys_path(__env_dir, "@radiko")
     # self.url          = f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
 

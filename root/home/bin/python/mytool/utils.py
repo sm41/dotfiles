@@ -5,7 +5,7 @@ from datetime import datetime, date, timedelta
 from pathlib  import Path
 from locale import setlocale, LC_TIME, LC_ALL
 from urllib import request
-from yaml import load, FullLoader
+from yaml import load, safe_load, load_all, FullLoader, SafeLoader
 from bs4  import BeautifulSoup
 from sys  import argv, exit
 from plyer import notification
@@ -74,12 +74,26 @@ class Ctrl_Path:
 
 
 class Gen_Obj:
+  # @staticmethod
+  # def load_file(*path_parts):
+  #   filename = Path(*path_parts)
+  #   with filename.open(mode='r') as f:
+  #     y_data = load(f, Loader=FullLoader)
+  #   return y_data
+
   @staticmethod
-  def load_file(*path_parts):
+  def safe_load_file(*path_parts):
     filename = Path(*path_parts)
     with filename.open(mode='r') as f:
-      y_data = load(f, Loader=FullLoader)
+      y_data = safe_load(f)
     return y_data
+
+  # @staticmethod
+  # def load_all_file(*path_parts):
+  #   filename = Path(*path_parts)
+  #   with filename.open(mode='r') as f:
+  #     y_data = list(load_all(f, Loader=SafeLoader))
+  #   return y_data
 
   @staticmethod
   def data2soup(url, type):
@@ -98,13 +112,13 @@ class Ctrl_Date:
     self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
 
 
-def dow_yesterday(day_int:int):
-  setlocale(LC_TIME, 'ja_JP.UTF-8')
+# def dow_yesterday(day_int:int):
+#   setlocale(LC_TIME, 'ja_JP.UTF-8')
 
-  d_today     = date.today()
-  d_yesterday = d_today - timedelta( days = day_int )
-  y_dow_str   = d_yesterday.strftime('%a')
-  return y_dow_str
+#   d_today     = date.today()
+#   d_yesterday = d_today - timedelta( days = day_int )
+#   y_dow_str   = d_yesterday.strftime('%a')
+#   return y_dow_str
 
 
 def ntfy(result, text):

@@ -1,11 +1,8 @@
-
-
-
-radiko:
-  # elekata:
-  #   title   : エレ片
-  #   station : tbs
-    # dow     : [月,火,水,木,金,土,日]
+# radiko:
+#   elekata:
+#     title   : エレ片
+#     station : tbs
+#     dow     : [月,火,水,木,金,土,日]
 
   rocket:
     title   : ロケットマン

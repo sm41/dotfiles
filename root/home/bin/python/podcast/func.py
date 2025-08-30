@@ -13,8 +13,7 @@ class Gen_Var:
     download_dir     = getenv("CLIENT_NETWORK_STORAGE_misc")
     state_file_dir   = getenv("XDG_CONFIG_HOME")
     self.storage_dir = utils.Ctrl_Path.anlys_path(download_dir, "@podcast")
-    self.loaded_yaml = utils.Gen_Obj.load_file(state_file_dir, "script_python", "podcast.yaml")
-    self.root_string = next(iter(self.loaded_yaml))
+    self.loaded_yaml = utils.Gen_Obj.safe_load_file(state_file_dir, "script_python", "podcast.yaml")
 
 
 class Gen_Tag:
@@ -32,19 +31,18 @@ class Gen_Tag:
 
 
 class Check_Arg:
-  def __init__(self, root_obj: str):
-    self._platform = root_obj
+  def __init__(self):
     self.reserve_list: list[dict] = []
 
-  def today_list(self, y_data, y_dow_str):
-    for key, value in y_data[self._platform].items():
+  def today_list(self, y_data:list, y_dow_str):
+    for value in y_data.values():
       if y_dow_str in value.get('dow', []):
         self.reserve_list.append({**value})
 
-  def series_name(self, y_data, args):
-    for ttl, cnfg in y_data[self._platform].items():
-      if ttl == args:
-        self.reserve_list.append({**cnfg})
+  def series_name(self, y_data:list, args):
+    for key, value in y_data.items():
+      if key == args:
+        self.reserve_list.append({**value})
 
 
 

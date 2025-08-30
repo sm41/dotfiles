@@ -1,4 +1,3 @@
-
 from subprocess import run
 from selenium import webdriver
 from pathlib  import Path
@@ -8,7 +7,6 @@ from re  import compile
 from os  import getenv
 from sys import argv
 from mytool import utils
-# from dataclasses import dataclass, field, InitVar
 
 
 class Gen_Var:
@@ -17,8 +15,7 @@ class Gen_Var:
     self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.__env_state  = getenv("XDG_CONFIG_HOME")
     self.storage_path = utils.Ctrl_Path.anlys_path(self.__env_dl, "@tver")
-    self.loaded_yaml  = utils.Gen_Obj.load_file(self.__env_state, "script_python", "tver.yaml")
-    # self.y_dow        = utils.dow_yesterday(1)
+    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(self.__env_state, "script_python", "tver2.yaml")
 
 
 class Scrp:
@@ -69,7 +66,7 @@ class Anlys:
 
 class Gen_Tag:
   def get_base_yaml(self, loaded_yaml):
-    self.config = loaded_yaml['tver']['_http']
+    self.config = loaded_yaml['_http']
 
   def integrate(self, url, down_dir, yaml_config):
     __header = yaml_config['header']

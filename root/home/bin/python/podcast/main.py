@@ -3,13 +3,14 @@ from subprocess import run
 from pathlib import Path
 from mytool  import utils
 import func
+from sys import exit
 
 
 def main():
 
   utils.Check_Any.check_arg()
   variable = func.Gen_Var()
-  branch   = func.Check_Arg(variable.root_string)
+  branch   = func.Check_Arg()
   before   = utils.Ctrl_Date(1)
 
   if variable.arg == "dow":
@@ -17,9 +18,16 @@ def main():
   else:
     branch.series_name(variable.loaded_yaml, variable.arg)
 
+
+  # print(branch.reserve_list)
+  # exit()
+
   for ttt in branch.reserve_list:
     soup   = utils.Gen_Obj.data2soup(ttt['url'], "xml")
     source = func.Gen_Tag(soup)
+
+    # print(source.episode)
+    # continue
 
     download = func.dl(source.url, source.img, source.name, source.ext, variable.tmp_dir)
     result   = run(download)
