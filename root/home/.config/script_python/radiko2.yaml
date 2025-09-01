@@ -1,14 +1,14 @@
-# elekata:
-#   title   : エレ片
-#   station : tbs
-#   dow     : [月,火,水,木,金,土,日]
+elekata:
+  title   : エレ片
+  station : tbs
+  dow     : [土]
 
 rocket:
   title   : ロケットマン
   station : yfm
-  dow     : [月,火,水,木,金,土,日]
+  dow     : [日,月,火,水,木,金,土]
 
 disco:
   title   : radio.+disco
   station : int
-  dow     : [月,火,水,木,金,土,日]
+  dow     : [日,月,火,水,木,金,土]

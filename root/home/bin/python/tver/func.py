@@ -15,7 +15,7 @@ class Gen_Var:
     self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.__env_state  = getenv("XDG_CONFIG_HOME")
     self.storage_path = utils.Ctrl_Path.anlys_path(self.__env_dl, "@tver")
-    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(self.__env_state, "script_python", "tver2.yaml")
+    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(self.__env_state, "script_python", "tver.yaml")
 
 
 class Scrp:
