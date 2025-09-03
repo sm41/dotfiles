@@ -1,7 +1,12 @@
-elekata:
-  title   : エレ片
-  station : tbs
-  dow     : [土]
+# ann:
+#   title   : オールナイトニッポン
+#   station : lfr
+#   dow     : [日,月,火,水,木,金,土]
+
+# haraichi:
+#   title   : ハライチ
+#   station : tbs
+#   dow     : [日,月,火,水,木,金,土]
 
 rocket:
   title   : ロケットマン

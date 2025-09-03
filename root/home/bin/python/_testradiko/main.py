@@ -1,12 +1,10 @@
-
 from os import remove
 from re import compile, IGNORECASE
 from subprocess import run
-import func, func_auth, func_dow
-from mytool import abc
-from sys import argv
+import func, auth, parse, variable, download
+from mytool import utils
+from sys import argv, exit
 import __main__
-from dataclasses import dataclass, field, InitVar
 
 
 #JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -17,73 +15,113 @@ from dataclasses import dataclass, field, InitVar
 #https://radiko.jp/v3/program/station/weekly/TBS.xml
 
 
-@dataclass
-class arg():
-  def __post_init__(self):
-    self.setarg   = func.set_arg()
-    self.valiable = func.gen_var(self.setarg.station_id)
-    self.time     = func.time(7)
-    self.vbn      = func.wsx()
+def majisuka(series_list, vbn:func.icpo, time:variable.time, var_parts:variable.local_path):
+  for series_dict in series_list:
+    station_id  = series_dict['station_id']
+    search_term = series_dict['title']
+    url         = series_dict['url']
 
-    soup = abc.gen_obj.data2soup(self.valiable.url, "xml")
-    find_list = soup.find_all("title", text=compile(self.setarg.search_term, flags=IGNORECASE))
-
-    self.vbn.search_program(find_list, self.time.today_now, self.time.days_ago, self.setarg.fftt)
-    self.vbn.branch(self.vbn.program_list, self.setarg.dl_flag)
+    soup      = utils.Gen_Obj.data2soup(url, "xml")
+    find_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
+    vbn.search_program(station_id, find_list, time.today_now, time.days_ago, var_parts.tmp_dir, var_parts.storage_path)
 
 
-@dataclass
-class analyse:
-  def __post_init__(self):
-    self.variable = func_dow.gen_var()
-    self.argment  = func_dow.check_arg()
+def siingle_match(vbn:func.icpo, setarg:func.set_arg):
 
-  def dow(self):
-    dy = abc.dow_yesterday(1)
-    self.argment.today_list(self.variable.loaded_yaml, dy)
-    self.today_list = self.argment.reserve_list
+  if len(vbn.program_list) != 1:
 
-  def phrase(self):
-    self.argment.series_name(self.variable.loaded_yaml, argv[1])
-    self.today_list = self.argment.reserve_list
+      if not setarg.fftt:
+          for iii in vbn.program_list:
+            srx = {
+              'station_id': iii['station_id'],
+              'day':        iii['date'],
+              'time':       f"{iii['ft'][8:10]}:{iii['ft'][10:12]}-{iii['to'][8:10]}:{iii['to'][10:12]}",
+              'title':      iii['title']
+            }
+            print(srx)
+          print(f"📢 Result {len(vbn.program_list)} Programs")
+          exit()
+
+      elif len(setarg.fftt) != 14:
+          exit("There is an error in the '-ft' option")
+
+      elif len(setarg.fftt) == 14:
+          hogefuga_list = []
+          for rrr in vbn.program_list:
+              if rrr['ft'] == setarg.fftt:
+                  hogefuga_list.append(rrr)
+                  break
+          vbn.program_list = hogefuga_list
+          print(vbn.program_list)
+          print("✅ You can download it by adding '-dl' flag")
+
+  elif len(vbn.program_list) == 1:
+
+      if not setarg.dl_flag:
+          print(vbn.program_list)
+          print("✅ You can download it by adding '-dl' flag")
+          exit()
 
 
-@dataclass
-class download:
-  def __post_init__(self):
-    self.fff = func.fastforward()
-    self.ooo = func_auth.oth()
-
-  def dl(self, argclass:arg):
-    self.fff.dl(self.ooo.xrat, argclass.setarg.station_id, argclass.vbn.time_ft, argclass.vbn.time_to, argclass.valiable.tmp_dir, argclass.vbn.filename)
-    self.fff.enc(argclass.valiable.tmp_dir, argclass.valiable.storage_path, argclass.vbn.filename, argclass.vbn.img)
-
-    result_1 = run(self.fff.download)
-    result_2 = run(self.fff.encode)
-    # print(self.fff.download)
+def ddwwnn(vbn:func.icpo, fst:download.fastforward, ooo:auth.oth):
+  for dl_dict in vbn.program_list:
+    fst.dl(ooo.xrat, dl_dict)
+    fst.enc(dl_dict)
+    result_1 = run(fst.ffmpeg_dl)
+    result_2 = run(fst.ffmpeg_enc)
+    # print(fst.ffmpeg_dl)
 
     if result_1.returncode == 0:
-      remove(f"{argclass.valiable.tmp_dir}/{argclass.vbn.filename}.m4a")
+        remove(f"{dl_dict['tmp']}/{dl_dict['title']}_{dl_dict['date']}.m4a")
 
-    abc.ntfy(result_2, f"{argclass.vbn.filename}.mp3")
+    utils.ntfy(result_2, f"{dl_dict['title']}_{dl_dict['date']}.mp3")
+
+
 
 
 def main():
+  time      = variable.time(7)
+  vbn       = func.icpo()
+  var_parts = variable.local_path()
+  fst       = download.fastforward()
+  ooo       = auth.oth()
 
-  if       argv[1].startswith("-"):
-    iop = arg()
-    dldl = download()
-    dldl.dl(iop)
-  elif not argv[1].startswith("-"):
-    jkl = analyse()
+  if argv[1].startswith("-"):
+    setarg    = func.set_arg()
+    series_list = [
+      {
+        'station_id' : setarg.station_id,
+        "title"      : setarg.search_term,
+        "url"        : f"https://radiko.jp/v3/program/station/weekly/{setarg.station_id}.xml"
+      }
+    ]
+
+    majisuka(series_list, vbn, time, var_parts)
+    siingle_match(vbn, setarg)
+
+
+  if not argv[1].startswith("-"):
+    argment   = parse.parse_file()
+    cd        = utils.Ctrl_Date(1)
 
     if   argv[1] == "dow":
-      jkl.dow()
+      argment.today_list(var_parts.loaded_yaml, cd.y_dow)
     elif argv[1] != "dow":
-      jkl.phrase()
+      argment.series_name(var_parts.loaded_yaml, argv[1])
 
-    cvb = func_dow.convert_d2l(jkl.today_list)
+    options_list = parse.yaml2arg(argment.reserve_list)
 
-    for ggg in cvb:
-      run(ggg)
+    series_list = []
+    for series in options_list:
+      station_id = series['-s'].upper()
+      hoge = {
+        'station_id': station_id,
+        'title'     : series['-t'],
+        'url'       : f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
+      }
+      series_list.append(hoge)
 
+    majisuka(series_list, vbn, time, var_parts)
+
+
+  ddwwnn(vbn, fst, ooo)

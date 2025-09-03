@@ -28,3 +28,11 @@ class hoge:
     self.article = self.website
     self.page    = "https://twstalker.com" + self.soup.select_one("div > span > a").attrs['href']
     # https://x.com/i/user/1690092058055233536
+
+
+  def mnemosynekoto(self):
+    self.website = "mnemosynekoto"
+    self.url     = "https://kemono.cr/patreon/user/86508534"
+    self.soup    = func.selenium(self.url)
+    self.article = self.website
+    self.page    = "https://kemono.cr" + self.soup.select_one("div > article > a").attrs['href']
