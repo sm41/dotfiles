@@ -90,11 +90,11 @@ stingers:
   dow    : [火]
   header : *header_drama
 
-yuukai:
-  title  : 誘拐の日
-  url    : https://tver.jp/series/srsotysrjz2
-  dow    : [火]
-  header : *header_drama
+# yuukai:
+#   title  : 誘拐の日
+#   url    : https://tver.jp/series/srsotysrjz2
+#   dow    : [火]
+#   header : *header_drama
 
 ssbc:
   title  : 大追跡～警視庁ＳＳＢＣ強行犯係～

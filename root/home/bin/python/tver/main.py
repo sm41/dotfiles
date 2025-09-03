@@ -12,7 +12,7 @@ def main():
   if variable.arg.startswith("https://tver.jp/episodes/"):
     tag_tag.get_base_yaml(variable.loaded_yaml)
     tag_tag.integrate(variable.arg, variable.storage_path, tag_tag.config)
-    func.ccc(tag_tag.series, tag_tag.episode, tag_tag.url, tag_tag.ext, tag_tag.id, tag_tag.paths, tag_tag.output, None, None)
+    func.ccc(tag_tag, None, None)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
     scraper = func.Scrp()
@@ -32,7 +32,7 @@ def main():
       scraper.selenium(bmw["url"])
       scraper.tver(scraper.soup)
       tag_tag.integrate(scraper.url, variable.storage_path, bmw)
-      func.ccc(tag_tag.series, tag_tag.episode, tag_tag.url, tag_tag.ext, tag_tag.id, tag_tag.paths, tag_tag.output, before.d_yesterday.year, before.q_date)
+      func.ccc(tag_tag, before.d_yesterday.year, before.q_date)
 
   else:
     exit("Invailed Argment!")

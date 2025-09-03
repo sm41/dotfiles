@@ -7,7 +7,7 @@ from re  import compile
 from os  import getenv
 from sys import argv
 from mytool import utils
-
+import func
 
 class Gen_Var:
   def __init__(self):
@@ -109,10 +109,10 @@ def ytdlp(paths, id, ext, url):
   return method
 
 
-def ccc(series, episode, url, ext, id, paths, output, year, q_date):
-  method = ytdlp(paths, id, ext, url)
+def ccc(tag_tag:func.Gen_Tag, year, q_date):
+  method = ytdlp(tag_tag.paths, tag_tag.id, tag_tag.ext, tag_tag.url)
   result = run(method)
-  output = insert_quoter(output, year, q_date)
-  output = utils.Ctrl_File.byte_count(output, 245)
-  utils.Ctrl_Path.rnm_path(Path(paths, f"{id}.{ext}"), Path(paths, f"{output}.{ext}"))
-  utils.ntfy(result, f"{series}\n{episode}")
+  tag_tag.output = insert_quoter(tag_tag.output, year, q_date)
+  tag_tag.output = utils.Ctrl_File.byte_count(tag_tag.output, 245)
+  utils.Ctrl_Path.rnm_path(Path(tag_tag.paths, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.paths, f"{tag_tag.output}.{tag_tag.ext}"))
+  utils.ntfy(result, f"{tag_tag.series}\n{tag_tag.episode}")
