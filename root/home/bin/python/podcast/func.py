@@ -55,17 +55,17 @@ def change_format(episode_date):
   return yyy
 
 
-def dl(url, img, filename, ext, tmp_dir):
+def dl(source:Gen_Tag, tmp_dir):
   download = [
     "ffmpeg",
       "-loglevel", "warning",
-      "-i",   url,
-      "-i",   img,
+      "-i",   source.url,
+      "-i",   source.img,
       "-map", "0:a",
       "-map", "1:v",
       "-metadata:s:v", "title='Album cover'",
       "-metadata:s:v", "comment='Cover (Front)'",
       "-codec", "copy",
-    f"{tmp_dir}/{filename}{ext}"
+    f"{tmp_dir}/{source.name}{source.ext}"
   ]
   return download

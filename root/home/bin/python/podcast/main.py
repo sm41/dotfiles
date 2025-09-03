@@ -29,7 +29,7 @@ def main():
     # print(source.episode)
     # continue
 
-    download = func.dl(source.url, source.img, source.name, source.ext, variable.tmp_dir)
+    download = func.dl(source, variable.tmp_dir)
     result   = run(download)
     utils.Ctrl_Path.rnm_path(Path(variable.tmp_dir, source.name + source.ext), Path(variable.storage_dir, source.name + source.ext))
     utils.ntfy(result, f"{source.series}\n{source.episode}")
