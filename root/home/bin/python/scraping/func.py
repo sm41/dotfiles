@@ -13,18 +13,6 @@ def get_yaml_path():
   return state_file_PATH
 
 
-def isexist_dict(method_name, state_file: Path):
-  if not state_file.exists():
-    with open(state_file, 'w', encoding='utf-8') as f:
-      return None
-  else:
-    with open(state_file, 'r', encoding='utf-8') as f:
-      for dict_of_siteinfo in yaml.safe_load_all(f):
-        for key_of_sitename in dict_of_siteinfo.keys():
-          if key_of_sitename == method_name:
-            return dict_of_siteinfo
-
-
 def get_function_names(instance):
   function_names = [
     name for name, obj in inspect.getmembers(instance, inspect.ismethod)
@@ -36,6 +24,18 @@ def get_function_names(instance):
 def generate_method(instance_name, method_name):
   unite_method = getattr(instance_name, method_name)
   unite_method()
+
+
+def isexist_dict(method_name, state_file: Path):
+  if not state_file.exists():
+    with open(state_file, 'w', encoding='utf-8') as f:
+      return None
+  else:
+    with open(state_file, 'r', encoding='utf-8') as f:
+      for dict_of_siteinfo in yaml.safe_load_all(f):
+        for key_of_sitename in dict_of_siteinfo.keys():
+          if key_of_sitename == method_name:
+            return dict_of_siteinfo
 
 
 def selenium(url):

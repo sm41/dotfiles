@@ -20,3 +20,27 @@ class time:
     __get_past     = __get_now - timedelta(day_int)
     self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
+
+
+
+def search_program(station_id, find_list, today_now, days_ago, tmp, storage):
+  program_list = []
+
+  for keyword in find_list:
+    prog_detail = keyword.parent
+    if   days_ago >  prog_detail.attrs['to'] >  today_now:
+      continue
+    elif days_ago <= prog_detail.attrs['to'] <= today_now:
+      ddd = {
+        "station_id":  station_id,
+        "ft":          prog_detail.attrs['ft'],
+        "to":          prog_detail.attrs['to'],
+        "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+        "img":      prog_detail.img.string,
+        'tmp':      tmp,
+        'storage':  storage,
+        "title":    utils.Ctrl_File.zen2han(prog_detail.title.string),
+      }
+      program_list.append(ddd)
+
+  return program_list

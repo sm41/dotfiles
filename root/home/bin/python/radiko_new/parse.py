@@ -1,3 +1,39 @@
+from argparse import ArgumentParser
+
+
+class parse_arg:
+  s_dict = {
+    "TBS":     "TBSラジオ",
+    "QRR":     "文化放送",
+    "LFR":     "ニッポン放送",
+    "RN1":     "ラジオNIKKEI第1",
+    "RN2":     "ラジオNIKKEI第2",
+    "INT":     "interfm",
+    "FMT":     "tokyo fm",
+    "FMJ":     "j-wave",
+    "IBS":     "LuckyFM 茨城放送",
+    "JORF":    "ラジオ日本",
+    "BAYFM78": "bayfm",
+    "NACK5":   "nack5",
+    "YFM":     "fm yokohama",
+    "JOAK":    "NHKラジオ第1（東京）",
+    "JOAK-FM": "NHK-FM（東京）",
+  }
+
+  def __init__(self):
+    __parser = ArgumentParser()
+    __parser.add_argument('-s',   help='station_id',  required=True,   type=str.upper, choices = self.s_dict.keys())
+    __parser.add_argument('-t',   help='title',       required=True,   type=str)
+    __parser.add_argument('-ft',  help='ft',          required=False,  type=str)
+    __parser.add_argument('-dl',  help='download',    required=False,  action='store_true')
+
+    __opt_args       = __parser.parse_args()
+    self.station_id  = __opt_args.s.upper()
+    self.search_term = __opt_args.t
+    self.fftt        = __opt_args.ft
+    self.dl_flag     = __opt_args.dl
+    self.url         = f"https://radiko.jp/v3/program/station/weekly/{self.station_id}.xml"
+
 
 class parse_file:
   reserve_list = []
@@ -22,12 +58,12 @@ def yaml2arg(yaml_list:list):
   }
 
   for yaml_value in yaml_list:
-    aaa = {}
+    today_series = {}
     for key, value in key_to_option.items():
       option = yaml_value.get(key)
       if option:
-        aaa[value] = option
-    opt_arg.extend([aaa])
+        today_series[value] = option
+    opt_arg.extend([today_series])
 
   return opt_arg
 

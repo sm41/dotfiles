@@ -54,17 +54,17 @@ sugoi:
 
 
 # drama:
-"19":
-  title  : 19番目のカルテ
-  url    : https://tver.jp/series/sryqn6v5zpo
-  dow    : [日]
-  header : *header_drama
+# "19":
+#   title  : 19番目のカルテ
+#   url    : https://tver.jp/series/sryqn6v5zpo
+#   dow    : [日]
+#   header : *header_drama
 
-asayama:
-  title  : こんばんは、朝山家です。
-  url    : https://tver.jp/series/srjibm6acr
-  dow    : [日]
-  header : *header_drama
+# asayama:
+#   title  : こんばんは、朝山家です。
+#   url    : https://tver.jp/series/srjibm6acr
+#   dow    : [日]
+#   header : *header_drama
 
 price:
   title  : DOCTOR PRICE
