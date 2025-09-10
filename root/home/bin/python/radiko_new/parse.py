@@ -32,38 +32,53 @@ class parse_arg:
     self.search_term = __opt_args.t
     self.fftt        = __opt_args.ft
     self.dl_flag     = __opt_args.dl
-    self.url         = f"https://radiko.jp/v3/program/station/weekly/{self.station_id}.xml"
 
 
 class parse_file:
   reserve_list = []
 
-  def today_list(self, yaml_file, y_dow_str):
+  def today_list(self, yaml_file:dict, y_dow_str):
     for key, value in yaml_file.items():
       for pln in value['dow']:
         if pln == y_dow_str:
           self.reserve_list.append({**value})
 
-  def series_name(self, yaml_file, args):
+  def series_name(self, yaml_file:dict, args):
     for ttl, cnfg in yaml_file.items():
       if ttl == args:
         self.reserve_list.append({**cnfg})
 
 
-def yaml2arg(yaml_list:list):
-  opt_arg = []
-  key_to_option = {
-    'station': '-s',
-    'title':   '-t',
-  }
+class convert_dict:
 
-  for yaml_value in yaml_list:
-    today_series = {}
-    for key, value in key_to_option.items():
-      option = yaml_value.get(key)
-      if option:
-        today_series[value] = option
-    opt_arg.extend([today_series])
+  def yaml2dict(self, yaml_list:list):
+    self.options_list = []
+    key_to_option = {
+      'station': '-s',
+      'title':   '-t',
+    }
 
-  return opt_arg
+    for yaml_value in yaml_list:
+      today_series = {}
+      for key, value in key_to_option.items():
+        option = yaml_value.get(key)
+        if option:
+          today_series[value] = option
+      self.options_list.extend([today_series])
 
+
+  def arg2dict(self, station_id, search_term):
+    self.options_list = [
+      {
+        '-s': station_id,
+        '-t': search_term
+      }
+    ]
+
+
+  def minimum_dict(self, station_id, search_term):
+    self.argument_dict = {
+      'station_id' : station_id,
+      "title"      : search_term,
+      "url"        : f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
+    }

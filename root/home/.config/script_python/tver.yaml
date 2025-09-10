@@ -114,11 +114,11 @@ kekkonn:
   dow    : [木]
   header : *header_drama
 
-dope:
-  title  : DOPE 麻薬取締部特捜課
-  url    : https://tver.jp/series/sr3b3odx0x1
-  dow    : [金]
-  header : *header_drama
+# dope:
+#   title  : DOPE 麻薬取締部特捜課
+#   url    : https://tver.jp/series/sr3b3odx0x1
+#   dow    : [金]
+#   header : *header_drama
 
 housoukyoku:
   title  : 放送局占拠

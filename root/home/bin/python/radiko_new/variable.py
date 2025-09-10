@@ -1,4 +1,5 @@
 from os  import getenv
+from sys import exit
 from mytool import utils
 from datetime import datetime, timedelta
 
@@ -13,7 +14,6 @@ class local_path:
     self.storage_path = utils.Ctrl_Path.anlys_path(__env_dir, "@radiko")
 
 
-
 class time:
   def __init__(self, day_int):
     __get_now      = datetime.now()
@@ -22,25 +22,25 @@ class time:
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
 
-
-def search_program(station_id, find_list, today_now, days_ago, tmp, storage):
+def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
   program_list = []
 
-  for keyword in find_list:
-    prog_detail = keyword.parent
-    if   days_ago >  prog_detail.attrs['to'] >  today_now:
-      continue
-    elif days_ago <= prog_detail.attrs['to'] <= today_now:
-      ddd = {
-        "station_id":  station_id,
-        "ft":          prog_detail.attrs['ft'],
-        "to":          prog_detail.attrs['to'],
-        "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
-        "img":      prog_detail.img.string,
-        'tmp':      tmp,
-        'storage':  storage,
-        "title":    utils.Ctrl_File.zen2han(prog_detail.title.string),
-      }
-      program_list.append(ddd)
+  for find_list in find_lists:
+    for keyword in find_list:
+      prog_detail = keyword.parent
+      if   days_ago >  prog_detail.attrs['to'] >  today_now:
+        continue
+      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+        ddd = {
+          "station_id":  station_id,
+          "ft":          prog_detail.attrs['ft'],
+          "to":          prog_detail.attrs['to'],
+          "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+          "img":      prog_detail.img.string,
+          'tmp':      tmp,
+          'storage':  storage,
+          "title":    utils.Ctrl_File.zen2han(prog_detail.title.string),
+        }
+        program_list.append(ddd)
 
   return program_list

@@ -66,7 +66,6 @@ case "$GROUP" in
 esac
 
 # 計算と出力
-# difficulty_coefficient=$(echo "scale=3; ${MIN_D} + ((${MAX_D} - ${MIN_D}) * (${TARGET_MISSION} - 1)) / (${LAST_MISSION} - 1)" | bc -l)
 difficulty_coefficient=$(bc -l <<< "scale=3; ${MIN_D} + ((${MAX_D} - ${MIN_D}) * (${TARGET_MISSION} - 1)) / (${LAST_MISSION} - 1)")
 
 cat << EOF
