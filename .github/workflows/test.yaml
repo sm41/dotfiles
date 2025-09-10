@@ -16,7 +16,7 @@ jobs:
             script:
             # - scripts/install/apt/__apt_install.sh
             # - scripts/install/misc/__install_vscode.sh
-            - scripts/app/apt/apt_install.sh
+            - scripts/app/apt/apt_install.sh server
             # - scripts/mkdir.sh
 
         steps:
