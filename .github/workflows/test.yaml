@@ -7,6 +7,8 @@ jobs:
     scripts:
         if: true
         runs-on: ubuntu-latest
+        env:
+          HOSTNAME: hoge-desktop
 
         strategy:
           fail-fast: false
@@ -15,10 +17,10 @@ jobs:
             # - scripts/install/apt/__apt_install.sh
             # - scripts/install/misc/__install_vscode.sh
             # - scripts/install/pip/__pip_install.sh
-            - test.sh
+            - scripts/mkdir.sh
 
         steps:
-          - name: chekout
+          - name: checkout
             uses: actions/checkout@v4
 
           - name: test script
@@ -28,9 +30,11 @@ jobs:
     makefile:
         if: false
         runs-on: ubuntu-latest
+        env:
+          HOSTNAME: fuga-server
 
         steps:
-          - name: chekout
+          - name: checkout
             uses: actions/checkout@v4
 
           - name: test
