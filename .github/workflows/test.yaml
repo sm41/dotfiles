@@ -1,7 +1,7 @@
 
 
 name: shellscript test
-on: push
+on: workflow_dispatch
 # branches-ignore: '**'
 jobs:
     scripts:
