@@ -15,7 +15,8 @@ def main():
     variable.ytdlp(str(variable.storage_dir) + variable.parts.path, variable.arg + "/videos/upload")
 
   else:
-    exit("Invailed Argment!")
+    print("Invailed Argment!")
+    exit()
 
   run(variable.method)
 

@@ -10,7 +10,7 @@ class local_path:
   def __init__(self):
     __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
     __state_file_dir  = getenv("XDG_CONFIG_HOME")
-    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(__state_file_dir, "script_python", "radiko2.yaml")
+    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(__state_file_dir, "script_python", "radiko.yaml")
     self.storage_path = utils.Ctrl_Path.anlys_path(__env_dir, "@radiko")
 
 

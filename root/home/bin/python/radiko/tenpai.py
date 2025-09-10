@@ -11,7 +11,6 @@ def arg2soup(series_list):
   for buiyon in series_list:
     url         = buiyon['url']
     search_term = buiyon['title']
-    # station_id  = buiyon['station_id']
 
     soup          = utils.Gen_Obj.data2soup(url, "xml")
     find_all_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))

@@ -5,11 +5,10 @@ from datetime import datetime, date, timedelta
 from pathlib  import Path
 from locale import setlocale, LC_TIME, LC_ALL
 from urllib import request
-from yaml import load, safe_load, load_all, FullLoader, SafeLoader
+from yaml import safe_load
 from bs4  import BeautifulSoup
 from sys  import argv, exit
 from plyer import notification
-# from dataclasses import dataclass, InitVar, field
 
 
 class Check_Any:
@@ -74,13 +73,6 @@ class Ctrl_Path:
 
 
 class Gen_Obj:
-  # @staticmethod
-  # def load_file(*path_parts):
-  #   filename = Path(*path_parts)
-  #   with filename.open(mode='r') as f:
-  #     y_data = load(f, Loader=FullLoader)
-  #   return y_data
-
   @staticmethod
   def safe_load_file(*path_parts):
     filename = Path(*path_parts)
@@ -110,15 +102,6 @@ class Ctrl_Date:
     self.d_yesterday = self.d_today - timedelta( days = day_int )
     self.y_dow       = self.d_yesterday.strftime('%a')
     self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
-
-
-# def dow_yesterday(day_int:int):
-#   setlocale(LC_TIME, 'ja_JP.UTF-8')
-
-#   d_today     = date.today()
-#   d_yesterday = d_today - timedelta( days = day_int )
-#   y_dow_str   = d_yesterday.strftime('%a')
-#   return y_dow_str
 
 
 def ntfy(result, text):

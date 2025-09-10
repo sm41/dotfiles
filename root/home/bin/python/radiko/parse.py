@@ -50,7 +50,6 @@ class parse_file:
 
 
 class convert_dict:
-
   def yaml2dict(self, yaml_list:list):
     self.options_list = []
     key_to_option = {
@@ -66,7 +65,6 @@ class convert_dict:
           today_series[value] = option
       self.options_list.extend([today_series])
 
-
   def arg2dict(self, station_id, search_term):
     self.options_list = [
       {
@@ -74,7 +72,6 @@ class convert_dict:
         '-t': search_term
       }
     ]
-
 
   def minimum_dict(self, station_id, search_term):
     self.argument_dict = {

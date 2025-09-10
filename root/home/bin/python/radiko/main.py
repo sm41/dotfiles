@@ -53,7 +53,6 @@ def main():
     pass
   else:
     pgm_list = tenpai.single_match(pgm_list, optional_arument)
-    # print(pgm_list)
 
 
   print(pgm_list)

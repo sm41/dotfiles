@@ -71,8 +71,8 @@ user_pref("font.name.monospace.ja",           "Roboto Mono,  Liberation Mono,  I
 user_pref("font.name.monospace.x-western",    "Roboto Mono,  Liberation Mono,  IPAゴシック");     // 等幅
 user_pref("font.name.sans-serif.ja",          "Roboto Flex,  Liberation Sans,  IPA Pゴシック");   // ゴシック   (ひげ飾り 無し)
 user_pref("font.name.sans-serif.x-western",   "Roboto Flex,  Liberation Sans,  IPA Pゴシック");   // サンセリフ (ひげ飾り 無し)
-user_pref("font.name.serif.ja",               "Roboto serif,  Liberation Serif,  IPA P明朝");    // 明朝体 (ひげ飾り 有り)
-user_pref("font.name.serif.x-western",        "Roboto serif,  Liberation Serif,  IPA P明朝");    // セリフ (ひげ飾り 有り)
+user_pref("font.name.serif.ja",               "Roboto serif, Liberation Serif, IPA P明朝");    // 明朝体 (ひげ飾り 有り)
+user_pref("font.name.serif.x-western",        "Roboto serif, Liberation Serif, IPA P明朝");    // セリフ (ひげ飾り 有り)
 
 user_pref("full-screen-api.warning.timeout",0);                    // HTML5動画のフルスクリーン警告非表示
 
