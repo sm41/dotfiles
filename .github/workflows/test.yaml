@@ -16,8 +16,8 @@ jobs:
             script:
             # - scripts/install/apt/__apt_install.sh
             # - scripts/install/misc/__install_vscode.sh
-            # - scripts/install/pip/__pip_install.sh
-            - scripts/mkdir.sh
+            - scripts/app/apt/apt_install.sh
+            # - scripts/mkdir.sh
 
         steps:
           - name: checkout
