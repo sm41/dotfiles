@@ -4,6 +4,7 @@ from subprocess import run
 from mytool import utils
 from sys import exit
 import parse, download
+from pathlib import Path
 
 
 def arg2soup(series_list):
@@ -34,13 +35,13 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
 
   elif len(pgm_list) >= 2:
     if not optional_arument.fftt:
-      for iii in pgm_list:
+      for pgm_status in pgm_list:
         srx = {
-          'ft' :        iii['ft'],
-          'station_id': iii['station_id'],
-          'day':        iii['date'],
-          'time':       f"{iii['ft'][8:10]}:{iii['ft'][10:12]}-{iii['to'][8:10]}:{iii['to'][10:12]}",
-          'title':      iii['title']
+          'ft' :        pgm_status['ft'],
+          'station_id': pgm_status['station_id'],
+          'day':        pgm_status['date'],
+          'time':       f"{pgm_status['ft'][8:10]}:{pgm_status['ft'][10:12]}-{pgm_status['to'][8:10]}:{pgm_status['to'][10:12]}",
+          'title':      pgm_status['title']
         }
         print(srx)
       print(f"📢 Result {len(pgm_list)} Programs")
@@ -63,13 +64,19 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
 def ddwwnn(pgm_list, fst:download.fastforward, xrat):
   for dl_dict in pgm_list:
     fst.dl(xrat, dl_dict)
+    fst.select_audio_format(fst.ffmpeg_dl[-1], dl_dict, "aac")
+    fst.select_container_format(fst.ffmpeg_af[-1], dl_dict, "mkv")
     fst.enc(dl_dict)
-    result_1 = run(fst.ffmpeg_dl)
-    result_2 = run(fst.ffmpeg_enc)
 
-    if result_1.returncode == 0:
-        remove(f"{dl_dict['tmp']}/{dl_dict['title']}_{dl_dict['date']}.m4a")
+    result_dl = run(fst.ffmpeg_dl)
+    result_af = run(fst.ffmpeg_af)
+    result_cf = run(fst.ffmpeg_cf)
 
-    utils.ntfy(result_2, f"{dl_dict['title']}_{dl_dict['date']}.mp3")
+    if result_dl.returncode == 0:
+      remove(Path(fst.ffmpeg_dl[-1]))
+    if result_af.returncode == 0:
+      remove(Path(fst.ffmpeg_af[-1]))
+
+    utils.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
 
 

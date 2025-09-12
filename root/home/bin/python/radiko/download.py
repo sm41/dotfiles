@@ -1,3 +1,4 @@
+from sys import exit
 
 class fastforward:
   def __init__(self):
@@ -22,23 +23,64 @@ class fastforward:
     ]
 
 
-  def enc(self, enc_dict:dict):
-    storage  = enc_dict['storage']
-    img      = enc_dict['img']
-    tmp      = enc_dict['tmp']
-    title    = enc_dict['title']
-    date     = enc_dict['date']
+  def select_audio_format(self, source_audio, enc_dict:dict, audio_format:str):
+    tmp    = enc_dict['tmp']
+    title  = enc_dict['title']
+    date   = enc_dict['date']
 
-    self.ffmpeg_enc = [
+    if   audio_format == "opus":
+      codec = "libopus"
+    elif audio_format == "aac":
+      codec = "copy"
+    else:
+      exit()
+
+    self.ffmpeg_af = [
       "ffmpeg",
         "-loglevel", "warning",
         "-n",
-        "-i",  f"{tmp}/{title}_{date}.m4a",
+        "-i", source_audio,
+        "-c", codec,
+      f"{tmp}/{title}_{date}.{audio_format}"
+    ]
+
+
+  def select_container_format(self, source_audio, enc_dict:dict, container_format:str):
+    storage  = enc_dict['storage']
+    img      = enc_dict['img']
+    title    = enc_dict['title']
+    date     = enc_dict['date']
+
+    if container_format == "mp4" or container_format == "mkv":
+      pass
+    else:
+      exit()
+
+    self.ffmpeg_cf = [
+      "ffmpeg",
+        "-loglevel", "warning",
+        "-n",
+        "-i",  source_audio,
         "-i",  f"{img}",
         "-map", "0",
         "-map", "1",
-        "-metadata:s:v", "title='Album cover'",
-        "-metadata:s:v", "comment='Cover (Front)'",
-        "-b:a", "48k",
-      f"{storage}/{title}_{date}.mp3"
+        "-c:a", "copy",
+        "-c:v", "mjpeg",
+        "-disposition:v:0", "attached_pic",
+      f"{storage}/{title}_{date}.{container_format}"
     ]
+
+    # if  audio_format == "mp3":
+    #   self.ffmpeg_af = [
+    #     "ffmpeg",
+    #       "-loglevel", "warning",
+    #       "-n",
+    #       "-i",  f"{tmp}/{title}_{date}.m4a",
+    #       "-i",  f"{img}",
+    #       "-map", "0",
+    #       "-map", "1",
+    #       "-metadata:s:v", "title='Album cover'",
+    #       "-metadata:s:v", "comment='Cover (Front)'",
+    #       "-b:a", "48k",
+    #     f"{storage}/{title}_{date}.mp3"
+    #   ]

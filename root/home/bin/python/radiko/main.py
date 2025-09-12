@@ -54,8 +54,4 @@ def main():
   else:
     pgm_list = tenpai.single_match(pgm_list, optional_arument)
 
-
-  print(pgm_list)
-  exit()
-
   tenpai.ddwwnn(pgm_list, fst, xrat)
