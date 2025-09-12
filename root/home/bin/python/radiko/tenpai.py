@@ -66,7 +66,6 @@ def ddwwnn(pgm_list, fst:download.fastforward, xrat):
     fst.dl(xrat, dl_dict)
     fst.select_audio_format(fst.ffmpeg_dl[-1], dl_dict, "aac")
     fst.select_container_format(fst.ffmpeg_af[-1], dl_dict, "mkv")
-    fst.enc(dl_dict)
 
     result_dl = run(fst.ffmpeg_dl)
     result_af = run(fst.ffmpeg_af)

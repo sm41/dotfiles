@@ -1,4 +1,6 @@
 from sys import exit
+import variable
+
 
 class fastforward:
   def __init__(self):
@@ -11,6 +13,7 @@ class fastforward:
     tmp        = dl_dict['tmp']
     title      = dl_dict['title']
     date       = dl_dict['date']
+    start      = variable.time.convert_time_hhmm_no_colon(dl_dict['start'])
 
     self.ffmpeg_dl = [
       "ffmpeg",
@@ -19,7 +22,7 @@ class fastforward:
         "-headers", f"X-Radiko-Authtoken: {authtoken}",
         "-i", f"https://radiko.jp/v2/api/ts/playlist.m3u8?station_id={station_id}&l=15&ft={time_ft}&to={time_to}",
         "-codec", "copy",
-      f"{tmp}/{title}_{date}.m4a"
+      f"{tmp}/{title}_{date}_{start}.m4a"
     ]
 
 
@@ -27,6 +30,7 @@ class fastforward:
     tmp    = enc_dict['tmp']
     title  = enc_dict['title']
     date   = enc_dict['date']
+    start  = variable.time.convert_time_hhmm_no_colon(enc_dict['start'])
 
     if   audio_format == "opus":
       codec = "libopus"
@@ -41,7 +45,7 @@ class fastforward:
         "-n",
         "-i", source_audio,
         "-c", codec,
-      f"{tmp}/{title}_{date}.{audio_format}"
+      f"{tmp}/{title}_{date}_{start}.{audio_format}"
     ]
 
 
@@ -50,6 +54,7 @@ class fastforward:
     img      = enc_dict['img']
     title    = enc_dict['title']
     date     = enc_dict['date']
+    start    = variable.time.convert_time_hhmm_no_colon(enc_dict['start'])
 
     if container_format == "mp4" or container_format == "mkv":
       pass
@@ -67,20 +72,6 @@ class fastforward:
         "-c:a", "copy",
         "-c:v", "mjpeg",
         "-disposition:v:0", "attached_pic",
-      f"{storage}/{title}_{date}.{container_format}"
+      f"{storage}/{title}_{date}_{start}.{container_format}"
     ]
 
-    # if  audio_format == "mp3":
-    #   self.ffmpeg_af = [
-    #     "ffmpeg",
-    #       "-loglevel", "warning",
-    #       "-n",
-    #       "-i",  f"{tmp}/{title}_{date}.m4a",
-    #       "-i",  f"{img}",
-    #       "-map", "0",
-    #       "-map", "1",
-    #       "-metadata:s:v", "title='Album cover'",
-    #       "-metadata:s:v", "comment='Cover (Front)'",
-    #       "-b:a", "48k",
-    #     f"{storage}/{title}_{date}.mp3"
-    #   ]

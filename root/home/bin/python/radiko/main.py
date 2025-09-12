@@ -47,6 +47,12 @@ def main():
   soup_dish: list = tenpai.arg2soup(series_list)
   pgm_list:  list = variable.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.days_ago, var_parts.tmp_dir, var_parts.storage_path)
 
+
+  # for iii in pgm_list:
+  #   print(iii)
+  # exit()
+
+
   try:
     optional_arument
   except NameError:

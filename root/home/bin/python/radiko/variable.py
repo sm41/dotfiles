@@ -21,6 +21,16 @@ class time:
     self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
     self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
 
+  def convert_time_hhmm_no_colon(time_str):
+    hour   = int(time_str[:2])
+    minute = int(time_str[2:])
+
+    if  hour >= 24:
+        hour -= 24
+
+    return f"{hour:02}{minute:02}"
+
+
 
 def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
   program_list = []
@@ -36,6 +46,8 @@ def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
           "ft":          prog_detail.attrs['ft'],
           "to":          prog_detail.attrs['to'],
           "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+          "start":    f"{prog_detail.attrs['ftl']}",
+          "end":      f"{prog_detail.attrs['tol']}",
           "img":      prog_detail.img.string,
           'tmp':      tmp,
           'storage':  storage,
