@@ -3,7 +3,7 @@ from re import compile, IGNORECASE
 from subprocess import run
 from mytool import utils
 from sys import exit
-import parse, download
+import auth, parse, download
 from pathlib import Path
 
 
@@ -48,7 +48,8 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
       exit()
 
     elif len(optional_arument.fftt) != 14:
-      exit("There is an error in the '-ft' option")
+      print("⚠️ Please specify the exact 'from time' with '-ft' option (e.g. 20xx1231235959)")
+      exit()
 
     elif len(optional_arument.fftt) == 14:
       hogefuga_list = []
@@ -61,11 +62,15 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
       return pgm_list
 
 
-def ddwwnn(pgm_list, fst:download.fastforward, xrat):
+def ddwwnn(pgm_list):
+  xrat = auth.iinntt()
+
   for dl_dict in pgm_list:
-    fst.dl(xrat, dl_dict)
-    fst.select_audio_format(fst.ffmpeg_dl[-1], dl_dict, "aac")
-    fst.select_container_format(fst.ffmpeg_af[-1], dl_dict, "mkv")
+    fst = download.fastforward(dl_dict)
+
+    fst.dl(xrat)
+    fst.select_audio_format(fst.ffmpeg_dl[-1], "aac")
+    fst.select_container_format(fst.ffmpeg_af[-1], "mp4")
 
     result_dl = run(fst.ffmpeg_dl)
     result_af = run(fst.ffmpeg_af)
@@ -79,3 +84,27 @@ def ddwwnn(pgm_list, fst:download.fastforward, xrat):
     utils.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
 
 
+def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
+  program_list = []
+
+  for find_list in find_lists:
+    for keyword in find_list:
+      prog_detail = keyword.parent
+      if   days_ago >  prog_detail.attrs['to'] >  today_now:
+        continue
+      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+        ddd = {
+          "station_id":  station_id,
+          "ft":          prog_detail.attrs['ft'],
+          "to":          prog_detail.attrs['to'],
+          "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+          "start":    f"{prog_detail.attrs['ftl']}",
+          "end":      f"{prog_detail.attrs['tol']}",
+          "img":         prog_detail.img.string,
+          'tmp':         tmp,
+          'storage':     storage,
+          "title":       utils.Ctrl_File.zen2han(prog_detail.title.string),
+        }
+        program_list.append(ddd)
+
+  return program_list

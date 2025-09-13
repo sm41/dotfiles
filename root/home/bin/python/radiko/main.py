@@ -1,6 +1,6 @@
 from mytool import utils
 from sys import argv, exit
-import auth, parse, variable, download, tenpai
+import parse, variable, tenpai
 
 
 #JP+都道府県コード ex) 北海道 => JP1    沖縄 => JP47
@@ -14,9 +14,7 @@ import auth, parse, variable, download, tenpai
 def main():
   var_parts = variable.local_path()
   time      = variable.time(7)
-  fst       = download.fastforward()
   cnv_dict  = parse.convert_dict()
-  xrat      = auth.iinntt()
 
   if argv[1].startswith("-"):
     optional_arument = parse.parse_arg()
@@ -24,7 +22,6 @@ def main():
     cnv_dict.arg2dict(optional_arument.station_id, optional_arument.search_term)
     cnv_dict.minimum_dict(optional_arument.station_id, optional_arument.search_term)
     series_list = [ cnv_dict.argument_dict ]
-
 
   if not argv[1].startswith("-"):
     yaml_argument   = parse.parse_file()
@@ -36,22 +33,11 @@ def main():
       yaml_argument.series_name(var_parts.loaded_yaml, argv[1])
 
     cnv_dict.yaml2dict(yaml_argument.reserve_list)
-
-    series_list  = []
-    for series in cnv_dict.options_list:
-      station_id = series['-s'].upper()
-      cnv_dict.minimum_dict(station_id, series['-t'])
-      series_list.append(cnv_dict.argument_dict)
-
+    cnv_dict.fix_dict(cnv_dict.options_list)
+    series_list = cnv_dict.series_list
 
   soup_dish: list = tenpai.arg2soup(series_list)
-  pgm_list:  list = variable.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.days_ago, var_parts.tmp_dir, var_parts.storage_path)
-
-
-  # for iii in pgm_list:
-  #   print(iii)
-  # exit()
-
+  pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.days_ago, var_parts.tmp_dir, var_parts.storage_path)
 
   try:
     optional_arument
@@ -60,4 +46,4 @@ def main():
   else:
     pgm_list = tenpai.single_match(pgm_list, optional_arument)
 
-  tenpai.ddwwnn(pgm_list, fst, xrat)
+  tenpai.ddwwnn(pgm_list)

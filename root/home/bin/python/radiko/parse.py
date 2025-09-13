@@ -79,3 +79,10 @@ class convert_dict:
       "title"      : search_term,
       "url"        : f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
     }
+
+  def fix_dict(self, options_list):
+    self.series_list  = []
+    for series in options_list:
+      station_id = series['-s'].upper()
+      self.minimum_dict(station_id, series['-t'])
+      self.series_list.append(self.argument_dict)

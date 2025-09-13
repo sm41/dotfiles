@@ -32,27 +32,27 @@ class time:
 
 
 
-def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
-  program_list = []
+# def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
+#   program_list = []
 
-  for find_list in find_lists:
-    for keyword in find_list:
-      prog_detail = keyword.parent
-      if   days_ago >  prog_detail.attrs['to'] >  today_now:
-        continue
-      elif days_ago <= prog_detail.attrs['to'] <= today_now:
-        ddd = {
-          "station_id":  station_id,
-          "ft":          prog_detail.attrs['ft'],
-          "to":          prog_detail.attrs['to'],
-          "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
-          "start":    f"{prog_detail.attrs['ftl']}",
-          "end":      f"{prog_detail.attrs['tol']}",
-          "img":      prog_detail.img.string,
-          'tmp':      tmp,
-          'storage':  storage,
-          "title":    utils.Ctrl_File.zen2han(prog_detail.title.string),
-        }
-        program_list.append(ddd)
+#   for find_list in find_lists:
+#     for keyword in find_list:
+#       prog_detail = keyword.parent
+#       if   days_ago >  prog_detail.attrs['to'] >  today_now:
+#         continue
+#       elif days_ago <= prog_detail.attrs['to'] <= today_now:
+#         ddd = {
+#           "station_id":  station_id,
+#           "ft":          prog_detail.attrs['ft'],
+#           "to":          prog_detail.attrs['to'],
+#           "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+#           "start":    f"{prog_detail.attrs['ftl']}",
+#           "end":      f"{prog_detail.attrs['tol']}",
+#           "img":         prog_detail.img.string,
+#           'tmp':         tmp,
+#           'storage':     storage,
+#           "title":       utils.Ctrl_File.zen2han(prog_detail.title.string),
+#         }
+#         program_list.append(ddd)
 
-  return program_list
+#   return program_list
