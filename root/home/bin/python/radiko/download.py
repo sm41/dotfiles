@@ -46,9 +46,7 @@ class fastforward:
 
 
   def select_container_format(self, source_audio, container_format:str):
-    if container_format == "mp4" or container_format == "mkv":
-      pass
-    else:
+    if container_format not in [ "mp4", "mkv" ]:
       exit()
 
     self.ffmpeg_cf = [

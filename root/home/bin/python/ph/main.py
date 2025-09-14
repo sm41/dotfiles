@@ -1,11 +1,10 @@
-
 import func
 from subprocess import run
-from mytool import utils
 from sys import exit
+from mytool import check_any
 
 def main():
-  utils.Check_Any.check_arg()
+  check_any.check_any.check_arg()
   variable = func.Gen_Var()
 
   if variable.parts.path == "/view_video.php":

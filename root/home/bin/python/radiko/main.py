@@ -1,4 +1,4 @@
-from mytool import utils
+from mytool import ctrl_date
 from sys import argv, exit
 import parse, variable, tenpai
 
@@ -25,7 +25,7 @@ def main():
 
   if not argv[1].startswith("-"):
     yaml_argument   = parse.parse_file()
-    cd              = utils.Ctrl_Date(1)
+    cd              = ctrl_date.ctrl_date(1)
 
     if   argv[1] == "dow":
       yaml_argument.today_list(var_parts.loaded_yaml, cd.y_dow)

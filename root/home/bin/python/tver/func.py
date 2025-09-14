@@ -6,7 +6,7 @@ from time import sleep
 from re  import compile
 from os  import getenv
 from sys import argv
-from mytool import utils
+from mytool import ctrl_path, gen_obj, ctrl_file, notify
 import func
 
 class Gen_Var:
@@ -14,8 +14,8 @@ class Gen_Var:
     self.arg          = argv[1]
     self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
     self.__env_state  = getenv("XDG_CONFIG_HOME")
-    self.storage_path = utils.Ctrl_Path.anlys_path(self.__env_dl, "@tver")
-    self.loaded_yaml  = utils.Gen_Obj.safe_load_file(self.__env_state, "script_python", "tver.yaml")
+    self.storage_path = ctrl_path.ctrl_path.anlys_path(self.__env_dl, "@tver")
+    self.loaded_yaml  = gen_obj.gen_obj.safe_load_file(self.__env_state, "script_python", "tver.yaml")
 
 
 class Scrp:
@@ -84,12 +84,13 @@ class Gen_Tag:
     ]
     __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
     self.series, self.episode, self.url, __filename, self.ext, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__filename).parent, utils.Ctrl_File.zen2han(Path(__filename).stem)
+    self.paths, self.output = Path(__filename).parent, ctrl_file.ctrl_file.zen2han(Path(__filename).stem)
 
 
 def insert_quoter(filename:str, year, q_date):
 
-  if year is None or q_date is None:
+  # if year is None or q_date is None:
+  if None in (year, q_date):
     return filename
 
   if filename.startswith("[ドラマ]"):
@@ -113,6 +114,6 @@ def ccc(tag_tag:func.Gen_Tag, year, q_date):
   method = ytdlp(tag_tag.paths, tag_tag.id, tag_tag.ext, tag_tag.url)
   result = run(method)
   tag_tag.output = insert_quoter(tag_tag.output, year, q_date)
-  tag_tag.output = utils.Ctrl_File.byte_count(tag_tag.output, 245)
-  utils.Ctrl_Path.rnm_path(Path(tag_tag.paths, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.paths, f"{tag_tag.output}.{tag_tag.ext}"))
-  utils.ntfy(result, f"{tag_tag.series}\n{tag_tag.episode}")
+  tag_tag.output = ctrl_file.ctrl_file.byte_count(tag_tag.output, 245)
+  ctrl_path.ctrl_path.rnm_path(Path(tag_tag.paths, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.paths, f"{tag_tag.output}.{tag_tag.ext}"))
+  notify.ntfy(result, f"{tag_tag.series}\n{tag_tag.episode}")

@@ -1,7 +1,7 @@
 from os import remove
 from re import compile, IGNORECASE
 from subprocess import run
-from mytool import utils
+from mytool import notify, ctrl_file, gen_obj
 from sys import exit
 import auth, parse, download
 from pathlib import Path
@@ -13,7 +13,7 @@ def arg2soup(series_list):
     url         = buiyon['url']
     search_term = buiyon['title']
 
-    soup          = utils.Gen_Obj.data2soup(url, "xml")
+    soup          = gen_obj.gen_obj.data2soup(url, "xml")
     find_all_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
     soup_dish.append(find_all_list)
   return soup_dish
@@ -81,7 +81,7 @@ def ddwwnn(pgm_list):
     if result_af.returncode == 0:
       remove(Path(fst.ffmpeg_af[-1]))
 
-    utils.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
+    notify.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
 
 
 def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
@@ -103,7 +103,7 @@ def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
           "img":         prog_detail.img.string,
           'tmp':         tmp,
           'storage':     storage,
-          "title":       utils.Ctrl_File.zen2han(prog_detail.title.string),
+          "title":       ctrl_file.ctrl_file.zen2han(prog_detail.title.string),
         }
         program_list.append(ddd)
 

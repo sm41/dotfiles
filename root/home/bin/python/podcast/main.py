@@ -1,17 +1,17 @@
 
 from subprocess import run
 from pathlib import Path
-from mytool  import utils
+from mytool  import check_any, ctrl_path, ctrl_date, gen_obj, notify
 import func
 from sys import exit
 
 
 def main():
 
-  utils.Check_Any.check_arg()
+  check_any.check_any.check_arg()
   variable = func.Gen_Var()
   branch   = func.Check_Arg()
-  before   = utils.Ctrl_Date(1)
+  before   = ctrl_date.ctrl_date(1)
 
   if variable.arg == "dow":
     branch.today_list(variable.loaded_yaml, before.y_dow)
@@ -23,7 +23,7 @@ def main():
   # exit()
 
   for ttt in branch.reserve_list:
-    soup   = utils.Gen_Obj.data2soup(ttt['url'], "xml")
+    soup   = gen_obj.gen_obj.data2soup(ttt['url'], "xml")
     source = func.Gen_Tag(soup)
 
     # print(source.episode)
@@ -31,5 +31,5 @@ def main():
 
     download = func.dl(source, variable.tmp_dir)
     result   = run(download)
-    utils.Ctrl_Path.rnm_path(Path(variable.tmp_dir, source.name + source.ext), Path(variable.storage_dir, source.name + source.ext))
-    utils.ntfy(result, f"{source.series}\n{source.episode}")
+    ctrl_path.ctrl_path.rnm_path(Path(variable.tmp_dir, source.name + source.ext), Path(variable.storage_dir, source.name + source.ext))
+    notify.ntfy(result, f"{source.series}\n{source.episode}")
