@@ -1,37 +1,25 @@
 from subprocess import run
-from selenium import webdriver
 from pathlib  import Path
-from bs4  import BeautifulSoup
-from time import sleep
-from re  import compile
-from os  import getenv
 from sys import argv
-from mytool import ctrl_path, gen_obj, ctrl_file, notify
+from mytool import ctrl_date, ctrl_path, gen_obj, ctrl_file, notify, local_path
 import func
 
 class Gen_Var:
   def __init__(self):
+    lp = local_path.storage("@tver")
+    ld = local_path.local_data("tver.yaml")
+
     self.arg          = argv[1]
-    self.__env_dl     = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.__env_state  = getenv("XDG_CONFIG_HOME")
-    self.storage_path = ctrl_path.ctrl_path.anlys_path(self.__env_dl, "@tver")
-    self.loaded_yaml  = gen_obj.gen_obj.safe_load_file(self.__env_state, "script_python", "tver.yaml")
+    self.storage_dir  = lp.storage_dir
+    self.loaded_yaml  = gen_obj.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
-class Scrp:
-  def selenium(self, url):
-    __fx_options = webdriver.FirefoxOptions()
-    __fx_options.add_argument("--headless")
-    __driver = webdriver.Firefox(options = __fx_options)
-    __driver.get(url)
-    sleep(5)
-    __get_html = __driver.page_source
-    self.soup = BeautifulSoup(__get_html, "html.parser")
-    __driver.quit()
+class time:
+  def __init__(self, day_int):
+    self.today = ctrl_date.ctrl_date()
+    self.bbb = self.today.yesterday(day_int)
+    self.ccc = self.today.quarte().quarte_date
 
-  def tver(self, soup:BeautifulSoup):
-    __url    = soup.find(class_ = compile("episode-row_container")).attrs['href']
-    self.url = "https://tver.jp" + __url
 
 
 class Anlys:

@@ -11,7 +11,7 @@ class ctrl_path:
     shutil.move(oldpath, newpath)
 
   @staticmethod
-  def anlys_path(*path_parts):
+  def mkdir_path(*path_parts):
     down_dir = Path(*path_parts)
     down_dir.mkdir(parents=True, exist_ok=True)
     return down_dir

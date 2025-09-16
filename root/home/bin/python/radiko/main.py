@@ -1,5 +1,5 @@
-from mytool import ctrl_date
 from sys import argv, exit
+# from mytool import ctrl_date
 import parse, variable, tenpai
 
 
@@ -12,7 +12,7 @@ import parse, variable, tenpai
 
 
 def main():
-  var_parts = variable.local_path()
+  var_parts = variable.hoge()
   time      = variable.time(7)
   cnv_dict  = parse.convert_dict()
 
@@ -25,10 +25,10 @@ def main():
 
   if not argv[1].startswith("-"):
     yaml_argument   = parse.parse_file()
-    cd              = ctrl_date.ctrl_date(1)
+    # cd              =
 
     if   argv[1] == "dow":
-      yaml_argument.today_list(var_parts.loaded_yaml, cd.y_dow)
+      yaml_argument.today_list(var_parts.loaded_yaml, time.n_days_ago_dow)
     elif argv[1] != "dow":
       yaml_argument.series_name(var_parts.loaded_yaml, argv[1])
 
@@ -36,8 +36,11 @@ def main():
     cnv_dict.fix_dict(cnv_dict.options_list)
     series_list = cnv_dict.series_list
 
+  # print(time.n_days_ago_dow)
+  # exit()
+
   soup_dish: list = tenpai.arg2soup(series_list)
-  pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.days_ago, var_parts.tmp_dir, var_parts.storage_path)
+  pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.n_days_ago, var_parts.tmp_dir, var_parts.storage_dir)
 
   try:
     optional_arument

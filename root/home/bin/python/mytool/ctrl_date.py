@@ -1,30 +1,25 @@
 from locale import setlocale, LC_TIME, LC_ALL
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 
 
 
 class ctrl_date:
-  def __init__(self, day_int:int):
+  def __init__(self):
     setlocale(LC_TIME, 'ja_JP.UTF-8')
-    self.d_today     = date.today()
-    self.d_yesterday = self.d_today - timedelta( days = day_int )
-    self.y_dow       = self.d_yesterday.strftime('%a')
-    self.q_date      = (self.d_yesterday.month - 1) // 3 + 1
+    self.today_now  = datetime.now().replace(second=0, microsecond=0)
+    self.today_date = self.today_now.date()
+    self.today_dow  = self.today_date.strftime('%a')
 
+  def yesterday(self, day_int:int):
+    self.n_days_ago_now  = self.today_now - timedelta(day_int)
+    self.n_days_ago_date = self.n_days_ago_now.date()
+    self.n_days_ago_dow  = self.n_days_ago_date.strftime('%a')
+    return self
 
-  # def __init__(self, day_int:int):
-  #   setlocale(LC_TIME, 'ja_JP.UTF-8')
+  def format(self, someday_now:datetime):
+    self.format_time  = someday_now.strftime('%Y%m%d%H%M')+'00'
+    return self
 
-  #   self.today_now  = datetime.now()
-  #   self.today_date = self.today_now.date()
-  #   self.today_dow  = self.today_date.strftime('%a')
-
-  #   self.yesterday_now  = self.today_now - timedelta(day_int)
-  #   self.yesterday_date = self.yesterday_now.date()
-  #   self.yesterday_dow  = self.yesterday_date.strftime('%a')
-
-
-  #   self.hoge = self.today_now.strftime('%Y%m%d%H%M')+'00'
-  #   self.fuga = self.yesterday_now.strftime('%Y%m%d%H%M')+'00'
-
-  #   self.q_date      = (self.yesterday_date.month - 1) // 3 + 1
+  def quarte(self):
+    self.quarte_date  = (self.n_days_ago_date.month - 1) // 3 + 1
+    return self

@@ -1,17 +1,18 @@
 import func
-from subprocess import run
 from sys import exit
-from mytool import check_any
+from subprocess import run
+from mytool import check_any, local_path
 
 def main():
   check_any.check_any.check_arg()
-  variable = func.Gen_Var()
+  variable = func.gen_var()
+  lp = local_path.storage("@ph")
 
   if variable.parts.path == "/view_video.php":
-    variable.ytdlp(str(variable.storage_dir), variable.arg)
+    variable.ytdlp(str(lp.storage_dir), variable.arg)
 
   elif variable.parts.path.startswith(("/model", "/pornstar")):
-    variable.ytdlp(str(variable.storage_dir) + variable.parts.path, variable.arg + "/videos/upload")
+    variable.ytdlp(str(lp.storage_dir) + variable.parts.path, variable.arg + "/videos/upload")
 
   else:
     print("Invailed Argment!")

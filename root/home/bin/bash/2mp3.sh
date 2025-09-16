@@ -6,9 +6,6 @@ filename=${input_file##*/}
 basename=${filename%.*}
 ext=${filename##*.}
 
-
-
-
 ffmpeg \
   -i "${input_file}" \
   -map 0:a \

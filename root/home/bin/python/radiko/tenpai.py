@@ -1,10 +1,10 @@
 from os import remove
 from re import compile, IGNORECASE
+from sys import exit
+from pathlib import Path
 from subprocess import run
 from mytool import notify, ctrl_file, gen_obj
-from sys import exit
 import auth, parse, download
-from pathlib import Path
 
 
 def arg2soup(series_list):

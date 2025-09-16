@@ -1,30 +1,30 @@
 
-from subprocess import run
-from pathlib import Path
-from mytool  import check_any, ctrl_path, ctrl_date, gen_obj, notify
-import func
 from sys import exit
+from pathlib import Path
+from subprocess import run
+from mytool  import check_any, ctrl_path, gen_obj, notify
+import func
 
 
 def main():
 
   check_any.check_any.check_arg()
-  variable = func.Gen_Var()
-  branch   = func.Check_Arg()
-  before   = ctrl_date.ctrl_date(1)
+  variable = func.gen_var()
+  branch   = func.check_arg()
+  time     = func.time(1)
 
   if variable.arg == "dow":
-    branch.today_list(variable.loaded_yaml, before.y_dow)
+    branch.today_list(variable.loaded_yaml, time.n_days_ago_dow)
   else:
     branch.series_name(variable.loaded_yaml, variable.arg)
 
-
-  # print(branch.reserve_list)
-  # exit()
+  if not branch.reserve_list:
+    print("No matching podcast found.")
+    exit()
 
   for ttt in branch.reserve_list:
     soup   = gen_obj.gen_obj.data2soup(ttt['url'], "xml")
-    source = func.Gen_Tag(soup)
+    source = func.gen_tag(soup)
 
     # print(source.episode)
     # continue

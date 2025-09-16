@@ -1,9 +1,10 @@
 import func, analyse
 from plyer import notification
+from sys import exit
 
 def main():
 
-  method    = analyse.hoge()
+  method  = analyse.hoge()
   yaml_path = func.get_yaml_path()
   newest_list = []
 
@@ -14,6 +15,9 @@ def main():
   # それぞれのメソッドを実行して、情報を取得
   for method_name in sorted_site:
     func.generate_method(method, method_name)
+
+    func.check_status(method.url)
+
 
     newest_state = {
       method_name: {

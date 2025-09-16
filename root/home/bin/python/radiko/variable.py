@@ -1,25 +1,25 @@
-from os  import getenv
 from sys import exit
-from mytool import ctrl_path, gen_obj
-from datetime import datetime, timedelta
+from mytool import gen_obj, local_path, ctrl_date
 
-
-class local_path:
-  tmp_dir = "/tmp"
-
+class hoge:
   def __init__(self):
-    __env_dir         = getenv("CLIENT_NETWORK_STORAGE_misc")
-    __state_file_dir  = getenv("XDG_CONFIG_HOME")
-    self.loaded_yaml  = gen_obj.gen_obj.safe_load_file(__state_file_dir, "script_python", "radiko.yaml")
-    self.storage_path = ctrl_path.ctrl_path.anlys_path(__env_dir, "@radiko")
+    lp = local_path.storage("@radiko")
+    ld = local_path.local_data("radiko.yaml")
+
+    self.tmp_dir      = lp.tmp_dir
+    self.storage_dir  = lp.storage_dir
+    self.loaded_yaml  = gen_obj.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class time:
   def __init__(self, day_int):
-    __get_now      = datetime.now()
-    __get_past     = __get_now - timedelta(day_int)
-    self.today_now = __get_now.strftime('%Y%m%d%H%M')+'00'
-    self.days_ago  = __get_past.strftime('%Y%m%d%H%M')+'00'
+    aaa = ctrl_date.ctrl_date()
+    aaa.yesterday(day_int)
+
+    self.today_now      = aaa.format(aaa.today_now).format_time
+    self.n_days_ago     = aaa.format(aaa.n_days_ago_now).format_time
+    self.n_days_ago_dow = aaa.n_days_ago_dow
+
 
   def convert_time_hhmm_no_colon(time_str):
     hour   = int(time_str[:2])

@@ -1,6 +1,7 @@
 import yaml
-import inspect
 from pathlib import Path
+import inspect
+import requests
 from mytool import local_path
 
 
@@ -34,6 +35,16 @@ def isexist_dict(method_name, state_file: Path):
         for key_of_sitename in dict_of_siteinfo.keys():
           if key_of_sitename == method_name:
             return dict_of_siteinfo
+
+
+def check_status(url):
+  response = requests.get(url)
+
+  if response.status_code == 200:
+    soup = selenium(url)
+    return soup
+  else:
+    return response.status_code
 
 
 def rewrite_dict(state_file, data):

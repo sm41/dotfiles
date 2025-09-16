@@ -1,15 +1,13 @@
-from urllib import parse
 from sys import argv
-from os  import getenv
-from mytool import ctrl_path
+# from os  import getenv
+from urllib import parse
+# from mytool import ctrl_path
 
 
-class Gen_Var:
+class gen_var:
   def __init__(self):
-    self.arg          = argv[1]
-    __download_dir    = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_dir  = ctrl_path.ctrl_path.anlys_path(__download_dir, "@ph")
-    self.parts        = parse.urlparse(self.arg)
+    self.arg    = argv[1]
+    self.parts  = parse.urlparse(self.arg)
 
 
   def ytdlp(self, paths, url):
