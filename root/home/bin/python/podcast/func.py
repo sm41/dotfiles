@@ -1,7 +1,7 @@
 from sys import argv
 from datetime import datetime
 from locale import setlocale, LC_TIME, LC_ALL
-from mytool import ctrl_date, ctrl_file, gen_obj, local_path
+from mytool import ctrl_date, ctrl_file, ctrl_file, local_path
 
 
 class gen_var:
@@ -12,7 +12,7 @@ class gen_var:
     self.arg         = argv[1]
     self.tmp_dir     = lp.tmp_dir
     self.storage_dir = lp.storage_dir
-    self.loaded_yaml = gen_obj.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml = ctrl_file.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class gen_tag:

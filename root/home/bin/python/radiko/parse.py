@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-
+from types import SimpleNamespace
 
 class parse_arg:
   s_dict = {
@@ -65,24 +65,24 @@ class convert_dict:
           today_series[value] = option
       self.options_list.extend([today_series])
 
-  def arg2dict(self, station_id, search_term):
+  def arg2dict(self, optional_arument:parse_arg):
     self.options_list = [
       {
-        '-s': station_id,
-        '-t': search_term
+        '-s': optional_arument.station_id,
+        '-t': optional_arument.search_term
       }
     ]
 
-  def minimum_dict(self, station_id, search_term):
+  def minimum_dict(self, optional_arument:parse_arg):
     self.argument_dict = {
-      'station_id' : station_id,
-      "title"      : search_term,
-      "url"        : f"https://radiko.jp/v3/program/station/weekly/{station_id}.xml"
+      'station_id' : optional_arument.station_id,
+      "title"      : optional_arument.search_term,
+      "url"        : f"https://radiko.jp/v3/program/station/weekly/{optional_arument.station_id}.xml"
     }
 
   def fix_dict(self, options_list):
     self.series_list  = []
     for series in options_list:
-      station_id = series['-s'].upper()
-      self.minimum_dict(station_id, series['-t'])
+      alt_optional_arg = SimpleNamespace(station_id=series['-s'].upper(), search_term=series['-t'])
+      self.minimum_dict(alt_optional_arg)
       self.series_list.append(self.argument_dict)

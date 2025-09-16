@@ -1,5 +1,4 @@
 from sys import argv, exit
-# from mytool import ctrl_date
 import parse, variable, tenpai
 
 
@@ -19,13 +18,12 @@ def main():
   if argv[1].startswith("-"):
     optional_arument = parse.parse_arg()
 
-    cnv_dict.arg2dict(optional_arument.station_id, optional_arument.search_term)
-    cnv_dict.minimum_dict(optional_arument.station_id, optional_arument.search_term)
+    cnv_dict.arg2dict(optional_arument)
+    cnv_dict.minimum_dict(optional_arument)
     series_list = [ cnv_dict.argument_dict ]
 
   if not argv[1].startswith("-"):
     yaml_argument   = parse.parse_file()
-    # cd              =
 
     if   argv[1] == "dow":
       yaml_argument.today_list(var_parts.loaded_yaml, time.n_days_ago_dow)
@@ -40,7 +38,7 @@ def main():
   # exit()
 
   soup_dish: list = tenpai.arg2soup(series_list)
-  pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time.today_now, time.n_days_ago, var_parts.tmp_dir, var_parts.storage_dir)
+  pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time, var_parts)
 
   try:
     optional_arument

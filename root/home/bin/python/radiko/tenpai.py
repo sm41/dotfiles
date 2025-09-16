@@ -3,8 +3,8 @@ from re import compile, IGNORECASE
 from sys import exit
 from pathlib import Path
 from subprocess import run
-from mytool import notify, ctrl_file, gen_obj
-import auth, parse, download
+from mytool import notify, ctrl_file, scraping
+import auth, parse, download, variable
 
 
 def arg2soup(series_list):
@@ -13,7 +13,9 @@ def arg2soup(series_list):
     url         = buiyon['url']
     search_term = buiyon['title']
 
-    soup          = gen_obj.gen_obj.data2soup(url, "xml")
+    qqq  = scraping.hoge(url)
+    soup = qqq.simple(qqq.response, "xml").soup
+
     find_all_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
     soup_dish.append(find_all_list)
   return soup_dish
@@ -84,15 +86,15 @@ def ddwwnn(pgm_list):
     notify.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
 
 
-def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
+def search_program(station_id, find_lists, time:variable.time, var_parts:variable.hoge):
   program_list = []
 
   for find_list in find_lists:
     for keyword in find_list:
       prog_detail = keyword.parent
-      if   days_ago >  prog_detail.attrs['to'] >  today_now:
+      if   time.n_days_ago >  prog_detail.attrs['to'] >  time.today_now:
         continue
-      elif days_ago <= prog_detail.attrs['to'] <= today_now:
+      elif time.n_days_ago <= prog_detail.attrs['to'] <= time.today_now:
         ddd = {
           "station_id":  station_id,
           "ft":          prog_detail.attrs['ft'],
@@ -101,8 +103,8 @@ def search_program(station_id, find_lists, today_now, days_ago, tmp, storage):
           "start":    f"{prog_detail.attrs['ftl']}",
           "end":      f"{prog_detail.attrs['tol']}",
           "img":         prog_detail.img.string,
-          'tmp':         tmp,
-          'storage':     storage,
+          'tmp':         var_parts.tmp_dir,
+          'storage':     var_parts.storage_dir,
           "title":       ctrl_file.ctrl_file.zen2han(prog_detail.title.string),
         }
         program_list.append(ddd)

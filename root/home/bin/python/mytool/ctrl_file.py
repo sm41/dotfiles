@@ -1,5 +1,5 @@
 from pathlib  import Path
-
+from yaml    import safe_load
 
 
 class ctrl_file:
@@ -8,7 +8,7 @@ class ctrl_file:
     length = len(str(input).encode('utf-8'))
 
     if length < limit:
-        return input
+      return input
 
     if length > limit:
       ttt = input[:-1]
@@ -34,3 +34,13 @@ class ctrl_file:
   @staticmethod
   def get_ext(input):
     return Path(input).suffix
+
+
+
+
+class yaml_tool:
+  @staticmethod
+  def yaml_safe_load(path):
+    with open(path, mode='r') as f:
+      y_data = safe_load(f)
+    return y_data

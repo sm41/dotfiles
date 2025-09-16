@@ -1,7 +1,5 @@
 from sys import argv
-# from os  import getenv
 from urllib import parse
-# from mytool import ctrl_path
 
 
 class gen_var:

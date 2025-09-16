@@ -1,7 +1,7 @@
 from subprocess import run
 from pathlib  import Path
 from sys import argv
-from mytool import ctrl_date, ctrl_path, gen_obj, ctrl_file, notify, local_path
+from mytool import ctrl_date, ctrl_path, ctrl_file, notify, local_path
 import func
 
 class Gen_Var:
@@ -11,14 +11,14 @@ class Gen_Var:
 
     self.arg          = argv[1]
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = gen_obj.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_file.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class time:
   def __init__(self, day_int):
-    self.today = ctrl_date.ctrl_date()
-    self.bbb = self.today.yesterday(day_int)
-    self.ccc = self.today.quarte().quarte_date
+    self.date = ctrl_date.ctrl_date()
+    self.date.yesterday(day_int)
+    self.date.quarte().quarte_date
 
 
 

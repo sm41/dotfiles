@@ -2,7 +2,7 @@
 from sys import exit
 from pathlib import Path
 from subprocess import run
-from mytool  import check_any, ctrl_path, gen_obj, notify
+from mytool  import check_any, ctrl_path, notify, scraping
 import func
 
 
@@ -23,7 +23,8 @@ def main():
     exit()
 
   for ttt in branch.reserve_list:
-    soup   = gen_obj.gen_obj.data2soup(ttt['url'], "xml")
+    qqq  = scraping.hoge(ttt['url'])
+    soup = qqq.simple(qqq.response, "xml").soup
     source = func.gen_tag(soup)
 
     # print(source.episode)
