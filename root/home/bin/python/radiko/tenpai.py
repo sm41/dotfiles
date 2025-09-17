@@ -3,7 +3,7 @@ from re import compile, IGNORECASE
 from sys import exit
 from pathlib import Path
 from subprocess import run
-from mytool import notify, ctrl_file, scraping
+from mytool import notify, ctrl_string, scraping
 import auth, parse, download, variable
 
 
@@ -13,8 +13,8 @@ def arg2soup(series_list):
     url         = buiyon['url']
     search_term = buiyon['title']
 
-    qqq  = scraping.hoge(url)
-    soup = qqq.simple(qqq.response, "xml").soup
+    qqq  = scraping.scrp().check_status_code(url)
+    soup = qqq.simple("xml").soup
 
     find_all_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
     soup_dish.append(find_all_list)
@@ -105,7 +105,7 @@ def search_program(station_id, find_lists, time:variable.time, var_parts:variabl
           "img":         prog_detail.img.string,
           'tmp':         var_parts.tmp_dir,
           'storage':     var_parts.storage_dir,
-          "title":       ctrl_file.ctrl_file.zen2han(prog_detail.title.string),
+          "title":       ctrl_string.ctrl_file.zen2han(prog_detail.title.string),
         }
         program_list.append(ddd)
 

@@ -1,14 +1,13 @@
 
-from sys import exit
+from sys import argv, exit
 from pathlib import Path
 from subprocess import run
-from mytool  import check_any, ctrl_date, ctrl_path, notify, scraping
+from mytool  import ctrl_string, ctrl_date, ctrl_path, notify, scraping
 import func
 
 
 def main():
-
-  check_any.check_any.check_arg()
+  ctrl_string.ctrl_arg.check_arg(argv[1])
   variable = func.gen_var()
   branch   = func.check_arg()
   time     = ctrl_date.ctrl_date().yesterday(1)
@@ -23,8 +22,8 @@ def main():
     exit()
 
   for ttt in branch.reserve_list:
-    qqq  = scraping.hoge(ttt['url'])
-    soup = qqq.simple(qqq.response, "xml").soup
+    qqq  = scraping.scrp().check_status_code(ttt['url'])
+    soup = qqq.simple("xml").soup
     source = func.gen_tag(soup)
 
     # print(source.episode)

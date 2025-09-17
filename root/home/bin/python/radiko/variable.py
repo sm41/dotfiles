@@ -1,14 +1,14 @@
 from sys import exit
-from mytool import local_path, ctrl_date, ctrl_file
+from mytool import ctrl_path, ctrl_date, ctrl_string
 
 class hoge:
   def __init__(self):
-    lp = local_path.storage("@radiko")
-    ld = local_path.local_data("radiko.yaml")
+    lp = ctrl_path.storage("@radiko")
+    ld = ctrl_path.local_data("radiko.yaml")
 
     self.tmp_dir      = lp.tmp_dir
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_file.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class time:

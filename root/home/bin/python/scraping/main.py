@@ -3,7 +3,7 @@ from plyer import notification
 
 def main():
 
-  method    = analyse.hoge()
+  method    = analyse.website()
   yaml_path = func.get_yaml_path()
   newest_list = []
 

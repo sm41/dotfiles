@@ -2,15 +2,24 @@ from bs4       import BeautifulSoup
 from re        import compile
 from time      import sleep
 from selenium  import webdriver
-from urllib  import request
-from mytool  import check_any
+from urllib    import request
+from sys       import exit
+from http.client import HTTPResponse
 
 
-class hoge:
-  def __init__(self, url):
+class scrp:
+  def __init__(self):
+    pass
+
+
+  def check_status_code(self, url):
     self.url = url
-    self.response = request.urlopen(url)
-    check_any.check_any.check_status_code(self.response)
+    self.response: HTTPResponse = request.urlopen(url)
+    if self.response.getcode() != 200:
+      print(f"Status Code is {self.response.getcode()} !!")
+      exit()
+
+    return self
 
 
   def make2soup(self):
@@ -25,8 +34,8 @@ class hoge:
     return self
 
 
-  def simple(self, response, markup_type):
-    self.soup = BeautifulSoup(response, markup_type)
+  def simple(self, markup_type):
+    self.soup = BeautifulSoup(self.response, markup_type)
     return self
 
 

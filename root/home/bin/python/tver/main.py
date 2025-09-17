@@ -1,10 +1,10 @@
-from sys import exit
-from mytool import check_any, scraping, ctrl_date
+from sys import argv, exit
+from mytool import ctrl_string, scraping, ctrl_date
 import func
 
 
 def main():
-  check_any.check_any.check_arg()
+  ctrl_string.ctrl_arg.check_arg(argv[1])
   variable = func.gen_var()
   tag_tag  = func.gen_tag()
 
@@ -28,8 +28,8 @@ def main():
       exit(0)
 
     for bmw in anlys.result_list:
-      scraper = scraping.hoge(bmw["url"])
-      scraper.make2soup().simple(scraper.response, "html.parser")
+      scraper = scraping.scrp().check_status_code(bmw["url"])
+      scraper.make2soup().simple("html.parser")
 
       # print(scraper.soup)
       # exit()

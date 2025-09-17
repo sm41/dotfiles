@@ -1,17 +1,17 @@
 from subprocess import run
 from pathlib  import Path
 from sys import argv
-from mytool import ctrl_path, ctrl_file, notify, local_path
+from mytool import ctrl_path, ctrl_string, notify
 import func
 
 class gen_var:
   def __init__(self):
-    lp = local_path.storage("@tver")
-    ld = local_path.local_data("tver.yaml")
+    lp = ctrl_path.storage("@tver")
+    ld = ctrl_path.local_data("tver.yaml")
 
     self.arg          = argv[1]
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_file.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class anlys:
@@ -64,7 +64,7 @@ class gen_tag:
     ]
     __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
     self.series, self.episode, self.url, __filename, self.ext, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__filename).parent, ctrl_file.ctrl_file.zen2han(Path(__filename).stem)
+    self.paths, self.output = Path(__filename).parent, ctrl_string.ctrl_file.zen2han(Path(__filename).stem)
 
 
 def insert_quoter(filename:str, year, q_date):
@@ -94,6 +94,6 @@ def ccc(tag_tag:func.gen_tag, year, q_date):
   method = ytdlp(tag_tag.paths, tag_tag.id, tag_tag.ext, tag_tag.url)
   result = run(method)
   tag_tag.output = insert_quoter(tag_tag.output, year, q_date)
-  tag_tag.output = ctrl_file.ctrl_file.byte_count(tag_tag.output, 245)
+  tag_tag.output = ctrl_string.ctrl_file.byte_count(tag_tag.output, 245)
   ctrl_path.ctrl_path.rnm_path(Path(tag_tag.paths, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.paths, f"{tag_tag.output}.{tag_tag.ext}"))
   notify.ntfy(result, f"{tag_tag.series}\n{tag_tag.episode}")

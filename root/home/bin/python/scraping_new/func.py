@@ -6,7 +6,7 @@ from mytool import local_path
 
 
 def get_yaml_path():
-  lp = local_path.local_data("scraping.yaml")
+  lp = ctrl_path.local_data("scraping.yaml")
 
   state_file_PATH = lp.local_data_path
   return state_file_PATH
