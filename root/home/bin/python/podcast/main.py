@@ -2,7 +2,7 @@
 from sys import exit
 from pathlib import Path
 from subprocess import run
-from mytool  import check_any, ctrl_path, notify, scraping
+from mytool  import check_any, ctrl_date, ctrl_path, notify, scraping
 import func
 
 
@@ -11,7 +11,7 @@ def main():
   check_any.check_any.check_arg()
   variable = func.gen_var()
   branch   = func.check_arg()
-  time     = func.time(1)
+  time     = ctrl_date.ctrl_date().yesterday(1)
 
   if variable.arg == "dow":
     branch.today_list(variable.loaded_yaml, time.n_days_ago_dow)
@@ -19,7 +19,7 @@ def main():
     branch.series_name(variable.loaded_yaml, variable.arg)
 
   if not branch.reserve_list:
-    print("No matching podcast found.")
+    print("⚠️  No matching podcast found")
     exit()
 
   for ttt in branch.reserve_list:

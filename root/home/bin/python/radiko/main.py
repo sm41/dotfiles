@@ -34,8 +34,6 @@ def main():
     cnv_dict.fix_dict(cnv_dict.options_list)
     series_list = cnv_dict.series_list
 
-  # print(time.n_days_ago_dow)
-  # exit()
 
   soup_dish: list = tenpai.arg2soup(series_list)
   pgm_list:  list = tenpai.search_program(cnv_dict.argument_dict['station_id'], soup_dish, time, var_parts)

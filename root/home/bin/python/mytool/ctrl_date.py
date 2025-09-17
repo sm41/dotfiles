@@ -16,10 +16,10 @@ class ctrl_date:
     self.n_days_ago_dow  = self.n_days_ago_date.strftime('%a')
     return self
 
-  def format(self, someday_now:datetime):
-    self.format_time  = someday_now.strftime('%Y%m%d%H%M')+'00'
+  def format(self, someday_now:datetime, format):
+    self.format_time  = someday_now.strftime(format)
     return self
 
-  def quarte(self):
-    self.quarte_date  = (self.n_days_ago_date.month - 1) // 3 + 1
+  def quarte(self, any_month):
+    self.quarte_date  = (any_month - 1) // 3 + 1
     return self

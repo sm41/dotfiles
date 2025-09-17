@@ -1,10 +1,10 @@
 from subprocess import run
 from pathlib  import Path
 from sys import argv
-from mytool import ctrl_date, ctrl_path, ctrl_file, notify, local_path
+from mytool import ctrl_path, ctrl_file, notify, local_path
 import func
 
-class Gen_Var:
+class gen_var:
   def __init__(self):
     lp = local_path.storage("@tver")
     ld = local_path.local_data("tver.yaml")
@@ -14,15 +14,7 @@ class Gen_Var:
     self.loaded_yaml  = ctrl_file.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
-class time:
-  def __init__(self, day_int):
-    self.date = ctrl_date.ctrl_date()
-    self.date.yesterday(day_int)
-    self.date.quarte().quarte_date
-
-
-
-class Anlys:
+class anlys:
   def __init__(self):
     self.result_list = []
 
@@ -52,7 +44,7 @@ class Anlys:
               # break  # 同じtitleのデータが複数回追加されないようにする
 
 
-class Gen_Tag:
+class gen_tag:
   def get_base_yaml(self, loaded_yaml):
     self.config = loaded_yaml['_http']
 
@@ -98,7 +90,7 @@ def ytdlp(paths, id, ext, url):
   return method
 
 
-def ccc(tag_tag:func.Gen_Tag, year, q_date):
+def ccc(tag_tag:func.gen_tag, year, q_date):
   method = ytdlp(tag_tag.paths, tag_tag.id, tag_tag.ext, tag_tag.url)
   result = run(method)
   tag_tag.output = insert_quoter(tag_tag.output, year, q_date)

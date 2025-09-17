@@ -1,12 +1,12 @@
 from sys import exit
-from mytool import check_any, scraping
+from mytool import check_any, scraping, ctrl_date
 import func
 
 
 def main():
   check_any.check_any.check_arg()
-  variable = func.Gen_Var()
-  tag_tag  = func.Gen_Tag()
+  variable = func.gen_var()
+  tag_tag  = func.gen_tag()
 
   if variable.arg.startswith("https://tver.jp/episodes/"):
     tag_tag.get_base_yaml(variable.loaded_yaml)
@@ -14,12 +14,12 @@ def main():
     func.ccc(tag_tag, None, None)
 
   elif not variable.arg.startswith("https://tver.jp/episodes/"):
-    scraper = scraping.selenium()
-    anlys   = func.Anlys()
-    time    = func.time(1)
+    anlys = func.anlys()
+    time  = ctrl_date.ctrl_date().yesterday(1)
+    time.quarte(time.n_days_ago_date.month)
 
     if   variable.arg == "dow":
-      anlys.find_key_value_list(variable.loaded_yaml, time.date.n_days_ago_dow)
+      anlys.find_key_value_list(variable.loaded_yaml, time.n_days_ago_dow)
     elif variable.arg != "dow":
       anlys.find_key_dict(variable.loaded_yaml, variable.arg)
 
@@ -28,16 +28,15 @@ def main():
       exit(0)
 
     for bmw in anlys.result_list:
-      scraper.make_soup(bmw["url"])
-      # fuga = scraping.hoge(bmw["url"])
-      # fuga.make2soup().simple(fuga.response, "html.parser")
+      scraper = scraping.hoge(bmw["url"])
+      scraper.make2soup().simple(scraper.response, "html.parser")
 
-      # print(fuga.soup)
+      # print(scraper.soup)
       # exit()
 
       scraper.tver(scraper.soup)
       tag_tag.integrate(scraper.url, variable.storage_dir, bmw)
-      func.ccc(tag_tag, time.date.n_days_ago_date.year, time.date.quarte_date)
+      func.ccc(tag_tag, time.n_days_ago_date.year, time.quarte_date)
 
   else:
     exit("Invailed Argment!")

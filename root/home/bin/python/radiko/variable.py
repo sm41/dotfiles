@@ -13,11 +13,10 @@ class hoge:
 
 class time:
   def __init__(self, day_int):
-    aaa = ctrl_date.ctrl_date()
-    aaa.yesterday(day_int)
+    aaa = ctrl_date.ctrl_date().yesterday(day_int)
 
-    self.today_now      = aaa.format(aaa.today_now).format_time
-    self.n_days_ago     = aaa.format(aaa.n_days_ago_now).format_time
+    self.today_now      = aaa.format(aaa.today_now, '%Y%m%d%H%M'+'00').format_time
+    self.n_days_ago     = aaa.format(aaa.n_days_ago_now, '%Y%m%d%H%M'+'00').format_time
     self.n_days_ago_dow = aaa.n_days_ago_dow
 
 

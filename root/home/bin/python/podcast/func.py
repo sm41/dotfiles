@@ -1,7 +1,7 @@
 from sys import argv
 from datetime import datetime
 from locale import setlocale, LC_TIME, LC_ALL
-from mytool import ctrl_date, ctrl_file, ctrl_file, local_path
+from mytool import ctrl_file, ctrl_file, local_path
 
 
 class gen_var:
@@ -22,7 +22,7 @@ class gen_tag:
 
     self.series  = ctrl_file.ctrl_file.zen2han(__root_obj.title.string)
     self.episode = ctrl_file.ctrl_file.zen2han(__item_obj.title.string)
-    self.date    = time.change_format(__item_obj.pubDate.string)
+    self.date    = change_format(__item_obj.pubDate.string)
     self.img     = __root_obj.image.url.string.split('?')[0]
     self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
     self.ext     = ctrl_file.ctrl_file.get_ext(self.url)
@@ -44,21 +44,13 @@ class check_arg:
         self.reserve_list.append({**value})
 
 
+def change_format(episode_date):
+  setlocale(LC_TIME, (None,None))
 
-class time:
-  def __init__(self, day_int):
-    aaa = ctrl_date.ctrl_date()
-    self.n_days_ago_dow = aaa.yesterday(day_int).n_days_ago_dow
-
-
-  @staticmethod
-  def change_format(episode_date):
-    setlocale(LC_TIME, (None,None))
-
-    format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
-    dt_tz = datetime.strptime(episode_date, format_str_tz)
-    yyy = dt_tz.strftime("%Y-%m-%d")
-    return yyy
+  format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
+  dt_tz = datetime.strptime(episode_date, format_str_tz)
+  yyy = dt_tz.strftime("%Y-%m-%d")
+  return yyy
 
 
 def dl(source:gen_tag, tmp_dir):
