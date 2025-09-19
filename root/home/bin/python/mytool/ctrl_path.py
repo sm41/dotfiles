@@ -1,5 +1,6 @@
 import shutil
-from os  import getenv
+from os      import getenv
+from yaml    import safe_load
 from pathlib import Path
 
 
@@ -15,9 +16,6 @@ class local_data:
     local_data_dir     = getenv("XDG_CONFIG_HOME")
     self.local_data_path = Path(local_data_dir, "script_python", target_file)
 
-  # def yaml_path(self, yaml_filename):
-  #   self.yaml_path_name = Path(self.local_data_dir, yaml_filename)
-
 
 class ctrl_path:
   @staticmethod
@@ -31,3 +29,11 @@ class ctrl_path:
     down_dir = Path(*path_parts)
     down_dir.mkdir(parents=True, exist_ok=True)
     return down_dir
+
+
+class yaml_tool:
+  @staticmethod
+  def yaml_safe_load(path):
+    with open(path, mode='r') as f:
+      y_data = safe_load(f)
+    return y_data

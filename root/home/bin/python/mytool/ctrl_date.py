@@ -2,7 +2,6 @@ from locale import setlocale, LC_TIME, LC_ALL
 from datetime import datetime, timedelta
 
 
-
 class ctrl_date:
   def __init__(self):
     setlocale(LC_TIME, 'ja_JP.UTF-8')

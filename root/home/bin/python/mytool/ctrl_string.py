@@ -1,7 +1,5 @@
 from pathlib import Path
-from yaml    import safe_load
 from sys     import exit
-
 
 
 class ctrl_arg:
@@ -43,13 +41,3 @@ class ctrl_file:
   @staticmethod
   def get_ext(input):
     return Path(input).suffix
-
-
-
-
-class yaml_tool:
-  @staticmethod
-  def yaml_safe_load(path):
-    with open(path, mode='r') as f:
-      y_data = safe_load(f)
-    return y_data

@@ -10,7 +10,7 @@ class gen_var:
     ld = ctrl_path.local_data("tver.yaml")
 
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_path.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class gen_tag:

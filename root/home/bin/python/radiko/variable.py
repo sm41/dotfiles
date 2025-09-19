@@ -1,5 +1,5 @@
 from sys import exit
-from mytool import ctrl_path, ctrl_date, ctrl_string
+from mytool import ctrl_path, ctrl_date
 
 class hoge:
   def __init__(self):
@@ -8,7 +8,7 @@ class hoge:
 
     self.tmp_dir      = lp.tmp_dir
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_path.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class time:

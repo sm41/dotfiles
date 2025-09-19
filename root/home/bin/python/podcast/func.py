@@ -12,21 +12,24 @@ class gen_var:
     self.arg         = argv[1]
     self.tmp_dir     = lp.tmp_dir
     self.storage_dir = lp.storage_dir
-    self.loaded_yaml = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml = ctrl_path.yaml_tool.yaml_safe_load(ld.local_data_path)
 
 
 class gen_tag:
   def __init__(self, soup):
+
+    JJJ = ctrl_string.ctrl_file()
+
     root_obj = soup.find("channel")
     item_obj = soup.find("item")
 
-    self.series  = ctrl_string.ctrl_file.zen2han(root_obj.title.string)
-    self.episode = ctrl_string.ctrl_file.zen2han(item_obj.title.string)
+    self.series  = JJJ.zen2han(root_obj.title.string)
+    self.episode = JJJ.zen2han(item_obj.title.string)
     self.date    = change_format(item_obj.pubDate.string)
     self.img     = root_obj.image.url.string.split('?')[0]
     self.url     = item_obj.enclosure.attrs['url'].split('?')[0]
-    self.ext     = ctrl_string.ctrl_file.get_ext(self.url)
-    self.name    = ctrl_string.ctrl_file.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
+    self.ext     = JJJ.get_ext(self.url)
+    self.name    = JJJ.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
 class check_arg:
