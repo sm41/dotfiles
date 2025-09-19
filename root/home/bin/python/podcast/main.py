@@ -22,8 +22,8 @@ def main():
     exit()
 
   for ttt in branch.reserve_list:
-    qqq  = scraping.scrp().check_status_code(ttt['url'])
-    soup = qqq.simple("xml").soup
+    qqq  = scraping.scrp()
+    soup = qqq.get_response(ttt['url']).simple("xml").soup
     source = func.gen_tag(soup)
 
     # print(source.episode)

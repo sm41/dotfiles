@@ -1,19 +1,19 @@
 from base64 import b64encode
-from urllib import request
+import requests
 
 def iinntt():
   auth1_url   = "https://radiko.jp/v2/api/auth1"
   auth2_url   = "https://radiko.jp/v2/api/auth2"
   authkey     = "bcd151073c03b352e1ef2fd66c32209da9ca0afa"
 
-  __head_dict_1 = set_users_header()
-  __auth_one    = get_header(auth1_url, __head_dict_1)
-  __head_res    = set_head_dict(__auth_one)
-  __partialkey  = get_partial(__head_res, authkey)
-  __head_dict_2 = set_head_dict_2(__partialkey, __head_res)
-  __auth_two    = get_header(auth2_url, __head_dict_2)
+  head_dict_1 = set_users_header()
+  auth_one    = get_header(auth1_url, head_dict_1)
+  head_res    = set_head_dict(auth_one)
+  partialkey  = get_partial(head_res, authkey)
+  head_dict_2 = set_head_dict_2(partialkey, head_res)
+  auth_two    = get_header(auth2_url, head_dict_2)
 
-  xrat = __head_dict_2['X-Radiko-AuthToken']
+  xrat = head_dict_2['X-Radiko-AuthToken']
   return xrat
 
 def set_users_header():
@@ -26,10 +26,8 @@ def set_users_header():
   return head_dict_1
 
 def get_header(auth_n_url, head_dict_n):
-  req = request.Request(url=auth_n_url, headers=head_dict_n, method="GET")
-  with request.urlopen(req) as res:
-    auth_n = res.headers
-  return auth_n
+  req = requests.get(url = auth_n_url, headers = head_dict_n)
+  return req.headers
 
 def set_head_dict(auth_one):
   AuthToken = str(auth_one['x-radiko-authtoken'])

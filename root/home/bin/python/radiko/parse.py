@@ -21,17 +21,17 @@ class parse_arg:
   }
 
   def __init__(self):
-    __parser = ArgumentParser()
-    __parser.add_argument('-s',   help='station_id',  required=True,   type=str.upper, choices = self.s_dict.keys())
-    __parser.add_argument('-t',   help='title',       required=True,   type=str)
-    __parser.add_argument('-ft',  help='ft',          required=False,  type=str)
-    __parser.add_argument('-dl',  help='download',    required=False,  action='store_true')
+    parser = ArgumentParser()
+    parser.add_argument('-s',   help='station_id',  required=True,   type=str.upper, choices = self.s_dict.keys())
+    parser.add_argument('-t',   help='title',       required=True,   type=str)
+    parser.add_argument('-ft',  help='ft',          required=False,  type=str)
+    parser.add_argument('-dl',  help='download',    required=False,  action='store_true')
 
-    __opt_args       = __parser.parse_args()
-    self.station_id  = __opt_args.s.upper()
-    self.search_term = __opt_args.t
-    self.fftt        = __opt_args.ft
-    self.dl_flag     = __opt_args.dl
+    opt_args         = parser.parse_args()
+    self.station_id  = opt_args.s.upper()
+    self.search_term = opt_args.t
+    self.fftt        = opt_args.ft
+    self.dl_flag     = opt_args.dl
 
 
 class parse_file:

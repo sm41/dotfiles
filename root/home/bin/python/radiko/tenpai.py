@@ -13,10 +13,10 @@ def arg2soup(series_list):
     url         = buiyon['url']
     search_term = buiyon['title']
 
-    qqq  = scraping.scrp().check_status_code(url)
-    soup = qqq.simple("xml").soup
+    qqq  = scraping.scrp()
+    qqq.get_response(url).simple("xml")
 
-    find_all_list = soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
+    find_all_list = qqq.soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
     soup_dish.append(find_all_list)
   return soup_dish
 

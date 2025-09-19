@@ -17,14 +17,14 @@ class gen_var:
 
 class gen_tag:
   def __init__(self, soup):
-    __root_obj = soup.find("channel")
-    __item_obj = soup.find("item")
+    root_obj = soup.find("channel")
+    item_obj = soup.find("item")
 
-    self.series  = ctrl_string.ctrl_file.zen2han(__root_obj.title.string)
-    self.episode = ctrl_string.ctrl_file.zen2han(__item_obj.title.string)
-    self.date    = change_format(__item_obj.pubDate.string)
-    self.img     = __root_obj.image.url.string.split('?')[0]
-    self.url     = __item_obj.enclosure.attrs['url'].split('?')[0]
+    self.series  = ctrl_string.ctrl_file.zen2han(root_obj.title.string)
+    self.episode = ctrl_string.ctrl_file.zen2han(item_obj.title.string)
+    self.date    = change_format(item_obj.pubDate.string)
+    self.img     = root_obj.image.url.string.split('?')[0]
+    self.url     = item_obj.enclosure.attrs['url'].split('?')[0]
     self.ext     = ctrl_string.ctrl_file.get_ext(self.url)
     self.name    = ctrl_string.ctrl_file.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 

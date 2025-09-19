@@ -1,6 +1,6 @@
-from subprocess import run
+from subprocess import run, CompletedProcess
 from pathlib  import Path
-from sys import argv
+# from sys import argv
 from mytool import ctrl_path, ctrl_string, notify
 import func
 
@@ -9,9 +9,32 @@ class gen_var:
     lp = ctrl_path.storage("@tver")
     ld = ctrl_path.local_data("tver.yaml")
 
-    self.arg          = argv[1]
     self.storage_dir  = lp.storage_dir
     self.loaded_yaml  = ctrl_string.yaml_tool.yaml_safe_load(ld.local_data_path)
+
+
+class gen_tag:
+  def get_base_yaml(self, loaded_yaml):
+    self.config = loaded_yaml['_http']
+
+  def integrate(self, url, down_dir, yaml_config):
+    header = yaml_config['header']
+    cmd_ytdlp = [
+      "yt-dlp",
+        "--paths",  f"home:{down_dir}",
+        "--output", f"{header}",
+        "--print",  "series",
+        "--print",  "episode",
+        "--print",  "original_url",
+        "--print",  "filename",
+        "--print",  "ext",
+        "--print",  "id",
+      url
+    ]
+    ddd: CompletedProcess = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
+    self.series, self.episode, self.url, filename, self.ext, self.id = ddd.splitlines()
+    self.dirname  = Path(filename).parent
+    self.basename = ctrl_string.ctrl_file.zen2han(Path(filename).stem)
 
 
 class anlys:
@@ -44,29 +67,6 @@ class anlys:
               # break  # 同じtitleのデータが複数回追加されないようにする
 
 
-class gen_tag:
-  def get_base_yaml(self, loaded_yaml):
-    self.config = loaded_yaml['_http']
-
-  def integrate(self, url, down_dir, yaml_config):
-    __header = yaml_config['header']
-    __cmd_ytdlp = [
-      "yt-dlp",
-        "--paths",  f"home:{down_dir}",
-        "--output", f"{__header}",
-        "--print",  "series",
-        "--print",  "episode",
-        "--print",  "original_url",
-        "--print",  "filename",
-        "--print",  "ext",
-        "--print",  "id",
-      url
-    ]
-    __ddd = run(__cmd_ytdlp, capture_output=True, text=True).stdout.strip()
-    self.series, self.episode, self.url, __filename, self.ext, self.id = __ddd.splitlines()
-    self.paths, self.output = Path(__filename).parent, ctrl_string.ctrl_file.zen2han(Path(__filename).stem)
-
-
 def insert_quoter(filename:str, year, q_date):
 
   # if year is None or q_date is None:
@@ -91,9 +91,9 @@ def ytdlp(paths, id, ext, url):
 
 
 def ccc(tag_tag:func.gen_tag, year, q_date):
-  method = ytdlp(tag_tag.paths, tag_tag.id, tag_tag.ext, tag_tag.url)
+  method = ytdlp(tag_tag.dirname, tag_tag.id, tag_tag.ext, tag_tag.url)
   result = run(method)
-  tag_tag.output = insert_quoter(tag_tag.output, year, q_date)
-  tag_tag.output = ctrl_string.ctrl_file.byte_count(tag_tag.output, 245)
-  ctrl_path.ctrl_path.rnm_path(Path(tag_tag.paths, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.paths, f"{tag_tag.output}.{tag_tag.ext}"))
+  tag_tag.basename = insert_quoter(tag_tag.basename, year, q_date)
+  tag_tag.basename = ctrl_string.ctrl_file.byte_count(tag_tag.basename, 245)
+  ctrl_path.ctrl_path.rnm_path(Path(tag_tag.dirname, f"{tag_tag.id}.{tag_tag.ext}"), Path(tag_tag.dirname, f"{tag_tag.basename}.{tag_tag.ext}"))
   notify.ntfy(result, f"{tag_tag.series}\n{tag_tag.episode}")

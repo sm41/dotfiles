@@ -2,7 +2,7 @@ import yaml
 from pathlib import Path
 import inspect
 import requests
-from mytool import local_path
+from mytool import ctrl_path
 
 
 def get_yaml_path():
@@ -37,14 +37,14 @@ def isexist_dict(method_name, state_file: Path):
             return dict_of_siteinfo
 
 
-def check_status(url):
-  response = requests.get(url)
+# def check_status(url):
+#   response = requests.get(url)
 
-  if response.status_code == 200:
-    soup = selenium(url)
-    return soup
-  else:
-    return response.status_code
+#   if response.status_code == 200:
+#     soup = (url)
+#     return soup
+#   else:
+#     return response.status_code
 
 
 def rewrite_dict(state_file, data):
