@@ -42,7 +42,7 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
           'ft' :        pgm_status['ft'],
           'station_id': pgm_status['station_id'],
           'day':        pgm_status['date'],
-          'time':       f"{pgm_status['ft'][8:10]}:{pgm_status['ft'][10:12]}-{pgm_status['to'][8:10]}:{pgm_status['to'][10:12]}",
+          'time':       f"{pgm_status['start'][0:2]}:{pgm_status['ft'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['to'][2:4]}",
           'title':      pgm_status['title']
         }
         print(srx)
@@ -100,8 +100,8 @@ def search_program(station_id, find_lists, time:variable.time, var_parts:variabl
           "ft":          prog_detail.attrs['ft'],
           "to":          prog_detail.attrs['to'],
           "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
-          "start":    f"{prog_detail.attrs['ftl']}",
-          "end":      f"{prog_detail.attrs['tol']}",
+          "start":       prog_detail.attrs['ftl'],
+          "end":         prog_detail.attrs['tol'],
           "img":         prog_detail.img.string,
           'tmp':         var_parts.tmp_dir,
           'storage':     var_parts.storage_dir,

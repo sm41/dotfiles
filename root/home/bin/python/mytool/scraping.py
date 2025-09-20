@@ -28,5 +28,11 @@ class scrp:
     self.soup = BeautifulSoup(self.response_text, markup_type)
     return self
 
+
+
+class channel:
+  def __init__(self):
+    pass
+
   def tver(self, soup:BeautifulSoup):
     self.url = "https://tver.jp" + soup.find(class_ = compile("episode-row_container")).attrs['href']

@@ -29,12 +29,11 @@ def main():
 
     for bmw in anlys.result_list:
       scraper = scraping.scrp()
+      hohoniku = scraping.channel()
+
       scraper.get_response(bmw["url"]).make2soup().simple("html.parser")
+      hohoniku.tver(scraper.soup)
 
-      # print(scraper.soup)
-      # exit()
-
-      scraper.tver(scraper.soup)
       tag_tag.integrate(scraper.url, variable.storage_dir, bmw)
       func.ccc(tag_tag, time.n_days_ago_date.year, time.quarte_date)
 

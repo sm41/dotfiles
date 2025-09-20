@@ -1,6 +1,5 @@
 from subprocess import run, CompletedProcess
 from pathlib  import Path
-# from sys import argv
 from mytool import ctrl_path, ctrl_string, notify
 import func
 
@@ -31,8 +30,9 @@ class gen_tag:
         "--print",  "id",
       url
     ]
-    ddd: CompletedProcess = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
-    self.series, self.episode, self.url, filename, self.ext, self.id = ddd.splitlines()
+    self.ddd: CompletedProcess = run(cmd_ytdlp, capture_output=True, text=True).stdout.strip()
+    rxw = self.ddd.splitlines()
+    self.series, self.episode, self.url, filename, self.ext, self.id = rxw[:6]
     self.dirname  = Path(filename).parent
     self.basename = ctrl_string.ctrl_file.zen2han(Path(filename).stem)
 
