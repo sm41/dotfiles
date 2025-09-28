@@ -8,7 +8,6 @@ def main():
   variable = func.gen_var()
   check_id = func.check()
   flfl     = func.fff_list()
-  # tptp     = tenpai.gen_tag()
   time     = ctrl_date.ctrl_date()
   time.yesterday(1).quarte(time.n_days_ago_date.month)
 
@@ -39,7 +38,6 @@ def main():
   inside_list  = []
 
   for kkk in flfl.ukuk:
-
     tptp = tenpai.gen_tag()
     tptp.get_metadata(kkk['url'], kkk['down_dir'], kkk['header'])
 
