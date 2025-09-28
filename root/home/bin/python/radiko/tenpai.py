@@ -21,6 +21,32 @@ def arg2soup(series_list):
   return soup_dish
 
 
+def search_program(station_id, find_lists, time:variable.time, var_parts:variable.hoge):
+  program_list = []
+
+  for find_list in find_lists:
+    for keyword in find_list:
+      prog_detail = keyword.parent
+      if   time.n_days_ago >  prog_detail.attrs['to'] >  time.today_now:
+        continue
+      elif time.n_days_ago <= prog_detail.attrs['to'] <= time.today_now:
+        ddd = {
+          "station_id":  station_id,
+          "ft":          prog_detail.attrs['ft'],
+          "to":          prog_detail.attrs['to'],
+          "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
+          "start":       prog_detail.attrs['ftl'],
+          "end":         prog_detail.attrs['tol'],
+          "img":         prog_detail.img.string,
+          'tmp':         var_parts.tmp_dir,
+          'storage':     var_parts.storage_dir,
+          "title":       ctrl_string.ctrl_file.zen2han(prog_detail.title.string),
+        }
+        program_list.append(ddd)
+
+  return program_list
+
+
 def single_match(pgm_list, optional_arument:parse.parse_arg):
 
   if   len(pgm_list) == 0:
@@ -29,7 +55,7 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
 
   elif len(pgm_list) == 1:
     if not optional_arument.dl_flag:
-      print(pgm_list)
+      ctrl_string.line_up_dict(pgm_list[0])
       print("✅ You can download it by adding '-dl' flag")
       exit()
     else:
@@ -37,20 +63,22 @@ def single_match(pgm_list, optional_arument:parse.parse_arg):
 
   elif len(pgm_list) >= 2:
     if not optional_arument.fftt:
+      print('+---'*32)
       for pgm_status in pgm_list:
         srx = {
           'ft' :        pgm_status['ft'],
           'station_id': pgm_status['station_id'],
           'day':        pgm_status['date'],
-          'time':       f"{pgm_status['start'][0:2]}:{pgm_status['ft'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['to'][2:4]}",
+          'time':    f"{pgm_status['start'][0:2]}:{pgm_status['ft'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['to'][2:4]}",
           'title':      pgm_status['title']
         }
         print(srx)
+      print('+---'*32)
       print(f"📢 Result {len(pgm_list)} Programs")
       exit()
 
     elif len(optional_arument.fftt) != 14:
-      print("⚠️ Please specify the exact 'from time' with '-ft' option (e.g. 20xx1231235959)")
+      print("⚠️ Please specify the exact 'from time' with '-ft' option (e.g. YYYYMMDDhhmmss(20xx1231235959))")
       exit()
 
     elif len(optional_arument.fftt) == 14:
@@ -85,28 +113,3 @@ def ddwwnn(pgm_list):
 
     notify.ntfy(result_cf, Path(fst.ffmpeg_cf[-1]).name)
 
-
-def search_program(station_id, find_lists, time:variable.time, var_parts:variable.hoge):
-  program_list = []
-
-  for find_list in find_lists:
-    for keyword in find_list:
-      prog_detail = keyword.parent
-      if   time.n_days_ago >  prog_detail.attrs['to'] >  time.today_now:
-        continue
-      elif time.n_days_ago <= prog_detail.attrs['to'] <= time.today_now:
-        ddd = {
-          "station_id":  station_id,
-          "ft":          prog_detail.attrs['ft'],
-          "to":          prog_detail.attrs['to'],
-          "date":     f"{prog_detail.attrs['ft'][0:4]}-{prog_detail.attrs['ft'][4:6]}-{prog_detail.attrs['ft'][6:8]}",
-          "start":       prog_detail.attrs['ftl'],
-          "end":         prog_detail.attrs['tol'],
-          "img":         prog_detail.img.string,
-          'tmp':         var_parts.tmp_dir,
-          'storage':     var_parts.storage_dir,
-          "title":       ctrl_string.ctrl_file.zen2han(prog_detail.title.string),
-        }
-        program_list.append(ddd)
-
-  return program_list
