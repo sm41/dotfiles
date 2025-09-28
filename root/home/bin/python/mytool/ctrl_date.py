@@ -22,3 +22,10 @@ class ctrl_date:
   def quarte(self, any_month):
     self.quarte_date  = (any_month - 1) // 3 + 1
     return self
+
+  def change_format(self, input_string, format_string, output_string):
+    setlocale(LC_TIME, (None,None))
+
+    dt_tz = datetime.strptime(input_string, format_string)
+    self.formatted_date = dt_tz.strftime(output_string)
+    return self

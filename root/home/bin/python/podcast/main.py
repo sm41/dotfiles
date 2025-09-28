@@ -22,12 +22,9 @@ def main():
     exit()
 
   for ttt in branch.reserve_list:
-    qqq  = scraping.scrp()
-    soup = qqq.get_response(ttt['url']).simple("xml").soup
+    qqq    = scraping.scrp()
+    soup   = qqq.get_response(ttt['url']).simple("xml").soup
     source = func.gen_tag(soup)
-
-    # print(source.episode)
-    # continue
 
     download = func.dl(source, variable.tmp_dir)
     result   = run(download)

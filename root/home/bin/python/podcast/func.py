@@ -1,7 +1,7 @@
 from sys import argv
 from datetime import datetime
-from locale import setlocale, LC_TIME, LC_ALL
-from mytool import ctrl_string, ctrl_path
+# from locale import setlocale, LC_TIME, LC_ALL
+from mytool import ctrl_string, ctrl_path, ctrl_date
 
 
 class gen_var:
@@ -19,13 +19,15 @@ class gen_tag:
   def __init__(self, soup):
 
     JJJ = ctrl_string.ctrl_file()
+    LLL = ctrl_date.ctrl_date()
 
     root_obj = soup.find("channel")
     item_obj = soup.find("item")
 
     self.series  = JJJ.zen2han(root_obj.title.string)
     self.episode = JJJ.zen2han(item_obj.title.string)
-    self.date    = change_format(item_obj.pubDate.string)
+    # self.date    = change_format(item_obj.pubDate.string)
+    self.date    = LLL.change_format(item_obj.pubDate.string, "%a, %d %b %Y %H:%M:%S %z", "%Y-%m-%d").formatted_date
     self.img     = root_obj.image.url.string.split('?')[0]
     self.url     = item_obj.enclosure.attrs['url'].split('?')[0]
     self.ext     = JJJ.get_ext(self.url)
@@ -47,13 +49,13 @@ class check_arg:
         self.reserve_list.append({**value})
 
 
-def change_format(episode_date):
-  setlocale(LC_TIME, (None,None))
+# def change_format(episode_date):
+#   setlocale(LC_TIME, (None,None))
 
-  format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
-  dt_tz = datetime.strptime(episode_date, format_str_tz)
-  yyy = dt_tz.strftime("%Y-%m-%d")
-  return yyy
+#   format_str_tz = "%a, %d %b %Y %H:%M:%S %z"
+#   dt_tz = datetime.strptime(episode_date, format_str_tz)
+#   yyy = dt_tz.strftime("%Y-%m-%d")
+#   return yyy
 
 
 def dl(source:gen_tag, tmp_dir):

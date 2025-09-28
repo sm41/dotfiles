@@ -1,7 +1,7 @@
 from bs4      import BeautifulSoup
+from selenium import webdriver
 from re       import compile
 from time     import sleep
-from selenium import webdriver
 import requests
 
 class scrp:
