@@ -15,8 +15,8 @@ def main():
 
   elif not argv[1].startswith("https://tver.jp/episodes/"):
     anlys = func.anlys()
-    time  = ctrl_date.ctrl_date().yesterday(1)
-    time.quarte(time.n_days_ago_date.month)
+    time  = ctrl_date.ctrl_date()
+    time.yesterday(1).quarte(time.n_days_ago_date.month)
 
     if   argv[1] == "dow":
       anlys.find_key_value_list(variable.loaded_yaml, time.n_days_ago_dow)
@@ -28,7 +28,7 @@ def main():
       exit(0)
 
     for bmw in anlys.result_list:
-      scraper = scraping.scrp()
+      scraper  = scraping.scrp()
       hohoniku = scraping.channel()
 
       scraper.get_response(bmw["url"]).make2soup().simple("html.parser")
