@@ -4,14 +4,15 @@ input_file="$1"
 
 filename=${input_file##*/}
 basename=${filename%.*}
-ext=${filename##*.}
+# ext=${filename##*.}
+bitrate=48
 
 ffmpeg \
   -i "${input_file}" \
   -map 0:a \
   -map 0:v:0 \
   -c:a libmp3lame \
-  -b:a 48k \
+  -b:a "${bitrate}k" \
   -disposition:1 attached_pic \
   -id3v2_version 3 \
   -metadata:s:v title="Album cover" \
