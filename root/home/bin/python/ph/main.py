@@ -9,10 +9,10 @@ def main():
   lp = ctrl_path.storage("@ph")
 
   if variable.parts.path == "/view_video.php":
-    variable.ytdlp(str(lp.storage_dir), variable.arg)
+    variable.ytdlp(str(lp.storage_dir), argv[1])
 
   elif variable.parts.path.startswith(("/model", "/pornstar")):
-    variable.ytdlp(str(lp.storage_dir) + variable.parts.path, variable.arg + "/videos/upload")
+    variable.ytdlp(str(lp.storage_dir) + variable.parts.path, argv[1] + "/videos/upload")
 
   else:
     print("Invailed Argment!")

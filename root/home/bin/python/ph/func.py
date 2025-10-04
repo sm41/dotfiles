@@ -4,8 +4,7 @@ from urllib import parse
 
 class gen_var:
   def __init__(self):
-    self.arg    = argv[1]
-    self.parts  = parse.urlparse(self.arg)
+    self.parts  = parse.urlparse(argv[1])
 
 
   def ytdlp(self, paths, url):

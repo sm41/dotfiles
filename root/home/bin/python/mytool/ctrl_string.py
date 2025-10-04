@@ -54,7 +54,7 @@ def line_up_dict(some_dict:dict):
   print("+" + ("-"*(k_byte_length + 2)) + "+" + ("-"*(v_byte_length + 2)) + "+")
 
   for key, value in some_dict.items():
-    print(f"| {str(key).ljust(k_byte_length)} : {value}")
+    print(f"| {str(key).ljust(k_byte_length)} | {value}")
 
   print("+" + ("-"*(k_byte_length + 2)) + "+" + ("-"*(v_byte_length + 2)) + "+")
 
