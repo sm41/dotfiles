@@ -1,6 +1,5 @@
 from subprocess import run
 from mytool import ctrl_path
-# import analyse
 
 
 class gen_var:
@@ -36,18 +35,18 @@ class check:
     return data['_http']['header']
 
 
-class fff_list:
+class line_up_contents:
   def __init__(self):
-    self.ukuk = []
+    self.contents_list = []
 
-  def mmkk(self, url, down_dir, header):
-    self.fff = {
+  def set_tmp_dict(self, url, down_dir, header):
+    self.tmp_dict = {
       "url"      : url,
       "down_dir" : down_dir,
       "header"   : header
     }
     return self
 
-  def llsstt(self):
-    self.ukuk.append(self.fff)
+  def append_contents(self):
+    self.contents_list.append(self.tmp_dict)
     return self
