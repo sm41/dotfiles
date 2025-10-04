@@ -2,22 +2,22 @@ from sys import argv
 from mytool import ctrl_string, ctrl_path, ctrl_date
 
 
-class gen_var:
+class Set_Variable:
   def __init__(self):
-    lp = ctrl_path.storage("@podcast")
-    ld = ctrl_path.local_data("podcast.yaml")
+    lp = ctrl_path.Storage("@podcast")
+    ld = ctrl_path.Local_Data("podcast_new.yaml")
 
     self.arg         = argv[1]
     self.tmp_dir     = lp.tmp_dir
     self.storage_dir = lp.storage_dir
-    self.loaded_yaml = ctrl_path.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml = ctrl_path.Yaml_Tool.yaml_safe_load(ld.local_data_path)
 
 
-class gen_tag:
+class Set_Metadata:
   def __init__(self, soup):
 
-    JJJ = ctrl_string.ctrl_file()
-    LLL = ctrl_date.ctrl_date()
+    JJJ = ctrl_string.Ctrl_File()
+    LLL = ctrl_date.Ctrl_Date()
 
     root_obj = soup.find("channel")
     item_obj = soup.find("item")
@@ -31,16 +31,16 @@ class gen_tag:
     self.name    = JJJ.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
-class check_arg:
+class Check:
   def __init__(self):
     self.reserve_list: list[dict] = []
 
-  def today_list(self, y_data:list, y_dow_str):
+  def check_today_list(self, y_data:dict, y_dow_str):
     for value in y_data.values():
       if y_dow_str in value.get('dow', []):
         self.reserve_list.append({**value})
 
-  def series_name(self, y_data:list, args):
+  def check_series_name(self, y_data:dict, args):
     for key, value in y_data.items():
       if key == args:
         self.reserve_list.append({**value})

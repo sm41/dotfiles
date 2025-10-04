@@ -13,7 +13,7 @@ def arg2soup(series_list):
     url         = buiyon['url']
     search_term = buiyon['title']
 
-    qqq  = scraping.scrp()
+    qqq  = scraping.Scrp()
     qqq.get_response(url).simple("xml")
 
     find_all_list = qqq.soup.find_all("title", text=compile(search_term, flags=IGNORECASE))
@@ -21,7 +21,7 @@ def arg2soup(series_list):
   return soup_dish
 
 
-def search_program(station_id, find_lists, time:variable.time, var_parts:variable.hoge):
+def search_program(station_id, find_lists, time:variable.Time, var_parts:variable.Set_Variable):
   program_list = []
 
   for find_list in find_lists:
@@ -40,14 +40,14 @@ def search_program(station_id, find_lists, time:variable.time, var_parts:variabl
           "img":         prog_detail.img.string,
           'tmp':         var_parts.tmp_dir,
           'storage':     var_parts.storage_dir,
-          "title":       ctrl_string.ctrl_file.zen2han(prog_detail.title.string),
+          "title":       ctrl_string.Ctrl_File.zen2han(prog_detail.title.string),
         }
         program_list.append(ddd)
 
   return program_list
 
 
-def single_match(pgm_list, optional_arument:parse.parse_arg):
+def single_match(pgm_list, optional_arument:parse.Parse_Arg):
 
   if   len(pgm_list) == 0:
     print("⚠️ Program is Not Found !!")
@@ -96,7 +96,7 @@ def ddwwnn(pgm_list):
   xrat = auth.iinntt()
 
   for dl_dict in pgm_list:
-    fst = download.fastforward(dl_dict)
+    fst = download.Fast_Forward(dl_dict)
 
     fst.dl(xrat)
     fst.select_audio_format(fst.ffmpeg_dl[-1], "aac")

@@ -24,7 +24,7 @@ def ytdlp(paths, id, ext, url):
   return method
 
 
-class gen_tag:
+class Set_Metadata:
 
   def get_metadata(self, url, down_dir, header):
     cmd_ytdlp = [
@@ -43,15 +43,15 @@ class gen_tag:
     rxw = ddd.splitlines()
     self.series, self.episode, self.url, filename, self.ext, self.id = rxw[:6]
     self.dirname  = Path(filename).parent
-    self.basename = ctrl_string.ctrl_file.zen2han(Path(filename).stem)
+    self.basename = ctrl_string.Ctrl_File.zen2han(Path(filename).stem)
 
 
-def kkk(flfl:func.line_up_contents, time:ctrl_date.ctrl_date):
+def kkk(flfl:func.Line_Up_Contents, time:ctrl_date.Ctrl_Date):
 
   today_dl_lists  = []
 
   for kkk in flfl.contents_list:
-    jsondata = gen_tag()
+    jsondata = Set_Metadata()
     jsondata.get_metadata(kkk['url'], kkk['down_dir'], kkk['header'])
 
     today_dl_lists.append(jsondata)
@@ -59,11 +59,11 @@ def kkk(flfl:func.line_up_contents, time:ctrl_date.ctrl_date):
 
 
   for dl_parts in today_dl_lists:
-    dl_parts:gen_tag
+    dl_parts:Set_Metadata
 
     method = ytdlp(dl_parts.dirname, dl_parts.id, dl_parts.ext, dl_parts.url)
     result = run(method)
     dl_parts.basename = insert_quoter(dl_parts.basename, time.n_days_ago_date.year, time.quarte_date)
-    dl_parts.basename = ctrl_string.ctrl_file.byte_count(dl_parts.basename, 245)
-    ctrl_path.ctrl_path.rnm_path(Path(dl_parts.dirname, f"{dl_parts.id}.{dl_parts.ext}"), Path(dl_parts.dirname, f"{dl_parts.basename}.{dl_parts.ext}"))
+    dl_parts.basename = ctrl_string.Ctrl_File.byte_count(dl_parts.basename, 245)
+    ctrl_path.Ctrl_Path.rnm_path(Path(dl_parts.dirname, f"{dl_parts.id}.{dl_parts.ext}"), Path(dl_parts.dirname, f"{dl_parts.basename}.{dl_parts.ext}"))
     notify.ntfy(result, f"{dl_parts.series}\n{dl_parts.episode}")

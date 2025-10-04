@@ -2,16 +2,16 @@ from subprocess import run
 from mytool import ctrl_path
 
 
-class gen_var:
+class Set_Variable:
   def __init__(self):
-    lp = ctrl_path.storage("@tver")
-    ld = ctrl_path.local_data("tver.yaml")
+    lp = ctrl_path.Storage("@tver")
+    ld = ctrl_path.Local_Data("tver_new.yaml")
 
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_path.yaml_tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = ctrl_path.Yaml_Tool.yaml_safe_load(ld.local_data_path)
 
 
-class check:
+class Check:
   def check_series_id(self, url, data):
     check_series = [
       "yt-dlp",
@@ -23,7 +23,7 @@ class check:
     self.series_url = "https://tver.jp/series/" + series_id
     self.header     = self.get_header(self.series_url, data)
 
-  def get_header(self, url, data):
+  def get_header(self, url, data:dict):
     for key, value in data.items():
       if key.startswith("_"):
         continue
@@ -35,7 +35,7 @@ class check:
     return data['_http']['header']
 
 
-class line_up_contents:
+class Line_Up_Contents:
   def __init__(self):
     self.contents_list = []
 

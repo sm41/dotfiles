@@ -2,7 +2,7 @@ from locale import setlocale, LC_TIME, LC_ALL
 from datetime import datetime, timedelta
 
 
-class ctrl_date:
+class Ctrl_Date:
   def __init__(self):
     setlocale(LC_TIME, 'ja_JP.UTF-8')
     self.today_now  = datetime.now().replace(second=0, microsecond=0)

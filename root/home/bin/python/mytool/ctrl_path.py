@@ -4,20 +4,20 @@ from yaml    import safe_load
 from pathlib import Path
 
 
-class storage:
+class Storage:
   def __init__(self, target_dir):
     self.tmp_dir     = "/tmp"
-    download_dir   = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_dir = ctrl_path.mkdir_path(download_dir, target_dir)
+    download_dir     = getenv("CLIENT_NETWORK_STORAGE_misc")
+    self.storage_dir = Ctrl_Path.mkdir_path(download_dir, target_dir)
 
 
-class local_data:
+class Local_Data:
   def __init__(self, target_file):
-    local_data_dir     = getenv("XDG_CONFIG_HOME")
+    local_data_dir       = getenv("XDG_CONFIG_HOME")
     self.local_data_path = Path(local_data_dir, "script_python", target_file)
 
 
-class ctrl_path:
+class Ctrl_Path:
   @staticmethod
   def rnm_path(bfr_path, aftr_path):
     oldpath = Path(bfr_path)
@@ -31,7 +31,7 @@ class ctrl_path:
     return down_dir
 
 
-class yaml_tool:
+class Yaml_Tool:
   @staticmethod
   def yaml_safe_load(path):
     with open(path, mode='r') as f:

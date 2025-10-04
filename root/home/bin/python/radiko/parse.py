@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from types import SimpleNamespace
 
-class parse_arg:
+class Parse_Arg:
   s_dict = {
     "TBS":     "TBSラジオ",
     "QRR":     "文化放送",
@@ -34,7 +34,7 @@ class parse_arg:
     self.dl_flag     = opt_args.dl
 
 
-class parse_file:
+class Parse_File:
   reserve_list = []
 
   def today_list(self, yaml_file:dict, y_dow_str):
@@ -49,7 +49,7 @@ class parse_file:
         self.reserve_list.append({**cnfg})
 
 
-class convert_dict:
+class Convert_Dict:
   def yaml2dict(self, yaml_list:list):
     self.options_list = []
     key_to_option = {
@@ -65,7 +65,7 @@ class convert_dict:
           today_series[value] = option
       self.options_list.extend([today_series])
 
-  def arg2dict(self, optional_arument:parse_arg):
+  def arg2dict(self, optional_arument:Parse_Arg):
     self.options_list = [
       {
         '-s': optional_arument.station_id,
@@ -73,7 +73,7 @@ class convert_dict:
       }
     ]
 
-  def minimum_dict(self, optional_arument:parse_arg):
+  def minimum_dict(self, optional_arument:Parse_Arg):
     self.argument_dict = {
       'station_id' : optional_arument.station_id,
       "title"      : optional_arument.search_term,

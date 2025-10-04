@@ -2,14 +2,14 @@ from pathlib import Path
 from sys     import exit
 import unicodedata
 
-class ctrl_arg:
+class Ctrl_Arg:
   @staticmethod
   def check_arg(data):
     if len(data) <= 1:
       exit('Length is incorrect')
 
 
-class ctrl_file:
+class Ctrl_File:
   @staticmethod
   def byte_count(input, limit=240):
     length = len(str(input).encode('utf-8'))
@@ -19,7 +19,7 @@ class ctrl_file:
 
     if length > limit:
       ttt = input[:-1]
-      result = ctrl_file.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
+      result = Ctrl_File.byte_count(ttt, limit) # 再帰呼び出しの結果を返す
 
       if len(result.encode('utf-8')) < limit:
         return result + "[…]"

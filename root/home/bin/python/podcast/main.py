@@ -4,15 +4,15 @@ import func, tenpai
 
 
 def main():
-  ctrl_string.ctrl_arg.check_arg(argv[1])
-  variable = func.gen_var()
-  branch   = func.check_arg()
-  time     = ctrl_date.ctrl_date().yesterday(1)
+  ctrl_string.Ctrl_Arg.check_arg(argv[1])
+  variable = func.Set_Variable()
+  branch   = func.Check()
+  time     = ctrl_date.Ctrl_Date().yesterday(1)
 
   if variable.arg == "dow":
-    branch.today_list(variable.loaded_yaml, time.n_days_ago_dow)
+    branch.check_today_list(variable.loaded_yaml, time.n_days_ago_dow)
   else:
-    branch.series_name(variable.loaded_yaml, variable.arg)
+    branch.check_series_name(variable.loaded_yaml, variable.arg)
 
   if not branch.reserve_list:
     print("⚠️  No matching podcast found")

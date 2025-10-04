@@ -4,7 +4,7 @@ from re       import compile
 from time     import sleep
 import requests
 
-class scrp:
+class Scrp:
   def __init__(self):
     pass
 
@@ -30,7 +30,7 @@ class scrp:
 
 
 
-class channel:
+class Channel:
   def __init__(self):
     pass
 

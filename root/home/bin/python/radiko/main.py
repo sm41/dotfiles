@@ -11,19 +11,19 @@ import parse, variable, tenpai
 
 
 def main():
-  var_parts = variable.hoge()
-  time      = variable.time(7)
-  cnv_dict  = parse.convert_dict()
+  var_parts = variable.Set_Variable()
+  time      = variable.Time(7)
+  cnv_dict  = parse.Convert_Dict()
 
   if argv[1].startswith("-"):
-    optional_arument = parse.parse_arg()
+    optional_arument = parse.Parse_Arg()
 
     cnv_dict.arg2dict(optional_arument)
     cnv_dict.minimum_dict(optional_arument)
     series_list = [ cnv_dict.argument_dict ]
 
   if not argv[1].startswith("-"):
-    yaml_argument   = parse.parse_file()
+    yaml_argument   = parse.Parse_File()
 
     if   argv[1] == "dow":
       yaml_argument.today_list(var_parts.loaded_yaml, time.n_days_ago_dow)

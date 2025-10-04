@@ -3,7 +3,7 @@ from mytool import scraping
 
 class website:
   def __init__(self):
-    self.scrp = scraping.scrp()
+    self.scrp = scraping.Scrp()
 
 
   def yamato(self):
@@ -12,14 +12,6 @@ class website:
     self.soup    = self.scrp.get_response(self.url).make2soup().simple("html.parser").soup
     self.article = self.scrp.soup.find(class_ = compile("el_articleCard_title")).text.strip()
     self.page    = self.scrp.soup.find(class_ = compile("el_articleCard")).attrs['href']
-
-
-  # def nhk(self):
-  #   self.website = "NHK"
-  #   self.url     = "https://www3.nhk.or.jp/news/catnew.html"
-  #   self.soup    = self.scrp.get_response(self.url).make2soup().simple("html.parser").soup
-  #   self.article = self.soup.find(class_ = "title").text.strip()
-  #   self.page    = "https://www3.nhk.or.jp" + self.scrp.soup.select_one('ul > li > dl > dd > a').attrs['href']
 
 
   def dariaartificial(self):

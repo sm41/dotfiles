@@ -1,13 +1,13 @@
 from sys import exit
 import variable
 
-class fastforward:
+class Fast_Forward:
   def __init__(self, dict:dict):
     self.station_id = dict['station_id']
     self.time_ft    = dict['ft']
     self.time_to    = dict['to']
     self.date       = dict['date']
-    self.start      = variable.time.convert_time_hhmm_no_colon(dict['start'])
+    self.start      = variable.Time.convert_time_hhmm_no_colon(dict['start'])
     self.end        = dict['end']
     self.img        = dict['img']
     self.tmp        = dict['tmp']
