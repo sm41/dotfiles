@@ -7,11 +7,9 @@ def main():
   yaml_path = func.get_yaml_path()
   newest_list = []
 
-  # analyse.py の中のメソッド名を取得して、ソート
   site_method = func.get_function_names(method)
   sorted_site = sorted(site_method)
 
-  # それぞれのメソッドを実行して、情報を取得
   for method_name in sorted_site:
     func.generate_method(method, method_name)
 
@@ -24,8 +22,6 @@ def main():
       }
     }
 
-    # state.yamlが存在しなければ新規作成
-    # 存在していたら、内容を読み込んで、現在の状態と比較
     dict_of_local = func.isexist_dict(method_name, yaml_path)
 
     if   dict_of_local is None:

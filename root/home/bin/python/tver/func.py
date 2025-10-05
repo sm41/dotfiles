@@ -1,14 +1,14 @@
 from subprocess import run
-from mytool import ctrl_path
+from mytool import ctrl_path as cp
 
 
 class Set_Variable:
   def __init__(self):
-    lp = ctrl_path.Storage("@tver")
-    ld = ctrl_path.Local_Data("tver_new.yaml")
+    lp = cp.Storage("@tver")
+    ld = cp.Local_Data("tver.yaml")
 
     self.storage_dir  = lp.storage_dir
-    self.loaded_yaml  = ctrl_path.Yaml_Tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml  = cp.Yaml_Tool.yaml_safe_load(ld.local_data_path)
 
 
 class Check:

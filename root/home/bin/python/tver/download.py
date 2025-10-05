@@ -1,6 +1,6 @@
 from subprocess import run, CompletedProcess
 from pathlib  import Path
-from mytool import ctrl_date, ctrl_path, ctrl_string, notify
+from mytool import ctrl_date as cd, ctrl_path as cp, ctrl_string as cs, notify
 import func
 
 
@@ -25,7 +25,6 @@ def ytdlp(paths, id, ext, url):
 
 
 class Set_Metadata:
-
   def get_metadata(self, url, down_dir, header):
     cmd_ytdlp = [
       "yt-dlp",
@@ -43,11 +42,10 @@ class Set_Metadata:
     rxw = ddd.splitlines()
     self.series, self.episode, self.url, filename, self.ext, self.id = rxw[:6]
     self.dirname  = Path(filename).parent
-    self.basename = ctrl_string.Ctrl_File.zen2han(Path(filename).stem)
+    self.basename = cs.File_Tool.zen2han(Path(filename).stem)
 
 
-def kkk(flfl:func.Line_Up_Contents, time:ctrl_date.Ctrl_Date):
-
+def kkk(flfl:func.Line_Up_Contents, time:cd.Date):
   today_dl_lists  = []
 
   for kkk in flfl.contents_list:
@@ -55,7 +53,7 @@ def kkk(flfl:func.Line_Up_Contents, time:ctrl_date.Ctrl_Date):
     jsondata.get_metadata(kkk['url'], kkk['down_dir'], kkk['header'])
 
     today_dl_lists.append(jsondata)
-    ctrl_string.line_up_dict(jsondata.__dict__)
+    cs.line_up_dict(jsondata.__dict__)
 
 
   for dl_parts in today_dl_lists:
@@ -64,6 +62,6 @@ def kkk(flfl:func.Line_Up_Contents, time:ctrl_date.Ctrl_Date):
     method = ytdlp(dl_parts.dirname, dl_parts.id, dl_parts.ext, dl_parts.url)
     result = run(method)
     dl_parts.basename = insert_quoter(dl_parts.basename, time.n_days_ago_date.year, time.quarte_date)
-    dl_parts.basename = ctrl_string.Ctrl_File.byte_count(dl_parts.basename, 245)
-    ctrl_path.Ctrl_Path.rnm_path(Path(dl_parts.dirname, f"{dl_parts.id}.{dl_parts.ext}"), Path(dl_parts.dirname, f"{dl_parts.basename}.{dl_parts.ext}"))
+    dl_parts.basename = cs.File_Tool.byte_count(dl_parts.basename, 245)
+    cp.Path_Tool.rnm_path(Path(dl_parts.dirname, f"{dl_parts.id}.{dl_parts.ext}"), Path(dl_parts.dirname, f"{dl_parts.basename}.{dl_parts.ext}"))
     notify.ntfy(result, f"{dl_parts.series}\n{dl_parts.episode}")

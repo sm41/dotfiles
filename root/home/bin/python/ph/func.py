@@ -2,10 +2,9 @@ from sys import argv
 from urllib import parse
 
 
-class gen_var:
+class Set_Variable:
   def __init__(self):
     self.parts  = parse.urlparse(argv[1])
-
 
   def ytdlp(self, paths, url):
     self.method = [

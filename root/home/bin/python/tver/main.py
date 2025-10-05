@@ -1,14 +1,14 @@
 from sys import argv, exit
-from mytool import ctrl_string, scraping, ctrl_date
+from mytool import ctrl_string as cs, ctrl_date as cd, scraping
 import func, analyse, download
 
 
 def main():
-  ctrl_string.Ctrl_Arg.check_arg(argv[1])
+  cs.Argument.check_arg(argv[1])
   variable = func.Set_Variable()
   check_id = func.Check()
   flfl     = func.Line_Up_Contents()
-  time     = ctrl_date.Ctrl_Date()
+  time     = cd.Date()
   time.yesterday(1).quarte(time.n_days_ago_date.month)
 
   if argv[1].startswith("https://tver.jp/episodes/"):

@@ -1,13 +1,13 @@
 from sys import argv, exit
-from mytool  import ctrl_string, ctrl_date
+from mytool  import ctrl_string as cs, ctrl_date as cd
 import func, tenpai
 
 
 def main():
-  ctrl_string.Ctrl_Arg.check_arg(argv[1])
+  cs.Argument.check_arg(argv[1])
   variable = func.Set_Variable()
   branch   = func.Check()
-  time     = ctrl_date.Ctrl_Date().yesterday(1)
+  time     = cd.Date().yesterday(1)
 
   if variable.arg == "dow":
     branch.check_today_list(variable.loaded_yaml, time.n_days_ago_dow)

@@ -1,12 +1,12 @@
 import func
 from sys import argv, exit
 from subprocess import run
-from mytool import ctrl_string, ctrl_path
+from mytool import ctrl_string as cs, ctrl_path as cp
 
 def main():
-  ctrl_string.Ctrl_Arg.check_arg(argv[1])
-  variable = func.gen_var()
-  lp = ctrl_path.Storage("@ph")
+  cs.Argument.check_arg(argv[1])
+  variable = func.Set_Variable()
+  lp = cp.Storage("@ph")
 
   if variable.parts.path == "/view_video.php":
     variable.ytdlp(str(lp.storage_dir), argv[1])

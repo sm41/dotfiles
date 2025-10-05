@@ -3,12 +3,13 @@ from re import compile, IGNORECASE
 from sys import exit
 from pathlib import Path
 from subprocess import run
-from mytool import notify, ctrl_string, scraping
+from mytool import ctrl_string as cs, scraping, notify
 import auth, parse, download, variable
 
 
 def arg2soup(series_list):
   soup_dish = []
+
   for buiyon in series_list:
     url         = buiyon['url']
     search_term = buiyon['title']
@@ -40,7 +41,7 @@ def search_program(station_id, find_lists, time:variable.Time, var_parts:variabl
           "img":         prog_detail.img.string,
           'tmp':         var_parts.tmp_dir,
           'storage':     var_parts.storage_dir,
-          "title":       ctrl_string.Ctrl_File.zen2han(prog_detail.title.string),
+          "title":       cs.File_Tool.zen2han(prog_detail.title.string),
         }
         program_list.append(ddd)
 
@@ -55,7 +56,7 @@ def single_match(pgm_list, optional_arument:parse.Parse_Arg):
 
   elif len(pgm_list) == 1:
     if not optional_arument.dl_flag:
-      ctrl_string.line_up_dict(pgm_list[0])
+      cs.line_up_dict(pgm_list[0])
       print("✅ You can download it by adding '-dl' flag")
       exit()
     else:
@@ -69,7 +70,7 @@ def single_match(pgm_list, optional_arument:parse.Parse_Arg):
           'ft' :        pgm_status['ft'],
           'station_id': pgm_status['station_id'],
           'day':        pgm_status['date'],
-          'time':    f"{pgm_status['start'][0:2]}:{pgm_status['ft'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['to'][2:4]}",
+          'time':    f"{pgm_status['start'][0:2]}:{pgm_status['start'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['end'][2:4]}",
           'title':      pgm_status['title']
         }
         print(srx)

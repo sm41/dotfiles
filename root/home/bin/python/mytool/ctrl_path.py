@@ -8,7 +8,7 @@ class Storage:
   def __init__(self, target_dir):
     self.tmp_dir     = "/tmp"
     download_dir     = getenv("CLIENT_NETWORK_STORAGE_misc")
-    self.storage_dir = Ctrl_Path.mkdir_path(download_dir, target_dir)
+    self.storage_dir = Path_Tool.mkdir_path(download_dir, target_dir)
 
 
 class Local_Data:
@@ -17,7 +17,7 @@ class Local_Data:
     self.local_data_path = Path(local_data_dir, "script_python", target_file)
 
 
-class Ctrl_Path:
+class Path_Tool:
   @staticmethod
   def rnm_path(bfr_path, aftr_path):
     oldpath = Path(bfr_path)

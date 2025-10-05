@@ -1,23 +1,23 @@
 from sys import argv
-from mytool import ctrl_string, ctrl_path, ctrl_date
+from mytool import ctrl_string as cs, ctrl_path as cp, ctrl_date as cd
 
 
 class Set_Variable:
   def __init__(self):
-    lp = ctrl_path.Storage("@podcast")
-    ld = ctrl_path.Local_Data("podcast_new.yaml")
+    lp = cp.Storage("@podcast")
+    ld = cp.Local_Data("podcast.yaml")
 
     self.arg         = argv[1]
     self.tmp_dir     = lp.tmp_dir
     self.storage_dir = lp.storage_dir
-    self.loaded_yaml = ctrl_path.Yaml_Tool.yaml_safe_load(ld.local_data_path)
+    self.loaded_yaml = cp.Yaml_Tool.yaml_safe_load(ld.local_data_path)
 
 
 class Set_Metadata:
   def __init__(self, soup):
 
-    JJJ = ctrl_string.Ctrl_File()
-    LLL = ctrl_date.Ctrl_Date()
+    JJJ = cs.File_Tool()
+    LLL = cd.Date()
 
     root_obj = soup.find("channel")
     item_obj = soup.find("item")
