@@ -18,8 +18,7 @@ def main():
   if argv[1].startswith("-"):
     optional_arument = parse.Parse_Arg()
 
-    cnv_dict.arg2dict(optional_arument)
-    cnv_dict.minimum_dict(optional_arument)
+    cnv_dict.options2dict(optional_arument)
     series_list = [ cnv_dict.argument_dict ]
 
   if not argv[1].startswith("-"):

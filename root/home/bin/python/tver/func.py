@@ -1,6 +1,6 @@
 from subprocess import run
 from mytool import ctrl_path as cp
-
+from sys import exit
 
 class Set_Variable:
   def __init__(self):
@@ -11,28 +11,27 @@ class Set_Variable:
     self.loaded_yaml  = cp.Yaml_Tool.yaml_safe_load(ld.local_data_path)
 
 
-class Check:
-  def check_series_id(self, url, data):
+class Check_Include_Series:
+  def check_series_id(self, url, data:dict):
     check_series = [
       "yt-dlp",
         "--print", "series_id",
         url
     ]
 
-    series_id       = run(check_series, capture_output=True, text=True).stdout.strip()
-    self.series_url = "https://tver.jp/series/" + series_id
-    self.header     = self.get_header(self.series_url, data)
+    series_id  = run(check_series, capture_output=True, text=True).stdout.strip()
+    series_url = "https://tver.jp/series/" + series_id
 
-  def get_header(self, url, data:dict):
     for key, value in data.items():
       if key.startswith("_"):
         continue
       if "url" not in value:
         continue
-      if value['url'] == url:
-        return value['header']
+      if value['url'] == series_url:
+        self.header = value['header']
+        break
 
-    return data['_http']['header']
+      self.header = data['_http']['header']
 
 
 class Line_Up_Contents:

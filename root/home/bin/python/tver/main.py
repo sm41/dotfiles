@@ -5,23 +5,24 @@ import func, analyse, download
 
 def main():
   cs.Argument.check_arg(argv[1])
-  variable = func.Set_Variable()
-  check_id = func.Check()
-  flfl     = func.Line_Up_Contents()
-  time     = cd.Date()
+  fsv   = func.Set_Variable()
+  flud  = func.Line_Up_Contents()
+  time  = cd.Date()
   time.yesterday(1).quarte(time.n_days_ago_date.month)
 
   if argv[1].startswith("https://tver.jp/episodes/"):
-    check_id.check_series_id(argv[1], variable.loaded_yaml)
-    flfl.set_tmp_dict(argv[1], variable.storage_dir, check_id.header).append_contents()
+    cis = func.Check_Include_Series()
+
+    cis.check_series_id(argv[1], fsv.loaded_yaml)
+    flud.set_tmp_dict(argv[1], fsv.storage_dir, cis.header).append_contents()
 
   elif not argv[1].startswith("https://tver.jp/episodes/"):
-    anlys = analyse.Anlys()
+    anlys = analyse.Anlys_Argument()
 
     if   argv[1] == "dow":
-      anlys.find_key_value_list(variable.loaded_yaml, time.n_days_ago_dow)
+      anlys.find_key_value_list(fsv.loaded_yaml, time.n_days_ago_dow)
     elif argv[1] != "dow":
-      anlys.find_key_dict(variable.loaded_yaml, argv[1])
+      anlys.find_key_dict(fsv.loaded_yaml, argv[1])
 
     if not anlys.result_list:
       print("Not Found")
@@ -33,6 +34,6 @@ def main():
 
       scraper.get_response(bmw["url"]).make2soup().simple("html.parser")
       hohoniku.tver(scraper.soup)
-      flfl.set_tmp_dict(scraper.url, variable.storage_dir, bmw['header']).append_contents()
+      flud.set_tmp_dict(scraper.url, fsv.storage_dir, bmw['header']).append_contents()
 
-  download.kkk(flfl, time)
+  download.kkk(flud, time)

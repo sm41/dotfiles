@@ -65,6 +65,10 @@ def single_match(pgm_list, optional_arument:parse.Parse_Arg):
   elif len(pgm_list) >= 2:
     if not optional_arument.fftt:
       print('+---'*32)
+
+      day_one = ''
+      day_two = ''
+
       for pgm_status in pgm_list:
         srx = {
           'ft' :        pgm_status['ft'],
@@ -73,6 +77,13 @@ def single_match(pgm_list, optional_arument:parse.Parse_Arg):
           'time':    f"{pgm_status['start'][0:2]}:{pgm_status['start'][2:4]}-{pgm_status['end'][0:2]}:{pgm_status['end'][2:4]}",
           'title':      pgm_status['title']
         }
+        day_one = srx['day']
+
+        if day_one != day_two:
+          day_two = day_one
+          print('■■■■'*36)
+
+
         print(srx)
       print('+---'*32)
       print(f"📢 Result {len(pgm_list)} Programs")
@@ -99,7 +110,7 @@ def ddwwnn(pgm_list):
   for dl_dict in pgm_list:
     fst = download.Fast_Forward(dl_dict)
 
-    fst.dl(xrat)
+    fst.download_by_ffmpeg(xrat)
     fst.select_audio_format(fst.ffmpeg_dl[-1], "aac")
     fst.select_container_format(fst.ffmpeg_af[-1], "mp4")
 

@@ -1,6 +1,7 @@
 from sys import argv
+from bs4 import BeautifulSoup
+from pathlib import Path
 from mytool import ctrl_string as cs, ctrl_path as cp, ctrl_date as cd
-
 
 class Set_Variable:
   def __init__(self):
@@ -14,7 +15,7 @@ class Set_Variable:
 
 
 class Set_Metadata:
-  def __init__(self, soup):
+  def __init__(self, soup:BeautifulSoup):
 
     JJJ = cs.File_Tool()
     LLL = cd.Date()
@@ -27,11 +28,11 @@ class Set_Metadata:
     self.date    = LLL.change_format(item_obj.pubDate.string, "%a, %d %b %Y %H:%M:%S %z", "%Y-%m-%d").formatted_date
     self.img     = root_obj.image.url.string.split('?')[0]
     self.url     = item_obj.enclosure.attrs['url'].split('?')[0]
-    self.ext     = JJJ.get_ext(self.url)
+    self.ext     = Path(self.url).suffix
     self.name    = JJJ.byte_count(f"[Podcast]_{self.series}_{self.date}_{self.episode}")
 
 
-class Check:
+class Check_Argument:
   def __init__(self):
     self.reserve_list: list[dict] = []
 

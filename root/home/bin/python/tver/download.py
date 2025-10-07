@@ -45,10 +45,10 @@ class Set_Metadata:
     self.basename = cs.File_Tool.zen2han(Path(filename).stem)
 
 
-def kkk(flfl:func.Line_Up_Contents, time:cd.Date):
+def kkk(flud:func.Line_Up_Contents, time:cd.Date):
   today_dl_lists  = []
 
-  for kkk in flfl.contents_list:
+  for kkk in flud.contents_list:
     jsondata = Set_Metadata()
     jsondata.get_metadata(kkk['url'], kkk['down_dir'], kkk['header'])
 

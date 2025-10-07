@@ -6,6 +6,8 @@ class Set_Variable:
   def __init__(self):
     self.parts  = parse.urlparse(argv[1])
 
+
+class dl:
   def ytdlp(self, paths, url):
     self.method = [
       "yt-dlp",

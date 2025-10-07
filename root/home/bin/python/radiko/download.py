@@ -15,7 +15,7 @@ class Fast_Forward:
     self.title      = dict['title']
 
 
-  def dl(self, authtoken):
+  def download_by_ffmpeg(self, authtoken):
     self.ffmpeg_dl = [
       "ffmpeg",
         "-loglevel", "warning",

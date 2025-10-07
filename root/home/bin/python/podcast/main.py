@@ -6,7 +6,7 @@ import func, tenpai
 def main():
   cs.Argument.check_arg(argv[1])
   variable = func.Set_Variable()
-  branch   = func.Check()
+  branch   = func.Check_Argument()
   time     = cd.Date().yesterday(1)
 
   if variable.arg == "dow":

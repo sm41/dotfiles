@@ -1,5 +1,4 @@
-from pathlib import Path
-from sys     import exit
+from sys  import exit
 import unicodedata
 
 class Argument:
@@ -33,14 +32,6 @@ class File_Tool:
     z2h_digit = str.maketrans(z_digit, h_digit)
     output    = input.translate(z2h_digit)
     return output
-
-  @staticmethod
-  def get_basename(input):
-    return Path(input).stem
-
-  @staticmethod
-  def get_ext(input):
-    return Path(input).suffix
 
 
 def line_up_dict(some_dict:dict):

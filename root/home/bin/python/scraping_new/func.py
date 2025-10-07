@@ -2,11 +2,11 @@ import yaml
 from pathlib import Path
 import inspect
 import requests
-from mytool import ctrl_path
+from mytool import ctrl_path as cp
 
 
 def get_yaml_path():
-  lp = ctrl_path.local_data("scraping.yaml")
+  lp = cp.local_data("scraping.yaml")
 
   state_file_PATH = lp.local_data_path
   return state_file_PATH

@@ -6,17 +6,18 @@ from mytool import ctrl_string as cs, ctrl_path as cp
 def main():
   cs.Argument.check_arg(argv[1])
   variable = func.Set_Variable()
-  lp = cp.Storage("@ph")
+  ccc      = func.dl()
+  lp       = cp.Storage("@ph")
 
   if variable.parts.path == "/view_video.php":
-    variable.ytdlp(str(lp.storage_dir), argv[1])
+    ccc.ytdlp(str(lp.storage_dir), argv[1])
 
   elif variable.parts.path.startswith(("/model", "/pornstar")):
-    variable.ytdlp(str(lp.storage_dir) + variable.parts.path, argv[1] + "/videos/upload")
+    ccc.ytdlp(str(lp.storage_dir) + variable.parts.path, argv[1] + "/videos/upload")
 
   else:
     print("Invailed Argment!")
     exit()
 
-  run(variable.method)
+  run(ccc.method)
 

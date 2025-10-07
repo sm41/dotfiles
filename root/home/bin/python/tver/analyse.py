@@ -1,5 +1,5 @@
 
-class Anlys:
+class Anlys_Argument:
   def __init__(self):
     self.result_list = []
 
