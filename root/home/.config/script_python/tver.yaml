@@ -2,6 +2,7 @@
 
 _common:
   - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_docment "[ドキュメンタリ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
   - &header_drama   "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
   - &header_house   "[住まい]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
   - &header_inform  "[情報]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
@@ -11,12 +12,27 @@ _http:
   header : *header_base
 
 
-# inform:
+# template:
+#   title  : 番組名
+#   url    : https://tver.jp/series/srp080hnd7
+#   dow    : [日,月,火,水,木,金,土]
+#   header : *header_base
+
+
+# inform
 gacchiri:
   title  : がっちりマンデー!!
   url    : https://tver.jp/series/srgphhvnph
   dow    : [日]
   header : *header_inform
+
+
+# docment
+jounetu:
+  title  : 情熱大陸
+  url    : https://tver.jp/series/srz38rt0a3
+  dow    : [日]
+  header : *header_docment
 
 
 # variety
@@ -54,75 +70,99 @@ sugoi:
 
 
 # drama:
-# "19":
-#   title  : 19番目のカルテ
-#   url    : https://tver.jp/series/sryqn6v5zpo
-#   dow    : [日]
-#   header : *header_drama
 
-# asayama:
-#   title  : こんばんは、朝山家です。
-#   url    : https://tver.jp/series/srjibm6acr
-#   dow    : [日]
-#   header : *header_drama
-
-price:
-  title  : DOCTOR PRICE
-  url    : https://tver.jp/series/sr0s4lfvfa5
-  dow    : [日]
+butai:
+  title  : もしもこの世が舞台なら、楽屋はどこにあるのだろう
+  url    : https://tver.jp/series/srgx9c7kxa
+  dow    : [水]
   header : *header_drama
 
-iihi:
-  title  : 明日はもっと、いい日になる
-  url    : https://tver.jp/series/src5g55gv1d
+reido:
+  title  : 絶対零度～情報犯罪緊急捜査～
+  url    : https://tver.jp/series/srawphp51p
   dow    : [月]
   header : *header_drama
 
-kousoku:
-  title  : 僕達はまだその星の校則を知らない
-  url    : https://tver.jp/series/sr44lnyslx
+rope:
+  title  : シナントロープ
+  url    : https://tver.jp/series/srxvrzcpmm
   dow    : [月]
   header : *header_drama
 
-stingers:
-  title  : スティンガース 警視庁おとり捜査検証室
-  url    : https://tver.jp/series/sr69w1h1ekm
+suijo:
+  title  : 新東京水上警察
+  url    : https://tver.jp/series/srlkrku89l
   dow    : [火]
   header : *header_drama
 
-# yuukai:
-#   title  : 誘拐の日
-#   url    : https://tver.jp/series/srsotysrjz2
-#   dow    : [火]
-#   header : *header_drama
+anta:
+  title  : じゃあ、あんたが作ってみろよ
+  url    : https://tver.jp/series/srp2094kb1
+  dow    : [火]
+  header : *header_drama
 
-ssbc:
-  title  : 大追跡～警視庁ＳＳＢＣ強行犯係～
-  url    : https://tver.jp/series/srx46vrn38v
+escape:
+  title  : ESCAPE それは誘拐のはずだった
+  url    : https://tver.jp/series/srdtg14ciy
   dow    : [水]
   header : *header_drama
 
-saigo:
-  title  : 最後の鑑定人
-  url    : https://tver.jp/series/srnmgdpbnk5
-  dow    : [水]
+fake:
+  title  : フェイクマミー
+  url    : https://tver.jp/series/srldjzs4z6
+  dow    : [金]
   header : *header_drama
 
-kekkonn:
-  title  : しあわせな結婚
-  url    : https://tver.jp/series/srje7d6tzp
+kamisama:
+  title  : 小さい頃は、神様がいて
+  url    : https://tver.jp/series/srare35roj
   dow    : [木]
   header : *header_drama
 
-# dope:
-#   title  : DOPE 麻薬取締部特捜課
-#   url    : https://tver.jp/series/sr3b3odx0x1
-#   dow    : [金]
-#   header : *header_drama
-
-housoukyoku:
-  title  : 放送局占拠
-  url    : https://tver.jp/series/srxmr1z44t
+iiwaru:
+  title  : 良いこと悪いこと
+  url    : https://tver.jp/series/sr97rekpee
   dow    : [土]
   header : *header_drama
 
+royal:
+  title  : ザ・ロイヤルファミリー
+  url    : https://tver.jp/series/srnp85c27z
+  dow    : [日]
+  header : *header_drama
+
+boku:
+  title  : ぼくたちん家
+  url    : https://tver.jp/series/sr62ncyo3g
+  dow    : [日]
+  header : *header_drama
+
+rondo:
+  title  : 終幕のロンド ―もう二度と、会えないあなたに―
+  url    : https://tver.jp/series/sr57a1hgo6
+  dow    : [月]
+  header : *header_drama
+
+coach:
+  title  : コーチ
+  url    : https://tver.jp/series/srduqazhi7
+  dow    : [金]
+  header : *header_drama
+
+# template:
+#   title  : 番組名
+#   url    : https://tver.jp/series/srp080hnd7
+#   dow    : [日,月,火,水,木,金,土]
+#   header : *header_base
+
+# template:
+#   title  : 番組名
+#   url    : https://tver.jp/series/srp080hnd7
+#   dow    : [日,月,火,水,木,金,土]
+#   header : *header_base
+
+# template:
+#   title  : 番組名
+#   url    : https://tver.jp/series/srp080hnd7
+#   dow    : [日,月,火,水,木,金,土]
+#   header : *header_base

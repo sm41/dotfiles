@@ -1,4 +1,3 @@
-from sys import exit
 from mytool import ctrl_path as cp, ctrl_date as cd
 
 class Set_Variable:
@@ -28,4 +27,3 @@ class Time:
         hour -= 24
 
     return f"{hour:02}{minute:02}"
-

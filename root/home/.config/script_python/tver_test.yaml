@@ -1,0 +1,34 @@
+# https://tver.jp/
+
+_common:
+  - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_docment "[ドキュメンタリ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_drama   "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
+  - &header_house   "[住まい]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_inform  "[情報]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_variety "[バラエティ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+
+_http:
+  header : *header_base
+
+
+alpha:
+  title  : 美レガシー
+  url    : https://tver.jp/series/srpwo4zt5q
+  dow    : [日,月,火,水,木,金,土]
+  header : *header_docment
+
+beta:
+  title  : 風景の足跡
+  url    : https://tver.jp/series/srp080hnd7
+  dow    : [日,月,火,水,木,金,土]
+  header : *header_docment
+
+fuga:
+  title  : 港時間
+  url    : https://tver.jp/series/sr0k9et8da
+  dow    : [日,月,火,水,木,金,土]
+  header : *header_docment
+
+
+

@@ -3,17 +3,27 @@
 #   station : lfr
 #   dow     : [日,月,火,水,木,金,土]
 
-haraichi:
-  title   : ハライチ
+# haraichi:
+#   title   : ハライチ
+#   station : tbs
+#   dow     : [日,月,火,水,木,金,土]
+
+# rocket:
+#   title   : ロケットマン
+#   station : yfm
+#   dow     : [日,月,火,水,木,金,土]
+
+# disco:
+#   title   : radio.+disco
+#   station : int
+#   dow     : [日,月,火,水,木,金,土]
+
+nemu:
+  title   : ねむチキ
   station : tbs
   dow     : [日,月,火,水,木,金,土]
 
-rocket:
-  title   : ロケットマン
-  station : yfm
-  dow     : [日,月,火,水,木,金,土]
-
-disco:
-  title   : radio.+disco
-  station : int
+taxi:
+  title   : かまいたちのヘイ！タクシー！
+  station : tbs
   dow     : [日,月,火,水,木,金,土]

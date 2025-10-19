@@ -1,0 +1,13 @@
+
+# https://www.podbean.com/site/search/index
+
+
+haraichi:
+  title : ハライチのターン!
+  url   : https://feeds.megaphone.fm/TBS4550274867
+  dow   : [日,月,火,水,木,金,土]
+
+nemuchiki:
+  title : TBSラジオ「ねむチキ」
+  url   : https://feeds.megaphone.fm/TBS6368995423
+  dow   : [日,月,火,水,木,金,土]

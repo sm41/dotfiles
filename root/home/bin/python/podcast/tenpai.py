@@ -20,7 +20,7 @@ def dl(source:func.Set_Metadata, tmp_dir):
   return download
 
 
-def ddwwnn(branch:func.Check, variable:func.Set_Variable):
+def ddwwnn(branch:func.Check_Argument, variable:func.Set_Variable):
 
   for ttt in branch.reserve_list:
     qqq    = scraping.Scrp()
