@@ -20,17 +20,7 @@ do
   Intermediate="${FENNEC/${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}}"
   processed_path="${HOME}${Intermediate/"/default-release"/${PROFILE_DIR}}"
 
-  if    [[ ! -e "${processed_path}"  ]] ; then
-    ln -s "${FENNEC}"  "${processed_path}"
-
-  elif  [[ -L "${processed_path}"  ]] ; then
-    ln -s -f "${FENNEC}"  "${processed_path}"
-
-  elif  [[ ! -L "${processed_path}"  ]] ; then
-    ln -s -b "${FENNEC}"  "${processed_path}"
-
-  fi
-
-  # echo "${FENNEC}  ===>  ${processed_path}"
+  # ln -s -f "${FENNEC}"  "${processed_path}"
+  echo "${FENNEC}  ===>  ${processed_path}"
 
 done < <( find "${GIT_TOPLEVEL}${ROOT_DIR}${FHS_DIR}${ORIGIN_DIR}" -type f | sort)

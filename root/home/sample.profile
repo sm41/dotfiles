@@ -58,11 +58,13 @@ function server(){
 
 }
 
-share
+
 
 
 if   [[ "${HOSTNAME}" =~ ^.*desktop$ ]] ; then
+  share
   desktop
 elif [[ "${HOSTNAME}" =~ ^.*server$ ]] ; then
+  share
   server
 fi

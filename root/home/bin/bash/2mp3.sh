@@ -1,7 +1,6 @@
 # !/bin/bash
 
 input_file="$1"
-
 filename=${input_file##*/}
 basename=${filename%.*}
 # ext=${filename##*.}
