@@ -1,17 +1,14 @@
-# desktop
 
-# tool
 curl
 
 
 
-# media
 mpv
 audacious
 
 
-
-
+git
+samba
 
 #ffmpeg
 # fonts-ipafont

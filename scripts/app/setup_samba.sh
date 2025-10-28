@@ -1,10 +1,6 @@
 # !/bin/bash
 set -eu
 
-sudo apt-get update
-sudo apt-get install samba
-
-
 # input samba user
 echo    "[ 📢  create {samba user} ]"
 read -p "・Input \"samba user\"  ==>  "  SAMBA_USER

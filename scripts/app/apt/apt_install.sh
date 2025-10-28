@@ -14,7 +14,7 @@ else
 fi
 
 work_path="$(realpath $(dirname "$0"))"
-input_file="$(find ${work_path}  -name ${type}   -not \( -path $0 \)  -type f  -printf "%f\n")"
+input_file="$(find ${work_path} -name ${type} -not \( -path $0 \) -type f -printf "%f\n")"
 
 
 # sudo apt-get update

@@ -4,7 +4,7 @@ set -eu
 input_file="requirements.txt"
 work_path="$(realpath $(dirname "$0"))"
 
-mkdir --p "${HOME}/.local/bin"
+mkdir -p "${HOME}/.local/bin"
 
 curl "https://bootstrap.pypa.io/get-pip.py" -o get-pip.py
 python3 get-pip.py --user

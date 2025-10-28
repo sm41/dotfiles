@@ -52,9 +52,8 @@ GENERATE_CRED_PATH="${FHS_ORIGIN_DIR}/${credentials_file}"
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   echo ${TEMPLATE_CONF_PATH}
-  echo ${TEMPLATE_CRED_PATH}
-
   echo ${GENERATE_CONF_PATH}
+  echo ${TEMPLATE_CRED_PATH}
   echo ${GENERATE_CRED_PATH}
 
   # envsubst < "${TEMPLATE_CONF_PATH}" | sudo tee "${GENERATE_CONF_PATH}" > /dev/null
