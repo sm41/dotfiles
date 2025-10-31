@@ -3,7 +3,7 @@ set -eu
 
 # variable
 WORK_PATH="$(realpath $(dirname "$0"))"
-arg_str="$1"
+arg_str=$(realpath "$1")
 old_ext=png
 new_ext=jpg
 hogefuga="_[encoded]"
@@ -29,26 +29,35 @@ _EOT_
 }
 
 function check_argment(){
+  arg_str="$(realpath "$1")"
+  input_path="$2"
+
+  input_dirname="${input_path%/*}"
+  input_basename="${input_path##*/}"
+  input_filename="${input_basename%.*}"
+  input_extention="${input_basename##*.}"
+  output_filename="$(zen2han <<< ${input_filename})"
+
   if [[ -d "${arg_str}" ]] ; then
     if [[ "${arg_str}" =~ ^.*/$ ]] ; then
       arg_str="${arg_str/%\//}"
     fi
 
-    if [[ ${arg_str} =~ ^(.*)/(.+)$ ]]; then
-      base_path="${BASH_REMATCH[1]}"
-      old_dir="${BASH_REMATCH[2]}"
-      new_dir="$(zen2han <<< "${old_dir}${hogefuga}")"
+    parent_dir="${input_dirname}"
+    child_dir="${parent_dir/${arg_str}/}"
 
-      old_path="${base_path}/${old_dir}"
-      new_path="${base_path}/${new_dir}"
-      mkdir -p "${new_path}"
-    fi
+    old_base_dir="${arg_str}"
+    new_base_dir="$(zen2han <<< "${old_base_dir}${hogefuga}")"
 
-  elif [[ -f "${arg_str}" && "${arg_str}" =~ ".${old_ext}"$ ]] ; then
-    if [[ ${arg_str} =~ ^(.*)/(.+)$ ]]; then
-      base_path="${BASH_REMATCH[1]}"
-      old_path="${base_path}"
-      new_path="${base_path}"
+    before_dir="${old_base_dir}${child_dir}"
+    after_dir="${new_base_dir}${child_dir}"
+
+    mkdir -p "${after_dir}"
+
+  elif [[ -f "${arg_str}" ]] ; then
+    if [[ "${arg_str}" =~ ^(.*)/(.+)\."${old_ext}"$ ]] ; then
+      before_dir="${input_dirname}"
+      after_dir="${input_dirname}"
     fi
 
   else
@@ -59,26 +68,20 @@ function check_argment(){
 }
 
 function main(){
-  while read inputfile
+  while read input_path
   do
-    filename="${inputfile##*/}"
-    old_file="${filename%.*}"
-    new_file="$(zen2han <<< "${old_file}")"
+    check_argment "${arg_str}" "${input_path}"
 
     ffmpeg \
       -nostdin \
       -loglevel warning \
-      -i "${old_path}/${old_file}.${old_ext}" \
-          "${new_path}/${new_file}.${new_ext}"
-
-    # echo "${old_path}/${old_file}.${old_ext}"
-    # echo "${new_path}/${new_file}.${new_ext}"
+      -i  "${before_dir}/${input_filename}.${input_extention}" \
+          "${after_dir}/${output_filename}.${new_ext}"
 
   done < <(find "${arg_str}" -type f -name "*.${old_ext}" | sort -V)
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
   check_number_of_argment 1 "$#"
-  check_argment
   main
 fi
