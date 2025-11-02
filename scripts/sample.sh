@@ -2,7 +2,7 @@
 set -eu
 
 
-
+echo "hoge"
 
 
 
