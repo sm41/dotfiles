@@ -3,7 +3,7 @@ set -eu
 
 
 echo "hoge"
+WORKSPACE="${GITHUB_WORKSPACE:-$(pwd)}"
 
 
-
-bash "${GITHUB_WORKSPACE}/scripts/system/cp/cp_home_profile.sh"
+bash "${WORKSPACE}/scripts/system/cp/cp_home_profile.sh"
