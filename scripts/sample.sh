@@ -2,7 +2,7 @@
 set -eu
 
 
-echo "${pwd}"
+echo ${pwd}
 WORKSPACE="${GITHUB_WORKSPACE:-$(pwd)}"
 
 
