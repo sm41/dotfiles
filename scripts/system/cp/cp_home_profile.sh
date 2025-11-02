@@ -11,8 +11,8 @@ TEMP_PATH="${GIT_TOPLEVEL}${ROOT_FHS_DIR}"
 
 while read USER_PROFILE
 do
-  echo "${TEMP_PATH}/sample${USER_PROFILE}"
-  # cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
+  # echo "${TEMP_PATH}/sample${USER_PROFILE}"
+  cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
 
 done << edf
   .profile
