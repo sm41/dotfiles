@@ -5,7 +5,7 @@ curl
 
 mpv
 audacious
-
+flameshot
 
 git
 samba

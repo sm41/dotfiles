@@ -81,7 +81,7 @@ def single_match(pgm_list, optional_arument:parse.Parse_Arg):
 
         if day_one != day_two:
           day_two = day_one
-          print('■■■■'*36)
+          print('----'*36)
 
 
         print(srx)

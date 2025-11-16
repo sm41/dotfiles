@@ -14,7 +14,7 @@
 --paths home:${CLIENT_NETWORK_STORAGE_misc}/misc
 
 --output "%(title)s_[%(id)s].%(ext)s"
---format "(bv[vcodec !~= 'vp0?9']/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
+--format "(bv[vcodec !~= 'vp0?9'][height<=1080]/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
 --merge-output-format "mp4"
 
 # --audio-multistreams

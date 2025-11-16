@@ -5,12 +5,6 @@ set -eu
 # https://docs.docker.com/engine/install/ubuntu/
 
 
-# Run the following command to uninstall all conflicting packages:
-# for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
-# do
-#   sudo apt-get remove $pkg
-# done
-
 
 # Run the following command to uninstall all conflicting packages:
 while read -r pkg;
@@ -26,6 +20,8 @@ done <<EOF
   runc
 EOF
 
+
+# 1.Set up Docker's apt repository.
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
@@ -40,6 +36,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
+# 2.Install the Docker packages.
 # To install the latest version, run:
 sudo apt-get install \
   docker-ce \
@@ -48,6 +45,6 @@ sudo apt-get install \
   docker-buildx-plugin \
   docker-compose-plugin
 
-# Verify that the Docker Engine installation is successful by running the hello-world image.
+# 3.Verify that the Docker Engine installation is successful by running the hello-world image.
 sudo docker run hello-world
 
