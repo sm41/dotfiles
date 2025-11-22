@@ -18,6 +18,7 @@ def ytdlp(paths, id, ext, url):
       "--console-title",
       "--embed-subs",
       "--paths",  str(paths),
+      "--format", "bestvideo + bestaudio",
       "--output", f"{id}.{ext}",
     url
   ]

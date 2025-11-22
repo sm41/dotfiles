@@ -13,6 +13,7 @@ class dl:
       "yt-dlp",
         "--trim-filenames", "240",
         "--paths",  paths,
+        "--format", "bestvideo + bestaudio",
         "--output", f"[%(upload_date>%Y-%m-%d)s]_[%(id)s]_%(title)s.%(ext)s",
       url
     ]

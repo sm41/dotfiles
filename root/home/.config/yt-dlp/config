@@ -7,18 +7,37 @@
 --embed-chapters
 --embed-subs
 
+# thumbnail
 --convert-thumbnails 'jpg'
---sub-langs "ja.*, jp, -live_chat"
 
+# PATH
 --paths temp:${CLIENT_NETWORK_STORAGE_misc}/.temp
 --paths home:${CLIENT_NETWORK_STORAGE_misc}/misc
 
 --output "%(title)s_[%(id)s].%(ext)s"
---format "(bv[vcodec !~= 'vp0?9'][height<=1080]/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
 --merge-output-format "mp4"
 
-# --audio-multistreams
+# --format "(bv[vcodec !~= 'vp0?9'][height<=1080]/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
+# --format "(bv[vcodec !~= 'vp0?9'][height<=1440]/bv) + (ba[acodec ~= 'mp?4a?'][language ~= ja]?) + (ba[acodec ~= 'mp?4a?'][language ~= en-US]?) + (ba[acodec ~= 'mp?4a?'][format_note *= original]?) / best*"
+--format "(bv[vcodec !~= 'vp0?9'][height<=1440]) +
+          (
+            (
+              (ba[acodec ~= 'mp?4a?'][language ~= ja]?) +
+              (ba[acodec ~= 'mp?4a?'][language ~= en-US]?)
+            )
+            / (ba[acodec ~= 'mp?4a?'])
+          )
+          / best*"
+
+
+# aduio
+--audio-multistreams
+
+# video
 # --video-multistreams
+
+# subtitle
+--sub-langs "ja.*, jp, -live_chat"
 
 --replace-in-metadata "series"   " "   "_"
 --replace-in-metadata "series"   "　"   "_"
