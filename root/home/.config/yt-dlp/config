@@ -2,6 +2,9 @@
 # https://scrapbox.io/Mijinko/yt-dlp_--format
 
 # --concurrent-fragments 5
+
+
+# embed
 --embed-thumbnail
 # --embed-metadata
 --embed-chapters
@@ -18,7 +21,7 @@
 --merge-output-format "mp4"
 
 # --format "(bv[vcodec !~= 'vp0?9'][height<=1080]/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
-# --format "(bv[vcodec !~= 'vp0?9'][height<=1440]/bv) + (ba[acodec ~= 'mp?4a?'][language ~= ja]?) + (ba[acodec ~= 'mp?4a?'][language ~= en-US]?) + (ba[acodec ~= 'mp?4a?'][format_note *= original]?) / best*"
+# (ba[acodec ~= 'mp?4a?'][format_note *= original]?)
 --format "(bv[vcodec !~= 'vp0?9'][height<=1440]) +
           (
             (
@@ -39,6 +42,7 @@
 # subtitle
 --sub-langs "ja.*, jp, -live_chat"
 
+# substitute
 --replace-in-metadata "series"   " "   "_"
 --replace-in-metadata "series"   "　"   "_"
 

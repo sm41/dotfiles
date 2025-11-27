@@ -4,8 +4,9 @@ _common:
   - &header_base    "[%(webpage_url_domain)s]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
   - &header_docment "[ドキュメンタリ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
   - &header_drama   "[ドラマ]_%(series)s_%(episode)s.%(ext)s"
-  - &header_house   "[住まい]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
-  - &header_inform  "[情報]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_house      "[住まい]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_inform       "[情報]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
+  - &header_news      "[ニュース]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
   - &header_variety "[バラエティ]_[%(channel)s]_[%(release_date>%Y-%m-%d)s]_%(series)s_%(episode)s.%(ext)s"
 
 _http:
@@ -19,7 +20,17 @@ _http:
 #   header : *header_base
 
 
+# news
+
+wbs:
+  title  : WBS（ワールドビジネスサテライト）
+  url    : https://tver.jp/series/srx2o7o3c8
+  dow    : [月,火,水,木,金]
+  header : *header_news
+
+
 # inform
+
 gacchiri:
   title  : がっちりマンデー!!
   url    : https://tver.jp/series/srgphhvnph
@@ -28,14 +39,16 @@ gacchiri:
 
 
 # docment
-jounetu:
-  title  : 情熱大陸
-  url    : https://tver.jp/series/srz38rt0a3
-  dow    : [日]
-  header : *header_docment
+
+# jounetu:
+#   title  : 情熱大陸
+#   url    : https://tver.jp/series/srz38rt0a3
+#   dow    : [日]
+#   header : *header_docment
 
 
 # variety
+
 moyasama:
   title  : モヤモヤさまぁ～ず2
   url    : https://tver.jp/series/sr9an4t9ow
@@ -48,14 +61,9 @@ samasama:
   dow    : [土]
   header : *header_variety
 
-life:
-  title  : ララLIFE
-  url    : https://tver.jp/series/srpg7xtokz
-  dow    : [金]
-  header : *header_variety
-
 
 # house:
+
 toiro:
   title  : 住人十色
   url    : https://tver.jp/series/srxbqmdpvs
@@ -71,21 +79,9 @@ sugoi:
 
 # drama:
 
-butai:
-  title  : もしもこの世が舞台なら、楽屋はどこにあるのだろう
-  url    : https://tver.jp/series/srgx9c7kxa
-  dow    : [水]
-  header : *header_drama
-
 reido:
   title  : 絶対零度～情報犯罪緊急捜査～
   url    : https://tver.jp/series/srawphp51p
-  dow    : [月]
-  header : *header_drama
-
-rope:
-  title  : シナントロープ
-  url    : https://tver.jp/series/srxvrzcpmm
   dow    : [月]
   header : *header_drama
 
@@ -113,12 +109,6 @@ fake:
   dow    : [金]
   header : *header_drama
 
-kamisama:
-  title  : 小さい頃は、神様がいて
-  url    : https://tver.jp/series/srare35roj
-  dow    : [木]
-  header : *header_drama
-
 iiwaru:
   title  : 良いこと悪いこと
   url    : https://tver.jp/series/sr97rekpee
@@ -128,12 +118,6 @@ iiwaru:
 royal:
   title  : ザ・ロイヤルファミリー
   url    : https://tver.jp/series/srnp85c27z
-  dow    : [日]
-  header : *header_drama
-
-boku:
-  title  : ぼくたちん家
-  url    : https://tver.jp/series/sr62ncyo3g
   dow    : [日]
   header : *header_drama
 
@@ -149,11 +133,11 @@ coach:
   dow    : [金]
   header : *header_drama
 
-# template:
-#   title  : 番組名
-#   url    : https://tver.jp/series/srp080hnd7
-#   dow    : [日,月,火,水,木,金,土]
-#   header : *header_base
+esper:
+  title  : ちょっとだけエスパー
+  url    : https://tver.jp/series/srm706pd6g
+  dow    : [火]
+  header : *header_drama
 
 # template:
 #   title  : 番組名
