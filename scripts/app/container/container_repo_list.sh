@@ -8,5 +8,5 @@ https://github.com/l3tnun/docker-mirakurun-epgstation
 https://github.com/qbittorrent/docker-qbittorrent-nox
 
 # tt-rss
-https://gitlab.tt-rss.org/tt-rss/tt-rss
+https://github.com/tt-rss/tt-rss
 
