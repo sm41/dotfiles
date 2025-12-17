@@ -105,7 +105,7 @@ user_pref("network.IDN_show_punycode",true);               // ホモグラフ攻
 user_pref("network.prefetch-next",false);                  // Prefetch の有効化
 
 user_pref("network.trr.mode",3);                           // "Trusted Recursive Resolver" の挙動 ( 0: defaultでTRRを使わない / 1: より速い方を使用 / 2: TRRを優先的に使い普通のDNSも使う / 3: TRRだけを使う )
-
+user_pref("network.protocol-handler.external.mailto",false);
 
 // "https://blog.halpas.com/archives/2938" / "https://en.wikipedia.org/wiki/Public_recursive_name_server"
 
