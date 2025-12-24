@@ -44,6 +44,7 @@ user_pref("browser.search.openintab",true);                // 検索バー を�
 user_pref("browser.sessionstore.max_tabs_undo",50);        // 閉じたタブ を記憶できる数
 user_pref("browser.send_pings.require_same_host",true);    // ホストが一致する場合にのみpingを送信（同じWebサイト）
 
+user_pref("browser.tabs.splitView.enabled",true);        //
 user_pref("browser.tabs.closeWindowWithLastTab",false);    // 最後のタブを閉じたときブラウザも終了する
 user_pref("browser.tabs.loadBookmarksInTabs",true);        // ブックマークを新しいタブで開く
 user_pref("browser.tabs.loadInBackground",false);          // オプション  ->  一般  ->  タブ  ->  リンクを新しいタブで開く時、すぐにそのタブに切り替える
