@@ -5,9 +5,5 @@ Documentation = "https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFil
 # unitname-Mon@env_arg.service
 
 [Service]
-# Environment = "DIRECTORY_NAME=repository/test_dev/src/python/tver"
-# Environment = "FILE_NAME=tver_get_newer.py"
-
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/${DIRECTORY_NAME}/${FILE_NAME}
-# ExecStart = /usr/bin/python3   %h/repository/test_dev/src/python/tver/tver_get_newer.py
+ExecStart = /usr/bin/python3   %h/repository/test_dev/src/python/tver/tver_get_special.py
