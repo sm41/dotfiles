@@ -25,15 +25,15 @@ jobs:
             run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
 
 
-    makefile:
-        if: false
-        runs-on: ubuntu-latest
-        env:
-          HOSTNAME: fuga-server
+    # makefile:
+    #     if: false
+    #     runs-on: ubuntu-latest
+    #     env:
+    #       HOSTNAME: fuga-server
 
-        steps:
-          - name: checkout
-            uses: actions/checkout@v4
+    #     steps:
+    #       - name: checkout
+    #         uses: actions/checkout@v4
 
-          - name: test
-            run:  setup.sh
+    #       - name: test
+    #         run:  setup.sh

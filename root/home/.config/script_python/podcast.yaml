@@ -7,10 +7,10 @@ elekata:
   url   : https://feeds.megaphone.fm/TBS2752996527
   dow   : [土]
 
-rocket:
-  title : ロケットマンショー
-  url   : https://feeds.megaphone.fm/rocketmanshow
-  dow   : [火]
+# rocket:
+#   title : ロケットマンショー
+#   url   : https://feeds.megaphone.fm/rocketmanshow
+#   dow   : [火]
 
 hakuzan:
   title : 問わず語りの神田伯山
