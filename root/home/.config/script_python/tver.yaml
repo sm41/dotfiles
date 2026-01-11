@@ -33,11 +33,11 @@ wbs:
 
 # inform
 
-gacchiri:
-  title  : がっちりマンデー!!
-  url    : https://tver.jp/series/srgphhvnph
-  dow    : [日]
-  header : *header_inform
+# gacchiri:
+#   title  : がっちりマンデー!!
+#   url    : https://tver.jp/series/srgphhvnph
+#   dow    : [日]
+#   header : *header_inform
 
 
 # docment
@@ -51,104 +51,33 @@ gacchiri:
 
 # variety
 
-moyasama:
-  title  : モヤモヤさまぁ～ず2
-  url    : https://tver.jp/series/sr9an4t9ow
-  dow    : [土]
-  header : *header_variety
+# moyasama:
+#   title  : モヤモヤさまぁ～ず2
+#   url    : https://tver.jp/series/sr9an4t9ow
+#   dow    : [土]
+#   header : *header_variety
 
-samasama:
-  title  : さまぁ～ず×さまぁ～ず BS さまぁ～ず
-  url    : https://tver.jp/series/srrtg4d0mx
-  dow    : [土]
-  header : *header_variety
+# samasama:
+#   title  : さまぁ～ず×さまぁ～ず BS さまぁ～ず
+#   url    : https://tver.jp/series/srrtg4d0mx
+#   dow    : [土]
+#   header : *header_variety
 
 
 # house:
 
-toiro:
-  title  : 住人十色
-  url    : https://tver.jp/series/srxbqmdpvs
-  dow    : [土]
-  header : *header_house
+# toiro:
+#   title  : 住人十色
+#   url    : https://tver.jp/series/srxbqmdpvs
+#   dow    : [土]
+#   header : *header_house
 
-sugoi:
-  title  : となりのスゴイ家
-  url    : https://tver.jp/series/sr1s8kvhrt
-  dow    : [金]
-  header : *header_house
+# sugoi:
+#   title  : となりのスゴイ家
+#   url    : https://tver.jp/series/sr1s8kvhrt
+#   dow    : [金]
+#   header : *header_house
 
 
 # drama:
 
-# reido:
-#   title  : 絶対零度～情報犯罪緊急捜査～
-#   url    : https://tver.jp/series/srawphp51p
-#   dow    : [月]
-#   header : *header_drama
-
-# suijo:
-#   title  : 新東京水上警察
-#   url    : https://tver.jp/series/srlkrku89l
-#   dow    : [火]
-#   header : *header_drama
-
-# anta:
-#   title  : じゃあ、あんたが作ってみろよ
-#   url    : https://tver.jp/series/srp2094kb1
-#   dow    : [火]
-#   header : *header_drama
-
-# escape:
-#   title  : ESCAPE それは誘拐のはずだった
-#   url    : https://tver.jp/series/srdtg14ciy
-#   dow    : [水]
-#   header : *header_drama
-
-# fake:
-#   title  : フェイクマミー
-#   url    : https://tver.jp/series/srldjzs4z6
-#   dow    : [金]
-#   header : *header_drama
-
-# iiwaru:
-#   title  : 良いこと悪いこと
-#   url    : https://tver.jp/series/sr97rekpee
-#   dow    : [土]
-#   header : *header_drama
-
-# royal:
-#   title  : ザ・ロイヤルファミリー
-#   url    : https://tver.jp/series/srnp85c27z
-#   dow    : [日]
-#   header : *header_drama
-
-# rondo:
-#   title  : 終幕のロンド ―もう二度と、会えないあなたに―
-#   url    : https://tver.jp/series/sr57a1hgo6
-#   dow    : [月]
-#   header : *header_drama
-
-# coach:
-#   title  : コーチ
-#   url    : https://tver.jp/series/srduqazhi7
-#   dow    : [金]
-#   header : *header_drama
-
-# esper:
-#   title  : ちょっとだけエスパー
-#   url    : https://tver.jp/series/srm706pd6g
-#   dow    : [火]
-#   header : *header_drama
-
-# template:
-#   title  : 番組名
-#   url    : https://tver.jp/series/srp080hnd7
-#   dow    : [日,月,火,水,木,金,土]
-#   header : *header_base
-
-# template:
-#   title  : 番組名
-#   url    : https://tver.jp/series/srp080hnd7
-#   dow    : [日,月,火,水,木,金,土]
-#   header : *header_base
