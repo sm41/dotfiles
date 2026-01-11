@@ -24,11 +24,11 @@ _http:
 
 # news
 
-wbs:
-  title  : WBS（ワールドビジネスサテライト）
-  url    : https://tver.jp/series/srx2o7o3c8
-  dow    : [月,火,水,木,金]
-  header : *header_news
+# wbs:
+#   title  : WBS（ワールドビジネスサテライト）
+#   url    : https://tver.jp/series/srx2o7o3c8
+#   dow    : [月,火,水,木,金]
+#   header : *header_news
 
 
 # inform
