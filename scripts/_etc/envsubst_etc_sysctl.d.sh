@@ -21,7 +21,10 @@ SCRIPT_PATH="$(readlink -f "$0")"
 SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 
 # HOSTNAME="${HOSTNAME:-$(hostname)}"
-GIT_TOPLEVEL=$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)
+if ! GIT_TOPLEVEL=$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null); then
+  echo "Error: script is not inside a git repository" >&2
+  exit 1
+fi
 
 ROOT_DIR=/root
 FHS_ORIGIN_DIR=/etc/sysctl.d
