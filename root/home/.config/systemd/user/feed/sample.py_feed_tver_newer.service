@@ -6,4 +6,6 @@ Documentation = "https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFil
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/repository/test_dev/src/python/tver/tver_get_newer.py
+WorkingDirectory = %h/repository/generate_feed
+
+ExecStart = %h/.local/bin/uv   run -m src.feed_tver_newer.tver_get_newer
