@@ -1,6 +1,0 @@
-# gallery-dl
-pip-autoremove
-yt-dlp
-selenium
-plyer
-bs4
