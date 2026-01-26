@@ -5,7 +5,6 @@ set -eu
 # https://docs.docker.com/engine/install/ubuntu/
 
 
-
 # Run the following command to uninstall all conflicting packages:
 while read -r pkg;
 do
