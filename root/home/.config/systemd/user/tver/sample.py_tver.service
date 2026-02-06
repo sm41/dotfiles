@@ -6,4 +6,6 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/repository/test_dev/bin/python/tver2/tver.py  _dow
+WorkingDirectory = %h/repository/tver
+
+ExecStart = %h/.local/bin/uv   run -m tver   _dow

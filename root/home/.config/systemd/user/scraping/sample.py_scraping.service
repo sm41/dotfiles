@@ -6,4 +6,6 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/python3   %h/bin/python/scraping.py
+WorkingDirectory = %h/repository/scraping
+
+ExecStart = %h/.local/bin/uv   run -m scraping
