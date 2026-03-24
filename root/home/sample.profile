@@ -12,52 +12,52 @@ HOSTNAME="${HOSTNAME:-$(hostname)}"
 
 
 function share(){
-  # XDG
-  export  XDG_CACHE_HOME="${HOME}/.cache"
-  export XDG_CONFIG_HOME="${HOME}/.config"
-  export   XDG_DATA_HOME="${HOME}/.local/share"
-  export  XDG_STATE_HOME="${HOME}/.local/state"
+    # XDG
+    export  XDG_CACHE_HOME="${HOME}/.cache"
+    export XDG_CONFIG_HOME="${HOME}/.config"
+    export   XDG_DATA_HOME="${HOME}/.local/share"
+    export  XDG_STATE_HOME="${HOME}/.local/state"
 
-  # NetWork
-  export DESKTOP_IP_ADDRESS="192.168.1.9"
-  export  SERVER_IP_ADDRESS="192.168.1.38"
-  export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
+    # NetWork
+    export DESKTOP_IP_ADDRESS="192.168.1.9"
+    export  SERVER_IP_ADDRESS="192.168.1.38"
+    export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
 
 }
 
 function desktop(){
-  # /mnt
-  export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
-  export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
+    # /mnt
+    export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
+    export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
 
 
-  # PATH
-  export PATH="${PATH}":"${HOME}/bin/bash"
-  export PATH="${PATH}":"${HOME}/bin/python"
-  export PATH="${PATH}":"${HOME}/.local/bin"
+    # PATH
+    export PATH="${PATH}":"${HOME}/bin/bash"
+    export PATH="${PATH}":"${HOME}/bin/python"
+    export PATH="${PATH}":"${HOME}/.local/bin"
 
 
-  # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
-  # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
+    # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
+    # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
-  # python
-  export              PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}${HOME}/bin/python"
-  export          PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
-  export     PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
-  # export          PYTHONUSERBASE="${XDG_DATA_HOME}/python"
-  # export PYTHONDONTWRITEBYTECODE=1
+    # python
+    export              PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}${HOME}/bin/python"
+    export          PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
+    export     PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
+    # export          PYTHONUSERBASE="${XDG_DATA_HOME}/python"
+    # export PYTHONDONTWRITEBYTECODE=1
 
-  # export PYTHONPATH="${PYTHONPATH}":"${PYTHONUSERBASE}"
+    # export PYTHONPATH="${PYTHONPATH}":"${PYTHONUSERBASE}"
 
 }
 
 function server(){
-  # /mnt
-  export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
-  export  SERVER_LOCAL_STORAGE_rec="/mnt/local/rec"
+    # /mnt
+    export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
+    export  SERVER_LOCAL_STORAGE_rec="/mnt/local/rec"
 
-  # docker
-  export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+    # docker
+    export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 }
 
@@ -65,9 +65,9 @@ function server(){
 
 
 if   [[ "${HOSTNAME}" =~ ^.*desktop$ ]] ; then
-  share
-  desktop
+    share
+    desktop
 elif [[ "${HOSTNAME}" =~ ^.*server$ ]] ; then
-  share
-  server
+    share
+    server
 fi

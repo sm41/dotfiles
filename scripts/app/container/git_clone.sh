@@ -1,18 +1,22 @@
 # !/bin/bash
 set -eu
 
-work_path="$(realpath $(dirname "$0"))"
-input_file="container_repo_list.sh"
-
-
 # cd ${HOME}/repository
 
-while read repo_name
-do
-  [[ -z "${repo_name}" ]] && continue
-  [[ "${repo_name::1}" = "#" ]] && continue
+function main(){
+    work_path="$(realpath $(dirname "$0"))"
+    input_file="container_repo_list.sh"
 
-  # git clone "${repo_name}.git"
-  echo "${repo_name}.git"
+    while read repo_name
+    do
+        [[ -z "${repo_name}" ]] && continue
+        [[ "${repo_name::1}" = "#" ]] && continue
+        # git clone "${repo_name}.git"
+        echo "${repo_name}.git"
+    done < "${work_path}/${input_file}"
+}
 
-done < "${work_path}/${input_file}"
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+    main
+fi

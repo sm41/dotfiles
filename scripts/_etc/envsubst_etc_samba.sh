@@ -11,56 +11,63 @@ set -eu
 # -o, --output <list>  出力する列を指定します
 
 function desktop(){
-  export SAMBA_MOUNT_PATH_misc="${CLIENT_NETWORK_STORAGE_misc}"
-  export SAMBA_MOUNT_PATH_rec="${CLIENT_NETWORK_STORAGE_rec}"
+    export SAMBA_MOUNT_PATH_misc="${CLIENT_NETWORK_STORAGE_misc}"
+    export SAMBA_MOUNT_PATH_rec="${CLIENT_NETWORK_STORAGE_rec}"
 }
 
 function server(){
-  export SAMBA_MOUNT_PATH_misc="${SERVER_LOCAL_STORAGE_misc}"
-  export SAMBA_MOUNT_PATH_rec="${SERVER_LOCAL_STORAGE_rec}"
+    export SAMBA_MOUNT_PATH_misc="${SERVER_LOCAL_STORAGE_misc}"
+    export SAMBA_MOUNT_PATH_rec="${SERVER_LOCAL_STORAGE_rec}"
 }
 
-if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-  desktop
-elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-  server
-else
-  # echo "Invalid argument"
-  exit 1
-fi
 
-SCRIPT_PATH="$(readlink -f "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+function main(){
+    if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
+        desktop
+    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
+        server
+    else
+        # echo "Invalid argument"
+        exit 1
+    fi
 
-# HOSTNAME="${HOSTNAME:-$(hostname)}"
-if ! GIT_TOPLEVEL=$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null); then
-  echo "Error: script is not inside a git repository" >&2
-  exit 1
-fi
+    SCRIPT_PATH="$(readlink -f "$0")"
+    SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 
-ROOT_DIR=/root
-FHS_ORIGIN_DIR=/etc/samba
+    # HOSTNAME="${HOSTNAME:-$(hostname)}"
+    if ! GIT_TOPLEVEL=$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null); then
+        echo "Error: script is not inside a git repository" >&2
+        exit 1
+    fi
 
-config_file="smb.conf"
-credentials_file="credentials"
+    ROOT_DIR=/root
+    FHS_ORIGIN_DIR=/etc/samba
 
-temp_conf_file="template.${config_file}"
-temp_cred_file="template.${credentials_file}"
+    config_file="smb.conf"
+    credentials_file="credentials"
 
-TEMPLATE_CONF_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${temp_conf_file}"
-TEMPLATE_CRED_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${temp_cred_file}"
+    temp_conf_file="template.${config_file}"
+    temp_cred_file="template.${credentials_file}"
 
-GENERATE_CONF_PATH="${FHS_ORIGIN_DIR}/${config_file}"
-GENERATE_CRED_PATH="${FHS_ORIGIN_DIR}/${credentials_file}"
+    TEMPLATE_CONF_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${temp_conf_file}"
+    TEMPLATE_CRED_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${temp_cred_file}"
 
-# sudo mkdir -p "${FHS_ORIGIN_DIR}"
+    GENERATE_CONF_PATH="${FHS_ORIGIN_DIR}/${config_file}"
+    GENERATE_CRED_PATH="${FHS_ORIGIN_DIR}/${credentials_file}"
+
+    # sudo mkdir -p "${FHS_ORIGIN_DIR}"
+
+    if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+        echo ${TEMPLATE_CONF_PATH}
+        echo ${GENERATE_CONF_PATH}
+        echo ${TEMPLATE_CRED_PATH}
+        echo ${GENERATE_CRED_PATH}
+
+        # envsubst < "${TEMPLATE_CONF_PATH}" | sudo tee "${GENERATE_CONF_PATH}" > /dev/null
+        # envsubst < "${TEMPLATE_CRED_PATH}" | sudo tee "${GENERATE_CRED_PATH}" > /dev/null
+    fi
+}
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-  echo ${TEMPLATE_CONF_PATH}
-  echo ${GENERATE_CONF_PATH}
-  echo ${TEMPLATE_CRED_PATH}
-  echo ${GENERATE_CRED_PATH}
-
-  # envsubst < "${TEMPLATE_CONF_PATH}" | sudo tee "${GENERATE_CONF_PATH}" > /dev/null
-  # envsubst < "${TEMPLATE_CRED_PATH}" | sudo tee "${GENERATE_CRED_PATH}" > /dev/null
+    main
 fi
