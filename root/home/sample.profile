@@ -28,6 +28,8 @@ function share(){
 function desktop(){
   # /mnt
   export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
+  export  CLIENT_NETWORK_STORAGE_rec="/mnt/samba/rec"
+
 
   # PATH
   export PATH="${PATH}":"${HOME}/bin/bash"
@@ -52,6 +54,7 @@ function desktop(){
 function server(){
   # /mnt
   export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
+  export  SERVER_LOCAL_STORAGE_rec="/mnt/local/rec"
 
   # docker
   export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"

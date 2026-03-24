@@ -11,11 +11,13 @@ set -eu
 # -o, --output <list>  出力する列を指定します
 
 function desktop(){
-  export SAMBA_MOUNT_PATH="${CLIENT_NETWORK_STORAGE_misc}"
+  export SAMBA_MOUNT_PATH_misc="${CLIENT_NETWORK_STORAGE_misc}"
+  export SAMBA_MOUNT_PATH_rec="${CLIENT_NETWORK_STORAGE_rec}"
 }
 
 function server(){
-  export SAMBA_MOUNT_PATH="${SERVER_LOCAL_STORAGE_misc}"
+  export SAMBA_MOUNT_PATH_misc="${SERVER_LOCAL_STORAGE_misc}"
+  export SAMBA_MOUNT_PATH_rec="${SERVER_LOCAL_STORAGE_rec}"
 }
 
 if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
