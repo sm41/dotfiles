@@ -1,1 +1,4 @@
 # dotfiles
+```
+ecgo "hoge"
+```
