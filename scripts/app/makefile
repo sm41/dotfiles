@@ -22,7 +22,11 @@ docker: ## install - docker
 	@ls ./docker/docker_installer.sh
 
 
-git-self-host: ## git clone - "self host apps" container
+github-my-repository: ## git clone -
+
+
+
+github-self-host: ## git clone - "self host apps" container
 	@ls ./self-host/git_clone.sh
 
 

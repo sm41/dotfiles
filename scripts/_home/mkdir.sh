@@ -33,7 +33,7 @@ function desktop() {
     # sudo mkdir -p "${CLIENT_NETWORK_STORAGE_rec}"
 
     # python
-    mkdir -p "${PYTHONPATH}"
+    # mkdir -p "${PYTHONPATH}"
     mkdir -p "${PYTHON_HISTORY}"
     mkdir -p "${PYTHONPYCACHEPREFIX}"
     # mkdir -p "${PYTHONUSERBASE}"

@@ -18,9 +18,5 @@ config: ## deploy the .config files (${HOME}/.[Any_Apps])
 	@ls ./ln_soft_home_config.sh
 
 
-firefox:
-
-
-
 mkdir: ## make directory
 	@ls ./mkdir.sh

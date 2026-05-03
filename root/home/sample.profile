@@ -33,7 +33,7 @@ function desktop(){
 
     # PATH
     export PATH="${PATH}":"${HOME}/bin/bash"
-    export PATH="${PATH}":"${HOME}/bin/python"
+    # export PATH="${PATH}":"${HOME}/bin/python"
     export PATH="${PATH}":"${HOME}/.local/bin"
 
 
@@ -41,7 +41,7 @@ function desktop(){
     # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
     # python
-    export              PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}${HOME}/bin/python"
+    # export              PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}${HOME}/bin/python"
     export          PYTHON_HISTORY="${XDG_STATE_HOME}/python/history"
     export     PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
     # export          PYTHONUSERBASE="${XDG_DATA_HOME}/python"
