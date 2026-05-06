@@ -22,15 +22,16 @@
 
 # --format "(bv[vcodec !~= 'vp0?9'][height<=1080]/bv) + (ba[acodec ~= 'mp?4a?']/ba) / best*"
 # (ba[acodec ~= 'mp?4a?'][format_note *= original]?)
---format "(bv[vcodec !~= 'vp0?9'][height<=1440]) +
-          (
-            (
-              (ba[acodec ~= 'mp?4a?'][language ~= ja]?) +
-              (ba[acodec ~= 'mp?4a?'][language ~= en-US]?)
-            )
-            / (ba[acodec ~= 'mp?4a?'])
-          )
-          / best*"
+--format
+  "(bv[vcodec !~= 'vp0?9'][height<=1440]) +
+    (
+      (
+        (ba[acodec ~= 'mp?4a?'][language ~= ja]?) +
+        (ba[acodec ~= 'mp?4a?'][language ~= en-US]?)
+      )
+      / (ba[acodec ~= 'mp?4a?'])
+    )
+    / best*"
 
 
 # aduio
