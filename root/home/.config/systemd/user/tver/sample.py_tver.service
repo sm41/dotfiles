@@ -8,4 +8,4 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 Type = oneshot
 WorkingDirectory = %h/repository/tver
 
-ExecStart = %h/.local/bin/uv   run -m tver   _dow
+ExecStart = %h/.local/bin/uv   run -m tver  -dow

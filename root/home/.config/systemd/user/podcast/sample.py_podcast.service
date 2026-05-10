@@ -8,4 +8,4 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 Type = oneshot
 WorkingDirectory = %h/repository/podcast
 
-ExecStart = %h/.local/bin/uv   run -m podcast   _dow
+ExecStart = %h/.local/bin/uv   run -m podcast  -dow

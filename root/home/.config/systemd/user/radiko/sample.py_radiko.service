@@ -8,4 +8,4 @@ Documentation = https://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFile
 Type = oneshot
 WorkingDirectory = %h/repository/radiko
 
-ExecStart = %h/.local/bin/uv   run -m radiko   _dow
+ExecStart = %h/.local/bin/uv   run -m radiko   -dow
