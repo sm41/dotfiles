@@ -1,21 +1,13 @@
 #!/bin/bash
 set -eu
 
-# https://netplan.readthedocs.io/en/latest/
-
-# ip link |grep "state UP"
-# ip -br link show | awk '$2 == "UP" { print $1 }'
-# ip addr
-
-# /etc/netplan/xxx_config.yaml
-# sudo netplan apply
 
 function desktop(){
-    export IPADDR="${DESKTOP_IP_ADDRESS}/24"
+    export IPADDR="${DESKTOP_IP_ADDRESS}"
 }
 
 function server(){
-    export IPADDR="${SERVER_IP_ADDRESS}/24"
+    export IPADDR="${SERVER_IP_ADDRESS}"
 }
 
 function main(){
@@ -38,10 +30,10 @@ function main(){
     fi
 
     ROOT_DIR=/root
-    FHS_ORIGIN_DIR=/etc/netplan
+    FHS_ORIGIN_DIR=/etc/NetworkManager/system-connections
 
-    generate_file="99_config.yaml"
-    template_file="template.${generate_file}"
+    generate_file="${NETWORK_INTERFACE}.nmconnection"
+    template_file="template.network_interface.nmconnection"
 
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
@@ -49,10 +41,25 @@ function main(){
     if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
         # echo ${TEMPLATE_PATH}
         # echo ${GENERATE_PATH}
-        envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+        envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null && \
+        sudo chmod 600 "${GENERATE_PATH}"      && \
+        sudo nmcli connection reload           && \
+        sudo systemctl restart NetworkManager
     fi
 }
+
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
     main
 fi
+
+
+
+# sudo chmod 600 /etc/NetworkManager/system-connections/*.nmconnection
+# sudo nmcli connection reload
+# sudo systemctl restart NetworkManager
+
+
+# nmcli connection show
+# nmcli connection show ${NETWORK_INTERFACE}
+
