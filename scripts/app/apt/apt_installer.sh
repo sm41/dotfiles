@@ -1,11 +1,9 @@
 # !/bin/bash
 set -eu
 
-common_application=(
-    mpv
-)
 
 desktop_application=(
+    mpv
     audacious
 )
 

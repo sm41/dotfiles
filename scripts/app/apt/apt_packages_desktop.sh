@@ -3,8 +3,7 @@ curl
 
 
 
-mpv
-audacious
+
 # flameshot
 
 git

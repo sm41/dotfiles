@@ -10,11 +10,11 @@ help: ## help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 
-all: netplan samba sysctl systemd
+all: networkmanager samba sysctl systemd
 
 
-netplan: ## generate "netplan config.yaml"
-	@ls ./envsubst_etc_netplan.sh
+networkmanager: ## generate "NetworkManager/system-connections/xxx.nmconnection"
+	@ls ./envsubst_etc_NetworkManager.sh
 
 
 samba: ## generate "smb.conf"
