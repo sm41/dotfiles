@@ -6,8 +6,7 @@ curl
 
 # flameshot
 
-git
-samba
+
 
 #ffmpeg
 # fonts-ipafont

@@ -11,6 +11,9 @@ set -eu
 # sudo netplan apply
 
 function main(){
+
+    HOSTNAME="${HOSTNAME:-$(hostname)}"
+
     if  [[ ${HOSTNAME} =~ ^.*desktop$ ]]  ||  [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
         :
     else
@@ -21,7 +24,6 @@ function main(){
     SCRIPT_PATH="$(readlink -f "$0")"
     SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
 
-    # HOSTNAME="${HOSTNAME:-$(hostname)}"
     if ! GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null); then
         echo "Error: script is not inside a git repository" >&2
         exit 1
@@ -36,11 +38,10 @@ function main(){
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
 
-    if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-        echo ${TEMPLATE_PATH}
-        echo ${GENERATE_PATH}
-        # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
-    fi
+    echo ${TEMPLATE_PATH}
+    echo ${GENERATE_PATH}
+    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then

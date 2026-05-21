@@ -1,9 +1,6 @@
 # !/bin/bash
 set -eu
 
-cd ${HOME}/repository
-
-
 container_repo_list=(
 
     # Mirakurun EPGStation
@@ -17,8 +14,14 @@ container_repo_list=(
 
 )
 
-
 function main(){
+
+    if [[ ! -d "${HOME}/repository" ]]; then
+        mkdir  "${HOME}/repository"
+    fi
+
+    cd ${HOME}/repository
+
     for repo_name in "${container_repo_list[@]}"
     do
         [[ -z "${repo_name}" ]] && continue

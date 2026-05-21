@@ -1,7 +1,6 @@
 #!/bin/bash
 set -eu
 
-
 function desktop(){
     export IPADDR="${DESKTOP_IP_ADDRESS}"
 }
@@ -11,6 +10,9 @@ function server(){
 }
 
 function main(){
+
+    HOSTNAME="${HOSTNAME:-$(hostname)}"
+
     if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
         desktop
     elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
@@ -23,7 +25,6 @@ function main(){
     SCRIPT_PATH="$(readlink -f "$0")"
     SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
 
-    # HOSTNAME="${HOSTNAME:-$(hostname)}"
     if ! GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null); then
         echo "Error: script is not inside a git repository" >&2
         exit 1
@@ -38,14 +39,13 @@ function main(){
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
 
-    if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-        # echo ${TEMPLATE_PATH}
-        # echo ${GENERATE_PATH}
-        envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null && \
-        sudo chmod 600 "${GENERATE_PATH}"      && \
-        sudo nmcli connection reload           && \
-        sudo systemctl restart NetworkManager
-    fi
+    # echo ${TEMPLATE_PATH}
+    # echo ${GENERATE_PATH}
+    envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null && \
+    sudo chmod 600 "${GENERATE_PATH}"      && \
+    sudo nmcli connection reload           && \
+    sudo systemctl restart NetworkManager
+
 }
 
 

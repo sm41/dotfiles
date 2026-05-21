@@ -1,6 +1,10 @@
 # !/bin/bash
 set -eu
 
+commoc_application=(
+    git
+    samba
+)
 
 desktop_application=(
     mpv
@@ -35,6 +39,7 @@ function main(){
     do
         [ -z "${package_name}" ] && continue
         [ "${package_name::1}" = "#" ] && continue
+
         echo "${package_name}"
         # sudo apt-get install --no-install-recommends ^"${package_name}"$
     done
