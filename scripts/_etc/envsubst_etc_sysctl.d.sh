@@ -38,6 +38,20 @@ function main(){
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
 
+    if [[ -f ${GENERATE_PATH} ]]; then
+        echo     "📢 [ \"${GENERATE_PATH}\" file is already exists  ]"
+        echo     "📢 [ Do you want to overwrite it? ]"
+        read -p  "👉️ [ y(yes) ] or [ n(no) ]  ==>  "   flagment
+
+        if   [[ ${flagment} == "n" ]]; then
+            echo "Do Nothing"
+            exit 1
+        elif [[ ${flagment} != "y" ]]; then
+            echo "Invailed Input Key"
+            exit 1
+        fi
+    fi
+
     echo ${TEMPLATE_PATH}
     echo ${GENERATE_PATH}
     # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null

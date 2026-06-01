@@ -33,11 +33,25 @@ function main(){
     ROOT_DIR=/root
     FHS_ORIGIN_DIR=/etc/NetworkManager/system-connections
 
-    generate_file="${NETWORK_INTERFACE}.nmconnection"
     template_file="template.network_interface.nmconnection"
+    generate_file="${NETWORK_INTERFACE}.nmconnection"
 
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
+
+    if [[ -f ${GENERATE_PATH} ]]; then
+        echo     "📢 [ \"${GENERATE_PATH}\" file is already exists  ]"
+        echo     "📢 [ Do you want to overwrite it? ]"
+        read -p  "👉️ [ y(yes) ] or [ n(no) ]  ==>  "   flagment
+
+        if   [[ ${flagment} == "n" ]]; then
+            echo "Do Nothing"
+            exit 1
+        elif [[ ${flagment} != "y" ]]; then
+            echo "Invailed Input Key"
+            exit 1
+        fi
+    fi
 
     # echo ${TEMPLATE_PATH}
     # echo ${GENERATE_PATH}
@@ -48,16 +62,9 @@ function main(){
 
 }
 
-
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
     main
 fi
-
-
-
-# sudo chmod 600 /etc/NetworkManager/system-connections/*.nmconnection
-# sudo nmcli connection reload
-# sudo systemctl restart NetworkManager
 
 
 # nmcli connection show

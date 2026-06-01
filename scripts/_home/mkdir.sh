@@ -3,7 +3,6 @@ set -eu
 
 HOSTNAME="${HOSTNAME:-$(hostname)}"
 
-
 function share(){
     # XDG
     mkdir -p "${XDG_CONFIG_HOME}"
@@ -30,7 +29,6 @@ function desktop() {
 
     # /mnt
     sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
-    # sudo mkdir -p "${CLIENT_NETWORK_STORAGE_rec}"
 
     # python
     # mkdir -p "${PYTHONPATH}"
@@ -46,20 +44,21 @@ function server() {
 
     # /mnt
     sudo mkdir -p "${SERVER_LOCAL_STORAGE_misc}"
-    # sudo mkdir -p "${SERVER_LOCAL_STORAGE_rec}"
 
     # docker
     mkdir -p "${DOCKER_CONFIG}"
 }
 
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
+    if   [[ ${HOSTNAME} =~ ^*desktop$ ]] ; then
+        share
+        desktop
+    elif [[ ${HOSTNAME} =~ ^*server$ ]] ; then
+        share
+        server
+    else
+        :
+    fi
 
-
-if   [[ ${HOSTNAME} =~ ^*desktop$ ]] ; then
-    desktop
-elif [[ ${HOSTNAME} =~ ^*server$ ]] ; then
-    server
-else
-    :
 fi
-
