@@ -1,7 +1,7 @@
 # !/bin/bash
 set -eu
 
-commoc_application=(
+common_application=(
     git
     samba
 )
@@ -18,15 +18,13 @@ server_application=(
 
 function main(){
 
-    if [ $# -lt 1 ]; then
-        echo "Usage: $0 [ desktop | server ]"
-        exit 1
+    HOSTNAME="${HOSTNAME:-$(hostname)}"
 
-    elif [[ "$1" == "desktop" ]] ; then
-        type="${desktop_application}"
+    if   [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
+        type=("${desktop_application[@]}")
 
-    elif [[ "$1" == "server" ]] ; then
-        type="${server_application}"
+    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
+        type=("${server_application[@]}")
 
     else
         echo "Invalid argument"
@@ -35,7 +33,7 @@ function main(){
 
     # sudo apt-get update
 
-    for package_name in "${type[@]}"
+    for package_name in "${common_application[@]}"  "${type[@]}"
     do
         [ -z "${package_name}" ] && continue
         [ "${package_name::1}" = "#" ] && continue
@@ -47,5 +45,5 @@ function main(){
 
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-    main $1
+    main
 fi
