@@ -23,8 +23,9 @@ function main(){
     do
         [[ -z "${repo_name}" ]] && continue
         [[ "${repo_name::1}" = "#" ]] && continue
-        # git clone "${repo_name}.git"
+
         echo "${repo_name}.git"
+        # git clone "${repo_name}.git"
     done
 }
 
