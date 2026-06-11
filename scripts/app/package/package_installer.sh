@@ -15,8 +15,33 @@ server_application=(
 
 )
 
-function main(){
+function fedora(){
+    var=dnf
+    opt=
+    echo "sudo ${var} check-update"
+}
 
+function ubuntu(){
+    var=apt-get
+    opt=--no-install-recommends
+    echo "sudo ${var} update"
+}
+
+
+function main(){
+    for package_name in "${common_application[@]}"  "${type[@]}"
+    do
+        [[ -z "${package_name}" ]] && continue
+        [[ "${package_name::1}" = "#" ]] && continue
+
+        echo "sudo ${var} install ${opt} ^"${package_name}"$"
+    done
+}
+
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+
+    id=$(. /etc/os-release && echo ${ID})
     HOSTNAME="${HOSTNAME:-$(hostname)}"
 
     if   [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
@@ -28,31 +53,12 @@ function main(){
         exit 1
     fi
 
-
-    id=$(. /etc/os-release && echo ${ID})
-
-    if   [[ "${id}" == linuxmint ]] ; then
-        var=apt-get
-        opt=--no-install-recommends
-        echo "sudo ${var} update"
-    elif [[ "${id}" == fedora ]] ; then
-        var=dnf
-        opt=
-        echo "sudo ${var} check-update"
+    if   [[ "${id}" == fedora ]] ; then
+        fedora
+        main
+    elif [[ "${id}" == linuxmint ]] ; then
+        ubuntu
+        main
     fi
 
-
-    for package_name in "${common_application[@]}"  "${type[@]}"
-    do
-        [ -z "${package_name}" ] && continue
-        [ "${package_name::1}" = "#" ] && continue
-
-        # echo "${var} ${package_name}"
-        echo "sudo ${var} install ${opt} ^"${package_name}"$"
-    done
-}
-
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-    main
 fi

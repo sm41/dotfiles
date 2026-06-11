@@ -12,8 +12,8 @@ function main(){
 
     for package_name in "${uv_tool_package[@]}"
     do
-        [ -z "${package_name}" ] && continue
-        [ "${package_name::1}" = "#" ] && continue
+        [[ -z "${package_name}" ]] && continue
+        [[ "${package_name::1}" = "#" ]] && continue
 
         # uv tool install "${package_name}"
         echo "uv tool install "${package_name}""
