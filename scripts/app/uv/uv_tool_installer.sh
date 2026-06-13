@@ -4,7 +4,7 @@ set -eu
 
 uv_tool_package=(
     yt-dlp
-    gallery-dl
+    # gallery-dl
 )
 
 

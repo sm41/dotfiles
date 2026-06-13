@@ -12,19 +12,18 @@ desktop_application=(
 )
 
 server_application=(
-
 )
 
 function fedora(){
     var=dnf
     opt=
-    echo "sudo ${var} check-update"
+    sudo "${var}" check-update
 }
 
 function ubuntu(){
     var=apt-get
     opt=--no-install-recommends
-    echo "sudo ${var} update"
+    sudo "${var}" update
 }
 
 
@@ -34,7 +33,7 @@ function main(){
         [[ -z "${package_name}" ]] && continue
         [[ "${package_name::1}" = "#" ]] && continue
 
-        echo "sudo ${var} install ${opt} ^"${package_name}"$"
+        sudo "${var}" install "${opt}" ^"${package_name}"$
     done
 }
 
@@ -54,11 +53,11 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
     fi
 
     if   [[ "${id}" == fedora ]] ; then
-        fedora
-        main
+        echo "fedora"
+        echo "main"
     elif [[ "${id}" == linuxmint ]] ; then
-        ubuntu
-        main
+        echo "ubuntu"
+        echo "main"
     fi
 
 fi
