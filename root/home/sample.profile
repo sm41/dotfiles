@@ -27,7 +27,8 @@ function share(){
 
 function desktop(){
     # /mnt
-    export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
+    # export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
+    export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
 
 
     # PATH

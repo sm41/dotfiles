@@ -1,7 +1,7 @@
 # !/bin/bash
 set -eu
 
-container_repo_list=(
+selfhost_repo_list=(
 
     # Mirakurun EPGStation
     "https://github.com/l3tnun/docker-mirakurun-epgstation"
@@ -13,13 +13,13 @@ container_repo_list=(
 
 function main(){
 
-    if [[ ! -d "${HOME}/repository" ]]; then
-        mkdir  "${HOME}/repository"
+    if [[ ! -d "${HOME}/self-host" ]]; then
+        mkdir  "${HOME}/self-host"
     fi
 
-    cd ${HOME}/repository
+    cd ${HOME}/self-host
 
-    for repo_name in "${container_repo_list[@]}"
+    for repo_name in "${selfhost_repo_list[@]}"
     do
         [[ -z "${repo_name}" ]] && continue
         [[ "${repo_name::1}" = "#" ]] && continue

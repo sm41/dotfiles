@@ -28,7 +28,8 @@ function desktop() {
     mkdir -p "${HOME}/repository"
 
     # /mnt
-    sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
+    sudo mkdir -p "${CLIENT_LOCAL_STORAGE_misc}"
+    # sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
 
     # python
     # mkdir -p "${PYTHONPATH}"
