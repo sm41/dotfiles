@@ -1,0 +1,35 @@
+
+elemaru:
+  title : エレキコミックのおーいエレマル
+  url   : https://feeds.megaphone.fm/TBS2752996527
+  dow   : [土]
+
+
+# chiki:
+#   title : 荻上チキ・Session～発信型ニュース・プロジェクト
+#   url   : https://feeds.megaphone.fm/TBS7072964704
+#   dow   : [土]
+
+
+akasaka:
+  title : プチ鹿島 赤坂タイムス
+  url   : https://feeds.megaphone.fm/TBS5769493745
+  dow   : [月, 土]
+
+
+# nemu:
+#   title : TBSラジオ「ねむチキ」
+#   url   : https://feeds.megaphone.fm/TBS6368995423
+#   dow   : [水]
+
+
+rocket:
+  title : ロケットマンショー
+  url   : https://feeds.megaphone.fm/rocketmanshow
+  dow   : [火]
+
+
+hakuzan:
+  title : 問わず語りの神田伯山
+  url   : https://feeds.megaphone.fm/TBS7474162925
+  dow   : [金]
