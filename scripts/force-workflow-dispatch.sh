@@ -3,7 +3,7 @@ set -eu
 
 # curl \
 #     -H "Accept: application/vnd.github.v3+json" \
-#     -H "Authorization: token xxxxxxx" \
+#     -H "Authorization: token xxxxxxxxxxxx" \
 #     "https://api.github.com/repos/sm41/cicd-feed/actions/workflows"
 
 function ccc(){
