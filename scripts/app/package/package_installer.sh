@@ -3,7 +3,7 @@ set -eu
 
 common_application=(
     git
-    samba
+    # samba
 )
 
 desktop_application=(
