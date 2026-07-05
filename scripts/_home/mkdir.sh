@@ -20,16 +20,18 @@ function share(){
     mkdir -p "${HOME}/XDG_USER_DIRS/Templates"
     mkdir -p "${HOME}/XDG_USER_DIRS/Videos"
 
+    mkdir -p "${XDG_CONFIG_HOME}/systemd/user"
+    mkdir -p "${HOME}/.ssh"
+
 }
 
 function desktop() {
     # /home
-    mkdir -p "${HOME}/bin/{appimage,bash,python}"
+    mkdir -p "${HOME}"/bin/{appimage,bash,python}
     mkdir -p "${HOME}/repository"
 
     # /mnt
     sudo mkdir -p "${CLIENT_LOCAL_STORAGE_misc}"
-    # sudo mkdir -p "${CLIENT_NETWORK_STORAGE_misc}"
 
     # python
     # mkdir -p "${PYTHONPATH}"
@@ -52,10 +54,10 @@ function server() {
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
-    if   [[ ${HOSTNAME} =~ ^*desktop$ ]] ; then
+    if   [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
         share
         desktop
-    elif [[ ${HOSTNAME} =~ ^*server$ ]] ; then
+    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
         share
         server
     else

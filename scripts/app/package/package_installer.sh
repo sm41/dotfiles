@@ -3,7 +3,9 @@ set -eu
 
 common_application=(
     git
-    # samba
+    ffmpeg
+    fcitx5
+    fcitx5-mozc
 )
 
 desktop_application=(
@@ -56,8 +58,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
         echo "fedora"
         echo "main"
     elif [[ "${id}" == linuxmint ]] ; then
-        echo "ubuntu"
-        echo "main"
+        ubuntu
+        main
     fi
 
 fi

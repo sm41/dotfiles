@@ -11,6 +11,16 @@
 HOSTNAME="${HOSTNAME:-$(hostname)}"
 
 
+function test(){
+    for i in /sys/class/net/*; do
+        [ -e "$i/device" ] || continue
+        iface=$(basename "$i")
+        state=$(cat "$i/operstate")
+        [ "$state" = "up" ] && echo "$iface"
+    done
+}
+
+
 function share(){
     # XDG
     export  XDG_CACHE_HOME="${HOME}/.cache"
@@ -20,14 +30,13 @@ function share(){
 
     # NetWork
     export DESKTOP_IP_ADDRESS="192.168.1.9"
-    export  SERVER_IP_ADDRESS="192.168.1.38"
-    export NETWORK_INTERFACE="$(ip -br link show | awk '$2 == "UP" { print $1 }')"
+    export NETWORK_INTERFACE=$(test)
+    # export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
 
 }
 
 function desktop(){
     # /mnt
-    # export CLIENT_NETWORK_STORAGE_misc="/mnt/samba/misc"
     export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
 
 
@@ -53,11 +62,11 @@ function desktop(){
 
 function server(){
     # /mnt
-    export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
+    # export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
 
     # docker
-    export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
-
+    # export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+    echo "hoge"
 }
 
 

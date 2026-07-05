@@ -52,9 +52,9 @@ function main(){
         fi
     fi
 
-    echo ${TEMPLATE_PATH}
-    echo ${GENERATE_PATH}
-    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+    # echo ${TEMPLATE_PATH}
+    # echo ${GENERATE_PATH}
+    envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
 
 }
 

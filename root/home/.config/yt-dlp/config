@@ -14,8 +14,8 @@
 --convert-thumbnails 'jpg'
 
 # PATH
---paths temp:${CLIENT_NETWORK_STORAGE_misc}/.temp
---paths home:${CLIENT_NETWORK_STORAGE_misc}/misc
+--paths temp:${CLIENT_LOCAL_STORAGE_misc}/.temp
+--paths home:${CLIENT_LOCAL_STORAGE_misc}/misc
 
 --output "%(title)s_[%(id)s].%(ext)s"
 --merge-output-format "mp4"

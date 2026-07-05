@@ -1,0 +1,11 @@
+[Unit]
+Description = timer unit of github actions workflow dispatch
+
+
+[Timer]
+OnCalendar = *-*-* 10..16/2,21,22,23:05
+Persistent = true
+RandomizedDelaySec = 60s
+
+[Install]
+WantedBy = timers.target

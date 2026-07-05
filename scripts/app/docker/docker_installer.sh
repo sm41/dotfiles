@@ -4,43 +4,7 @@ set -eu
 # https://docs.docker.com
 
 
-function fedora(){
-
-    # https://docs.docker.com/engine/install/fedora/
-
-    # Uninstall old versions
-    sudo dnf remove docker \
-        docker-client \
-        docker-client-latest \
-        docker-common \
-        docker-latest \
-        docker-latest-logrotate \
-        docker-logrotate \
-        docker-selinux \
-        docker-engine-selinux \
-        docker-engine
-
-    # Install using the rpm repository
-    # Set up the repository
-    sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
-
-    # 1.Install the Docker packages.
-    sudo dnf install \
-        docker-ce \
-        docker-ce-cli \
-        containerd.io \
-        docker-buildx-plugin \
-        docker-compose-plugin
-
-    # 2.Start Docker Engine.
-    sudo systemctl enable --now docker
-
-    # 3.Verify that the installation is successful by running the hello-world image:
-    sudo docker run hello-world
-}
-
-
-function ubuntu(){
+function main(){
 
     # https://docs.docker.com/engine/install/ubuntu/
 
@@ -89,12 +53,5 @@ EOF
 
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
-    id=$(. /etc/os-release && echo ${ID})
-
-    if   [[ "${id}" == fedora ]] ; then
-        echo "fedooooooora"
-    elif [[ "${id}" == linuxmint ]] ; then
-        echo "minmiiiiiiin"
-    fi
-
+    main
 fi

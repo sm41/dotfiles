@@ -11,14 +11,14 @@ set -eu
 
 
 function desktop(){
-    temp_path="${CLIENT_NETWORK_STORAGE_misc#/}"
-    template_file="template.mnt-samba-xxx.mount"
+    temp_path="${CLIENT_LOCAL_STORAGE_misc#/}"
+    template_file="template.mnt-local-xxx.mount"
+    export UUID=$(lsblk -dno UUID | awk 'NF')
 }
 
 function server(){
     temp_path="${SERVER_LOCAL_STORAGE_misc#/}"
     template_file="template.mnt-local-xxx.mount"
-    export UUID=""
 }
 
 function main(){
@@ -51,9 +51,9 @@ function main(){
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
 
-    echo ${TEMPLATE_PATH}
-    echo ${GENERATE_PATH}
-    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+    # echo ${TEMPLATE_PATH}
+    # echo ${GENERATE_PATH}
+    envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
 
 }
 

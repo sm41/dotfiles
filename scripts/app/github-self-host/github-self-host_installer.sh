@@ -1,7 +1,9 @@
 # !/bin/bash
 set -eu
 
-selfhost_repo_list=(
+
+function main(){
+    selfhost_repo_list=(
 
     # Mirakurun EPGStation
     "https://github.com/l3tnun/docker-mirakurun-epgstation"
@@ -9,9 +11,7 @@ selfhost_repo_list=(
     # tt-rss
     "https://github.com/tt-rss/tt-rss"
 
-)
-
-function main(){
+    )
 
     if [[ ! -d "${HOME}/self-host" ]]; then
         mkdir  "${HOME}/self-host"
@@ -24,8 +24,8 @@ function main(){
         [[ -z "${repo_name}" ]] && continue
         [[ "${repo_name::1}" = "#" ]] && continue
 
-        echo "${repo_name}.git"
-        # git clone "${repo_name}.git"
+        # echo "${repo_name}.git"
+        git clone "${repo_name}.git"
     done
 }
 

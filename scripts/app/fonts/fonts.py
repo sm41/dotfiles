@@ -4,13 +4,13 @@ from urllib import request, parse
 
 
 font = {
-    # "Noto" : {
+    "Noto" : {
     #     "Noto_Sans"     : "https://github.com/google/fonts/tree/main/ofl/notosans",
-    #     "Noto_Sans_JP"  : "https://github.com/google/fonts/tree/main/ofl/notosansjp",
+        "Noto_Sans_JP"  : "https://github.com/google/fonts/tree/main/ofl/notosansjp",
     #     "Noto_Serif"    : "https://github.com/google/fonts/tree/main/ofl/notoserif",
     #     "Noto_Serif_JP" : "https://github.com/google/fonts/tree/main/ofl/notoserifjp",
     #     "Noto_Sans_Mono": "https://github.com/google/fonts/tree/main/ofl/notosansmono",
-    # },
+    },
 
     "Roboto" : {
     #     "Roboto"      : "https://github.com/google/fonts/tree/main/ofl/roboto",

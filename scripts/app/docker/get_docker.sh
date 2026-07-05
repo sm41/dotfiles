@@ -3,7 +3,10 @@ set -eu
 
 
 function main(){
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    curl -sSL https://get.docker.com | sh
+
+    sudo usermod -aG docker $USER
+
 }
 
 

@@ -1,0 +1,7 @@
+
+# https://github.com/l3tnun/EPGStation/blob/master/doc/conf-manual.md
+
+
+ttt:
+  title  : 建もの探訪
+  format : "[住まい]_[%CHNAME%]_[%YEAR%-%MONTH%-%DAY%(%DOW%)]_%TITLE%"
