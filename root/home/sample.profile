@@ -11,7 +11,7 @@
 HOSTNAME="${HOSTNAME:-$(hostname)}"
 
 
-function test(){
+function get_NW-INT(){
     for i in /sys/class/net/*; do
         [ -e "$i/device" ] || continue
         iface=$(basename "$i")
@@ -30,15 +30,15 @@ function share(){
 
     # NetWork
     export DESKTOP_IP_ADDRESS="192.168.1.9"
-    export NETWORK_INTERFACE=$(test)
-    # export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
+    export NETWORK_INTERFACE=$(get_NW-INT)
+    export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
+
+    # /mnt
+    export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
 
 }
 
 function desktop(){
-    # /mnt
-    export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
-
 
     # PATH
     # export PATH="${PATH}":"${HOME}/bin/bash"
@@ -60,22 +60,8 @@ function desktop(){
 
 }
 
-function server(){
-    # /mnt
-    # export SERVER_LOCAL_STORAGE_misc="/mnt/local/misc"
-
-    # docker
-    # export  DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
-    echo "hoge"
-}
-
-
-
 
 if   [[ "${HOSTNAME}" =~ ^.*desktop$ ]] ; then
     share
     desktop
-elif [[ "${HOSTNAME}" =~ ^.*server$ ]] ; then
-    share
-    server
 fi

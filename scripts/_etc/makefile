@@ -10,16 +10,12 @@ help: ## help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 
-# all: nwm samba sysctl systemd
+# all: nwm sysctl systemd
 all: nwm sysctl
 
 
 nwm: ## generate "NetworkManager/system-connections/xxx.nmconnection"
 	@ls ./envsubst_etc_NetworkManager.sh
-
-
-samba: ## generate "smb.conf"
-	@ls ./envsubst_etc_samba.sh
 
 
 sysctl: ## generate "ipv6-privacy.conf"

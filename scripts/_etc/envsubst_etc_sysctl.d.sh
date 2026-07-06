@@ -14,13 +14,6 @@ function main(){
 
     HOSTNAME="${HOSTNAME:-$(hostname)}"
 
-    if  [[ ${HOSTNAME} =~ ^.*desktop$ ]]  ||  [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-        :
-    else
-        # echo "Invalid argument"
-        exit 1
-    fi
-
     SCRIPT_PATH="$(readlink -f "$0")"
     SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
 

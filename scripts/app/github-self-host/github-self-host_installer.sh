@@ -2,8 +2,7 @@
 set -eu
 
 
-function main(){
-    selfhost_repo_list=(
+selfhost_repo_list=(
 
     # Mirakurun EPGStation
     "https://github.com/l3tnun/docker-mirakurun-epgstation"
@@ -11,13 +10,18 @@ function main(){
     # tt-rss
     "https://github.com/tt-rss/tt-rss"
 
-    )
+)
 
-    if [[ ! -d "${HOME}/self-host" ]]; then
-        mkdir  "${HOME}/self-host"
+function main(){
+
+    selfhot_directory="${HOME}/self-host"
+    # selfhot_directory="${SELFHOSTED_DIRECTORY}"
+
+    if [[ ! -d "${selfhot_directory}" ]]; then
+        mkdir  "${selfhot_directory}"
     fi
 
-    cd ${HOME}/self-host
+    cd "${selfhot_directory}"
 
     for repo_name in "${selfhost_repo_list[@]}"
     do

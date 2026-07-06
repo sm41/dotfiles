@@ -30,10 +30,6 @@ package:  ## install - package
 	@ls ./package/package_installer.sh
 
 
-samba: ## create samba user
-	@ls ./samba/setup_samba.sh
-
-
 uv: ## install - uv
 	@ls ./uv/uv_installer.sh
 # 	@ls ./uv/uv_tool_installer.sh

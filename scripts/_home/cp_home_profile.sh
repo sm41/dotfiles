@@ -11,16 +11,12 @@ function main(){
   ROOT_FHS_DIR=/root/home
   TEMP_PATH="${GIT_TOPLEVEL}${ROOT_FHS_DIR}"
 
-  while read USER_PROFILE
-  do
-    # echo "${TEMP_PATH}/sample${USER_PROFILE}"
-    cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
+  USER_PROFILE=".profile"
 
-done << edf
-  .profile
-edf
+  # echo "${TEMP_PATH}/sample${USER_PROFILE}"
+  cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
 
-  # source "${HOME}/.bash_profile"
+  source "${HOME}/.profile"
 
 }
 

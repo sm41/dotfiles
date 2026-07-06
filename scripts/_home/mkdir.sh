@@ -41,25 +41,12 @@ function desktop() {
 
 }
 
-function server() {
-    # /home
-    mkdir -p "${HOME}/repository"
-
-    # /mnt
-    sudo mkdir -p "${SERVER_LOCAL_STORAGE_misc}"
-
-    # docker
-    mkdir -p "${DOCKER_CONFIG}"
-}
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
     if   [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
         share
         desktop
-    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-        share
-        server
     else
         :
     fi

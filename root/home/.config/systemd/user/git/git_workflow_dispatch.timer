@@ -3,7 +3,7 @@ Description = timer unit of github actions workflow dispatch
 
 
 [Timer]
-OnCalendar = *-*-* 10..16/2,21,22,23:05
+OnCalendar = *-*-* 00,08,12,16,20:05:00
 Persistent = true
 RandomizedDelaySec = 60s
 
