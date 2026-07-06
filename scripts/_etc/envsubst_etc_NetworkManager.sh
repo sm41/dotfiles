@@ -1,26 +1,29 @@
 #!/bin/bash
 set -eu
 
-function desktop(){
-    export IPADDR="${DESKTOP_IP_ADDRESS}"
-}
-
-function server(){
-    export IPADDR="${SERVER_IP_ADDRESS}"
-}
+required_vars=(
+    NETWORK_INTERFACE
+    IPADDR
+    hogefuga
+)
 
 function main(){
 
-    HOSTNAME="${HOSTNAME:-$(hostname)}"
+    export IPADDR="${DESKTOP_IP_ADDRESS}"
 
-    if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-        desktop
-    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-        server
-    else
-        # echo "Invalid argument"
-        exit 1
-    fi
+    for var in "${required_vars[@]}"; do
+        if [[ ! -v $var ]]; then
+            echo "ERROR: '$var' が未定義です。"
+            exit 1
+        fi
+
+        if [[ -z ${!var} ]]; then
+            echo "ERROR: '$var' は空文字です。"
+            exit 1
+        fi
+    done
+
+    HOSTNAME="${HOSTNAME:-$(hostname)}"
 
     SCRIPT_PATH="$(readlink -f "$0")"
     SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"

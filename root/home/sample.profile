@@ -31,10 +31,12 @@ function share(){
     # NetWork
     export DESKTOP_IP_ADDRESS="192.168.1.9"
     export NETWORK_INTERFACE=$(get_NW-INT)
-    export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
 
     # /mnt
     export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
+
+    # Docker
+    export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
 
 }
 

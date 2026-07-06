@@ -1,7 +1,6 @@
 #!/bin/bash
 set -eu
 
-
 # lsblk -dno UUID | awk 'NF'
 # lsblk -o NAME,SIZE,FSTYPE,UUID,LABEL,PARTUUID,PARTLABEL,MOUNTPOINT
 
@@ -9,6 +8,10 @@ set -eu
 # -n, --noheadings     ヘッダを表示しません
 # -o, --output <list>  出力する列を指定します
 
+required_vars=(
+    UUID
+    hogefuga
+)
 
 function desktop(){
     temp_path="${CLIENT_LOCAL_STORAGE_misc#/}"
@@ -16,23 +19,30 @@ function desktop(){
     export UUID=$(lsblk -dno UUID | awk 'NF')
 }
 
-function server(){
-    temp_path="${SERVER_LOCAL_STORAGE_misc#/}"
-    template_file="template.mnt-local-xxx.mount"
-}
-
 function main(){
-
-    HOSTNAME="${HOSTNAME:-$(hostname)}"
 
     if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
         desktop
-    elif [[ ${HOSTNAME} =~ ^.*server$ ]] ; then
-        server
     else
         # echo "Invalid argument"
         exit 1
     fi
+
+    # echo ${UUID}
+
+    for var in "${required_vars[@]}"; do
+        if [[ ! -v $var ]]; then
+            echo "ERROR: '$var' が未定義です。"
+            exit 1
+        fi
+
+        if [[ -z ${!var} ]]; then
+            echo "ERROR: '$var' は空文字です。"
+            exit 1
+        fi
+    done
+
+    HOSTNAME="${HOSTNAME:-$(hostname)}"
 
     redefinition_path="${temp_path//\//-}"
     generate_file="${redefinition_path}.mount"

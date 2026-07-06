@@ -10,7 +10,24 @@ set -eu
 # /etc/netplan/xxx_config.yaml
 # sudo netplan apply
 
+required_vars=(
+    NETWORK_INTERFACE
+    hogefuga
+)
+
 function main(){
+
+    for var in "${required_vars[@]}"; do
+        if [[ ! -v $var ]]; then
+            echo "ERROR: '$var' が未定義です。"
+            exit 1
+        fi
+
+        if [[ -z ${!var} ]]; then
+            echo "ERROR: '$var' は空文字です。"
+            exit 1
+        fi
+    done
 
     HOSTNAME="${HOSTNAME:-$(hostname)}"
 
