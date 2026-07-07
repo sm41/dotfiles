@@ -12,7 +12,6 @@ set -eu
 
 required_vars=(
     NETWORK_INTERFACE
-    hogefuga
 )
 
 function main(){
@@ -27,7 +26,12 @@ function main(){
             echo "ERROR: '$var' は空文字です。"
             exit 1
         fi
+        echo ${!var}
     done
+
+    echo "env var is passed"
+    exit 0
+
 
     HOSTNAME="${HOSTNAME:-$(hostname)}"
 

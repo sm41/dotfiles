@@ -30,14 +30,7 @@ function main(){
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
 
-    HOSTNAME="${HOSTNAME:-$(hostname)}"
-
-    if   [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-        type=("${desktop_application[@]}")
-    else
-        echo "Invalid argument"
-        exit 1
-    fi
+    type=("${desktop_application[@]}")
 
     main
 

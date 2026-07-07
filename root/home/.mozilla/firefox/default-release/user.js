@@ -12,9 +12,6 @@ user_pref("network.cookie.sameSite.schemeful",true);                      //
 user_pref("accessibility.browsewithcaret_shortcut.enabled",false);        // キャレットブラウズモード (F7キー) の有効化
 // user_pref("alerts.showFavicons",true);                                    // Push通知 ファビコン
 
-user_pref("beacon.enabled",false);                         // 位置情報
-user_pref("geo.enabled",false);                            // 位置情報
-
 user_pref("browser.aboutConfig.showWarning",false);        // about:configの警告を表示
 user_pref("browser.bookmarks.autoExportHTML",true);        // ブックマーク
 user_pref("browser.link.open_newwindow.restriction",2);    // JavaScript で開くウィンドウの扱い (0:「browser.link.open_newwindow」に従う 1:新規ウィンドウ 2:窓の大きさやツールバーの設定のあるものは新しい窓で開き、それ以外は「browser.link.open_newwindow」に従う。

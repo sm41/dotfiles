@@ -33,7 +33,7 @@ function share(){
     export NETWORK_INTERFACE=$(get_NW-INT)
 
     # /mnt
-    export   CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
+    export CLIENT_LOCAL_STORAGE_misc="/mnt/local/misc"
 
     # Docker
     export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"

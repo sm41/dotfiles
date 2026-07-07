@@ -10,7 +10,6 @@ set -eu
 
 required_vars=(
     UUID
-    hogefuga
 )
 
 function desktop(){
@@ -21,14 +20,7 @@ function desktop(){
 
 function main(){
 
-    if  [[ ${HOSTNAME} =~ ^.*desktop$ ]] ; then
-        desktop
-    else
-        # echo "Invalid argument"
-        exit 1
-    fi
-
-    # echo ${UUID}
+    desktop
 
     for var in "${required_vars[@]}"; do
         if [[ ! -v $var ]]; then
@@ -40,7 +32,11 @@ function main(){
             echo "ERROR: '$var' は空文字です。"
             exit 1
         fi
+        echo ${!var}
     done
+
+    echo "env var is passed"
+    exit 0
 
     HOSTNAME="${HOSTNAME:-$(hostname)}"
 
