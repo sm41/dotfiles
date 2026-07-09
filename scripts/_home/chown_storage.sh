@@ -4,11 +4,11 @@ set -eu
 
 
 function main(){
-  while read jjj
-  do
-    sudo chown -R "${USER}":"${USER}" "${jjj}"
+    while read jjj
+    do
+        sudo chown -R "${USER}":"${USER}" "${jjj}"
 
-  done < <(grep -oP "(STORAGE.*=)\K.*" <<< $(printenv))
+    done < <(grep -oP "(STORAGE.*=)\K.*" <<< $(printenv))
 
 }
 
