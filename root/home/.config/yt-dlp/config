@@ -14,7 +14,8 @@
 --convert-thumbnails 'jpg'
 
 # PATH
---paths temp:${CLIENT_LOCAL_STORAGE_misc}/.temp
+--paths temp:/dev/shm
+# --paths temp:${CLIENT_LOCAL_STORAGE_misc}/.temp
 --paths home:${CLIENT_LOCAL_STORAGE_misc}/misc
 
 --output "%(title)s_[%(id)s].%(ext)s"

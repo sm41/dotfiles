@@ -162,3 +162,8 @@ user_pref("ui.submenuDelay",25);                                     // 【新�
 
 
 user_pref("browser.urlbar.keepPanelOpenDuringImeComposition",true);  //
+
+
+
+user_pref("gfx.color_management.mode",2);                  //
+user_pref("gfx.color_management.native_srgb",true);        //
