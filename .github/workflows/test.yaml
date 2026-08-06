@@ -19,7 +19,7 @@ jobs:
 
         steps:
           - name: checkout
-            uses: actions/checkout@v4
+            uses: actions/checkout@v7
 
           - name: test script
             run:  ${GITHUB_WORKSPACE}/${{ matrix.script }}
@@ -33,7 +33,7 @@ jobs:
 
     #     steps:
     #       - name: checkout
-    #         uses: actions/checkout@v4
+    #         uses: actions/checkout@v7
 
     #       - name: test
     #         run:  setup.sh

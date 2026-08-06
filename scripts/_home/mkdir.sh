@@ -27,7 +27,7 @@ function share(){
 
 function desktop() {
     # /home
-    mkdir -p "${HOME}"/bin/{appimage,bash,python}
+    mkdir -p "${HOME}"/bin/appimage
     mkdir -p "${HOME}/repository"
 
     # /mnt
