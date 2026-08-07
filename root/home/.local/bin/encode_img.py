@@ -65,6 +65,12 @@ def sanitize_filename(name):
 
 
 def main():
+
+    if len(sys.argv) != 2:
+        print("argv is")
+        sys.exit()
+
+
     old_ext  = "png"
     new_ext  = "jpg"
     hogefuga = "_[encoded]"
