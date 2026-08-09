@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 import sys
+import subprocess
 from pathlib import Path
 
 
-def ooo(input_file, bitrate, basename):
+def encode(input_file, bitrate, output_file):
 
     return [
         "ffmpeg",
@@ -17,33 +18,30 @@ def ooo(input_file, bitrate, basename):
             "-id3v2_version", "3",
             "-metadata:s:v",  "title='Album cover'",
             "-metadata:s:v",  "comment='Cover (front)'",
-        f"{basename}.mp3"
+        f"{output_file}.mp3"
     ]
 
 
 def main():
 
-    input_file = sys.argv[1]
-    file_path  = Path(input_file).absolute()
+    if not len(sys.argv) == 2:
+        print("Argument is Less")
+        sys.exit()
 
-    if not file_path.exists():
+    INPUT_FILE  = Path(sys.argv[1]).absolute()
+
+    if not INPUT_FILE.exists():
         print("Argument is invailed")
         sys.exit()
 
-    directory = file_path.parent
-    basename  = file_path.stem
-    ext       = file_path.suffix
-    bitrate   = 48
+    DIRECTORY = INPUT_FILE.parent
+    BASENAME  = INPUT_FILE.stem
+    ext       = INPUT_FILE.suffix
+    BITRATE   = 48
 
-    bbb = directory / basename
+    OUTPUT_FILE = DIRECTORY / BASENAME
 
-    # print(file_path)
-    # print(directory)
-    # print(basename)
-    # print(ext)
-
-
-    ddd = ooo(input_file, bitrate, bbb)
+    ddd = encode(INPUT_FILE, BITRATE, OUTPUT_FILE)
     print(ddd)
 
 
