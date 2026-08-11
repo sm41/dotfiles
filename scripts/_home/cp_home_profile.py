@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+
 import subprocess
 from pathlib import Path
 
 
-def rrr(script_dir):
+def git_toplevel(script_dir):
     return [ "git", "-C", script_dir, "rev-parse", "--show-toplevel" ]
 
 def bbb(temp_path, user_profile):
@@ -15,14 +16,12 @@ def sss(user_profile):
 
 def main():
 
-    SCRIPT_PATH  = Path(__file__)
-    SCRIPT_DIR   = SCRIPT_PATH.parent
-    GIT_TOPLEVEL = Path(subprocess.run(rrr(SCRIPT_DIR), capture_output=True, text= True).stdout.strip())
+    SCRIPT_DIR   = Path(__file__).parent
+    GIT_TOPLEVEL = Path(subprocess.run(git_toplevel(SCRIPT_DIR), capture_output=True, text= True).stdout.strip())
+    FHS_ROOT_DIR = Path("root/home")
+    USER_PROFILE = ".profile"
 
-    ROOT_FHS_DIR = Path("root/home")
-    USER_PROFILE = Path(".profile")
-
-    TEMP_PATH = GIT_TOPLEVEL / ROOT_FHS_DIR
+    TEMP_PATH = GIT_TOPLEVEL / FHS_ROOT_DIR
 
     print(bbb(TEMP_PATH, USER_PROFILE))
     print(sss(USER_PROFILE))
