@@ -29,12 +29,13 @@ def main():
     # TEMPLATE_PATH = GIT_TOPLEVEL / FHS_ROOT_DIR / TEMPLATE_FILENAME
     # GENERATE_PATH = Path.home() / "XDG_USER_DIRS/Desktop" / GENERATE_FILENAME
 
-    # if not TEMPLATE_PATH.exists():
-    #     print("No such file")
-    #     sys.exit()
-
-    print(TEMPLATE_PATH)
-    print(GENERATE_PATH)
+    if TEMPLATE_PATH.exists():
+        print("File is exist")
+        print(TEMPLATE_PATH)
+        print(GENERATE_PATH)
+    else:
+        print("No such file")
+        sys.exit()
 
     sys.exit()
 
