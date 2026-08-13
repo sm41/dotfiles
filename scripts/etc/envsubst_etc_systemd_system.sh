@@ -54,13 +54,13 @@ function main(){
     redefinition_path="${temp_path//\//-}"
     generate_file="${redefinition_path}.mount"
 
-    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
-    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
-    ROOT_DIR=/root
-    FHS_ORIGIN_DIR=/etc/systemd/system
+    SCRIPT_DIRECTORY="$(dirname "$(readlink -f "$0")" )"
+    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIRECTORY}" rev-parse --show-toplevel 2>/dev/null)
+    ROOT_DIRECTORY=/root
+    FHS_ORIGIN_DIRECTORY=/etc/systemd/system
 
-    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
-    GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
+    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIRECTORY}${FHS_ORIGIN_DIRECTORY}/${template_file}"
+    GENERATE_PATH="${FHS_ORIGIN_DIRECTORY}/${generate_file}"
 
     echo ${TEMPLATE_PATH}
     echo ${GENERATE_PATH}

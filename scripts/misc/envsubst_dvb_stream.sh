@@ -38,15 +38,15 @@ function main(){
     check_env "${REQUIRED_VARS_ARRAY[@]}"
     exit 0
 
-    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
-    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
-    ROOT_DIR=/root
-    FHS_ORIGIN_DIR=/home
+    SCRIPT_DIRECTORY="$(dirname "$(readlink -f "$0")" )"
+    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIRECTORY}" rev-parse --show-toplevel 2>/dev/null)
+    ROOT_DIRECTORY=/root
+    FHS_ORIGIN_DIRECTORY=/home
 
     GENERATE_FILE="dvb_stram.m3u"
     TEMPLATE_FILE="template.${GENERATE_FILE}"
 
-    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${TEMPLATE_FILE}"
+    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIRECTORY}${FHS_ORIGIN_DIRECTORY}/${TEMPLATE_FILE}"
     GENERATE_PATH="${HOME}/XDG_USER_DIRS/Desktop/${GENERATE_FILE}"
 
     echo "${TEMPLATE_PATH}   ===>   ${GENERATE_PATH}"

@@ -2,19 +2,21 @@
 set -eu
 
 function main(){
-    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
-    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
-    ROOT_FHS_DIR=/root/home
-    XDG_DIR=/.local/bin
+    SCRIPT_DIRECTORY="$(dirname "$(readlink -f "$0")" )"
+    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIRECTORY}" rev-parse --show-toplevel 2>/dev/null)
+    ROOT_FHS_DIRECTORY=/root/home
+    XDG_DIRECTORY=/.local/bin
+
+    STANDARD_DIRECTORY="${GIT_TOPLEVEL}${ROOT_FHS_DIRECTORY}${XDG_DIRECTORY}"
 
     while read DOT_CONFIG
     do
-        CONFIG_DIR="${HOME}${DOT_CONFIG/${GIT_TOPLEVEL}${ROOT_FHS_DIR}}"
-        mkdir -p "${CONFIG_DIR%/*}"
-        # ln -s -f "${DOT_CONFIG}"  "${CONFIG_DIR}"
-        echo "${DOT_CONFIG}  ===>   ${CONFIG_DIR}"
+        CONFIG_DIRECTORY="${HOME}${DOT_CONFIG/${GIT_TOPLEVEL}${ROOT_FHS_DIRECTORY}}"
+        mkdir -p "${CONFIG_DIRECTORY%/*}"
+        # ln -s -f "${DOT_CONFIG}"  "${CONFIG_DIRECTORY}"
+        echo "${DOT_CONFIG}  ===>   ${CONFIG_DIRECTORY}"
 
-    done < <( find "${GIT_TOPLEVEL}${ROOT_FHS_DIR}${XDG_DIR}" -not \( -path "*/systemd/user*" \) -type f | sort )
+    done < <( find "${STANDARD_DIRECTORY}" -type f | sort )
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then

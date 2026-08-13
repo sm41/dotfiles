@@ -3,9 +3,8 @@ set -eu
 
 REQUIRED_VARS_ARRAY=(
     NETWORK_INTERFACE
-    IPADDR
+    DESKTOP_IP_ADDRESS
 )
-
 
 function check_env(){
 
@@ -25,33 +24,31 @@ function check_env(){
         fi
     done
 
-    echo "Required Vars Array is passed"
+    echo "✅ Required Vars Array is passed"
 
 }
-
 
 function main(){
 
     check_env "${REQUIRED_VARS_ARRAY[@]}"
-    exit 0
 
-    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
-    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
-    ROOT_DIR=/root
-    FHS_ORIGIN_DIR=/etc/NetworkManager/system-connections
+    SCRIPT_DIRECTORY="$(dirname "$(readlink -f "$0")" )"
+    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIRECTORY}" rev-parse --show-toplevel 2>/dev/null)
+    ROOT_DIRECTORY=/root
+    FHS_ORIGIN_DIRECTORY=/etc/NetworkManager/system-connections
 
     TEMPLATE_FILE="template.network_interface.nmconnection"
     GENERATE_FILE="${NETWORK_INTERFACE}.nmconnection"
 
-    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${TEMPLATE_FILE}"
-    GENERATE_PATH="${FHS_ORIGIN_DIR}/${GENERATE_FILE}"
+    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIRECTORY}${FHS_ORIGIN_DIRECTORY}/${TEMPLATE_FILE}"
+    GENERATE_PATH="${FHS_ORIGIN_DIRECTORY}/${GENERATE_FILE}"
 
-    # echo ${TEMPLATE_PATH}
-    # echo ${GENERATE_PATH}
-    envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null && \
-    sudo chmod 600 "${GENERATE_PATH}"      && \
-    sudo nmcli connection reload           && \
-    sudo systemctl restart NetworkManager
+    echo ${TEMPLATE_PATH}
+    echo ${GENERATE_PATH}
+    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null && \
+    # sudo chmod 600 "${GENERATE_PATH}"      && \
+    # sudo nmcli connection reload           && \
+    # sudo systemctl restart NetworkManager
 
 }
 
