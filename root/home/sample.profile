@@ -38,6 +38,8 @@ function share(){
     # Docker
     export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
 
+    # DTV
+    # export TUNER_IP_ADDRESS=""
 }
 
 function desktop(){

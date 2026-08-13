@@ -1,45 +1,50 @@
 #!/bin/bash
 set -eu
 
-required_vars=(
+REQUIRED_VARS_ARRAY=(
     NETWORK_INTERFACE
     IPADDR
 )
 
-function main(){
 
-    export IPADDR="${DESKTOP_IP_ADDRESS}"
+function check_env(){
 
-    for var in "${required_vars[@]}"; do
-        if [[ ! -v $var ]]; then
-            echo "ERROR: '$var' が未定義です。"
+    local target_array=("${@}")
+
+    for target_var in "${target_array[@]}"; do
+        if [[ ! -v ${target_var} ]]; then
+            echo "ERROR: '${target_var}' は未定義です。"
             exit 1
         fi
 
-        if [[ -z ${!var} ]]; then
-            echo "ERROR: '$var' は空文字です。"
+        if [[ -z ${!target_var} ]]; then
+            echo "ERROR: '${target_var}' は空文字です。"
             exit 1
+        else
+            echo "${target_var} は '${!target_var}' として定義されています。"
         fi
-        echo ${!var}
     done
 
-    echo "env var is passed"
+    echo "Required Vars Array is passed"
+
+}
+
+
+function main(){
+
+    check_env "${REQUIRED_VARS_ARRAY[@]}"
     exit 0
 
-
-    HOSTNAME="${HOSTNAME:-$(hostname)}"
-
-    SCRIPT_PATH="$(readlink -f "$0")"
-    SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
+    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
     GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
     ROOT_DIR=/root
     FHS_ORIGIN_DIR=/etc/NetworkManager/system-connections
 
-    template_file="template.network_interface.nmconnection"
-    generate_file="${NETWORK_INTERFACE}.nmconnection"
+    TEMPLATE_FILE="template.network_interface.nmconnection"
+    GENERATE_FILE="${NETWORK_INTERFACE}.nmconnection"
 
-    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
-    GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
+    TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${TEMPLATE_FILE}"
+    GENERATE_PATH="${FHS_ORIGIN_DIR}/${GENERATE_FILE}"
 
     # echo ${TEMPLATE_PATH}
     # echo ${GENERATE_PATH}

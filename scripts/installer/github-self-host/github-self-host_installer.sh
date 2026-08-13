@@ -2,9 +2,11 @@
 set -eu
 
 
-required_vars=(
-    SELFHOSTED_DIRECTORY
+REQUIRED_VARS_ARRAY=(
+    # SELFHOSTED_DIRECTORY
+    hogefuga
 )
+
 
 selfhost_repo_list=(
 
@@ -16,21 +18,34 @@ selfhost_repo_list=(
 
 )
 
-function main(){
 
-    for var in "${required_vars[@]}"; do
-        if [[ ! -v $var ]]; then
-            echo "ERROR: '$var' が未定義です。"
+function check_env(){
+
+    local target_array=("${@}")
+
+    for target_var in "${target_array[@]}"; do
+        if [[ ! -v ${target_var} ]]; then
+            echo "ERROR: '${target_var}' は未定義です。"
             exit 1
         fi
 
-        if [[ -z ${!var} ]]; then
-            echo "ERROR: '$var' は空文字です。"
+        if [[ -z ${!target_var} ]]; then
+            echo "ERROR: '${target_var}' は空文字です。"
             exit 1
+        else
+            echo "${target_var} は '${!target_var}' として定義されています。"
         fi
     done
 
+    echo "Required Vars Array is passed"
 
+}
+
+
+function main(){
+
+    check_env "${REQUIRED_VARS_ARRAY[@]}"
+    exit 0
 
     selfhot_directory="${HOME}/self-host"
     # selfhot_directory="${SELFHOSTED_DIRECTORY}"
@@ -46,8 +61,8 @@ function main(){
         [[ -z "${repo_name}" ]] && continue
         [[ "${repo_name::1}" = "#" ]] && continue
 
-        # echo "${repo_name}.git"
-        git clone "${repo_name}.git"
+        echo "${repo_name}.git"
+        # git clone "${repo_name}.git"
     done
 }
 

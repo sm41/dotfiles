@@ -2,14 +2,17 @@
 
 
 import subprocess
-from pathlib import Path
+from pathlib  import Path
+from datetime import datetime
 
+# 現在日時を指定のフォーマットで取得
+current_time = datetime.now().strftime('%Y%m%d_%H%M')
 
 def git_toplevel(script_dir):
     return [ "git", "-C", script_dir, "rev-parse", "--show-toplevel" ]
 
 def bbb(temp_path, user_profile):
-    return [ "cp", "-f", "-b", "--suffix=_`date +%Y%m%d_%H%M`",  f"{temp_path}/sample{user_profile}",  Path.home() / user_profile ]
+    return [ "cp", "-f", "-b", f"--suffix=_{current_time}",  f"{temp_path}/sample{user_profile}",  Path.home() / user_profile ]
 
 def sss(user_profile):
     return [ "source", Path.home() / user_profile ]
@@ -23,8 +26,8 @@ def main():
 
     TEMP_PATH = GIT_TOPLEVEL / FHS_ROOT_DIR
 
-    print(bbb(TEMP_PATH, USER_PROFILE))
-    print(sss(USER_PROFILE))
+    subprocess.run(bbb(TEMP_PATH, USER_PROFILE))
+    subprocess.run(sss(USER_PROFILE))
 
 if __name__ == '__main__':
     main()

@@ -9,11 +9,12 @@ def encode(input_file, bitrate, output_file):
 
     return [
         "ffmpeg",
+            "-loglevel", "error",
             "-i", input_file,
             "-map", "0:a",
             "-map", "0:v:0",
             "-c:a", "libmp3lame",
-            "-b:a", bitrate,
+            "-b:a", str(bitrate),
             "-disposition:1", "attached_pic",
             "-id3v2_version", "3",
             "-metadata:s:v",  "title='Album cover'",
@@ -24,27 +25,25 @@ def encode(input_file, bitrate, output_file):
 
 def main():
 
-    if not len(sys.argv) == 2:
+    if len(sys.argv) != 2:
         print("Argument is Less")
         sys.exit()
 
     INPUT_FILE  = Path(sys.argv[1]).absolute()
 
-    if not INPUT_FILE.exists():
+    if not INPUT_FILE.is_file():
         print("Argument is invailed")
         sys.exit()
 
-    DIRECTORY = INPUT_FILE.parent
-    BASENAME  = INPUT_FILE.stem
-    ext       = INPUT_FILE.suffix
-    BITRATE   = 48
+    BITRATE     = 48
+    OUTPUT_FILE = INPUT_FILE.parent / INPUT_FILE.stem
 
-    OUTPUT_FILE = DIRECTORY / BASENAME
+    result = subprocess.run(encode(INPUT_FILE, BITRATE, OUTPUT_FILE))
 
-    ddd = encode(INPUT_FILE, BITRATE, OUTPUT_FILE)
-    print(ddd)
-
+    if result.returncode == 0:
+        print()
+    else:
+        print()
 
 if __name__ == '__main__':
     main()
-

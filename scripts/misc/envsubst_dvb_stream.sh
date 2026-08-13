@@ -1,18 +1,13 @@
 #!/bin/bash
 set -eu
 
-# https://netplan.readthedocs.io/en/latest/
+function desktop(){
+    export IPADDR="${DESKTOP_IP_ADDRESS}"
+}
 
-# ip link |grep "state UP"
-# ip -br link show | awk '$2 == "UP" { print $1 }'
-# ip addr
-
-# /etc/netplan/xxx_config.yaml
-# sudo netplan apply
-
-REQUIRED_VARS_ARRAY=(
-    NETWORK_INTERFACE
-)
+function server(){
+    export IPADDR="${SERVER_IP_ADDRESS}"
+}
 
 
 function check_env(){
@@ -41,22 +36,21 @@ function check_env(){
 function main(){
 
     check_env "${REQUIRED_VARS_ARRAY[@]}"
-    # exit 0
+    exit 0
 
     SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
     GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
     ROOT_DIR=/root
-    FHS_ORIGIN_DIR=/etc/sysctl.d
+    FHS_ORIGIN_DIR=/home
 
-    GENERATE_FILE="77_ipv6-privacy.conf"
+    GENERATE_FILE="dvb_stram.m3u"
     TEMPLATE_FILE="template.${GENERATE_FILE}"
 
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${TEMPLATE_FILE}"
-    GENERATE_PATH="${FHS_ORIGIN_DIR}/${GENERATE_FILE}"
+    GENERATE_PATH="${HOME}/XDG_USER_DIRS/Desktop/${GENERATE_FILE}"
 
-    echo ${TEMPLATE_PATH}
-    echo ${GENERATE_PATH}
-    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+    echo "${TEMPLATE_PATH}   ===>   ${GENERATE_PATH}"
+    # envsubst < "${TEMPLATE_PATH}" | tee "${GENERATE_PATH}" > /dev/null
 
 }
 

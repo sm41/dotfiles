@@ -8,7 +8,7 @@ set -eu
 # -n, --noheadings     ヘッダを表示しません
 # -o, --output <list>  出力する列を指定します
 
-required_vars=(
+REQUIRED_VARS_ARRAY=(
     UUID
 )
 
@@ -18,24 +18,35 @@ function desktop(){
     export UUID=$(lsblk -dno UUID | awk 'NF')
 }
 
+
+function check_env(){
+
+    local target_array=("${@}")
+
+    for target_var in "${target_array[@]}"; do
+        if [[ ! -v ${target_var} ]]; then
+            echo "ERROR: '${target_var}' は未定義です。"
+            exit 1
+        fi
+
+        if [[ -z ${!target_var} ]]; then
+            echo "ERROR: '${target_var}' は空文字です。"
+            exit 1
+        else
+            echo "${target_var} は '${!target_var}' として定義されています。"
+        fi
+    done
+
+    echo "Required Vars Array is passed"
+
+}
+
+
 function main(){
 
     desktop
 
-    for var in "${required_vars[@]}"; do
-        if [[ ! -v $var ]]; then
-            echo "ERROR: '$var' が未定義です。"
-            exit 1
-        fi
-
-        if [[ -z ${!var} ]]; then
-            echo "ERROR: '$var' は空文字です。"
-            exit 1
-        fi
-        echo ${!var}
-    done
-
-    echo "env var is passed"
+    check_env "${REQUIRED_VARS_ARRAY[@]}"
     exit 0
 
     HOSTNAME="${HOSTNAME:-$(hostname)}"
@@ -43,23 +54,17 @@ function main(){
     redefinition_path="${temp_path//\//-}"
     generate_file="${redefinition_path}.mount"
 
-    SCRIPT_PATH="$(readlink -f "$0")"
-    SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
-
-    if ! GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null); then
-        echo "Error: script is not inside a git repository" >&2
-        exit 1
-    fi
-
+    SCRIPT_DIR="$(dirname "$(readlink -f "$0")" )"
+    GIT_TOPLEVEL=$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null)
     ROOT_DIR=/root
     FHS_ORIGIN_DIR=/etc/systemd/system
 
     TEMPLATE_PATH="${GIT_TOPLEVEL}${ROOT_DIR}${FHS_ORIGIN_DIR}/${template_file}"
     GENERATE_PATH="${FHS_ORIGIN_DIR}/${generate_file}"
 
-    # echo ${TEMPLATE_PATH}
-    # echo ${GENERATE_PATH}
-    envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
+    echo ${TEMPLATE_PATH}
+    echo ${GENERATE_PATH}
+    # envsubst < "${TEMPLATE_PATH}" | sudo tee "${GENERATE_PATH}" > /dev/null
 
 }
 
