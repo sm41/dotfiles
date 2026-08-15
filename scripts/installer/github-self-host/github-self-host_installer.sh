@@ -37,7 +37,7 @@ function check_env(){
         fi
     done
 
-    echo "Required Vars Array is passed"
+    echo "✅ Required Vars Array is passed"
 
 }
 

@@ -7,14 +7,11 @@ function main(){
     ROOT_FHS_DIRECTORY=/root/home
     USER_PROFILE=".profile"
 
-    echo ${SCRIPT_DIRECTORY}
-    exit 1
-
     TEMP_PATH="${GIT_TOPLEVEL}${ROOT_FHS_DIRECTORY}"
 
-    # echo "${TEMP_PATH}/sample${USER_PROFILE}"
-    cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
-    source "${HOME}/.profile"
+    echo "${TEMP_PATH}/sample${USER_PROFILE}"
+    # cp -f -b --suffix=_`date +%Y%m%d_%H%M`  "${TEMP_PATH}/sample${USER_PROFILE}"  "${HOME}/${USER_PROFILE}"
+    # source "${HOME}/${USER_PROFILE}"
 
 }
 

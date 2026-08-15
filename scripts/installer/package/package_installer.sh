@@ -16,14 +16,14 @@ desktop_application=(
 
 function main(){
 
-    sudo apt-get update
+    # sudo apt-get update
 
     for package_name in "${common_application[@]}"  "${type[@]}"
     do
         [[ -z "${package_name}" ]] && continue
         [[ "${package_name::1}" = "#" ]] && continue
 
-        sudo apt-get install --no-install-recommends ^"${package_name}"$
+        echo "sudo apt-get install --no-install-recommends ^"${package_name}"$"
     done
 }
 
