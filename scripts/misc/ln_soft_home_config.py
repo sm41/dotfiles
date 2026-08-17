@@ -34,6 +34,7 @@ def main():
 
         for ignore_path in ignore_list:
             if str(CONFIG_REPOSITORY / ignore_path) in str(DOT_CONFIG):
+                print(f"🚫  {DOT_CONFIG}")
                 continue
             else:
                 if not LOCAL_BIN.parent.exists():
