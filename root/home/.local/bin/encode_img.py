@@ -70,19 +70,19 @@ def main():
         print("argv is")
         sys.exit()
 
-    old_ext  = "png"
-    new_ext  = "jpg"
+    old_ext  = ".png"
+    new_ext  = ".jpg"
     hogefuga = "_[encoded]"
 
-    standard_path = Path(sys.argv[1]).resolve()
+    ARGUMENT_PATH = Path(sys.argv[1]).resolve()
 
-    if standard_path.exists():
-        if standard_path.is_dir():
-            before_parent = standard_path
-            after_parent  = sanitize_filename(standard_path.with_name(standard_path.name + hogefuga))
+    if ARGUMENT_PATH.exists():
+        if ARGUMENT_PATH.is_dir():
+            before_parent = ARGUMENT_PATH
+            after_parent  = sanitize_filename(ARGUMENT_PATH.with_name(ARGUMENT_PATH.name + hogefuga))
 
-            for target_path in sorted(standard_path.rglob(f"*.{old_ext}")):
-                child = target_path.relative_to(standard_path)
+            for target_path in sorted(ARGUMENT_PATH.rglob(f"*{old_ext}")):
+                child = target_path.relative_to(ARGUMENT_PATH)
 
                 if str(child).startswith("."):
                     continue
@@ -93,18 +93,18 @@ def main():
                 after_child = sanitize_filename(child.parent)
                 after_name  = sanitize_filename(child.name)
                 before_path = before_parent / child.parent / child.name
-                after_path  = after_parent  / after_child  / after_name.with_suffix(f".{new_ext}")
+                after_path  = after_parent  / after_child  / after_name.with_suffix(new_ext)
 
                 if not after_path.parent.exists():
                     after_path.parent.mkdir(parents=True)
 
                 subprocess.run(encode(before_path, after_path))
 
-        elif standard_path.is_file():
-            before_parent = standard_path.parent
-            # after_parent  = standard_path.parent.with_name(standard_path.parent.name + "_hogefuga")
-            before_name   = standard_path.name
-            after_name    = sanitize_filename(standard_path.with_suffix(".pdf").name)
+        elif ARGUMENT_PATH.is_file():
+            before_parent = ARGUMENT_PATH.parent
+            # after_parent  = ARGUMENT_PATH.parent.with_name(ARGUMENT_PATH.parent.name + "_hogefuga")
+            before_name   = ARGUMENT_PATH.name
+            after_name    = sanitize_filename(ARGUMENT_PATH.with_suffix(".pdf").name)
             before_path   = before_parent / before_name
             after_path    = before_parent / after_name
 

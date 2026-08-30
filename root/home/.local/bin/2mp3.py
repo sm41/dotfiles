@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 def encode(input_file, bitrate, output_file):
-
     return [
         "ffmpeg",
             "-loglevel", "error",

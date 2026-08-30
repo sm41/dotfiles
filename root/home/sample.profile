@@ -45,8 +45,6 @@ function share(){
 function desktop(){
 
     # PATH
-    # export PATH="${PATH}":"${HOME}/bin/bash"
-    # export PATH="${PATH}":"${HOME}/bin/python"
     # export PATH="${PATH}":"${HOME}/.local/bin"
 
 
