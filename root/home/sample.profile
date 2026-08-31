@@ -39,7 +39,7 @@ function share(){
     export SELFHOSTED_DIRECTORY="${HOME}/selfhosted"
 
     # DTV
-    # export TUNER_IP_ADDRESS=""
+    export TUNER_IP_ADDRESS="${DESKTOP_IP_ADDRESS}"
 }
 
 function desktop(){
