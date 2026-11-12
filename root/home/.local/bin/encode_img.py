@@ -42,6 +42,13 @@ def sanitize_filename(name):
         '#()[]{}<>@%&+=.,'
     )
 
+    srx = str.maketrans(
+        "/",
+        "／"
+    )
+
+
+    name = name.translate(srx)
 
     # 1. Unicode正規化
     name = unicodedata.normalize("NFC", name)
@@ -74,44 +81,46 @@ def main():
     new_ext  = ".jpg"
     hogefuga = "_[encoded]"
 
-    ARGUMENT_PATH = Path(sys.argv[1]).resolve()
+    STANDARD_PATH = Path(sys.argv[1]).resolve()
 
-    if ARGUMENT_PATH.exists():
-        if ARGUMENT_PATH.is_dir():
-            before_parent = ARGUMENT_PATH
-            after_parent  = sanitize_filename(ARGUMENT_PATH.with_name(ARGUMENT_PATH.name + hogefuga))
+    if not STANDARD_PATH.exists():
+        print("NG")
+        sys.exit()
 
-            for target_path in sorted(ARGUMENT_PATH.rglob(f"*{old_ext}")):
-                child = target_path.relative_to(ARGUMENT_PATH)
+    if STANDARD_PATH.is_dir():
+        ORIGINAL_GRAND_DIRECTORY  = STANDARD_PATH.parents[0]
+        ORIGINAL_PARENT_DIRECTORY = STANDARD_PATH.name
+        REPLACED_PARENT_DIRECTORY = str(sanitize_filename(ORIGINAL_PARENT_DIRECTORY)) + hogefuga
 
-                if str(child).startswith("."):
-                    continue
+        for target_path in sorted(STANDARD_PATH.rglob(f"*{old_ext}")):
 
-                if target_path.is_dir():
-                    continue
+            if target_path.is_dir():
+                continue
 
-                after_child = sanitize_filename(child.parent)
-                after_name  = sanitize_filename(child.name)
-                before_path = before_parent / child.parent / child.name
-                after_path  = after_parent  / after_child  / after_name.with_suffix(new_ext)
+            child = target_path.relative_to(STANDARD_PATH)
 
-                if not after_path.parent.exists():
-                    after_path.parent.mkdir(parents=True)
+            if str(child).startswith("."):
+                continue
 
-                subprocess.run(encode(before_path, after_path))
+            after_parent = sanitize_filename(child.parent)
+            after_name   = sanitize_filename(child.name)
+            before_path  = ORIGINAL_GRAND_DIRECTORY / ORIGINAL_PARENT_DIRECTORY / child.parent / child.name
+            after_path   = ORIGINAL_GRAND_DIRECTORY / REPLACED_PARENT_DIRECTORY / after_parent / after_name.with_suffix(new_ext)
 
-        elif ARGUMENT_PATH.is_file():
-            before_parent = ARGUMENT_PATH.parent
-            # after_parent  = ARGUMENT_PATH.parent.with_name(ARGUMENT_PATH.parent.name + "_hogefuga")
-            before_name   = ARGUMENT_PATH.name
-            after_name    = sanitize_filename(ARGUMENT_PATH.with_suffix(".pdf").name)
-            before_path   = before_parent / before_name
-            after_path    = before_parent / after_name
+            if not after_path.parent.exists():
+                after_path.parent.mkdir(parents=True)
 
             subprocess.run(encode(before_path, after_path))
 
-    else:
-        print("NG")
+    elif STANDARD_PATH.is_file():
+        before_parent = STANDARD_PATH.parent
+        # after_parent  = STANDARD_PATH.parent.with_name(STANDARD_PATH.parent.name + "_hogefuga")
+        before_name   = STANDARD_PATH.name
+        after_name    = sanitize_filename(STANDARD_PATH.with_suffix(".pdf").name)
+        before_path   = before_parent / before_name
+        after_path    = before_parent / after_name
+
+        subprocess.run(encode(before_path, after_path))
 
 
 if __name__ == '__main__':

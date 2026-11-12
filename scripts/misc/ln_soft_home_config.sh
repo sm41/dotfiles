@@ -13,8 +13,8 @@ function main(){
     do
         CONFIG_DIRECTORY="${HOME}${DOT_CONFIG/${GIT_TOPLEVEL}${ROOT_FHS_DIRECTORY}}"
         mkdir -p "${CONFIG_DIRECTORY%/*}"
-        # ln -s -f "${DOT_CONFIG}"  "${CONFIG_DIRECTORY}"
-        echo "${DOT_CONFIG}  ===>   ${CONFIG_DIRECTORY}"
+        ln -s -f "${DOT_CONFIG}"  "${CONFIG_DIRECTORY}"
+        # echo "${DOT_CONFIG}  ===>   ${CONFIG_DIRECTORY}"
 
     done < <( find "${STANDARD_DIRECTORY}" -not \( -path "${STANDARD_DIRECTORY}/systemd/user*" \) -type f | sort )
 }

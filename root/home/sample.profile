@@ -28,6 +28,9 @@ function share(){
     export   XDG_DATA_HOME="${HOME}/.local/share"
     export  XDG_STATE_HOME="${HOME}/.local/state"
 
+    # XDG (de facto standard)
+    export  XDG_BIN_HOME="${HOME}/.local/bin"
+
     # NetWork
     export DESKTOP_IP_ADDRESS="192.168.1.9"
     export NETWORK_INTERFACE=$(get_NW-INT)
@@ -42,12 +45,17 @@ function share(){
     export TUNER_IP_ADDRESS="${DESKTOP_IP_ADDRESS}"
 }
 
-function desktop(){
-
-    # PATH
-    # export PATH="${PATH}":"${HOME}/.local/bin"
 
 
+function rust(){
+    # Rust
+    export  CARGO_HOME="${XDG_DATA_HOME}/cargo"
+    export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+}
+
+
+function python(){
+    # Python
     # 1. コマンドラインと環境 — Python 3.13.0 ドキュメント
     # https://docs.python.org/ja/3/using/cmdline.html#environment-variables
 
@@ -63,7 +71,8 @@ function desktop(){
 }
 
 
+
 if   [[ "${HOSTNAME}" =~ ^.*desktop$ ]] ; then
     share
-    desktop
+    # desktop
 fi

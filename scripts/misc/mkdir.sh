@@ -10,6 +10,10 @@ function share(){
     mkdir -p "${XDG_DATA_HOME}"
     mkdir -p "${XDG_STATE_HOME}"
 
+    # XDG (de facto standard)
+    mkdir -p "${XDG_BIN_HOME}"
+    mkdir -p "${XDG_BIN_HOME}/appimage"
+
     # /home
     mkdir -p "${HOME}/XDG_USER_DIRS/Desktop"
     mkdir -p "${HOME}/XDG_USER_DIRS/Documents"
@@ -27,7 +31,6 @@ function share(){
 
 function desktop() {
     # /home
-    mkdir -p "${HOME}"/bin/appimage
     mkdir -p "${HOME}/repository"
 
     # /mnt
